@@ -161,8 +161,8 @@ main img { cursor: zoom-in; }
 <nav class="tabs" aria-label="Sections">
   <div class="tabs-inner" role="tablist">
     <a class="tab" role="tab" id="tab-overview" href="#overview" aria-controls="overview"><span class="tab-n">01</span>Overview</a>
-    <a class="tab" role="tab" id="tab-halves" href="#halves" aria-controls="halves"><span class="tab-n">02</span>The halves</a>
-    <a class="tab" role="tab" id="tab-dock" href="#dock" aria-controls="dock"><span class="tab-n">03</span>The dock</a>
+    <a class="tab" role="tab" id="tab-halves" href="#halves" aria-controls="halves"><span class="tab-n">02</span>Keyboard</a>
+    <a class="tab" role="tab" id="tab-dock" href="#dock" aria-controls="dock"><span class="tab-n">03</span>Cyberdeck</a>
     <a class="tab" role="tab" id="tab-modules" href="#modules" aria-controls="modules"><span class="tab-n">04</span>Pointing modules</a>
     <a class="tab" role="tab" id="tab-parts" href="#parts" aria-controls="parts"><span class="tab-n">05</span>Parts</a>
     <a class="tab" role="tab" id="tab-build" href="#build" aria-controls="build"><span class="tab-n">06</span>Build guide</a>
@@ -205,7 +205,7 @@ main img { cursor: zoom-in; }
     <h2>Not built yet</h2>
     <p>Nothing has been fabbed or printed. Nominal clearances and numerical checks do not guarantee physical fit or assembly. Sources, Gerbers, STLs, a BOM and a hand-soldering guide are in the repo: <a href="https://github.com/rafaelromao/prisma">rafaelromao/prisma</a>.</p>
   </section>
-  <p class="next"><a href="#halves">Next: The halves <span aria-hidden="true">→</span></a></p>
+  <p class="next"><a href="#halves">Next: Keyboard <span aria-hidden="true">→</span></a></p>
 </section>
 
 <section class="panel" id="halves" role="tabpanel" aria-labelledby="tab-halves" tabindex="-1">
@@ -262,7 +262,12 @@ main img { cursor: zoom-in; }
     <figure><img src="renders/stacked.png" alt="Both halves stacked floor to floor, seen at an angle" width="1200" height="900" loading="lazy"><figcaption>Stacked back to back, keys facing out.</figcaption></figure>
     <figure><img src="renders/stacked_side.png" alt="Both halves stacked floor to floor, seen from the side" width="1200" height="900" loading="lazy"><figcaption>Stacked floor to floor for travel.</figcaption></figure>
   </div>
-  <p class="next"><a href="#dock">Next: The dock <span aria-hidden="true">→</span></a></p>
+  <section class="stack col">
+    <h3>Independent tenting</h3>
+    <p>Use two stands, with three common discs glued to each tilting phone platform, not the base. The mirrored SVG templates place them 120° apart on a 44 mm circle around the estimated assembled centre of gravity. It needs a clear flat 54 mm contact patch on the platform. The 2.0 mm bump-ons clear the platform by 0.6 mm, and the half's weight stays inside the contact triangle through 35° of tilt. Test it with your own stand before typing on it.</p>
+    <figure><img src="renders/independent_tenting.png" alt="Each keyboard half independently tented on an illustrative phone stand" width="1600" height="1200" loading="lazy"><figcaption>Independent platforms, on stand-in stands.</figcaption></figure>
+  </section>
+  <p class="next"><a href="#dock">Next: Cyberdeck <span aria-hidden="true">→</span></a></p>
 </section>
 
 <section class="panel" id="dock" role="tabpanel" aria-labelledby="tab-dock" tabindex="-1">
@@ -272,9 +277,6 @@ main img { cursor: zoom-in; }
     <p>A phone on a Ugreen folding stand is the computer and the screen. The dock is one printed part that holds both halves around it. It sits over the stand's base, which stays on the desk on its own feet and carries the phone; behind the dock the base is bare, its hinge half a millimetre off the halves and the spine. Without the stand, it is a sturdier, tented unibody.</p>
     <p>The dock continues the halves' 45° bottom facets down to the desk, with 12° splay and 5.70° extra tent (about 12.3° total). Its middle is a front-opening drawer for a trackball, trackpad or solid cover, preserving continuous front facets and horizontal removal. At the back each insert extends only its top into a 45° hood over a matching sloped dock support, with 0.4 mm clearance.</p>
     <p>Every magnet is an 8 × 1.5 mm N52 disc. Six wing magnets mate six of each half's seven floor magnets; six per side fit 2.4 mm drawer walls with 0.6 mm inner skins. Three insert magnets per side align through those skins, forming an attracting half → dock → insert chain. One more disc in the drawer floor grips a pointing module from below. Three pairs attach the dock to the Ugreen base. The rear stays free for USB and the power switch. The dock is 199.0 × 111.3 × 29.8 mm, about 83 cm³, with six bump-ons.</p>
-    <h3>Independent tenting</h3>
-    <p>Use two stands, with three common discs glued to each tilting phone platform, not the base. The mirrored SVG templates place them 120° apart on a 44 mm circle around the estimated assembled centre of gravity. It needs a clear flat 54 mm contact patch on the platform. The 2.0 mm bump-ons clear the platform by 0.6 mm, and the half's weight stays inside the contact triangle through 35° of tilt. Test it with your own stand before typing on it.</p>
-    <figure><img src="renders/independent_tenting.png" alt="Each keyboard half independently tented on an illustrative phone stand" width="1600" height="1200" loading="lazy"><figcaption>Independent platforms, on stand-in stands.</figcaption></figure>
   </section>
 
   <figure class="hero">
