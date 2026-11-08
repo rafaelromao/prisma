@@ -172,12 +172,12 @@ main img { cursor: zoom-in; }
 <main>
 <section class="panel" id="overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="-1">
   <div class="intro col">
-    <p class="lede">A wireless, low-profile remake of the handwired Diamond (1333+2 per half). The layout and goals are mine; the PCB, the printed case and every check were generated as code by Claude, Anthropic's model, working in Claude Code.</p>
+    <p class="lede">A wireless, low-profile remake of the handwired Diamond (1333+2 per half). The layout and goals are mine; Claude, working in Claude Code, generated the PCB, the printed case and every check as code.</p>
   </div>
 
   <figure class="hero">
     <img src="renders/full.png" alt="Left half assembled: printed base, top plate, Choc switches and keycaps" width="1200" height="900">
-    <figcaption>The left half as built: solid printed base, top plate, Choc v1 switches. KiCad ray-traced render.</figcaption>
+    <figcaption>The left half: solid printed base, top plate, Choc v1 switches. KiCad ray-traced render.</figcaption>
   </figure>
 
   <section class="stack">
@@ -185,25 +185,25 @@ main img { cursor: zoom-in; }
     <h2>The board</h2>
     <table class="spec">
       <tr><th>Keys</th><td>24 Choc v1 hot-swap, all 1u: 3×3, a pinky key and two thumbs per half</td></tr>
-      <tr><th>Wiring</th><td>Diodeless, one pin per key: 11 Xiao edge pins plus the NFC1 pad</td></tr>
-      <tr><th>Controller</th><td>A XIAO-sized nRF52840 per half: the Seeed XIAO nRF52840 or the NologoTech Super52840, on the same board. ZMK firmware, the same for both</td></tr>
-      <tr><th>Power</th><td>Nominal 7 × 20 × 40 mm LiPo (500 mAh) per half on a JST PH socket, MSK-12C02 slide switch beside the USB-C port; pointing modules use 250 mAh cells</td></tr>
+      <tr><th>Wiring</th><td>Diodeless, one pin per key: 11 XIAO edge pins plus the NFC1 pad</td></tr>
+      <tr><th>Controller</th><td>One XIAO-sized nRF52840 per half, either the Seeed XIAO nRF52840 or the NologoTech Super52840. Same board, same ZMK firmware</td></tr>
+      <tr><th>Power</th><td>500 mAh LiPo (nominal 7 × 20 × 40 mm) on a JST PH socket, and an MSK-12C02 slide switch beside the USB-C port</td></tr>
       <tr><th>PCB</th><td><span class="num">87.6 × 92.3 mm</span>, 2 layers, one reversible design for both halves</td></tr>
-      <tr><th>Case</th><td>Solid printed base tented <span class="num">6.6°</span>, <span class="num">20.4 mm</span> at the seam and <span class="num">10.5 mm</span> at the outer edge, with a <span class="num">1.2 mm</span> top plate</td></tr>
-      <tr><th>Extras</th><td>Magnets to join the halves or stack them for travel, anti-slip pads that interleave when stacked, a reset button under a cone hole in the plate</td></tr>
+      <tr><th>Case</th><td>Solid printed base tented <span class="num">6.6°</span> (<span class="num">20.4 mm</span> at the seam, <span class="num">10.5 mm</span> at the outer edge), with a <span class="num">1.2 mm</span> top plate</td></tr>
+      <tr><th>Extras</th><td>Magnets to join the halves or stack them for travel, interleaving anti-slip pads, a reset button under a cone hole in the plate</td></tr>
       <tr><th>Assembly</th><td>Soldering iron only: no paste, no hot air</td></tr>
     </table>
   </section>
 
   <div class="grid2">
-    <figure><img src="renders/full_side.png" alt="The left half seen from the front edge, tilted up towards the inner wall" width="1200" height="900" loading="lazy"><figcaption>From the front: the 6.6° tent rises towards the seam.</figcaption></figure>
-    <figure><img src="renders/parts_top.png" alt="The left half's PCB with switches and keycaps, seen from above at an angle" width="1200" height="900" loading="lazy"><figcaption>Switch side of the left half, with keycaps.</figcaption></figure>
+    <figure><img src="renders/full_side.png" alt="The left half seen from the front edge, tilted up towards the inner wall" width="1200" height="900" loading="lazy"><figcaption>From the front: the tent rises towards the seam.</figcaption></figure>
+    <figure><img src="renders/parts_top.png" alt="The left half's PCB with switches and keycaps, seen from above at an angle" width="1200" height="900" loading="lazy"><figcaption>Switch side, with keycaps.</figcaption></figure>
   </div>
 
   <section class="stack col">
     <span class="eyebrow">Status</span>
     <h2>Not built yet</h2>
-    <p>Nothing has been fabbed or printed. Nominal clearances and numerical checks do not guarantee physical fit or assembly. Sources, Gerbers, STLs, a BOM and a hand-soldering guide are in the repo: <a href="https://github.com/rafaelromao/prisma">rafaelromao/prisma</a>.</p>
+    <p>Nothing has been fabbed or printed, and passing checks do not guarantee physical fit. Sources, Gerbers, STLs, a BOM and a hand-soldering guide are in the repo: <a href="https://github.com/rafaelromao/prisma">rafaelromao/prisma</a>.</p>
   </section>
   <p class="next"><a href="#halves">Next: Keyboard <span aria-hidden="true">→</span></a></p>
 </section>
@@ -212,59 +212,66 @@ main img { cursor: zoom-in; }
   <section class="stack col">
     <span class="eyebrow">One PCB, two halves</span>
     <h2>The reversible trick</h2>
-    <p>The left half puts its parts on the back face; the right half is the same board flipped, with parts on the front. Flipped, the module's pins land mirrored: where the left half has D0, D1 and D2, the right half has VBUS, GND and 3V3. Solder jumpers route those three to their keys, and you bridge only the set on the face without the module.</p>
-    <p>The module's underside pads (battery, the 12th key's pin, reset) are reached through plated holes filled with solder from the other face, so the whole board stays iron-friendly. The reset pad sits exactly under the module's GND pad on the opposite mount, so each half's reset hole gets its own net and only reaches that half's button.</p>
+    <p>The left half carries its parts on the back face; the right half is the same board flipped, with parts on the front. Flipped, the module's pins land mirrored: the left half's D0, D1 and D2 become VBUS, GND and 3V3. Solder jumpers route those three to their keys, and you bridge only the set on the face without the module.</p>
+    <p>The module's underside pads (battery, 12th key, reset) are reached through plated holes filled with solder from the other face, so everything stays iron-friendly. The reset pad sits under the module's GND pad on the opposite mount, so each half's reset hole has its own net and reaches only that half's button.</p>
   </section>
 
   <div class="grid3">
     <figure>
       <img src="renders/parts_bottom.png" alt="Underside of the left half's PCB with the Xiao, power switch, JST socket and hot-swap sockets" width="1200" height="900" loading="lazy">
-      <figcaption>Parts face of the left half. The right half is the same board turned over.</figcaption>
+      <figcaption>Parts face of the left half. The right half is this board turned over.</figcaption>
     </figure>
     <figure>
       <img src="renders/board_top.png" alt="The bare PCB's front face, with the right half's part footprints" width="1200" height="900" loading="lazy">
-      <figcaption>Bare board, front face: the right half's parts go here.</figcaption>
+      <figcaption>Bare front face: the right half's parts.</figcaption>
     </figure>
     <figure>
       <img src="renders/board_bottom.png" alt="The bare PCB's back face, with the left half's part footprints" width="1200" height="900" loading="lazy">
-      <figcaption>Bare board, back face: the left half's parts go here.</figcaption>
+      <figcaption>Bare back face: the left half's parts.</figcaption>
     </figure>
   </div>
 
   <section class="stack">
     <span class="eyebrow">One board, either module</span>
     <h2>XIAO or Super52840</h2>
-    <p class="col">Both modules have the same 14 edge pins on the same nRF52840 pins, so the layout, case, plate and firmware are shared. Underneath they differ. Their battery pads sit in the same two spots but swapped, so a battery selector on the switch face picks which hole is +: bridge the row labelled <code class="num">+MID</code> or <code class="num">+USB</code>. The Super52840's pads were measured from photos against the 2.54 mm pin pitch.</p>
+    <p class="col">Both modules have the same 14 edge pins on the same nRF52840 pins, so layout, case, plate and firmware are shared. Underneath they differ. Their battery pads sit in the same two spots but swapped, so a selector on the switch face picks which hole is +: bridge <code class="num">+MID</code> or <code class="num">+USB</code>. The Super52840's pads were measured from photos against the 2.54 mm pin pitch.</p>
     <table class="spec">
       <tr><th></th><td><strong>Seeed XIAO nRF52840</strong></td><td><strong>NologoTech Super52840</strong></td></tr>
       <tr><th>Battery +</th><td>The pad nearer the middle: bridge <code class="num">+MID</code></td><td>The pad nearer the USB end: bridge <code class="num">+USB</code></td></tr>
-      <tr><th>12th key</th><td>NFC1 pad (P0.09)</td><td>P0.09 in a row of nine extra GPIO pads, 1.3 mm away: a hole under each, on one net</td></tr>
+      <tr><th>12th key</th><td>NFC1 pad (P0.09)</td><td>P0.09 in a row of nine extra GPIO pads: a hole under each, on one net</td></tr>
       <tr><th>Reset</th><td>Test pad</td><td>Same place</td></tr>
-      <tr><th>USB-C</th><td>Surface-mount</td><td>Legs through its board, cleared by holes; sticks out 0.8 mm further, inside the case's recess</td></tr>
+      <tr><th>USB-C</th><td>Surface-mount</td><td>Legs through its board, cleared by holes; sticks out 0.8 mm further, into the case's recess</td></tr>
     </table>
   </section>
 
   <div class="grid2">
-    <figure><img src="renders/xiao_left_half.png" alt="Left half's switch face around the module: D0 to D2 jumpers, the +MID and +USB selector rows, and the boxed fill holes" width="700" height="700" loading="lazy"><figcaption>Left half, switch face: D0–D2 jumpers, the <code class="num">+MID</code> / <code class="num">+USB</code> selector, the boxed fill holes.</figcaption></figure>
+    <figure><img src="renders/xiao_left_half.png" alt="Left half's switch face around the module: D0 to D2 jumpers, the +MID and +USB selector rows, and the boxed fill holes" width="700" height="700" loading="lazy"><figcaption>Left half, switch face: D0–D2 jumpers, the <code class="num">+MID</code> / <code class="num">+USB</code> selector, the fill holes.</figcaption></figure>
     <figure><img src="renders/xiao_right_half.png" alt="Right half's switch face, mirrored as seen when turned over" width="700" height="700" loading="lazy"><figcaption>Right half, as you see it turned over.</figcaption></figure>
   </div>
 
+  <section class="stack col">
+    <span class="eyebrow">Case</span>
+    <h2>Base, plate, two ways to join</h2>
+    <p>A solid base with a pocket per part, a top plate on top, and anti-slip pads that sit in different ends of each slot so they interleave when the halves are stacked.</p>
+  </section>
+
   <div class="grid2">
-    <figure><img src="renders/case.png" alt="Printed base with pockets for each part, the USB-C recess and the switch slot" width="1200" height="900" loading="lazy"><figcaption>Solid base: a pocket per part.</figcaption></figure>
-    <figure><img src="renders/plate.png" alt="The top plate from above, with switch cutouts, countersunk screw holes and the reset cone" width="1200" height="900" loading="lazy"><figcaption>Top plate: switch cutouts, countersunk screws, the reset cone.</figcaption></figure>
+    <figure><img src="renders/case.png" alt="Printed base with pockets for each part, the USB-C recess and the switch slot" width="1200" height="900" loading="lazy"><figcaption>Base: a pocket per part.</figcaption></figure>
+    <figure><img src="renders/plate.png" alt="The top plate from above, with switch cutouts, countersunk screw holes and the reset cone" width="1200" height="900" loading="lazy"><figcaption>Plate: switch cutouts, countersunk screws, the reset cone.</figcaption></figure>
     <figure><img src="renders/plate_under.png" alt="Underside of the top plate with support pillars and screw bosses" width="1200" height="900" loading="lazy"><figcaption>Plate underside: pillars, bosses, solder pocket.</figcaption></figure>
-    <figure><img src="renders/pads.png" alt="Both floors from below, showing where each half's anti-slip pads go" width="1000" height="750" loading="lazy"><figcaption>Pads sit in different ends of each slot, so they interleave when stacked.</figcaption></figure>
+    <figure><img src="renders/pads.png" alt="Both floors from below, showing where each half's anti-slip pads go" width="1000" height="750" loading="lazy"><figcaption>Pad positions on both floors.</figcaption></figure>
   </div>
 
   <div class="grid2">
     <figure><img src="renders/unibody.png" alt="Both halves joined at the seam as a unibody" width="1200" height="900" loading="lazy"><figcaption>Joined at the seam by magnets.</figcaption></figure>
-    <figure><img src="renders/unibody_top.png" alt="Both halves joined, seen from above, forming the diamond outline" width="1200" height="900" loading="lazy"><figcaption>Joined, from above: the two outlines make the diamond.</figcaption></figure>
-    <figure><img src="renders/stacked.png" alt="Both halves stacked floor to floor, seen at an angle" width="1200" height="900" loading="lazy"><figcaption>Stacked back to back, keys facing out.</figcaption></figure>
-    <figure><img src="renders/stacked_side.png" alt="Both halves stacked floor to floor, seen from the side" width="1200" height="900" loading="lazy"><figcaption>Stacked floor to floor for travel.</figcaption></figure>
+    <figure><img src="renders/unibody_top.png" alt="Both halves joined, seen from above, forming the diamond outline" width="1200" height="900" loading="lazy"><figcaption>From above: the two outlines make the diamond.</figcaption></figure>
+    <figure><img src="renders/stacked.png" alt="Both halves stacked floor to floor, seen at an angle" width="1200" height="900" loading="lazy"><figcaption>Stacked for travel, keys facing out.</figcaption></figure>
+    <figure><img src="renders/stacked_side.png" alt="Both halves stacked floor to floor, seen from the side" width="1200" height="900" loading="lazy"><figcaption>Stacked, from the side.</figcaption></figure>
   </div>
+
   <section class="stack col">
     <h3>Independent tenting</h3>
-    <p>Use two stands, with three common discs glued to each tilting phone platform, not the base. The mirrored SVG templates place them 120° apart on a 44 mm circle around the estimated assembled centre of gravity. It needs a clear flat 54 mm contact patch on the platform. The 2.0 mm bump-ons clear the platform by 0.6 mm, and the half's weight stays inside the contact triangle through 35° of tilt. Test it with your own stand before typing on it.</p>
+    <p>Use two phone stands with three common magnet discs glued to each tilting platform (not the base). Mirrored SVG templates place them 120° apart on a 44 mm circle around the half's estimated centre of gravity. The platform needs a clear flat 54 mm contact patch; the 2.0 mm bump-ons clear it by 0.6 mm, and the weight stays inside the contact triangle through 35° of tilt. Test with your own stand before typing on it.</p>
     <figure><img src="renders/independent_tenting.png" alt="Each keyboard half independently tented on an illustrative phone stand" width="1600" height="1200" loading="lazy"><figcaption>Independent platforms, on stand-in stands.</figcaption></figure>
   </section>
   <p class="next"><a href="#dock">Next: Cyberdeck <span aria-hidden="true">→</span></a></p>
@@ -274,27 +281,27 @@ main img { cursor: zoom-in; }
   <section class="stack col">
     <span class="eyebrow">Cyberdeck</span>
     <h2>A dock for a phone stand</h2>
-    <p>A phone on a Ugreen folding stand is the computer and the screen. The dock is one printed part that holds both halves around it. It sits over the stand's base, which stays on the desk on its own feet and carries the phone; behind the dock the base is bare, its hinge half a millimetre off the halves and the spine. Without the stand, it is a sturdier, tented unibody.</p>
-    <p>The dock continues the halves' 45° bottom facets down to the desk, with 12° splay and 5.70° extra tent (about 12.3° total). Its middle is a front-opening drawer for a trackball, trackpad or solid cover, preserving continuous front facets and horizontal removal. At the back each insert extends only its top into a 45° hood over a matching sloped dock support, with 0.4 mm clearance.</p>
-    <p>Every magnet is an 8 × 1.5 mm N52 disc. Six wing magnets mate six of each half's seven floor magnets; six per side fit 2.4 mm drawer walls with 0.6 mm inner skins. Three insert magnets per side align through those skins, forming an attracting half → dock → insert chain. One more disc in the drawer floor grips a pointing module from below. Three pairs attach the dock to the Ugreen base. The rear stays free for USB and the power switch. The dock is 199.0 × 111.3 × 29.8 mm, about 83 cm³, with six bump-ons.</p>
+    <p>A phone on a Ugreen folding stand is the computer and the screen. The dock is one printed part that holds both halves around it. It sits over the stand's base, which stays on the desk on its own feet and carries the phone; behind the dock the base is bare, its hinge half a millimetre off the halves and the spine. Without the stand, the dock is a sturdier, more tented unibody.</p>
+    <p>It continues the halves' 45° bottom facets down to the desk, with 12° of splay and 5.70° of extra tent (about 12.3° in all). The middle is a front-opening drawer for a trackball, a trackpad or a solid placeholder, which slide out horizontally. At the back, each insert extends only its top into a 45° hood over a matching dock support, 0.4 mm clear.</p>
+    <p>Everything is held by the same 8 × 1.5 mm N52 discs. Six wing magnets mate six of each half's seven floor magnets, and three more per side pass through 0.6 mm inner skins to the insert, so every join attracts: half → dock → insert. One more disc in the drawer floor grips a module from below, and three pairs attach the dock to the Ugreen base. The rear stays free for USB and the power switch. The dock measures 199.0 × 111.3 × 29.8 mm (about 83 cm³).</p>
   </section>
 
   <figure class="hero">
     <img src="renders/cyberdeck.png" alt="Both halves on the dock, splayed and tented, with a phone on the Ugreen stand behind them" width="1600" height="1200" loading="lazy">
-    <figcaption>The cyberdeck: dock, both halves, the trackball in the drawer, and the phone on its stand (the stand and phone are stand-ins).</figcaption>
+    <figcaption>The cyberdeck: dock, both halves, trackball in the drawer, phone on its stand (stand and phone are stand-ins).</figcaption>
   </figure>
 
   <div class="grid2">
-    <figure><img src="renders/cyberdeck_front.png" alt="The cyberdeck seen from the front: the halves tilt down from the spine to the desk" width="1600" height="1200" loading="lazy"><figcaption>From the front: the halves slope down from the spine, the dock under them like a gem's lower half.</figcaption></figure>
-    <figure><img src="renders/cyberdeck_side.png" alt="The cyberdeck from the side: the keyboard low on the desk, the phone on its arm behind" width="1600" height="1200" loading="lazy"><figcaption>From the side: the hinge right behind the board.</figcaption></figure>
-    <figure><img src="renders/cyberdeck_top.png" alt="The cyberdeck from above: the halves splayed either side of the spine, the phone behind" width="1600" height="1200" loading="lazy"><figcaption>From above: 12° of splay a side, the spine between.</figcaption></figure>
-    <figure><img src="renders/dock_unibody.png" alt="Both halves on the dock without the stand: one tented, splayed unibody" width="1600" height="1200" loading="lazy"><figcaption>Without the stand: a sturdier, more tented unibody, here with the trackpad.</figcaption></figure>
+    <figure><img src="renders/cyberdeck_front.png" alt="The cyberdeck seen from the front: the halves tilt down from the spine to the desk" width="1600" height="1200" loading="lazy"><figcaption>Front: the halves slope down from the spine, the dock under them like a gem's lower half.</figcaption></figure>
+    <figure><img src="renders/cyberdeck_side.png" alt="The cyberdeck from the side: the keyboard low on the desk, the phone on its arm behind" width="1600" height="1200" loading="lazy"><figcaption>Side: the hinge right behind the board.</figcaption></figure>
+    <figure><img src="renders/cyberdeck_top.png" alt="The cyberdeck from above: the halves splayed either side of the spine, the phone behind" width="1600" height="1200" loading="lazy"><figcaption>Top: 12° of splay a side, the spine between.</figcaption></figure>
+    <figure><img src="renders/dock_unibody.png" alt="Both halves on the dock without the stand: one tented, splayed unibody" width="1600" height="1200" loading="lazy"><figcaption>Without the stand: a unibody, here with the trackpad.</figcaption></figure>
   </div>
 
   <div class="grid2">
     <figure><img src="renders/dock_insert.png" alt="Both halves on the dock with the solid placeholder in the drawer, its diamond and PRISMA in low relief" width="1600" height="1200" loading="lazy"><figcaption>With the placeholder in the drawer.</figcaption></figure>
     <figure><img src="renders/dock_unibody_side.png" alt="The unibody on the dock from the side" width="1600" height="1200" loading="lazy"><figcaption>The unibody from the side.</figcaption></figure>
-    <figure><img src="renders/dock.png" alt="The dock alone: two wings with floor magnets, the drawer between them" width="1600" height="1200" loading="lazy"><figcaption>The dock: wing magnets, pad recesses, the drawer.</figcaption></figure>
+    <figure><img src="renders/dock.png" alt="The dock alone: two wings with floor magnets, the drawer between them" width="1600" height="1200" loading="lazy"><figcaption>The dock alone: wing magnets, pad recesses, drawer.</figcaption></figure>
     <figure><img src="renders/dock_base.png" alt="The dock on the Ugreen base seen from behind, the base's back strip left bare" width="1600" height="1200" loading="lazy"><figcaption>From behind, on the base: bare round the hinge.</figcaption></figure>
     <figure><img src="renders/dock_under.png" alt="The dock from below: the pocket for the Ugreen base, and three bump-on feet under each wing" width="1600" height="1200" loading="lazy"><figcaption>Underneath: the base's pocket and the feet.</figcaption></figure>
   </div>
@@ -305,55 +312,57 @@ main img { cursor: zoom-in; }
   <section class="stack col">
     <span class="eyebrow">Pointing</span>
     <h2>A trackball or a trackpad, in the drawer</h2>
-    <p>Two ZMK pointing devices that slide into the dock's drawer or snap onto a half on the desk. They are built like a half: a tray, a lid, and the same M3 × 8 flat-head screws from the top. The tray, main board, battery, power switch and reset button are shared. Choose a nice!nano v2 or plain XIAO nRF52840, on its own small board under the same main board.</p>
-    <figure><img src="renders/trackball_structure.png" alt="Trackball module with the grey lid raised off the blue tray and four orange screws above it" width="1600" height="1280" loading="lazy"><figcaption>The parts: lid, tray, four M3 × 8 screws from the top.</figcaption></figure>
-    <p>Three common side magnets per side use every other position in the halves' six-magnet row, level with the halves' own. One more disc in the module's floor sits over its mate in the drawer floor, on the centreline. To take a module out, push its rear hood forwards through the dock's rear passage.</p>
-    <p><strong>The trackball:</strong> a 34 mm ball and PMW3610 sensor, with two MX or Choc v1 hot-swap keys on one shared PCB. Populate only one socket family and print the matching lid.</p>
+    <p>Two ZMK pointing modules that slide into the dock's drawer or snap onto a half on the desk. They are built like a half: a tray, a lid, and the same M3 × 8 flat-head screws from the top. Tray, main board, battery, power switch and reset button are shared. The controller, a nice!nano v2 or a plain XIAO nRF52840, sits on its own small board under the main board.</p>
+    <figure><img src="renders/trackball_structure.png" alt="Trackball module with the grey lid raised off the blue tray and four orange screws above it" width="1600" height="1280" loading="lazy"><figcaption>Lid, tray and four M3 × 8 screws from the top.</figcaption></figure>
+    <p>Three side magnets per side use every other position in the halves' six-magnet row, and one disc in the module's floor mates with the drawer floor. To remove a module, push its rear hood forwards through the dock's rear passage.</p>
+    <p><strong>Trackball:</strong> a 34 mm ball and PMW3610 sensor, with two MX or Choc v1 hot-swap keys on one shared PCB. Populate one socket family and print the matching lid.</p>
     <figure><img src="renders/trackball_choc.png" alt="Choc v1 trackball case with lower switches, sharing the MX variant's PCB" width="1600" height="1200" loading="lazy"><figcaption>Choc v1 lid: same tray and boards.</figcaption></figure>
-    <p><strong>The trackpad:</strong> a 40 mm Cirque in the lid, with its supplied I²C breakout and original flat cable retained. Four wires run from the main board to the breakout; a separate DR wire runs directly to the Cirque underside. Space above the reset board is reserved for the insulated breakout and cable, without a printed holder; check the actual kit dimensions against the build guide.</p>
+    <p><strong>Trackpad:</strong> a 40 mm Cirque in the lid, with its supplied I²C breakout and flat cable. Four wires run from the main board to the breakout and a separate DR wire to the Cirque's underside. Space is reserved for the breakout and cable with no printed holder; check your kit's dimensions against the build guide.</p>
     <figure><img src="renders/trackpad_structure.png" alt="Trackpad module with the grey lid raised off the blue tray" width="1600" height="1280" loading="lazy"><figcaption>The trackpad's lid on the same tray.</figcaption></figure>
-    <p>The boards come as one panel: the main board and sensor board at opposite ends of a long bridge, and the controller board on a short tab off the sensor board's side. Snap them apart and file the stubs. The whole assembly is in the build guide below.</p>
-    <h3>USB-C, seated</h3>
-    <p>The rear connection is shown with an illustrative 12.35 × 6.5 mm plug and cable. The port is flush with the module's back with nothing beneath it, and the dock's 12.8 mm rear passage leads straight to it.</p>
-    <figure><img src="renders/trackball_usb.png" alt="Trackball module with a USB-C cable seated through the rear opening" width="1600" height="1200" loading="lazy"><figcaption>Trackball: rear USB-C connection.</figcaption></figure>
-    <figure><img src="renders/trackball_usb_open.png" alt="Cutaway showing the USB-C plug seated at the nice!nano" width="1600" height="1200" loading="lazy"><figcaption>Cutaway to the controller's receptacle.</figcaption></figure>
-    <figure><img src="renders/trackball_usb_dock.png" alt="Trackball docked with its USB cable through the rear exit" width="1600" height="1200" loading="lazy"><figcaption>Cable connected before docking.</figcaption></figure>
-    <figure><img src="renders/trackpad_usb.png" alt="Trackpad module with a seated USB-C cable" width="1600" height="1200" loading="lazy"><figcaption>Trackpad: rear USB-C connection.</figcaption></figure>
-    <figure><img src="renders/trackpad_usb_open.png" alt="Trackpad cutaway exposing the USB-C connection" width="1600" height="1200" loading="lazy"><figcaption>Trackpad receptacle and plug.</figcaption></figure>
-    <figure><img src="renders/trackpad_usb_dock.png" alt="Trackpad docked with a USB cable through the rear passage" width="1600" height="1200" loading="lazy"><figcaption>Trackpad with the cable pre-connected.</figcaption></figure>
   </section>
 
   <div class="grid2">
     <figure><img src="renders/trackball.png" alt="The trackball module: a red ball at the front, two MX keys stacked behind it" width="1600" height="1200" loading="lazy"><figcaption>The trackball module.</figcaption></figure>
     <figure><img src="renders/trackball_open.png" alt="The trackball module cut open: the sensor board under the ball, the main board under the keys, the nice!nano and the battery under it" width="1600" height="1200" loading="lazy"><figcaption>Cut open: sensor board, main board, nice!nano, battery.</figcaption></figure>
     <figure><img src="renders/trackpad.png" alt="The trackpad module: a round Cirque pad at the front, two Choc keys stacked behind it" width="1600" height="1200" loading="lazy"><figcaption>The trackpad module.</figcaption></figure>
-    <figure><img src="renders/trackpad_open.png" alt="The trackpad module cut open: battery, reset board and the nice!nano beneath the keys" width="1600" height="1200" loading="lazy"><figcaption>Cut open: battery, reset board and the controller on its board.</figcaption></figure>
-    <figure><img src="renders/trackball_with_half.png" alt="The trackball module snapped onto the left half on the desk" width="1600" height="1200" loading="lazy"><figcaption>On the desk, snapped onto a half.</figcaption></figure>
+    <figure><img src="renders/trackpad_open.png" alt="The trackpad module cut open: battery, reset board and the nice!nano beneath the keys" width="1600" height="1200" loading="lazy"><figcaption>Cut open: battery, reset board, controller.</figcaption></figure>
+    <figure><img src="renders/trackball_with_half.png" alt="The trackball module snapped onto the left half on the desk" width="1600" height="1200" loading="lazy"><figcaption>Snapped onto a half on the desk.</figcaption></figure>
     <figure><img src="renders/trackpad_with_half.png" alt="The trackpad module snapped onto the left half on the desk" width="1600" height="1200" loading="lazy"><figcaption>The trackpad, on a half.</figcaption></figure>
-
   </div>
 
   <section class="stack col">
+    <h3>USB-C, seated</h3>
+    <p>The port is flush with the module's back with nothing beneath it, and the dock's 12.8 mm rear passage leads straight to it. The renders use an illustrative 12.35 × 6.5 mm plug and cable.</p>
+    <div class="grid2">
+      <figure><img src="renders/trackball_usb.png" alt="Trackball module with a USB-C cable seated through the rear opening" width="1600" height="1200" loading="lazy"><figcaption>Trackball: rear USB-C.</figcaption></figure>
+      <figure><img src="renders/trackpad_usb.png" alt="Trackpad module with a seated USB-C cable" width="1600" height="1200" loading="lazy"><figcaption>Trackpad: rear USB-C.</figcaption></figure>
+      <figure><img src="renders/trackball_usb_open.png" alt="Cutaway showing the USB-C plug seated at the nice!nano" width="1600" height="1200" loading="lazy"><figcaption>Cutaway to the receptacle.</figcaption></figure>
+      <figure><img src="renders/trackpad_usb_open.png" alt="Trackpad cutaway exposing the USB-C connection" width="1600" height="1200" loading="lazy"><figcaption>Trackpad cutaway.</figcaption></figure>
+      <figure><img src="renders/trackball_usb_dock.png" alt="Trackball docked with its USB cable through the rear exit" width="1600" height="1200" loading="lazy"><figcaption>Docked, cable connected first.</figcaption></figure>
+      <figure><img src="renders/trackpad_usb_dock.png" alt="Trackpad docked with a USB cable through the rear passage" width="1600" height="1200" loading="lazy"><figcaption>Trackpad docked, cable connected first.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="stack col">
     <h3>One panel, either controller</h3>
-    <p>The <a href="trackball/fab/trackball_jlcpcb.zip">same breakaway panel</a> supports a nice!nano v2 or a plain XIAO nRF52840. The controller stands face down on an ordinary 2.54 mm header on its own small board, in two straight columns 15.24 mm apart, and eight stacking pins join that board to the main board above it. The six signal pins are GPIOs on both controllers, so only the firmware differs. One solder jumper picks the 3.3 V pin, and two short wires carry the battery and reset</p>
-    <p>On the panel the controller board lies a quarter turn round. In the module it sits under the main board, and each of its eight stacking holes lines up with one of the main board's. The diagram measures them on the routed board.</p>
-    <figure><img src="renders/trackball_board_stack.png" alt="The controller board with a XIAO on its header, and the main board's rear part over it, the stacking pins coming through its holes" width="1600" height="1200" loading="lazy"><figcaption>The two boards joined by the eight stacking pins, with a XIAO on its header. The main board is cut short here to show what lies under it.</figcaption></figure>
-    <figure><img src="renders/trackball_board_stack_exploded.png" alt="The same stack with the main board lifted 10 mm above the stacking pins' tips" width="1600" height="1200" loading="lazy"><figcaption>The main board lifted off: each pin stands under its hole.</figcaption></figure>
-    <figure><img src="renders/trackball_board_stack_nano.png" alt="The two boards joined by the stacking pins with a nice!nano on the header, running on past the cut-off main board" width="1600" height="1200" loading="lazy"><figcaption>The same stack with a nice!nano, which runs on further forward on the same header.</figcaption></figure>
-    <figure><img src="renders/trackball_board_stack_nano_exploded.png" alt="The nice!nano stack with the main board lifted 10 mm above the stacking pins' tips" width="1600" height="1200" loading="lazy"><figcaption>With a nice!nano, lifted off: the stacking pins and holes are the same.</figcaption></figure>
+    <p>The <a href="trackball/fab/trackball_jlcpcb.zip">same breakaway panel</a> holds three boards: main, sensor and controller. Snap them apart and file the stubs. It supports a nice!nano v2 or a plain XIAO nRF52840, with the firmware the only difference: the six signal pins are GPIOs on both. The controller stands face down on a 2.54 mm header on its own small board (two straight columns 15.24 mm apart), and eight stacking pins join that board to the main board above it. One solder jumper picks the 3.3 V pin, and two short wires carry the battery and reset.</p>
+    <p>On the panel the controller board lies a quarter turn round; in the module it sits under the main board, and each of its eight stacking holes lines up with one of the main board's. Both controllers use the same pin rows. A XIAO's rows sit 0.2 mm further from its USB-C mouth, so its mouth lies 0.2 mm inside the module's back. All images are nominal models, not a physically tested fit for every controller or clone.</p>
+    <figure><img src="renders/trackball_board_stack.png" alt="The controller board with a XIAO on its header, and the main board's rear part over it, the stacking pins coming through its holes" width="1600" height="1200" loading="lazy"><figcaption>Controller board with a XIAO, joined to the main board by the eight stacking pins. The main board is cut short to show what lies under it.</figcaption></figure>
+    <figure><img src="renders/trackball_board_stack_exploded.png" alt="The same stack with the main board lifted 10 mm above the stacking pins' tips" width="1600" height="1200" loading="lazy"><figcaption>Main board lifted off: each pin stands under its hole.</figcaption></figure>
+    <figure><img src="renders/trackball_board_stack_nano.png" alt="The two boards joined by the stacking pins with a nice!nano on the header, running on past the cut-off main board" width="1600" height="1200" loading="lazy"><figcaption>The same stack with a nice!nano, which runs further forward on the same header.</figcaption></figure>
+    <figure><img src="renders/trackball_board_stack_nano_exploded.png" alt="The nice!nano stack with the main board lifted 10 mm above the stacking pins' tips" width="1600" height="1200" loading="lazy"><figcaption>nice!nano, lifted off: same pins and holes.</figcaption></figure>
     <figure><img src="renders/trackball_board_stack_wires.png" alt="The XIAO stack from low at the front corner, with coloured wires in every other main-board hole, running forward" width="1600" height="1200" loading="lazy"><figcaption>Every other hole takes a wire. 3V red, G grey, RST white, CK yellow, IO green, CS blue and MO cyan run forward to the sensor board or trackpad; VBAT orange and R2 purple come up from the controller.</figcaption></figure>
-    <figure><img src="renders/trackball_board_stack_nano_wires.png" alt="The nice!nano stack from low at the front corner, with the same coloured wires" width="1600" height="1200" loading="lazy"><figcaption>The same wires with a nice!nano: its battery and reset wires start on its B+ and RST pins.</figcaption></figure>
-    <figure><img src="renders/stack_alignment.png" alt="Plan of both boards' stacking holes measured from the routed PCB, all eight 0.000 mm apart, and a scale section across the stack" loading="lazy"><figcaption>Measured from the routed board: every pair 0.000 mm apart.</figcaption></figure>
-    <figure><img src="renders/wiring_xiao.png" alt="Top view of the controller board with a XIAO on it: named pins, stacking pins and the jumper setting" loading="lazy"><figcaption>Plain XIAO nRF52840 wiring, for the trackball and the trackpad.</figcaption></figure>
-    <figure><img src="renders/wiring_nice_nano.png" alt="Top view of the controller board with a nice!nano on it: named pins, stacking pins and the jumper setting" loading="lazy"><figcaption>nice!nano v2 wiring, for the trackball and the trackpad.</figcaption></figure>
-    <p>Both controllers stand on the same pin rows. A XIAO's rows sit 0.2 mm further from its USB-C mouth, so its mouth lies 0.2 mm inside the module's back. The assembly images show nominal models, not a physically tested fit for every controller or clone.</p>
-    <figure><img src="renders/trackball_xiao_stack.png" alt="Seeed-published XIAO reference model on the controller board in the shared tray" width="1600" height="1200" loading="lazy"><figcaption>XIAO reference geometry on its board in the shared tray. Wires are not shown.</figcaption></figure>
-    <figure><img src="renders/trackball_xiao_usb_open.png" alt="XIAO USB cutaway with a plug at the shared rear opening" width="1600" height="1200" loading="lazy"><figcaption>XIAO USB mouth at the rear opening, from Seeed's published STEP reference.</figcaption></figure>
+    <figure><img src="renders/trackball_board_stack_nano_wires.png" alt="The nice!nano stack from low at the front corner, with the same coloured wires" width="1600" height="1200" loading="lazy"><figcaption>The same wires with a nice!nano; its battery and reset wires start on its B+ and RST pins.</figcaption></figure>
+    <figure><img src="renders/stack_alignment.png" alt="Plan of both boards' stacking holes measured from the routed PCB, all eight 0.000 mm apart, and a scale section across the stack" loading="lazy"><figcaption>Measured on the routed board: every hole pair 0.000 mm apart.</figcaption></figure>
+    <figure><img src="renders/wiring_xiao.png" alt="Top view of the controller board with a XIAO on it: named pins, stacking pins and the jumper setting" loading="lazy"><figcaption>XIAO wiring, trackball and trackpad.</figcaption></figure>
+    <figure><img src="renders/wiring_nice_nano.png" alt="Top view of the controller board with a nice!nano on it: named pins, stacking pins and the jumper setting" loading="lazy"><figcaption>nice!nano v2 wiring, trackball and trackpad.</figcaption></figure>
+    <figure><img src="renders/trackball_xiao_stack.png" alt="Seeed-published XIAO reference model on the controller board in the shared tray" width="1600" height="1200" loading="lazy"><figcaption>XIAO reference geometry in the shared tray (no wires).</figcaption></figure>
+    <figure><img src="renders/trackball_xiao_usb_open.png" alt="XIAO USB cutaway with a plug at the shared rear opening" width="1600" height="1200" loading="lazy"><figcaption>XIAO USB mouth at the rear opening, from Seeed's STEP reference.</figcaption></figure>
   </section>
   <div class="grid2">
-    <figure><img src="renders/trackball_board_top.png" alt="The three-board panel: main board with keys and wire pads, controller board, and sensor board" width="1600" height="1200" loading="lazy"><figcaption>One panel for either controller and either pointing module.</figcaption></figure>
+    <figure><img src="renders/trackball_board_top.png" alt="The three-board panel: main board with keys and wire pads, controller board, and sensor board" width="1600" height="1200" loading="lazy"><figcaption>One panel for either controller and either module.</figcaption></figure>
     <figure><img src="renders/trackball_board_bottom.png" alt="The trackball's board from the back: the MX hot-swap sockets, and the sensor's regulator, capacitors and reset button" width="1600" height="1200" loading="lazy"><figcaption>Back face: the sockets, and the sensor's parts facing the plate.</figcaption></figure>
-</div>
+  </div>
   <p class="next"><a href="#parts">Next: Parts <span aria-hidden="true">→</span></a></p>
 </section>
 
@@ -1230,15 +1239,15 @@ time. Both halves use the same PCB, turned over for the right half.</p>
     <span class="eyebrow">Toolchain</span>
     <h2>Everything is a script</h2>
     <div class="tools">
-      <div class="tool"><b>Python + shapely</b><p>One <code class="num">design.json</code> places everything from the key layout: the Xiao, battery, connector, screws and magnets. The tent angle is the smallest one the parts under the PCB fit beneath.</p></div>
-      <div class="tool"><b>KiCad 9 Python API</b><p>Runs headless in the official container. Footprints are written as text, checked against KiCad's library, Seeed's OPL library and kiswitch, then the board is built by script.</p></div>
+      <div class="tool"><b>Python + shapely</b><p>One <code class="num">design.json</code> places everything from the key layout: XIAO, battery, connector, screws, magnets. The tent angle is the smallest one the parts under the PCB fit beneath.</p></div>
+      <div class="tool"><b>KiCad 9 Python API</b><p>Runs headless in the official container. Footprints are written as text and checked against KiCad's library, Seeed's OPL library and kiswitch; the board is then built by script.</p></div>
       <div class="tool"><b>Freerouting 2.2</b><p>Autoroutes the board; pours and stitching vias go on afterwards.</p></div>
-      <div class="tool"><b>kicad-cli</b><p>Design-rule check, Gerbers and drill files for JLCPCB, and every render on this page.</p></div>
-      <div class="tool"><b>manifold3d</b><p>Builds the base and plate as solids, then intersects every part with them. Anything that isn't <span class="num">0 mm³</span> fails.</p></div>
+      <div class="tool"><b>kicad-cli</b><p>Design-rule check, JLCPCB Gerbers and drill files, and every render on this page.</p></div>
+      <div class="tool"><b>manifold3d</b><p>Builds the base and plate as solids and intersects every part with them. Anything that isn't <span class="num">0 mm³</span> fails.</p></div>
     </div>
     <figure class="col">
       <img src="design.png" alt="Top view of the left half's placement: sockets, Xiao, battery, JST socket, magnets, screws, reset button and pad slots" width="782" height="833" loading="lazy">
-      <figcaption>The placement design.json describes, left half from above: sockets red, Xiao blue, battery yellow, floor magnets purple, anti-slip pads black, screws dark grey.</figcaption>
+      <figcaption>The placement design.json describes, left half from above: sockets red, XIAO blue, battery yellow, floor magnets purple, anti-slip pads black, screws dark grey.</figcaption>
     </figure>
   </section>
 
@@ -1261,9 +1270,9 @@ time. Both halves use the same PCB, turned over for the right half.</p>
     <p class="col">Every part that could collide is modelled, and the fit check fails on anything above <span class="num">0 mm³</span>. Some checks cover how the keyboard is assembled and used, not only where parts sit:</p>
     <div class="finds col">
       <div class="find"><div><h3>A USB-C cable seats fully</h3><p>A recess the size of the largest Type-C overmold (<span class="num">12.35 × 6.5 mm</span>) reaches the port, and the PCB edge is notched in front of it. The check plugs in a cable of that size.</p></div></div>
-      <div class="find"><div><h3>The PCB drops straight in</h3><p>The power switch's lever reaches past the PCB edge, so it slides down a slot open to the top. The slot widens outwards so a fingernail reaches the lever. The check sweeps the lever along the drop-in path.</p></div></div>
+      <div class="find"><div><h3>The PCB drops straight in</h3><p>The power switch's lever reaches past the PCB edge, so it slides down a slot open to the top, wider outwards so a fingernail reaches the lever. The check sweeps the lever along the drop-in path.</p></div></div>
       <div class="find"><div><h3>Room for tolerances</h3><p><span class="num">0.5 mm</span> around the PCB and plate covers JLCPCB's ±<span class="num">0.2 mm</span> outline tolerance plus print shrinkage.</p></div></div>
-      <div class="find"><div><h3>One magnet throughout</h3><p>Thirteen <span class="num">8 × 1.5 mm N52</span> discs per half: six along the seam and seven underneath, including three circular stand contacts. Each pocket keeps <span class="num">0.5 mm</span> of plastic all round, measured against the printed base. The larger battery raises the PCB and case by 1.8 mm without changing the PCB outline or wiring.</p></div></div>
+      <div class="find"><div><h3>One magnet throughout</h3><p>Thirteen <span class="num">8 × 1.5 mm N52</span> discs per half: six along the seam and seven underneath, three of them stand contacts. Each pocket keeps <span class="num">0.5 mm</span> of plastic all round, measured against the printed base. The 500 mAh battery raises the PCB and case by 1.8 mm without changing the PCB outline or wiring.</p></div></div>
     </div>
 <pre class="term">$ python check_fit.py
 sockets vs base                       0.000 mm3
