@@ -1,4 +1,4 @@
-"""Fills build-log.html's parts and build-guide tabs from BOM.md and BUILD.md, and the guide's contents.
+"""Fills index.html's parts and build-guide tabs from BOM.md and BUILD.md, and the guide's contents.
 
 Each document goes between its <!-- NAME --> and <!-- /NAME --> markers, converted to HTML:
 its title dropped (the page has its own), its sections one level down, its tables in a
@@ -8,7 +8,7 @@ import re
 
 import markdown
 
-PAGE = "build-log.html"
+PAGE = "index.html"
 
 
 def convert(path):

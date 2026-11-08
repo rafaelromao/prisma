@@ -1,4 +1,4 @@
-"""Slim Diamond Trackpad: a 40 mm Cirque trackpad and two Choc hot-swap keys, in a drawer module.
+"""Prisma Trackpad: a 40 mm Cirque trackpad and two Choc hot-swap keys, in a drawer module.
 
 It is the trackball's module with a different lid. The tray, the main board (keys, sockets, power
 switch), the nice!nano, the battery and a sensor board are all the same, in the same places: the
@@ -138,7 +138,7 @@ def main():
     tray_m, main_plan, sensor_plan = B.tray(L), B.main_board_plan(L), B.sensor_board_plan(L)
     lid_m = lid(L)
     ps = parts(L, main_plan, sensor_plan)
-    M.check_common("Slim Diamond Trackpad", lid_m, tray_m, ps)
+    M.check_common("Prisma Trackpad", lid_m, tray_m, ps)
     M.check_dock_and_desk(lid_m, tray_m, H, ps)
     print("  height %.2f mm, pad centre y %.2f, keys at y %s" % (H, L["pad"][1], ["%.1f" % k[1] for k in L["keys"]]))
     print("  lid %.1f cm3, genus %d" % (lid_m.volume() / 1000, lid_m.genus()))

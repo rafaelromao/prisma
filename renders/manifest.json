@@ -6,7 +6,7 @@
         4120,
         2043
       ],
-      "sha256": "aaaf8fc1c9ef6b4f366cd85f1adbfd2ce41c2be4384fdd018823df4b797853f7"
+      "sha256": "c20582e358dc0a1cd026d7c2c9ff723569944f6dd6481bb13c376ae5a7d7d1e5"
     },
     {
       "path": "renders/board_bottom.png",
@@ -14,7 +14,7 @@
         1568,
         1176
       ],
-      "sha256": "3b4d394a31870d56b6ef0e9b6cb56835701ea4ef8cdd924b1e424422b1f05634"
+      "sha256": "30594d6f0414fb108478a077e9bc6aa8569edae497a9c6ed6882ce2cdfb8e861"
     },
     {
       "path": "renders/board_top.png",
@@ -22,7 +22,7 @@
         1568,
         1176
       ],
-      "sha256": "ba7dfa8f1233386d9ac39ea78751bad217d4b225239681c3759f57912b23be95"
+      "sha256": "48b193eec0e49f24225118e520bc172dee2f0aa8fea644e93f83df666017e4bb"
     },
     {
       "path": "renders/case.png",
@@ -118,7 +118,7 @@
         1568,
         1176
       ],
-      "sha256": "1c443edb0b9346840cc02742bf07d970a1138519b9be849bee98ad60bbe63a72"
+      "sha256": "45fef6627043b61bcedb073bb28131ed611b9ed99a63f9602b0b72a92e31145d"
     },
     {
       "path": "renders/full_side.png",
@@ -126,7 +126,7 @@
         1568,
         1176
       ],
-      "sha256": "3ba1b9defc13d19e09480007b46fcb60168e31d803055b8baa6783cd8746d5a9"
+      "sha256": "801f453de17dc242336254d07e873c28d8fa2f6e4c275f14aade6e3f13bc3bbf"
     },
     {
       "path": "renders/independent_tenting.png",
@@ -150,7 +150,7 @@
         1265,
         629
       ],
-      "sha256": "ce5429a24bf3f246f14572b8d232373c50e698e02052719f75e883242a134ff9"
+      "sha256": "32515d116e6d4970661a89daca17515bcf1b3b3e8bf202d2d88a7d53f7f518fe"
     },
     {
       "path": "renders/parts_bottom.png",
@@ -158,7 +158,7 @@
         1568,
         1176
       ],
-      "sha256": "5c2eabdce2b9282e28ea0d85250fc52586344fa2730ba5ed1019d780bc742bc2"
+      "sha256": "59be7d071c97d61d1d475ae0b927b8b6fe7d7b5aa6371e7363cda8a544a384a6"
     },
     {
       "path": "renders/parts_top.png",
@@ -166,7 +166,7 @@
         1568,
         1176
       ],
-      "sha256": "f3e16692f33a556717b6b3aa702a31848cbaf4e118aaf8f64c3d5b697b5b8690"
+      "sha256": "cba70e43aba8f5071c7a1ff03ae383a1426454d710db48d67c80f7a589ab37b0"
     },
     {
       "path": "renders/plate.png",
@@ -632,15 +632,15 @@
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "d9c9be9658ee512b883affdb0c749b9ef570b96cb60a4313b2c280c4e422844a"
+      "sha256": "f80b00c56dfe4405dd7999a375b7713b6891173417c35b401b5b2b824a52b90c"
     },
     {
       "path": "build_pcb.py",
-      "sha256": "0cd7484f9ec81a8ea82e7d5058c1d31200f7962e41433fc348d65fdbcf638b85"
+      "sha256": "cef09242abe4ce89016cd42f214eb15e358918c5d9c0b8d9bd37666544b8d9bd"
     },
     {
       "path": "case.py",
-      "sha256": "08c48d93ec0e35dec44400b72b4d6ec7fb21f8bae0bbb3c5b3cf276a79d1e12c"
+      "sha256": "975eb79a0ca302aab7bbbf4a2fe3e2aa9d02ce8e07b34e061b09420c71cd0fba"
     },
     {
       "path": "check_fit.py",
@@ -648,15 +648,15 @@
     },
     {
       "path": "check_pcb.py",
-      "sha256": "7213de7fb4fe113c7158d020b64c7654afbb45e531b0c276ec60341be2f84c47"
+      "sha256": "7cfde8a87a1e035c8a2c5293b964ec60327bf4705d1856d4cb5c3c1a0955794e"
     },
     {
       "path": "design.json",
-      "sha256": "6b838824ec91336bc3648380cc9c0bb1dd0e4254666cdbaa8a8f962cc718e2e3"
+      "sha256": "f20c84eecec232b09cce880d807b70907cb3d585923215105d8f03efe2605e05"
     },
     {
       "path": "design.py",
-      "sha256": "5e97f222c10d8fe0962271468714b0cfc8da024a2d7a92ea8a8941194a4d5940"
+      "sha256": "8709d1efb247c88207f70b5238b2810d6aa06a11326929dffb5cd1f6cd000a77"
     },
     {
       "path": "dock.py",
@@ -664,7 +664,7 @@
     },
     {
       "path": "footprints.py",
-      "sha256": "53410252c803163bc030096f440426a9cf47a569486f0ca9fee2a65ef87248db"
+      "sha256": "351e8ce4daa56686d5b24ab4b3fb47dfe70fade71e387633eee31cc2b9a70d1f"
     },
     {
       "path": "insert.py",
@@ -672,7 +672,7 @@
     },
     {
       "path": "layout.py",
-      "sha256": "b264ab72e04f2e3e43479200c30028ac08b3f6d6ac3137c89200508942ba7010"
+      "sha256": "a8d5e09d2285b33322be1a028012797a9320bde1d76ab94ca110323de1a14f2e"
     },
     {
       "path": "magnets.py",
@@ -684,19 +684,19 @@
     },
     {
       "path": "page.py",
-      "sha256": "0879cb9310e019f813f315d888b9678ac8bcf703c808a9d610400c9e7c27cdc5"
+      "sha256": "6adfaf58ffbb58cf4a1e7d7954286b3bfee6c3a6f262ca2138ed9941bb22cb16"
     },
     {
       "path": "render.sh",
-      "sha256": "c8b4fbe8a7a4ddf79eb0c8c864d92ba1aaaf38fc9765a3e4120ddf1d51a5d984"
+      "sha256": "9632d590a8f8b40f205f1e84f171d5d857961bbee5cf0230105f353ae7d2bd6e"
     },
     {
       "path": "render_boards.py",
-      "sha256": "3bdfd4f1de099aeffe75e6faaf55dfd5b2997152865ef771312d63f77768b32a"
+      "sha256": "e5cea4fc19c926c5cae393ac3d1feddf2216011cd482ad66d4aef0fd8b73f721"
     },
     {
       "path": "render_manifest.py",
-      "sha256": "6d841fc46f3b7b0720547c6aa30c5b001ac0e959e28a935b2523f45f7082e71d"
+      "sha256": "6442c946e6c67eb2642b2c82fb3fc7a9d24f2fdf25d0c682f840f318410ca616"
     },
     {
       "path": "render_notes.py",
@@ -708,7 +708,7 @@
     },
     {
       "path": "stand_mount.py",
-      "sha256": "589605a1961eace3e802e40b57c7781625974b66a5dc111e4124316bc584d653"
+      "sha256": "83ea1ebacd0f14eb62518d362367cd92c7586cdd8b0d18cf8ee34392437dcf01"
     },
     {
       "path": "stl_mesh.py",
@@ -728,11 +728,11 @@
     },
     {
       "path": "test_stl_export.py",
-      "sha256": "da369a1dbbd72a14d858134f0799b2a463e96d3c7a2994da0649243e394e2f74"
+      "sha256": "10bb6278dbd238d17abd236cc8742bedc514fcc06d344067cd83e5b82734e609"
     },
     {
       "path": "test_xiao_option.py",
-      "sha256": "b4949634522f208efbb9a93142d46862cc3189632f8811cda067889ca8883b27"
+      "sha256": "99c41ca221612f548615132b5f7807717a5aa173e0a696bbbcd652b3d2837de8"
     },
     {
       "path": "trackball/controllers.py",
@@ -752,19 +752,19 @@
     },
     {
       "path": "trackball/trackball.py",
-      "sha256": "52a2b3ca404ea9d2f02ee55a15e209a27f7eb7d0a19cfdf64de3ad9b1eaf25a0"
+      "sha256": "22fe07e9f0f183353d70c940638277846d6c0b95500b0866f4e1610d6de01bab"
     },
     {
       "path": "trackpad/trackpad.py",
-      "sha256": "a26d62c279d248991b71bab5dfd73dd5ba836023ffe498eb3e5df51f8aa3b2c6"
+      "sha256": "d8c7c34e3ec0601da796de148975aca6130cc5244d6f8696c0dc06ef9c272807"
     },
     {
       "path": "verify_artifacts.py",
-      "sha256": "679674fa86b10541577fdfb68918819ee58ea5677cd3bba0c3298c765ecae0ac"
+      "sha256": "fc16626368b73b98df63412d0fd8c5cd535e8dff992fc3d2c2956305fa16dee2"
     },
     {
       "path": "vrml.py",
-      "sha256": "611da28f1128a49823577000ae09c4d22738c2c8245894a9b903ba1f18b0dcd4"
+      "sha256": "6a98eba0532f105d5fb0197a23fa0adddf1562ee9f25d77d62ad8277633e4121"
     },
     {
       "path": "xiao_alternatives.json",

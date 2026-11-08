@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Slim Diamond</title>
+<title>Prisma</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">
@@ -155,7 +155,7 @@ main img { cursor: zoom-in; }
 <body>
 
 <header class="masthead">
-  <h1>Slim Diamond</h1>
+  <h1>Prisma</h1>
   <span class="eyebrow">Wireless split · 24 keys · Choc v1 · ZMK</span>
 </header>
 <nav class="tabs" aria-label="Sections">
@@ -203,7 +203,7 @@ main img { cursor: zoom-in; }
   <section class="stack col">
     <span class="eyebrow">Status</span>
     <h2>Not built yet</h2>
-    <p>Nothing has been fabbed or printed. Nominal clearances and numerical checks do not guarantee physical fit or assembly. Sources, Gerbers, STLs, a BOM and a hand-soldering guide are in the repo: <a href="https://github.com/rafaelromao/diamond/tree/main/slim_diamond">rafaelromao/diamond</a>.</p>
+    <p>Nothing has been fabbed or printed. Nominal clearances and numerical checks do not guarantee physical fit or assembly. Sources, Gerbers, STLs, a BOM and a hand-soldering guide are in the repo: <a href="https://github.com/rafaelromao/prisma">rafaelromao/prisma</a>.</p>
   </section>
   <p class="next"><a href="#halves">Next: The halves <span aria-hidden="true">→</span></a></p>
 </section>
@@ -436,7 +436,7 @@ packs come in round numbers anyway.</p>
 <tbody>
 <tr>
 <td>1</td>
-<td>PCB, <code>fab/slim_diamond_jlcpcb.zip</code></td>
+<td>PCB, <code>fab/prisma_jlcpcb.zip</code></td>
 <td>2 (order 5)</td>
 <td>(JLCPCB, not AliExpress)</td>
 <td>2 layers, 1.6 mm, 87.6 × 92.3 mm, HASL, any colour. The cheapest tier: 5 boards is 2 keyboards plus a spare.</td>
@@ -822,13 +822,13 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <tbody>
 <tr>
 <td>Left</td>
-<td><code>slim_diamond_peripheral_left-zmk.uf2</code></td>
-<td><code>slim_diamond_central_left-zmk.uf2</code></td>
+<td><code>prisma_peripheral_left-zmk.uf2</code></td>
+<td><code>prisma_central_left-zmk.uf2</code></td>
 </tr>
 <tr>
 <td>Right</td>
-<td><code>slim_diamond_peripheral_right-zmk.uf2</code></td>
-<td><code>slim_diamond_peripheral_right-zmk.uf2</code></td>
+<td><code>prisma_peripheral_right-zmk.uf2</code></td>
+<td><code>prisma_peripheral_right-zmk.uf2</code></td>
 </tr>
 </tbody>
 </table></div>
@@ -1164,7 +1164,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 </table></div>
 <p>On the <strong>trackball</strong>, also wire the sensor board's <code>SCLK</code>, <code>SDIO</code>, <code>NCS</code> and <code>MOTION</code> to the main board's <code>CK</code>, <code>IO</code>, <code>CS</code> and <code>MO</code> pads, which sit beside their stacking pins.</p>
 <p>Verify the clone's pin labels and USB location against a genuine nice!nano v2 before wiring; clones can differ. The power switch is between the cell positive and B+, not between the controller and its regulated VCC. Insulate the battery leads while wiring, check polarity and continuity with the battery disconnected, and confirm there is no short between supply and ground before connecting it.</p>
-<p>Use <code>slim_diamond_trackball</code> for nice!nano or <code>slim_diamond_trackball_xiao</code> for XIAO. The XIAO shield turns off I²C1 and the serial port, so that the sensor can use D4 and D5 and the other signals D6 and D7.</p>
+<p>Use <code>prisma_trackball</code> for nice!nano or <code>prisma_trackball_xiao</code> for XIAO. The XIAO shield turns off I²C1 and the serial port, so that the sensor can use D4 and D5 and the other signals D6 and D7.</p>
 <p>On the <strong>trackpad</strong>, retain the supplied <strong>I²C breakout PCB and its 12-pin flat cable</strong>. Solder four flexible wires from the breakout's <code>VDD</code>/<code>VCC</code>, <code>GND</code>, <code>SDA</code> and <code>SCL</code> pads to the main board's <code>3V</code>, <code>G</code>, <code>IO</code> and <code>CK</code> pads. Solder one additional wire directly from the Cirque's underside <strong>DR/data-ready</strong> test pad to the <code>MO</code> pad; this does not replace the flat cable. Confirm DR by continuity to connector J1 pin 4 before soldering. Use the breakout's two pull-ups to <strong>3.3 V</strong>, not 5 V; verify their population and the kit's pad order with its schematic/meter rather than wire colours. Cable orientation matters: check the supplied FFC contact orientation and the breakout's pin reversal before applying power.</p>
 <p>Configure the Cirque for I²C: order a <code>TM040040-2023-302</code> flat-overlay I²C version, or verify the kit's SPI-labelled board has R1 removed. If R1 is still fitted, remove it with a short iron touch and wick away any bridge; protect the nearby FFC connector. Keep R7 and R8 fitted for this 3.3 V design—do not apply the 5 V conversion. See <a href="https://keycapsss.com/help/cirque-trackpad/">the adapter guide</a> and the Cirque data sheet. Leave the common sensor PCB's trackball components and <code>CK</code>/<code>IO</code>/<code>CS</code>/<code>MO</code> connections unpopulated; wire only its reset and ground (its unpopulated VCC connection is optional).</p>
 <p>The firmware uses Zephyr's Pinnacle driver and assumes a directly wired, active-high DR signal. Test startup, motion, primary tap, sleep and wake on the actual pad; interrupt startup and driver calibration have not been physically verified. The PMW3610 trackball firmware likewise compiles but the shared SDIO line and bus turnaround have not been electrically tested.</p>
@@ -1214,7 +1214,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 </tr>
 </tbody>
 </table></div>
-<p>Use <code>slim_diamond_trackpad</code> for nice!nano or <code>slim_diamond_trackpad_xiao</code> for XIAO. Both use I²C at 100 kHz and address <code>0x2A</code>. Never connect breakout VDD/VCC to raw battery voltage or USB 5 V. Both I²C firmware variants compile; physical communications, tap, sleep and wake still need testing.</p>
+<p>Use <code>prisma_trackpad</code> for nice!nano or <code>prisma_trackpad_xiao</code> for XIAO. Both use I²C at 100 kHz and address <code>0x2A</code>. Never connect breakout VDD/VCC to raw battery voltage or USB 5 V. Both I²C firmware variants compile; physical communications, tap, sleep and wake still need testing.</p>
 <p>On the <strong>plain XIAO nRF52840</strong>, the <code>VBAT</code> and <code>R2</code> wires start on the two small pads on its back. Keep them flat across its back, not crossing, and off towards the rear of the sockets above it. The battery's negative needs no wire to the XIAO: the <code>-</code> pad is ground on the main board, and ground reaches the XIAO through the stacking pins and header. Use Seeed's <a href="https://wiki.seeedstudio.com/XIAO_BLE/#hardware-overview">front and back pinout</a> to identify the pads on the actual board. Insulate each joint and check polarity and shorts with the cell and USB disconnected.</p>
 <p><strong>Super52840:</strong> battery-pad locations differ and reset, charger and regulator details depend on the actual revision; compatibility remains experimental until verified against that board's schematic and measurements. Do not assume the Seeed battery, reset or charging pinout applies. The XIAO firmware variants compile but have not been tested on hardware.</p>
 <h3 id="b-into-the-tray">Into the tray</h3>

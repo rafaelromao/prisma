@@ -1,6 +1,6 @@
 (footprint "JST_PH_S2B_Reversible"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "JST PH 2-pin SMD horizontal, either face, opening at +y")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

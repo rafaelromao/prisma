@@ -1,5 +1,5 @@
 /*
- * Slim Diamond Trackball: key 1 (in front, by the ball) clicks left; key 2 clicks right when
+ * Prisma Trackball: key 1 (in front, by the ball) clicks left; key 2 clicks right when
  * tapped, and held, turns the ball into a scroll wheel. Both together: middle click.
  *
  * SPDX-License-Identifier: MIT

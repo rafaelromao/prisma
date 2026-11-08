@@ -13,7 +13,7 @@ import shutil
 import pcbnew
 
 D = json.load(open("design.json"))
-SRC = "pcb/slim_diamond.kicad_pcb"
+SRC = "pcb/prisma.kicad_pcb"
 OUT = ".render"   # scratch boards for kicad-cli; the images go to renders/
 OFF = (100.0, 100.0)
 

@@ -1,4 +1,4 @@
-# Slim Diamond — fresh exported-STL mechanical/DFM review
+# Prisma — fresh exported-STL mechanical/DFM review
 
 **Disposition: the meshes are healthy, but I would not call this a proven buildable, serviceable consumer-product design yet.** The highest-priority finding is a battery-loading restriction in the trackpad floor that a seated-component Boolean does not reveal. The short Choc main-board screw joint and delicate trackball controller supports also deserve design changes or explicit prototype gates.
 
@@ -6,7 +6,7 @@ Reviewed 2026-11-05, independently, against the frozen binaries in `/home/romao/
 
 ## Scope, evidence and coordinates
 
-- **All 24 current Slim Diamond STL files covered:** 11 printable exports, their 11 public copies, and the two hidden `.render` helpers. Older `stls/v1` and `stls/v2` are outside this request.
+- **All 24 current Prisma STL files covered:** 11 printable exports, their 11 public copies, and the two hidden `.render` helpers. Older `stls/v1` and `stls/v2` are outside this request.
 - Binary record lengths, SHA-256, triangle counts, merged-vertex edge incidence, connected components, winding, signed volumes, Euler characteristic and Manifold import status were checked independently. Sections, ray thickness samples, and Manifold intersections were made from the exported triangles.
 - There is one solid per printable file. The two disconnected halves in `dock_halves.stl` are expected; they are **not** a broken printable unibody. All 11 public copies are byte-identical to their corresponding printable exports.
 - **No detected open mesh, nonmanifold edge, reversed component or accidental physical shell split.** No zero-area triangles detected. Every binary has the expected `84 + 50 × triangle_count` length. All import as `Error.NoError`. Topological validity is not an FDM/assembly certificate.
@@ -154,21 +154,21 @@ Additional independent positive checks:
 
 The paired source and public paths in each row below have **the same complete SHA-256, byte length and mesh statistics**. This explicitly inventories and hashes all 22 printable-path files; the two separate helper rows bring coverage to 24. Volumes are mm³. All rows are watertight, consistently wound, and have zero boundary/nonmanifold edges and zero detected zero-area triangles.
 
-| Source path | Public copy (all under `stls/slim_diamond/`) | SHA-256 | Bytes | Triangles | Euler | Components | Volume |
+| Source path | Public copy (all under `stls/`) | SHA-256 | Bytes | Triangles | Euler | Components | Volume |
 |---|---|---|---:|---:|---:|---:|---:|
-| `slim_diamond/case/case_left.stl` | `case_left.stl` | `b8419049fdd1cc62a28dfc311d2a59c5cf2109677ed8554a26ee961fcea9f7e5` | 415184 | 8302 | 0 | 1 | 65912.748 |
-| `slim_diamond/case/case_right.stl` | `case_right.stl` | `1b8406b17fb5b485b6fa3f33d9f8132b6863bb90402ffd78170760430cc9b94b` | 415084 | 8300 | 0 | 1 | 65912.747 |
-| `slim_diamond/case/plate_left.stl` | `plate_left.stl` | `e0f9723ff6dd5d13f46429d282257cd223edccb076a6ed47661ec6bbd5b3b3f4` | 147084 | 2940 | −32 | 1 | 4278.883 |
-| `slim_diamond/case/plate_right.stl` | `plate_right.stl` | `33d01e9ab24619b3c2157b3f8f5374982a0402638635e6828fd7b3f24e14e8b2` | 147084 | 2940 | −32 | 1 | 4278.883 |
-| `slim_diamond/case/dock.stl` | `dock.stl` | `19da4b71f7b7ac768fec66f0eec66b89765127edfc3eeba754d9952ce1fc2ece` | 433484 | 8668 | 2 | 1 | 82887.486 |
-| `slim_diamond/case/insert.stl` | `insert.stl` | `24c74b28f2744cc8421c31f2b46d8620b672d944b8fbb5fea349d2b677e47f4f` | 88484 | 1768 | 2 | 1 | 64493.050 |
-| `slim_diamond/trackball/case/shell.stl` | `trackball_shell.stl` | `430833cc36ac8bfd05cb5dd3f124e12a03fd7ef934a7314c8ae07a5506a1564e` | 547584 | 10950 | −10 | 1 | 14261.920 |
-| `slim_diamond/trackball/case/shell_choc.stl` | `trackball_shell_choc.stl` | `d9ad24b6a52fe79716c3b7d7880d2f9ba6d9b22aa2e71f91b5179dcd4f524463` | 487284 | 9744 | −10 | 1 | 12369.409 |
-| `slim_diamond/trackball/case/bottom_plate.stl` | `trackball_bottom_plate.stl` | `a3f4541bd04b99862951d0fbef2a5e4706cd26151d9b8e9389ed18687f476f21` | 97984 | 1958 | −6 | 1 | 5659.415 |
-| `slim_diamond/trackpad/case/shell.stl` | `trackpad_shell.stl` | `deaac06d678e3af6b2f6e5021b8a3a4c2fd3e65db2fd3a24a4ed49cfb65c75cf` | 146084 | 2920 | −18 | 1 | 11782.042 |
-| `slim_diamond/trackpad/case/bottom_plate.stl` | `trackpad_bottom_plate.stl` | `e50e47f3ba1f5c77747454fe1b046879ba6087a5893b3191d5928461b461b520` | 83984 | 1678 | −10 | 1 | 6610.357 |
-| `slim_diamond/.render/dock_halves.stl` | helper only | `8174bced7f7b1fb87b611ad03c5bcf1b0003d489e48c11c5c3edbb9165037597` | 830284 | 16604 | 0 | **2** | 131825.491 |
-| `slim_diamond/.render/dock_ugreen.stl` | helper only | `8cf0f0bc0398f529462518e13c606d5f74120183f30cc49167725a86f6ddc960` | 10284 | 204 | 2 | 1 | 35668.775 |
+| `case/case_left.stl` | `case_left.stl` | `b8419049fdd1cc62a28dfc311d2a59c5cf2109677ed8554a26ee961fcea9f7e5` | 415184 | 8302 | 0 | 1 | 65912.748 |
+| `case/case_right.stl` | `case_right.stl` | `1b8406b17fb5b485b6fa3f33d9f8132b6863bb90402ffd78170760430cc9b94b` | 415084 | 8300 | 0 | 1 | 65912.747 |
+| `case/plate_left.stl` | `plate_left.stl` | `e0f9723ff6dd5d13f46429d282257cd223edccb076a6ed47661ec6bbd5b3b3f4` | 147084 | 2940 | −32 | 1 | 4278.883 |
+| `case/plate_right.stl` | `plate_right.stl` | `33d01e9ab24619b3c2157b3f8f5374982a0402638635e6828fd7b3f24e14e8b2` | 147084 | 2940 | −32 | 1 | 4278.883 |
+| `case/dock.stl` | `dock.stl` | `19da4b71f7b7ac768fec66f0eec66b89765127edfc3eeba754d9952ce1fc2ece` | 433484 | 8668 | 2 | 1 | 82887.486 |
+| `case/insert.stl` | `insert.stl` | `24c74b28f2744cc8421c31f2b46d8620b672d944b8fbb5fea349d2b677e47f4f` | 88484 | 1768 | 2 | 1 | 64493.050 |
+| `trackball/case/shell.stl` | `trackball_shell.stl` | `430833cc36ac8bfd05cb5dd3f124e12a03fd7ef934a7314c8ae07a5506a1564e` | 547584 | 10950 | −10 | 1 | 14261.920 |
+| `trackball/case/shell_choc.stl` | `trackball_shell_choc.stl` | `d9ad24b6a52fe79716c3b7d7880d2f9ba6d9b22aa2e71f91b5179dcd4f524463` | 487284 | 9744 | −10 | 1 | 12369.409 |
+| `trackball/case/bottom_plate.stl` | `trackball_bottom_plate.stl` | `a3f4541bd04b99862951d0fbef2a5e4706cd26151d9b8e9389ed18687f476f21` | 97984 | 1958 | −6 | 1 | 5659.415 |
+| `trackpad/case/shell.stl` | `trackpad_shell.stl` | `deaac06d678e3af6b2f6e5021b8a3a4c2fd3e65db2fd3a24a4ed49cfb65c75cf` | 146084 | 2920 | −18 | 1 | 11782.042 |
+| `trackpad/case/bottom_plate.stl` | `trackpad_bottom_plate.stl` | `e50e47f3ba1f5c77747454fe1b046879ba6087a5893b3191d5928461b461b520` | 83984 | 1678 | −10 | 1 | 6610.357 |
+| `.render/dock_halves.stl` | helper only | `8174bced7f7b1fb87b611ad03c5bcf1b0003d489e48c11c5c3edbb9165037597` | 830284 | 16604 | 0 | **2** | 131825.491 |
+| `.render/dock_ugreen.stl` | helper only | `8cf0f0bc0398f529462518e13c606d5f74120183f30cc49167725a86f6ddc960` | 10284 | 204 | 2 | 1 | 35668.775 |
 
 Exported bounding sizes (X × Y × Z), useful for slicer sanity checks:
 

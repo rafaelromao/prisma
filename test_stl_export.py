@@ -25,7 +25,7 @@ class StlExportTest(unittest.TestCase):
                                   ("trackpad", T.lid(T.place()), T.H)):
             solids[name] = lid.mirror((0, 0, 1)).translate((0, 0, height))
         record = np.dtype([("normal", "<f4", 3), ("vertices", "<f4", (3, 3)), ("attribute", "<u2")])
-        with tempfile.TemporaryDirectory(dir="/tmp/opencode", prefix="diamond-stl-test-") as folder:
+        with tempfile.TemporaryDirectory(dir="/tmp/opencode", prefix="prisma-stl-test-") as folder:
             for name, solid in solids.items():
                 with self.subTest(variant=name):
                     path = Path(folder) / (name + ".stl")

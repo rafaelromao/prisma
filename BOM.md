@@ -1,4 +1,4 @@
-# Slim Diamond: bill of materials
+# Prisma: bill of materials
 
 Quantities are for **one keyboard (both halves)**. The PCB is reversible, so
 both halves use the same board. "Spares" are worth ordering because AliExpress
@@ -6,7 +6,7 @@ packs come in round numbers anyway.
 
 | # | Part | Qty | Search AliExpress for | Notes |
 |---|------|-----|------------------------|-------|
-| 1 | PCB, `fab/slim_diamond_jlcpcb.zip` | 2 (order 5) | (JLCPCB, not AliExpress) | 2 layers, 1.6 mm, 87.6 × 92.3 mm, HASL, any colour. The cheapest tier: 5 boards is 2 keyboards plus a spare. |
+| 1 | PCB, `fab/prisma_jlcpcb.zip` | 2 (order 5) | (JLCPCB, not AliExpress) | 2 layers, 1.6 mm, 87.6 × 92.3 mm, HASL, any colour. The cheapest tier: 5 boards is 2 keyboards plus a spare. |
 | 2 | Seeed Studio XIAO nRF52840, **or** NologoTech Super52840 | 2 | `Seeed XIAO nRF52840` / `Super52840` or `MINI NRF52840 18x21` | The same board takes either; set its battery selector to match (BUILD.md, step 1). XIAO: the plain one (not "Sense", not "Plus"), genuine Seeed, since the board relies on its bottom pads (BAT, GND, NFC1). Super52840: the one with B+/B- pads and a row of nine GPIO pads underneath. |
 | 3 | Kailh Choc v1 switches | 24 (+2) | `Kailh choc low profile switch` | Any v1 (PG1350) switch. Not v2 (MX stem) and not Choc mini. |
 | 4 | Kailh Choc hot-swap sockets | 24 (+4) | `Kailh choc hotswap socket PG1350` | CPG135001S30, the low-profile socket. |

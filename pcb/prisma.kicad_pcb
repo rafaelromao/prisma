@@ -103,7 +103,7 @@
 	(net 23 "RST_L")
 	(net 24 "VBAT")
 	(net 25 "BAT+")
-	(footprint "slim_diamond:MountingHole_M3"
+	(footprint "prisma:MountingHole_M3"
 		(layer "F.Cu")
 		(uuid "03334243-320b-4098-8e85-a76716303f4b")
 		(at 66.5 123)
@@ -166,7 +166,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SolderJumper_B"
+	(footprint "prisma:SolderJumper_B"
 		(layer "F.Cu")
 		(uuid "0f4e2a65-7e9d-45ae-a470-7169d02111ca")
 		(at 91.6272 129.8827 140)
@@ -238,7 +238,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_TS1187A_Reversible"
+	(footprint "prisma:SW_TS1187A_Reversible"
 		(layer "F.Cu")
 		(uuid "107e3f0a-6662-4593-9baa-01faff6bd8a9")
 		(at 129.5 137)
@@ -584,7 +584,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SolderJumper_F"
+	(footprint "prisma:SolderJumper_F"
 		(layer "F.Cu")
 		(uuid "12d173c2-5f88-45ed-b6da-0f58efc1b0e7")
 		(at 91.6272 129.8827 140)
@@ -656,7 +656,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:JST_PH_S2B_Reversible"
+	(footprint "prisma:JST_PH_S2B_Reversible"
 		(layer "F.Cu")
 		(uuid "17a33d75-61bd-442b-a004-76cf7298e8ee")
 		(at 130 116 180)
@@ -993,7 +993,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:MountingHole_M3"
+	(footprint "prisma:MountingHole_M3"
 		(layer "F.Cu")
 		(uuid "1998a457-3bc2-40a3-a9c5-2e9f129b5dc7")
 		(at 134 144.5)
@@ -1056,7 +1056,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SolderJumper_B"
+	(footprint "prisma:SolderJumper_B"
 		(layer "F.Cu")
 		(uuid "2a012394-4eb3-4e64-938b-ef3a6d8397e4")
 		(at 91.9204 134.0449 140)
@@ -1128,7 +1128,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SolderJumper_B"
+	(footprint "prisma:SolderJumper_B"
 		(layer "F.Cu")
 		(uuid "3d1dfdd0-6492-4027-81cb-cf4fa363ba09")
 		(at 90.3777 135.8834 140)
@@ -1200,7 +1200,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "3da7f8fb-f6f9-4262-ad8d-dfe87c734e06")
 		(at 60.9719 107.2018 -3)
@@ -1527,7 +1527,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SolderJumper_F"
+	(footprint "prisma:SolderJumper_F"
 		(layer "F.Cu")
 		(uuid "5afc8c63-d090-4a2f-a34e-616ce0dd3589")
 		(at 89.6223 132.1166 140)
@@ -1599,7 +1599,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "5ed6bba7-935d-4565-a733-6315c9ec94d5")
 		(at 97.048 116.7417 -10)
@@ -1926,7 +1926,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:nRF52840_Module_Reversible"
+	(footprint "prisma:nRF52840_Module_Reversible"
 		(layer "F.Cu")
 		(uuid "6a54ee9c-c23b-477e-8683-618ab2e3b76c")
 		(at 90 134 140)
@@ -2674,7 +2674,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "6bcc352b-9f4b-4905-81b7-4cac9d49bae3")
 		(at 119.5724 92.6572 -10)
@@ -3001,7 +3001,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SW_MSK12C02_Reversible"
+	(footprint "prisma:SW_MSK12C02_Reversible"
 		(layer "F.Cu")
 		(uuid "728ace4d-162a-440b-8c2a-009bc62f011d")
 		(at 71.7161 130.2761 -40)
@@ -3354,7 +3354,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "79dbfadd-8024-4a9e-97ef-8bbec281d1b6")
 		(at 110.3329 145.057 -27)
@@ -3681,7 +3681,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SolderJumper_F"
+	(footprint "prisma:SolderJumper_F"
 		(layer "F.Cu")
 		(uuid "7fea94a0-fdd8-44d2-a34f-e68dd0858777")
 		(at 86.5369 135.7936 140)
@@ -3753,7 +3753,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "852104ea-0a98-4c93-8f21-b2b4b1503eb6")
 		(at 78.3441 117.866 -7)
@@ -4080,7 +4080,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:MountingHole_M3"
+	(footprint "prisma:MountingHole_M3"
 		(layer "F.Cu")
 		(uuid "9ac6fe9c-010a-41ce-b6be-e96baedcedf9")
 		(at 61 94.5)
@@ -4143,7 +4143,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SolderJumper_F"
+	(footprint "prisma:SolderJumper_F"
 		(layer "F.Cu")
 		(uuid "9b7ba40b-105d-483e-8d46-8c8ada2c9518")
 		(at 95.1863 129.9972 140)
@@ -4215,7 +4215,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SolderJumper_B"
+	(footprint "prisma:SolderJumper_B"
 		(layer "F.Cu")
 		(uuid "9f69caea-5ecf-4757-9d72-d0e33a26043b")
 		(at 95.1863 129.9972 140)
@@ -4287,7 +4287,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "a2aba19f-239d-4200-b703-b9e1507bcdcd")
 		(at 80.3864 100.9892 -7)
@@ -4614,7 +4614,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "a48d218a-1295-4650-abf1-72c0a38da356")
 		(at 126.3568 153.2568 -27)
@@ -4941,7 +4941,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SolderJumper_F"
+	(footprint "prisma:SolderJumper_F"
 		(layer "F.Cu")
 		(uuid "aac78a16-8a73-4e79-867c-0d92469f66c8")
 		(at 93.0414 128.1974 140)
@@ -5013,7 +5013,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "b10b1d58-bd3a-4cad-9d40-3d9fc508d5e7")
 		(at 102.952 83.2583 -10)
@@ -5340,7 +5340,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SolderJumper_F"
+	(footprint "prisma:SolderJumper_F"
 		(layer "F.Cu")
 		(uuid "b21cbbe3-e207-4475-8b9e-1854d263ee0f")
 		(at 88.0796 133.9551 140)
@@ -5412,7 +5412,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:MountingHole_M3"
+	(footprint "prisma:MountingHole_M3"
 		(layer "F.Cu")
 		(uuid "bfa1db19-6df8-491c-b6ec-e84a0f25a039")
 		(at 127 123.5)
@@ -5475,7 +5475,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SolderJumper_F"
+	(footprint "prisma:SolderJumper_F"
 		(layer "F.Cu")
 		(uuid "cccb9083-874c-4ffb-9cea-17fd670f3da2")
 		(at 93.7722 131.6825 140)
@@ -5547,7 +5547,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "cfaf1360-4c2f-47e2-bcde-51d20d20facd")
 		(at 82.4288 84.1123 -7)
@@ -5874,7 +5874,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SolderJumper_B"
+	(footprint "prisma:SolderJumper_B"
 		(layer "F.Cu")
 		(uuid "d9d25f58-0d75-4173-936f-d40ca3f8ecbc")
 		(at 88.835 137.7219 140)
@@ -5946,7 +5946,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SolderJumper_B"
+	(footprint "prisma:SolderJumper_B"
 		(layer "F.Cu")
 		(uuid "de40208a-76ba-46f5-b997-1f2b6e911975")
 		(at 93.7722 131.6825 140)
@@ -6018,7 +6018,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "f22cdddd-245d-441d-a15c-12c900ce5fda")
 		(at 113.6684 126.1406 -10)
@@ -6345,7 +6345,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "f2faaad9-f1c9-4f38-b778-e67434f483b4")
 		(at 116.6204 109.3989 -10)
@@ -6672,7 +6672,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SW_Choc_V1_Hotswap_Reversible"
+	(footprint "prisma:SW_Choc_V1_Hotswap_Reversible"
 		(layer "F.Cu")
 		(uuid "f37e14e5-98f5-4169-bf23-916ac950f805")
 		(at 100 100 -10)
@@ -6999,7 +6999,7 @@
 			)
 		)
 	)
-	(footprint "slim_diamond:SolderJumper_B"
+	(footprint "prisma:SolderJumper_B"
 		(layer "F.Cu")
 		(uuid "feb3574d-bca9-4898-bd61-0474bf181537")
 		(at 93.0414 128.1974 140)
@@ -7487,7 +7487,7 @@
 			)
 		)
 	)
-	(gr_text "SLIM DIAMOND"
+	(gr_text "PRISMA"
 		(at 134.15436 122.628381 90)
 		(layer "F.SilkS")
 		(uuid "4a2fb432-8591-4cc9-8eee-f53d0edc9b40")
@@ -7570,7 +7570,7 @@
 			(justify mirror)
 		)
 	)
-	(gr_text "SLIM DIAMOND"
+	(gr_text "PRISMA"
 		(at 134.15436 122.628381 90)
 		(layer "B.SilkS")
 		(uuid "238ab3cc-086c-4eb7-8b64-41ac1fc21db4")

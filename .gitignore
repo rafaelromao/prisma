@@ -5,9 +5,9 @@ pcb/*.kicad_prl
 pcb/route.log
 pcb/drc*.json
 pcb/pinout.txt
-pcb/slim_diamond-backups/
+pcb/prisma-backups/
 .render/
-/slim_diamond.pretty/
+/prisma.pretty/
 __pycache__/
 xiao_alternatives.json
 

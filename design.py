@@ -1,4 +1,4 @@
-"""Slim Diamond: places the electronics, magnets and outlines around the key layout.
+"""Prisma: places the electronics, magnets and outlines around the key layout.
 
 Writes design.json, the single source of truth for the PCB and case generators,
 and design.png, a top view.
@@ -571,7 +571,7 @@ def main():
     side_z, side_spots = MAG_SIDE_SPOTS
 
     result = {
-        "name": "Slim Diamond",
+        "name": "Prisma",
         "keys": {n: {"x": keys[n][0][0], "y": keys[n][0][1], "r": keys[n][1]} for n in KEY_ORDER},
         "xiao": {"x": xiao_c[0], "y": xiao_c[1], "r": xiao_ang, "usb_dir": usb_dir},
         "power_switch": {"x": power_c[0], "y": power_c[1], "r": pwr_ang},
@@ -662,7 +662,7 @@ def main():
         draw(Point(from_floor(a)).buffer(PAD[0] / 2), color="#111", alpha=0.75)
         ax.plot(*Point(from_floor(b)).buffer(PAD[0] / 2).exterior.xy, color="#111", lw=1, ls="--")
     ax.set_aspect("equal"); ax.invert_yaxis(); ax.grid(alpha=0.3)
-    ax.set_title(f"Slim Diamond (left, top view)  case {cb[2]-cb[0]:.0f}x{cb[3]-cb[1]:.0f} mm, tent {tent:.1f}°")
+    ax.set_title(f"Prisma (left, top view)  case {cb[2]-cb[0]:.0f}x{cb[3]-cb[1]:.0f} mm, tent {tent:.1f}°")
     fig.savefig("design.png", dpi=110, bbox_inches="tight")
     plt.close(fig)
     pad_guide(foot, ends, key_spots, seam_x, plt)

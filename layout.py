@@ -1,4 +1,4 @@
-"""Diamond Air key layout: the Diamond's angles and stagger, packed at Choc spacing.
+"""Prisma key layout: the Diamond's angles and stagger, packed at Choc spacing.
 
 Coordinates are KiCad's: millimetres, y grows downwards. Angles are QMK-style
 (degrees clockwise on screen); KiCad footprint orientation is the negative.

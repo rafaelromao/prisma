@@ -1,6 +1,6 @@
 (footprint "PMW3610_Back"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "PixArt PMW3610DM-SUDU on the back face, LM18-LSI lens on the front; after siderakb/pmw3610-pcb (CERN-OHL-P-2.0)")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

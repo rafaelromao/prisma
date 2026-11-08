@@ -15,7 +15,7 @@ import pcbnew
 
 D = json.load(open("design.json"))
 PINOUT = json.load(open("pcb/pinout.json"))
-board = pcbnew.LoadBoard("pcb/slim_diamond.kicad_pcb")
+board = pcbnew.LoadBoard("pcb/prisma.kicad_pcb")
 fails = []
 
 

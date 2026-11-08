@@ -1,6 +1,6 @@
 """Layout regressions for the trackball's boards.
 
-Run from slim_diamond/: python3 -m unittest discover -s trackball -p 'test_*.py'
+Run from the repository root: python3 -m unittest discover -s trackball -p 'test_*.py'
 """
 import unittest
 

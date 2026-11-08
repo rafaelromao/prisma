@@ -16,7 +16,7 @@ class XiaoOptionTest(unittest.TestCase):
     def test_all_signal_pins_match_each_firmware_overlay(self):
         for kind, controllers in SIGNALS.items():
             for controller, signals in controllers.items():
-                name = 'slim_diamond_' + kind + ('_xiao' if controller == 'xiao' else '')
+                name = 'prisma_' + kind + ('_xiao' if controller == 'xiao' else '')
                 text = (Path('zmk/boards/shields') / name / (name + '.overlay')).read_text()
                 with self.subTest(shield=name):
                     pins = [gpio(kind, controller, signal) for signal in signals]
@@ -37,7 +37,7 @@ class XiaoOptionTest(unittest.TestCase):
     def test_only_one_panel_is_advertised(self):
         self.assertFalse(Path('trackball/pcb_xiao/trackball_xiao.kicad_pcb').exists())
         self.assertFalse(Path('trackball/fab/trackball_xiao_jlcpcb.zip').exists())
-        for path in ('BOM.md', 'BUILD.md', 'README.md', 'build-log.html'):
+        for path in ('BOM.md', 'BUILD.md', 'README.md', 'index.html'):
             with self.subTest(path=path):
                 text = Path(path).read_text()
                 self.assertNotIn('trackball_xiao_jlcpcb.zip', text)
@@ -56,7 +56,7 @@ class XiaoOptionTest(unittest.TestCase):
 
     def test_xiao_shields_release_i2c_key_pin(self):
         for kind in ('trackball', 'trackpad'):
-            name = 'slim_diamond_' + kind + '_xiao'
+            name = 'prisma_' + kind + '_xiao'
             overlay = (Path('zmk/boards/shields') / name / (name + '.overlay')).read_text()
             with self.subTest(shield=name):
                 self.assertIn('&uart0 { status = "disabled"; };', overlay)
@@ -69,7 +69,7 @@ class XiaoOptionTest(unittest.TestCase):
 
     def test_trackpads_enable_active_high_data_ready_and_primary_tap(self):
         for suffix, port, pin in (('', 0, 22), ('_xiao', 1, 11)):
-            name = 'slim_diamond_trackpad' + suffix
+            name = 'prisma_trackpad' + suffix
             overlay = (Path('zmk/boards/shields') / name / (name + '.overlay')).read_text()
             with self.subTest(shield=name):
                 self.assertIn(f'data-ready-gpios = <&gpio{port} {pin} GPIO_ACTIVE_HIGH>;', overlay)

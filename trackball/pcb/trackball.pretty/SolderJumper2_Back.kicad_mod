@@ -1,6 +1,6 @@
 (footprint "SolderJumper2_Back"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "2-pad solder jumper, open, on the back face")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

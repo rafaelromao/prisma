@@ -2,7 +2,7 @@
 
 This specifies the minimum clear flat contact patch, not unmeasured Ugreen platform dimensions.
 Glue three of the common 8 x 1.5 mm discs to each platform, on the circular pattern.
-Run from slim_diamond/: python3 stand_mount.py
+Run from the repository root: python3 stand_mount.py
 """
 import math
 from pathlib import Path

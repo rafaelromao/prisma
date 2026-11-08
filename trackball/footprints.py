@@ -1,4 +1,4 @@
-"""Writes trackball.pretty: the Slim Diamond Trackball's footprints (one board, two parts).
+"""Writes trackball.pretty: the Prisma Trackball's footprints (one board, two parts).
 
 The main board carries MX / Choc v1 alternative hot-swap sockets and a power switch. The
 controller stands on its own small board, on pin headers. The sensor board's parts all sit
@@ -15,7 +15,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
-import footprints as F                     # the Slim Diamond's helpers
+import footprints as F                     # the Prisma's helpers
 
 F.OUT = os.path.join(HERE, "trackball.pretty")
 B = ["B.Cu", "B.Mask", "B.Paste"]

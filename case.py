@@ -1,4 +1,4 @@
-"""Slim Diamond case and top plate. Writes case/*.stl.
+"""Prisma case and top plate. Writes case/*.stl.
 
 The case is a solid base under the tented PCB: plastic everywhere up to the
 PCB's underside (sturdy, and no hollow body to ring), with a pocket for each
@@ -34,7 +34,7 @@ from shapely.ops import unary_union
 
 D = json.load(open("design.json"))
 OUT = "case"
-STLS = "../stls/slim_diamond"   # the repo's STL folder gets the same files
+STLS = "stls"   # the repo's STL folder gets the same files
 
 TENT = math.radians(D["tent_deg"])
 WALL_IN = D["wall_in"]
@@ -325,7 +325,7 @@ def stl(m, path):
     from stl_mesh import clean_mesh
     v, f = clean_mesh(m)
     with open(path, "wb") as fh:
-        fh.write(b"slim diamond".ljust(80, b" "))
+        fh.write(b"prisma".ljust(80, b" "))
         fh.write(np.uint32(len(f)).tobytes())
         tri = v[f]
         n = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])

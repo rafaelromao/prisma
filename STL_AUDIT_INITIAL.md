@@ -1,4 +1,4 @@
-# Slim Diamond: independent read-only artifact audit
+# Prisma: independent read-only artifact audit
 
 ## Scope and method
 
@@ -14,7 +14,7 @@ Assembly frames were reconstructed from STL print orientation, saved layout meta
 
 ### P1 — Both front bottom-plate screw heads collide with the shell, and their intended plate seats have been cut away
 
-Affected: `slim_diamond/trackball/case/bottom_plate.stl`, `slim_diamond/trackpad/case/bottom_plate.stl`, together with `trackball/case/shell.stl`, `trackball/case/shell_choc.stl`, and `trackpad/case/shell.stl`; all corresponding `stls/slim_diamond` copies are identical.
+Affected: `trackball/case/bottom_plate.stl`, `trackpad/case/bottom_plate.stl`, together with `trackball/case/shell.stl`, `trackball/case/shell_choc.stl`, and `trackpad/case/shell.stl`; all corresponding `stls` copies are identical.
 
 The front screw axes are `(x,y)=(−22,−95)` and `(22,−95)`. At the intended flush head location, assembled z=0.5, the 3D front-facet trim has removed the bottom plate around both countersinks. A 0.05 mm witness band just outside the intended 90° conical seats intersects **0.000 mm³** of bottom-plate material at both positions (rear-screw controls give 0.3038/0.3132 mm³). Only partial edge notches remain at greater heights; these are not enclosed countersunk holes.
 
@@ -22,11 +22,11 @@ More seriously, a standard Ø3.8 mm M2 flat head, modeled as a 90° truncated co
 
 **Action:** move the front screws behind the actual 3D front-facet clearance boundary, or redesign the local shell/plate seating geometry. Check the whole fastener head against both printed parts, plus retained plate material around the countersink, rather than only checking pilot axes in plan. Do not rely on these two screws seating flush in the present exports.
 
-Proof: `slim_fasteners.py`, `slim_fasteners.txt`, `slim_fasteners.png`.
+Proof: `prisma_fasteners.py`, `prisma_fasteners.txt`, `prisma_fasteners.png`.
 
 ### P1 — The trackpad power-switch lever passage is closed by a 0.15 mm membrane
 
-Affected: `slim_diamond/trackpad/case/shell.stl` and `stls/slim_diamond/trackpad_shell.stl`.
+Affected: `trackpad/case/shell.stl` and `stls/trackpad_shell.stl`.
 
 At x=−2, 0 and +2 mm, the outward lever path passes through plastic at y=−15.850000..−15.699999. At the switch center height assembled z=11.15, even a conservative **1×1 mm** lever shaft from y=−16 to −12 intersects **0.1500006 mm³** of the actual shell at every tested lateral position. The membrane is visible in a direct x=0 cross-section. Example blocking point: assembled `(0,−15.75,11.15)`, or exported-shell `(0,−15.75,10.320856)`.
 
@@ -34,27 +34,27 @@ The switch body itself fits, so body-only clearance checks miss this. A 0.15 mm 
 
 **Action:** cut a continuous lever swept envelope through the completed shell/pocket and verify both travel endpoints and the intervening path. Include the lever, not just the switch housing, in fit validation.
 
-Proof: `slim_confirm.py`, `slim_confirm.txt`, `slim_sections.png`.
+Proof: `prisma_confirm.py`, `prisma_confirm.txt`, `prisma_sections.png`.
 
 ### P2 — Trackpad rear bump-on recess has only a 0.20 mm roof
 
-Affected: `slim_diamond/trackpad/case/bottom_plate.stl` and `stls/slim_diamond/trackpad_bottom_plate.stl`.
+Affected: `trackpad/case/bottom_plate.stl` and `stls/trackpad_bottom_plate.stl`.
 
 The USB clearance cut reduces the roof above the rear foot. Vertical rays at exported `(x,y)=(0,−21),(2,−21),(0,−18),(0,−24)` hit material only between **z=1.500000 and 1.700000**. The remaining thickness is **0.200000 mm**, not the documented 0.7 mm. This spans the rear Ø8.4 mm recess, rather than being a knife-edge artifact. It is essentially a single 0.2 mm layer carrying the rear bump-on; real breakage depends on print/material/load, but the geometric thickness loss is confirmed.
 
 **Action:** restore a deliberate roof thickness without obstructing USB, e.g. move the rear foot or locally redesign the clearance/floor. Recheck the actual STL after all cuts. Update the retained-skin claim only after measuring it.
 
-Proof: `slim_confirm.py`; `slim_thickness.json`.
+Proof: `prisma_confirm.py`; `prisma_thickness.json`.
 
 ### P2 — MX and Choc trackball exports have a large unsupported rear hood in the supplied print orientation
 
-Affected: `slim_diamond/trackball/case/shell.stl`, `slim_diamond/trackball/case/shell_choc.stl`, and their public copies.
+Affected: `trackball/case/shell.stl`, `trackball/case/shell_choc.stl`, and their public copies.
 
 These files are top-down, but the common rear hood's first downward-facing horizontal surface begins at exported **z=4.0 mm (MX)** or **z=1.2 mm (Choc)**. It extends from y=−14.2 to +0.195553: **14.3956 mm** beyond the main rear wall. At `(x,y)=(0,−5)` a vertical ray meets no material until those heights; intersections are z=4..7.75 for MX and z=1.2..4.95 for Choc. At y=0 it is likewise unsupported below the roof. The rear tip is an open cantilever, not a bridge spanning two supports. The 45° assembled underside does not make the first printed hood layer self-supporting in this inverted orientation.
 
 **Action:** provide local supports and a tested removal strategy, change orientation, split the hood, or redesign its printable growth. Do not assume the delivered orientation is support-free. Actual sag/finish severity depends on printer and material.
 
-Proof: `slim_details.py`, `slim_confirm.py`, `slim_sections.png`.
+Proof: `prisma_details.py`, `prisma_confirm.py`, `prisma_sections.png`.
 
 ### P2 — Exported STLs contain zero-area scraps and non-manifold edge incidences
 
@@ -69,17 +69,17 @@ Seven of eleven unique printable exports fail ordinary welded-STL watertightness
 
 **Action:** weld/clean at the export boundary with topology-preserving handling of float32 slivers; independently reload the binary STL and require edge incidence two, no zero-area faces and the expected material-component count. Blindly dropping every tiny-area face is not sufficient and can introduce holes.
 
-Proof: `slim_audit.py`, `slim_mesh_audit.json`.
+Proof: `prisma_audit.py`, `prisma_mesh_audit.json`.
 
 ### P3 — The dock-half helper STL is stale, and the documented extra tent is stale
 
-Affected: `slim_diamond/.render/dock_halves.stl`; README's extra-tent figure.
+Affected: `.render/dock_halves.stl`; README's extra-tent figure.
 
 The helper's floor normals imply **5.38416°**, whereas the actual dock seat normals imply **5.95718°**. Each helper half is **64,239.06 mm³**, versus **65,912.75 mm³** for the actual printable case. A helper half intersects the actual dock by **3,671.88 mm³**. Placing the actual case using the actual dock's seating planes gives only **0.000277 mm³**, numerical noise. The README still says 5.38° extra tent; the actual supplied dock gives about 12.52° total with the case's 6.56079° tent.
 
 **Action:** retire/regenerate the stale helper alongside exports, and derive documentation figures from the published STL revision. Do not use this helper as assembly evidence. This does not imply that the PNG renders are stale: the render-scene geometry comparisons below match current STLs.
 
-Proof: `slim_fit.py`, `slim_fit.txt`.
+Proof: `prisma_fit.py`, `prisma_fit.txt`.
 
 ## Confirmed geometric concern with unproven full assembly consequence
 
@@ -87,13 +87,13 @@ Proof: `slim_fit.py`, `slim_fit.txt`.
 
 This proves the obvious axial assembly/service path is obstructed. It does **not** prove there is no possible tilted six-degree-of-freedom path. Simple front-edge tilts also encounter interference, but I did not exhaustively search rigid-body configuration space. Components/wires mounted on these plates further constrain practical manipulation.
 
-**Action:** explicitly design/document a collision-free bottom-plate insertion/removal path and test it with the populated module, or clearance the front lip for normal downward removal. Check this separately from horizontal module removal from the dock, which passed. Scratch `slim_paths.py` explores limited translations/tilts; it is not a completeness proof.
+**Action:** explicitly design/document a collision-free bottom-plate insertion/removal path and test it with the populated module, or clearance the front lip for normal downward removal. Check this separately from horizontal module removal from the dock, which passed. Scratch `prisma_paths.py` explores limited translations/tilts; it is not a completeness proof.
 
 ## Coverage: every STL
 
 All public copies in the second column are byte-identical to the corresponding first-column export. Sizes are exported bounding-box extents. “Bad edges” means welded edges with incidence other than two. “Degenerate” means triangle area <1e−10 mm².
 
-| Source path under `slim_diamond/` | Copy under `stls/slim_diamond/` | Size mm | Bad edges | Degenerate |
+| Source path | Copy under `stls/` | Size mm | Bad edges | Degenerate |
 |---|---|---:|---:|---:|
 | `case/case_left.stl` | `case_left.stl` | 93.013×100.451×20.648 | 2 | 2 |
 | `case/case_right.stl` | `case_right.stl` | 93.013×100.451×20.648 | 2 | 2 |
@@ -128,7 +128,7 @@ No separate file named cover was present: `insert.stl` is the documented solid c
 
 ## Render review
 
-Inspected **all 43 PNGs** in `slim_diamond/renders` using four labeled contact sheets, with full-size spot checks of board, dock, Choc and USB cutaway views. No definite unintended object clipping/cropping was found. Board renders have tight margins but retain their outlines. The keyboard “opened” module pictures are actually x=0 cutaways, including sectioned balls/pads, not exploded removable covers; the captions would be clearer as “Cutaway”. USB cutaways intentionally retain the full plug/cable. They should not be mistaken for physical assembly access.
+Inspected **all 43 PNGs** in `renders` using four labeled contact sheets, with full-size spot checks of board, dock, Choc and USB cutaway views. No definite unintended object clipping/cropping was found. Board renders have tight margins but retain their outlines. The keyboard “opened” module pictures are actually x=0 cutaways, including sectioned balls/pads, not exploded removable covers; the captions would be clearer as “Cutaway”. USB cutaways intentionally retain the full plug/cable. They should not be mistaken for physical assembly access.
 
 Parsed the saved VRML render-scene meshes independently and compared vertices against the actual exports after frame/orientation reversal: MX shell, Choc shell, trackpad shell, both module bottom plates, dock and dock-base render geometry all agree within **0.000214 mm**, consistent with four-decimal VRML rounding. Thus the principal render geometry is faithful, but it faithfully hides the same thin internal membrane/foot roof unless sectioned appropriately. The stale `.render/dock_halves.stl` is a separate cache problem, not evidence that current PNGs use stale cases.
 
@@ -138,14 +138,14 @@ Physical uncertainties remain: real Cirque backside/FFC geometry, sensor lens da
 
 From any directory, run the scratch scripts with `/tmp/opencode/diamond-venv/bin/python`:
 
-1. `slim_audit.py`: all-file manifest, hashes and topology (`slim_mesh_audit.json`).
-2. `slim_fit.py`: infer actual dock seat transform, seated fits, horizontal drawer removal and axial plate obstruction (`slim_fit.txt` captured).
-3. `slim_confirm.py`: exact trackpad membrane/foot rays and trackball print-hood evidence (`slim_confirm.txt`, `slim_sections.png`).
-4. `slim_fasteners.py`: seat witness bands and head/shell collisions (`slim_fasteners.txt`, `slim_fasteners.png`).
-5. `slim_components.py`: independent nominal component envelopes, mirrors and bore sections (`slim_components.txt`).
-6. `slim_magnets_usb.py`: actual nominal magnet alignment/seating and seated USB clearance (`slim_magnets_usb.txt`; run after `slim_fit.py`).
-7. `slim_thickness.py`: independent random thickness probes (`slim_thickness.json`, `slim_thickness.txt`).
-8. `slim_render_compare.py`: saved render-scene versus STL comparison (`slim_render_compare.txt`).
-9. `slim_contacts.py`: four contact sheets `slim_contact_0.jpg` .. `slim_contact_3.jpg` covering all render PNGs.
+1. `prisma_audit.py`: all-file manifest, hashes and topology (`prisma_mesh_audit.json`).
+2. `prisma_fit.py`: infer actual dock seat transform, seated fits, horizontal drawer removal and axial plate obstruction (`prisma_fit.txt` captured).
+3. `prisma_confirm.py`: exact trackpad membrane/foot rays and trackball print-hood evidence (`prisma_confirm.txt`, `prisma_sections.png`).
+4. `prisma_fasteners.py`: seat witness bands and head/shell collisions (`prisma_fasteners.txt`, `prisma_fasteners.png`).
+5. `prisma_components.py`: independent nominal component envelopes, mirrors and bore sections (`prisma_components.txt`).
+6. `prisma_magnets_usb.py`: actual nominal magnet alignment/seating and seated USB clearance (`prisma_magnets_usb.txt`; run after `prisma_fit.py`).
+7. `prisma_thickness.py`: independent random thickness probes (`prisma_thickness.json`, `prisma_thickness.txt`).
+8. `prisma_render_compare.py`: saved render-scene versus STL comparison (`prisma_render_compare.txt`).
+9. `prisma_contacts.py`: four contact sheets `prisma_contact_0.jpg` .. `prisma_contact_3.jpg` covering all render PNGs.
 
 No existing project test result was used as proof, and no exports were regenerated.

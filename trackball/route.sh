@@ -16,7 +16,7 @@ fi
 $PY trackball/footprints.py >/dev/null
 mkdir -p trackball/pcb
 rm -rf trackball/pcb/trackball.pretty && cp -r trackball/trackball.pretty trackball/pcb/
-cp pcb/slim_diamond.kicad_dru trackball/pcb/trackball.kicad_dru
+cp pcb/prisma.kicad_dru trackball/pcb/trackball.kicad_dru
 rm -f trackball/pcb/trackball.ses trackball/pcb/trackball.kicad_pcb
 ./kicad.sh python3 trackball/build_pcb.py build
 if [ -n "${SENSOR_ROUTING:-}" ]; then

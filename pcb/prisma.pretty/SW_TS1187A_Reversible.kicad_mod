@@ -1,6 +1,6 @@
 (footprint "SW_TS1187A_Reversible"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "XKB TS-1187A 5.1x5.1 mm SMD tact switch, either face; pads after KiCad's SW_SPST_TL3342")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

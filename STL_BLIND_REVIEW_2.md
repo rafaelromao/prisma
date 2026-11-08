@@ -1,4 +1,4 @@
-# Slim Diamond — second fresh blind product/mechanical review
+# Prisma — second fresh blind product/mechanical review
 
 **Review date:** 2026-11-05. **Repository:** `/home/romao/projects/diamond`.
 **Disposition:** coherent prototype geometry, **not yet a physically qualified build**.
@@ -15,7 +15,7 @@ The rest of the leading risks are prototype qualification gates, particularly re
 
 - I did **not read** `STL_AUDIT*.md`, `STL_DESIGN_REVIEW*.md`, `ASSEMBLY_REVISION.md`, generators, project tests, or old temporary audit scripts. I did not follow the review/disposition links embedded in the current instructions.
 - I did not execute a generator, a project test, or a pre-existing project verification script. **No source clarification was used**; all findings below remain artifact/instruction/manufacturer-based.
-- Inputs read: current root `readme.md`; `slim_diamond/{BUILD,BOM,README}.md`; all three current `design.json` files; both final electrical KiCad PCBs; the 26 STLs; the 63 published PNGs; and manufacturer-origin hardware documentation. Fabrication ZIP directory contents and hashes were also recorded, but their electrical validity was not independently certified.
+- Inputs read: `README.md`; `{BUILD,BOM,README}.md`; all three current `design.json` files; both final electrical KiCad PCBs; the 26 STLs; the 63 published PNGs; and manufacturer-origin hardware documentation. Fabrication ZIP directory contents and hashes were also recorded, but their electrical validity was not independently certified.
 - New analysis files only were written under `/tmp/opencode`, using the `blind2_` prefix, plus this requested report. No project edit, regeneration, commit, push or other agent was used.
 - Tools: independent Python using `trimesh`, `numpy`, `manifold3d`, Pillow and Matplotlib; a small independent KiCad S-expression reader; `pdftotext`/`pdftoppm` for manufacturer documents.
 - Mesh checks merge coincident STL vertices without a winding repair. They check edge incidence, watertightness, winding, positive component volumes, degeneracy and Manifold acceptance. Raw binary facet normals were additionally compared with triangle cross products: no reversed or zero stored normals in the 14 distinct assets. Public duplicates have identical bytes.
@@ -93,7 +93,7 @@ The selected hardware family is credible: the Molex catalogue independently conf
 
 **Classification: confirmed publication omission.**
 
-Root `readme.md:55–56` links the trackpad shell and bottom plate but not `stls/slim_diamond/trackpad_adapter_bridge.stl`. The public bridge file exists and is correct, but a builder following only the root download list receives an incomplete set for the current adapter/battery assembly.
+`README.md:55–56` links the trackpad shell and bottom plate but not `stls/trackpad_adapter_bridge.stl`. The public bridge file exists and is correct, but a builder following only the root download list receives an incomplete set for the current adapter/battery assembly.
 
 **Correction:** add the bridge to that trackpad download line and call it a required third print, not an optional replacement floor.
 
@@ -164,7 +164,7 @@ These do not make the meshes unprintable. The engineering contrast colors are in
 
 All 26 are watertight, consistently wound, have zero non-two-manifold edges and zero detected degenerate faces, and are accepted by Manifold. Every connected component has positive signed volume. All prints have one component. Euler characteristics below describe intended apertures, not failed meshes.
 
-Paths in the table are relative to `slim_diamond/`. The public counterpart is under `stls/slim_diamond/` with the listed name and **exactly the same full SHA-256**.
+Paths in the table are relative to the repository root. The public counterpart is under `stls/` with the listed name and **exactly the same full SHA-256**.
 
 | Original | Public name | Faces | Components | Volume cm³ | Euler | SHA-256 |
 |---|---|---:|---:|---:|---:|---|

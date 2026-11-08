@@ -41,7 +41,7 @@ def inspect(path):
 
 
 def main():
-    public = Path("../stls/slim_diamond")
+    public = Path("stls")
     inventory, pairs = [], []
     for folder, prefix in ((Path("case"), ""), (Path("trackball/case"), "trackball_"),
                            (Path("trackpad/case"), "trackpad_")):

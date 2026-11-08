@@ -1,6 +1,6 @@
 (footprint "SW_Choc_V1_Hotswap_Reversible"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "Kailh Choc V1 (PG1350), hot-swap socket on either face, after kiswitch (MIT)")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

@@ -1,9 +1,10 @@
-# Slim Diamond
+# Prisma
 
-A wireless Choc v1 Diamond: the Diamond's 1333+2 layout on one reversible
-PCB per half, a XIAO-sized nRF52840 module, and a 7 × 20 × 40 mm (500 mAh) battery in
-each half. The halves join magnetically into a unibody, or stack back to back for
-transport.
+A wireless Choc v1 split keyboard: the handwired Diamond's 1333+2 layout on one
+reversible PCB per half, a XIAO-sized nRF52840 module, and a 7 × 20 × 40 mm (500 mAh)
+battery in each half. The halves join magnetically into a unibody, or stack back to
+back for transport. The [project page](https://rafaelromao.github.io/prisma/) has the
+boards, renders, BOM and build guide on one page.
 
 ## One board, either module
 
@@ -96,12 +97,12 @@ The board is made in one batch, so check what software can't:
    its `009` pad the round hole in the P0.09 box, and its USB-C legs land inside the two pairs of
    slots. Measure its height from its underside to the top of its USB-C shell: the case allows
    4.3 mm (the XIAO's).
-4. **Firmware:** rebuild it before flashing (`b slim_diamond -c` in rafaelromao/keyboards, branch
-   `slim-diamond`). `check_pcb.py` confirms that branch lists the board's pins, given the shield's
-   `slim_diamond_peripheral_left.overlay` and `_right.overlay` copied to `.render/fw_left.overlay`
+4. **Firmware:** rebuild it before flashing (`b prisma -c` in rafaelromao/keyboards, branch
+   `prisma`). `check_pcb.py` confirms that branch lists the board's pins, given the shield's
+   `prisma_peripheral_left.overlay` and `_right.overlay` copied to `.render/fw_left.overlay`
    and `.render/fw_right.overlay`.
 
-Checked by the scripts: JLCPCB's limits in the DRC (`pcb/slim_diamond.kicad_dru`: annular ring
+Checked by the scripts: JLCPCB's limits in the DRC (`pcb/prisma.kicad_dru`: annular ring
 0.18, pad holes 0.45 apart, tracks and clearance 0.10, silkscreen 1.0 mm text with a 0.15 stroke),
 no tracks under the module's antenna, every net against its intent and the firmware's pin lists
 (`check_pcb.py`), both modules' underside pads against the board's copper, and every part, plug,
@@ -111,19 +112,20 @@ screw, magnet and pad against the case (`check_fit.py`).
 
 | Path | What |
 |---|---|
-| `fab/slim_diamond_jlcpcb.zip` | Gerbers + drill files: upload to JLCPCB as they are |
+| `fab/prisma_jlcpcb.zip` | Gerbers + drill files: upload to JLCPCB as they are |
 | `fab/print_1to1_F_face.pdf`, `fab/print_1to1_B_face.pdf` | Both faces at full size, to lay the real parts on before ordering |
 | `pcb/` | The KiCad 9 project, its footprint library, 3D stand-ins, and DRC rules |
 | `case/case_left.stl`, `case/case_right.stl` | The printed base |
 | `case/plate_left.stl`, `case/plate_right.stl` | The printed top plate, oriented top face down for printing |
 | `case/dock.stl`, `case/insert.stl` | The cyberdeck dock, and the placeholder for its drawer (below) |
+| `stls/` | The same printable parts under print-friendly names: case and plate left/right, dock, drawer insert, module tray, and the trackball/trackpad lids |
 | `stand_mount.py`, `case/stand_magnet_template_*.svg` | Independent-stand contact check and 1:1 platform-magnet templates |
 | `trackball/`, `trackpad/` | The drawer modules: scripts, `case/` STLs; the trackball's board in `pcb/` and `fab/` |
 | `zmk/` | The modules' ZMK shields |
 | `renders/` | Board, board with parts, case, full build; `all.png` has every view on one sheet |
 | `BOM.md` | Parts list (AliExpress search terms) |
 | `BUILD.md` | Hand-soldering and assembly guide, testing, printing |
-| `build-log.html` | The project on one page: both boards, the renders, the BOM and the build guide (open it via raw.githack or GitHub Pages: GitHub shows .html as source) |
+| `index.html` | The project on one page: both boards, the renders, the BOM and the build guide (also served as the GitHub Pages home) |
 | `design.png` | Top view of the placement: sockets (red), Xiao, battery, JST, magnets, screws, the reset button (red, its cone white), pad slots (grey: left pads filled, the right half's dashed) |
 | `renders/pads.png` | Both floors from below: where each half's pads go |
 | `*.py`, `*.sh` | The generators: everything above is built from them |
@@ -248,7 +250,7 @@ clearance.
 | Trackball docked | Trackpad docked |
 | ![](renders/trackball_usb_dock.png) | ![](renders/trackpad_usb_dock.png) |
 
-### Slim Diamond Trackball (`trackball/trackball.py`)
+### Prisma Trackball (`trackball/trackball.py`)
 
 A 34 mm ball and two MX or Choc v1 hot-swap keys on one shared PCB. The MX lid stands 4 mm over the
 halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halves' top height to the lid top. The front facet is steeper to preserve the 40 mm trackpad rim and key/power-switch clearance; the lower front remains matched to the drawer.
@@ -277,7 +279,7 @@ halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halv
 - The sensor's posts print 0.4 mm low. Equal shims can adjust the optical gap, but the real ball-to-board
   distance and lens reference-plane height must be measured; see `BUILD.md` for the calculation and limits.
 
-### Slim Diamond Trackpad (`trackpad/trackpad.py`)
+### Prisma Trackpad (`trackpad/trackpad.py`)
 
 The same module with a 40 mm Cirque (TM040040, I²C) in the lid instead of the ball. It uses the Choc
 sockets on the shared main board and stands at the Choc lid's height, 1.2 mm over the halves.
@@ -300,8 +302,8 @@ sockets on the shared main board and stands at the Choc lid's height, 1.2 mm ove
 Use I²C at address `0x2A`; confirm R1 is absent on an SPI-labelled kit and leave R7/R8 fitted for
 3.3 V operation.
 
-**Firmware** (`zmk/`): a ZMK config with both shields, `slim_diamond_trackball` (the PMW3610 through
-badjeff's zmk-pmw3610-driver) and `slim_diamond_trackpad` (the Cirque through Zephyr's in-tree
+**Firmware** (`zmk/`): a ZMK config with both shields, `prisma_trackball` (the PMW3610 through
+badjeff's zmk-pmw3610-driver) and `prisma_trackpad` (the Cirque through Zephyr's in-tree
 Pinnacle driver), pinned in `zmk/config/west.yml`. Key 1 clicks left; key 2 clicks right, and
 held turns pointing into scrolling; both together click middle. If the pointer runs the wrong way,
 check the selected driver's orientation settings against its binding before changing the overlay.
@@ -310,12 +312,12 @@ check the selected driver's orientation settings against its binding before chan
 runs the checks.
 
 For the XIAO shields, initialize a west workspace from `zmk/config/west.yml`, then build ZMK's `app`
-for `xiao_ble//zmk` with `SHIELD=slim_diamond_trackball_xiao` or `slim_diamond_trackpad_xiao` and
+for `xiao_ble//zmk` with `SHIELD=prisma_trackball_xiao` or `prisma_trackpad_xiao` and
 `ZMK_EXTRA_MODULES` set to this directory's absolute `zmk/` path. For example, from that workspace:
 
 ```sh
-west build -s zmk/app -d build-trackball -b xiao_ble//zmk -- -DSHIELD=slim_diamond_trackball_xiao -DZMK_EXTRA_MODULES=/absolute/path/to/slim_diamond/zmk
-west build -s zmk/app -d build-trackpad -b xiao_ble//zmk -- -DSHIELD=slim_diamond_trackpad_xiao -DZMK_EXTRA_MODULES=/absolute/path/to/slim_diamond/zmk
+west build -s zmk/app -d build-trackball -b xiao_ble//zmk -- -DSHIELD=prisma_trackball_xiao -DZMK_EXTRA_MODULES=/absolute/path/to/prisma/zmk
+west build -s zmk/app -d build-trackpad -b xiao_ble//zmk -- -DSHIELD=prisma_trackpad_xiao -DZMK_EXTRA_MODULES=/absolute/path/to/prisma/zmk
 ```
 
 The generated `zephyr/zmk.uf2` is controller-specific. Compilation is not a physical sensor, charging or Bluetooth test.
@@ -356,12 +358,12 @@ Pin map (from `pcb/pinout.json`):
 
 ## Firmware
 
-ZMK shield `slim_diamond` in [rafaelromao/keyboards](https://github.com/rafaelromao/keyboards)
-(`zmk/keyboards/rafaelromao/slim_diamond`). It builds for `xiao_ble//zmk` with the
+ZMK shield `prisma` in [rafaelromao/keyboards](https://github.com/rafaelromao/keyboards)
+(`zmk/keyboards/rafaelromao/prisma`). It builds for `xiao_ble//zmk` with the
 same keymap as the other Diamonds:
 
 ```sh
-b slim_diamond -c   # central left, peripheral left/right, dongle
+b prisma -c   # central left, peripheral left/right, dongle
 ```
 
 ## Regenerating
@@ -375,7 +377,7 @@ Java 25.
 ```sh
 python3 design.py        # placement, tent, outlines, magnets, screws -> design.json, design.png
 FREEROUTING=/path/freerouting.jar ./route.sh   # footprints, board, routing, pours, DRC
-./fab.sh                 # gerbers and drill files -> fab/slim_diamond_jlcpcb.zip
+./fab.sh                 # gerbers and drill files -> fab/prisma_jlcpcb.zip
 python3 magnets.py       # only after a layout change: measures the base for the magnets to pin in design.py
 python3 case.py          # base and plate STLs (and their 3D models for renders)
 python3 check_fit.py     # parts, plate, solder blobs, the reset button and its cone, screws, magnets, pad slots, a USB-C plug and the lever against
@@ -387,7 +389,7 @@ python3 trackball/trackball.py && ./trackball/route.sh && ./trackball/fab.sh   #
 python3 trackpad/trackpad.py                       # trackpad module: case and fit check
 python3 insert.py                                  # the drawer's placeholder
 python3 vrml.py && python3 scene.py && ./kicad.sh python3 render_boards.py && ./render.sh
-python3 page.py          # build-log.html's BOM and build-guide sections, from BOM.md and BUILD.md
+python3 page.py          # index.html's BOM and build-guide sections, from BOM.md and BUILD.md
 ```
 
 `layout.py` holds the Diamond geometry. `design.py` places everything else and

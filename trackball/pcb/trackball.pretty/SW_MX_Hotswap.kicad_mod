@@ -1,6 +1,6 @@
 (footprint "SW_MX_Hotswap"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "MX switch, Kailh CPG151101S11 hot-swap socket on the back face")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

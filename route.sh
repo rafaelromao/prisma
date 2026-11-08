@@ -7,14 +7,14 @@ PY=${PY:-python3}
 JAVA=${JAVA:-java}
 FREEROUTING=$(readlink -f "${FREEROUTING:-freerouting.jar}")   # absolute: the router runs in pcb/
 $PY footprints.py >/dev/null
-rm -rf pcb/slim_diamond.pretty && cp -r slim_diamond.pretty pcb/
-rm -f pcb/slim_diamond.ses pcb/slim_diamond.kicad_pcb
+rm -rf pcb/prisma.pretty && cp -r prisma.pretty pcb/
+rm -f pcb/prisma.ses pcb/prisma.kicad_pcb
 ./kicad.sh python3 build_pcb.py build > pcb/pinout.txt
-(cd pcb && timeout 2400 "$JAVA" -jar "$FREEROUTING" -de slim_diamond.dsn -do slim_diamond.ses \
+(cd pcb && timeout 2400 "$JAVA" -jar "$FREEROUTING" -de prisma.dsn -do prisma.ses \
     -mp 100 --gui.enabled=false > route.log 2>&1)
 grep -E 'session completed' pcb/route.log | sed 's/.*final score/final score/' | cut -c1-80
 ./kicad.sh python3 build_pcb.py import 2>&1 | grep -v swig
-./kicad.sh kicad-cli pcb drc --format json -o pcb/drc.json pcb/slim_diamond.kicad_pcb >/dev/null 2>&1
+./kicad.sh kicad-cli pcb drc --format json -o pcb/drc.json pcb/prisma.kicad_pcb >/dev/null 2>&1
 python3 - <<'PY'
 import json, collections
 d = json.load(open('pcb/drc.json'))

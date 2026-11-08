@@ -1,6 +1,6 @@
 (footprint "SW_TS1187A_Back"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "XKB TS-1187A 5.1 x 5.1 mm tact switch on the back face")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

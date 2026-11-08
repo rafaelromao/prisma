@@ -1,4 +1,4 @@
 (fp_lib_table
   (version 7)
-  (lib (name "slim_diamond")(type "KiCad")(uri "${KIPRJMOD}/slim_diamond.pretty")(options "")(descr "Slim Diamond footprints"))
+  (lib (name "prisma")(type "KiCad")(uri "${KIPRJMOD}/prisma.pretty")(options "")(descr "Prisma footprints"))
 )

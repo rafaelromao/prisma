@@ -16,7 +16,7 @@ def main():
     # scene and both final boards do; every PNG is regenerated after these.
     scene_stamp = (root / ".render/scenes.json").stat().st_mtime
     pcb_stamp = (root / "trackball/pcb/trackball.kicad_pcb").stat().st_mtime
-    half_stamp = (root / "pcb/slim_diamond.kicad_pcb").stat().st_mtime
+    half_stamp = (root / "pcb/prisma.kicad_pcb").stat().st_mtime
     images = sorted((root / "renders").glob("*.png"))
     stale = [str(p) for p in images if p.name not in ("modules.png",) and
              p.stat().st_mtime < (pcb_stamp if p.name.startswith("trackball_board_") else

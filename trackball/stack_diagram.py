@@ -3,7 +3,7 @@
 On the panel the controller board lies a quarter turn round; here it is where it sits in the module,
 under the main board. Hole positions come from trackball/pcb/stack_alignment.json, which
 check_controller_pcb.py writes from the routed board after undoing the panel's turn and offset.
-Run from slim_diamond/: python3 trackball/stack_diagram.py
+Run from the repository root: python3 trackball/stack_diagram.py
 """
 import json
 import os

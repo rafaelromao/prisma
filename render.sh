@@ -86,7 +86,7 @@ fi
 for side in F B; do
     ./kicad.sh kicad-cli pcb export svg --mode-single --layers $side.Mask,$side.Silkscreen,Edge.Cuts \
         --exclude-drawing-sheet --fit-page-to-board $( [ $side = B ] && echo --mirror ) \
-        -o .render/guide_$side.svg pcb/slim_diamond.kicad_pcb >/dev/null 2>&1
+        -o .render/guide_$side.svg pcb/prisma.kicad_pcb >/dev/null 2>&1
     rsvg-convert -w 1750 -b white .render/guide_$side.svg -o .render/guide_$side.png
 done
 magick .render/guide_F.png -crop 700x700+434+869 +repage -resize 900x900 .render/xiao_left_half.png
@@ -118,4 +118,4 @@ magick montage \
     -label 'Placement, top view' design.png \
     -label 'Anti-slip pads, from below' renders/pads.png \
     -tile 5x3 -geometry 800x600+12+12 -pointsize 26 -background white \
-    -title 'Slim Diamond' renders/all.png
+    -title 'Prisma' renders/all.png

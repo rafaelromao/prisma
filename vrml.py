@@ -1,4 +1,4 @@
-"""Tiny VRML writer and the Slim Diamond's stand-in 3D models for KiCad renders.
+"""Tiny VRML writer and the Prisma's stand-in 3D models for KiCad renders.
 
 KiCad reads VRML in 0.1-inch units, with model +Y = board -y and z = 0 on the
 footprint's copper face.

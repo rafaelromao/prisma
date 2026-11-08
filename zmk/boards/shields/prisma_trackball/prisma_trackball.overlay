@@ -1,5 +1,5 @@
 /*
- * Slim Diamond Trackball: a PMW3610 under a 34 mm ball, two MX keys, on a nice!nano.
+ * Prisma Trackball: a PMW3610 under a 34 mm ball, two MX keys, on a nice!nano.
  * Pins from trackball/controller_pinout.py: SCLK P0.17 (D2), SDIO P0.20 (D3, both SPI data
  * lines: the sensor's one-wire data), NCS P0.29 (D20), MOTION P0.22 (D4), key 1 P0.02 (D19), key 2
  * P0.31 (D21). SPI2: the nice!nano board doesn't claim it.

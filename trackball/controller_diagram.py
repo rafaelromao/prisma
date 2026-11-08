@@ -1,7 +1,7 @@
 """Wiring diagrams: the controller board seen from above, with one controller on it.
 
 Pads and pins come from design.json and controller_pinout.py, the tables the tests check against the
-firmware shields. Run from slim_diamond/: python3 trackball/controller_diagram.py
+firmware shields. Run from the repository root: python3 trackball/controller_diagram.py
   nice!nano v2: https://nicekeyboards.com/docs/nice-nano/pinout-schematic
   XIAO nRF52840: https://wiki.seeedstudio.com/XIAO_BLE/#hardware-overview
 """

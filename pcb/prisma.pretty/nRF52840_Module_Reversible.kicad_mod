@@ -1,6 +1,6 @@
 (footprint "nRF52840_Module_Reversible"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "Seeed XIAO nRF52840 or NologoTech Super52840, castellated, on either face; bottom pads via plated holes")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

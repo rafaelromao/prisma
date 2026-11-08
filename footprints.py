@@ -1,4 +1,4 @@
-"""Writes slim_diamond.pretty: the reversible footprints of the Slim Diamond.
+"""Writes prisma.pretty: the reversible footprints of the Prisma.
 
 Every footprint carries its parts on both faces. The left half is built with
 the parts on the bottom (B) face, the right half with the board turned over,
@@ -13,7 +13,7 @@ import os
 
 from shapely.geometry import Point, box
 
-OUT = "slim_diamond.pretty"
+OUT = "prisma.pretty"
 VERSION = "20241229"
 
 
@@ -26,7 +26,7 @@ def mirror_layers(layers):
 
 
 def header(name, descr, attr="smd"):
-    return [f'(footprint "{name}"', f'  (version {VERSION})', '  (generator "slim_diamond")',
+    return [f'(footprint "{name}"', f'  (version {VERSION})', '  (generator "prisma")',
             '  (layer "F.Cu")', f'  (descr "{descr}")',
             '  (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide'
             ' (effects (font (size 1 1) (thickness 0.15))))',

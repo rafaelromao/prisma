@@ -1,4 +1,4 @@
-"""Builds the Slim Diamond Trackball's board from design.json (runs in KiCad's Python).
+"""Builds the Prisma Trackball's board from design.json (runs in KiCad's Python).
 
     python3 trackball/build_pcb.py build   -> trackball/pcb/trackball.kicad_pcb + .dsn (unrouted)
     python3 trackball/build_pcb.py import  -> imports the Freerouting session, pours, stitches, saves
@@ -264,7 +264,7 @@ def antenna_rule(i):
 
 def build():
     os.makedirs(PCB_DIR, exist_ok=True)
-    rules = open(os.path.join(HERE, "..", "pcb", "slim_diamond.kicad_dru")).read()
+    rules = open(os.path.join(HERE, "..", "pcb", "prisma.kicad_dru")).read()
     # Persist the intended 0.3 mm copper-edge clearance in a real DRC rule: KiCad can reset
     # a generated project's board-setup default to 0.5 mm when saving it.
     rules += '\n(rule "Trackball: copper to routed edge"\n  (constraint edge_clearance (min 0.3mm)))\n'

@@ -1,7 +1,7 @@
-"""Builds the Slim Diamond KiCad board from design.json (runs in KiCad's Python).
+"""Builds the Prisma KiCad board from design.json (runs in KiCad's Python).
 
-    python3 build_pcb.py build    -> pcb/slim_diamond.kicad_pcb + pcb/slim_diamond.dsn (unrouted)
-    python3 build_pcb.py import   -> imports pcb/slim_diamond.ses (Freerouting), fills zones, saves
+    python3 build_pcb.py build    -> pcb/prisma.kicad_pcb + pcb/prisma.dsn (unrouted)
+    python3 build_pcb.py import   -> imports pcb/prisma.ses (Freerouting), fills zones, saves
 
 One reversible board serves both halves. Left half: parts on the B face.
 Right half: board turned over, parts on the F face.
@@ -23,8 +23,8 @@ PCB_DIR = os.path.join(HERE, "pcb")
 # end is (the Super52840's B+). Bridge one row, never both.
 SELECTOR = {"+MID": (4.2, {"BATM": "VBAT", "BATU": "GND"}),
             "+USB": (6.4, {"BATM": "GND", "BATU": "VBAT"})}
-BOARD = os.path.join(PCB_DIR, "slim_diamond.kicad_pcb")
-LIB = os.path.join(PCB_DIR, "slim_diamond.pretty")
+BOARD = os.path.join(PCB_DIR, "prisma.kicad_pcb")
+LIB = os.path.join(PCB_DIR, "prisma.pretty")
 OFF = (100.0, 100.0)          # design origin on the KiCad page
 
 D = json.load(open(os.path.join(HERE, "design.json")))
@@ -47,7 +47,7 @@ def local(c, ang, p):
 
 def add_fp(board, name, ref, c, ang, value=None):
     fp = pcbnew.FootprintLoad(LIB, name)
-    fp.SetFPID(pcbnew.LIB_ID("slim_diamond", name))
+    fp.SetFPID(pcbnew.LIB_ID("prisma", name))
     fp.SetReference(ref)
     fp.SetValue(value or name)
     fp.SetPosition(pt(*c))
@@ -266,8 +266,8 @@ def build():
     # titles run up the strip along the inner wall, between the battery and the inner thumb
     tx = D["wall_in"] - 4.5
     ty = (D["battery"]["bounds"][3] + D["keys"]["thumb_inner"]["y"]) / 2 - 4
-    text(board, "SLIM DIAMOND", (tx, ty), pcbnew.F_SilkS, 1.4, -90)
-    text(board, "SLIM DIAMOND", (tx, ty), pcbnew.B_SilkS, 1.4, -90, mirror=True)
+    text(board, "PRISMA", (tx, ty), pcbnew.F_SilkS, 1.4, -90)
+    text(board, "PRISMA", (tx, ty), pcbnew.B_SilkS, 1.4, -90, mirror=True)
     text(board, "RIGHT: parts on this face", (tx + 2.4, ty), pcbnew.F_SilkS, 1.0, -90)
     text(board, "LEFT: parts on this face", (tx + 2.4, ty), pcbnew.B_SilkS, 1.0, -90, mirror=True)
     for j, (lb, lf) in pairs.items():
@@ -281,7 +281,7 @@ def build():
 
     pcbnew.SaveBoard(BOARD, board)
     # GND is routed too (the pours and stitching vias come on top, after routing).
-    pcbnew.ExportSpecctraDSN(board, os.path.join(PCB_DIR, "slim_diamond.dsn"))
+    pcbnew.ExportSpecctraDSN(board, os.path.join(PCB_DIR, "prisma.dsn"))
 
     pins = {}
     for k, inp in assign.items():
@@ -339,7 +339,7 @@ def stitch(board, pitch=4.0):
 
 def import_ses():
     board = pcbnew.LoadBoard(BOARD)
-    ses = os.path.join(PCB_DIR, "slim_diamond.ses")
+    ses = os.path.join(PCB_DIR, "prisma.ses")
     if os.path.exists(ses):
         pcbnew.ImportSpecctraSES(board, ses)
     gnd = board.FindNet("GND")

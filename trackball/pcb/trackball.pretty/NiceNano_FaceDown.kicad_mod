@@ -1,6 +1,6 @@
 (footprint "NiceNano_FaceDown"
   (version 20241229)
-  (generator "slim_diamond")
+  (generator "prisma")
   (layer "F.Cu")
   (descr "nice!nano v2 face down under the board, USB end at -y")
   (property "Reference" "REF**" (at 0 0 0) (layer "F.SilkS") hide (effects (font (size 1 1) (thickness 0.15))))

@@ -1,4 +1,4 @@
-"""Slim Diamond Trackball: a 34 mm ball and two MX or Choc v1 hot-swap keys, on shared boards.
+"""Prisma Trackball: a 34 mm ball and two MX or Choc v1 hot-swap keys, on shared boards.
 
 On the shared tray (module_shell.py), with a lid that carries the keys' plate and the ball's cup.
 The ball sits at the front in that cup on three 3 mm ceramic balls, and lifts out from above. Under
@@ -528,7 +528,7 @@ def main():
     L = place()
     lid_m, tray_m, main_plan, sensor_plan = build(L)
     ps = parts(L, main_plan, sensor_plan)
-    M.check_common("Slim Diamond Trackball", lid_m, tray_m, ps)
+    M.check_common("Prisma Trackball", lid_m, tray_m, ps)
     M.check_dock_and_desk(lid_m, tray_m, H, ps)
     nb = SOCKET_BOT - NANO_GAP
     print("  ball centre %.1f over the standing plane, top %.1f (%.1f over the module's top); keys at y %s"
@@ -544,7 +544,7 @@ def main():
     choc_height = PCB_TOP + CHOC["below_plate"]
     choc_lid, choc_tray, choc_main, choc_sensor = build(L, "choc")
     choc_parts = parts(L, choc_main, choc_sensor, "choc")
-    M.check_common("Slim Diamond Trackball / Choc v1", choc_lid, choc_tray, choc_parts)
+    M.check_common("Prisma Trackball / Choc v1", choc_lid, choc_tray, choc_parts)
     M.check_dock_and_desk(choc_lid, choc_tray, choc_height, choc_parts)
     assert main_plan.equals(choc_main) and sensor_plan.equals(choc_sensor)
     stl_lid(choc_lid, choc_height, os.path.join(HERE, "case", "lid_choc.stl"))

@@ -1,4 +1,4 @@
-# Slim Diamond Trackball: flexible interconnect feasibility
+# Prisma Trackball: flexible interconnect feasibility
 
 Research date: **2026-11-04**, designer history and JLCPCB FPC capabilities rechecked
 **2026-11-05**. Manufacturing and price statements below refer to

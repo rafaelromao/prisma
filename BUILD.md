@@ -1,4 +1,4 @@
-# Slim Diamond: soldering and assembly
+# Prisma: soldering and assembly
 
 The module, battery and battery socket all end up inside the case, under the PCB. Only the USB-C port and the power-switch lever show, through openings in the outer wall: a recess the size of a cable's plug in front of the port, and a slot open to the top for the lever. Push the lever with a fingernail. The module's LED and its own reset button face the case floor, so flash and test it before closing the case. A second reset button on the switch face, wired to the module's reset pad, works with the case closed: it sits in a cone in the plate, above the thumbs.
 
@@ -36,8 +36,8 @@ The module always lies flat on the parts face, with its pad side against the PCB
 
   | Half | With a dongle | Without a dongle |
   |---|---|---|
-  | Left | `slim_diamond_peripheral_left-zmk.uf2` | `slim_diamond_central_left-zmk.uf2` |
-  | Right | `slim_diamond_peripheral_right-zmk.uf2` | `slim_diamond_peripheral_right-zmk.uf2` |
+  | Left | `prisma_peripheral_left-zmk.uf2` | `prisma_central_left-zmk.uf2` |
+  | Right | `prisma_peripheral_right-zmk.uf2` | `prisma_peripheral_right-zmk.uf2` |
 
   A dead module is much easier to swap now than after soldering.
 
@@ -250,7 +250,7 @@ On the **trackball**, also wire the sensor board's `SCLK`, `SDIO`, `NCS` and `MO
 
 Verify the clone's pin labels and USB location against a genuine nice!nano v2 before wiring; clones can differ. The power switch is between the cell positive and B+, not between the controller and its regulated VCC. Insulate the battery leads while wiring, check polarity and continuity with the battery disconnected, and confirm there is no short between supply and ground before connecting it.
 
-Use `slim_diamond_trackball` for nice!nano or `slim_diamond_trackball_xiao` for XIAO. The XIAO shield turns off I²C1 and the serial port, so that the sensor can use D4 and D5 and the other signals D6 and D7.
+Use `prisma_trackball` for nice!nano or `prisma_trackball_xiao` for XIAO. The XIAO shield turns off I²C1 and the serial port, so that the sensor can use D4 and D5 and the other signals D6 and D7.
 
 On the **trackpad**, retain the supplied **I²C breakout PCB and its 12-pin flat cable**. Solder four flexible wires from the breakout's `VDD`/`VCC`, `GND`, `SDA` and `SCL` pads to the main board's `3V`, `G`, `IO` and `CK` pads. Solder one additional wire directly from the Cirque's underside **DR/data-ready** test pad to the `MO` pad; this does not replace the flat cable. Confirm DR by continuity to connector J1 pin 4 before soldering. Use the breakout's two pull-ups to **3.3 V**, not 5 V; verify their population and the kit's pad order with its schematic/meter rather than wire colours. Cable orientation matters: check the supplied FFC contact orientation and the breakout's pin reversal before applying power.
 
@@ -268,7 +268,7 @@ The firmware uses Zephyr's Pinnacle driver and assumes a directly wired, active-
 | Breakout GND, on pad `G` | GND | GND |
 | Breakout VDD/VCC, on pad `3V` | VCC (3.3 V) | 3V3 |
 
-Use `slim_diamond_trackpad` for nice!nano or `slim_diamond_trackpad_xiao` for XIAO. Both use I²C at 100 kHz and address `0x2A`. Never connect breakout VDD/VCC to raw battery voltage or USB 5 V. Both I²C firmware variants compile; physical communications, tap, sleep and wake still need testing.
+Use `prisma_trackpad` for nice!nano or `prisma_trackpad_xiao` for XIAO. Both use I²C at 100 kHz and address `0x2A`. Never connect breakout VDD/VCC to raw battery voltage or USB 5 V. Both I²C firmware variants compile; physical communications, tap, sleep and wake still need testing.
 
 On the **plain XIAO nRF52840**, the `VBAT` and `R2` wires start on the two small pads on its back. Keep them flat across its back, not crossing, and off towards the rear of the sockets above it. The battery's negative needs no wire to the XIAO: the `-` pad is ground on the main board, and ground reaches the XIAO through the stacking pins and header. Use Seeed's [front and back pinout](https://wiki.seeedstudio.com/XIAO_BLE/#hardware-overview) to identify the pads on the actual board. Insulate each joint and check polarity and shorts with the cell and USB disconnected.
 
