@@ -162,11 +162,11 @@ main img { cursor: zoom-in; }
   <div class="tabs-inner" role="tablist">
     <a class="tab" role="tab" id="tab-overview" href="#overview" aria-controls="overview"><span class="tab-n">01</span>Overview</a>
     <a class="tab" role="tab" id="tab-halves" href="#halves" aria-controls="halves"><span class="tab-n">02</span>The halves</a>
-    <a class="tab" role="tab" id="tab-making" href="#making" aria-controls="making"><span class="tab-n">03</span>How it is made</a>
-    <a class="tab" role="tab" id="tab-dock" href="#dock" aria-controls="dock"><span class="tab-n">04</span>The dock</a>
-    <a class="tab" role="tab" id="tab-modules" href="#modules" aria-controls="modules"><span class="tab-n">05</span>Pointing modules</a>
-    <a class="tab" role="tab" id="tab-parts" href="#parts" aria-controls="parts"><span class="tab-n">06</span>Parts</a>
-    <a class="tab" role="tab" id="tab-build" href="#build" aria-controls="build"><span class="tab-n">07</span>Build guide</a>
+    <a class="tab" role="tab" id="tab-dock" href="#dock" aria-controls="dock"><span class="tab-n">03</span>The dock</a>
+    <a class="tab" role="tab" id="tab-modules" href="#modules" aria-controls="modules"><span class="tab-n">04</span>Pointing modules</a>
+    <a class="tab" role="tab" id="tab-parts" href="#parts" aria-controls="parts"><span class="tab-n">05</span>Parts</a>
+    <a class="tab" role="tab" id="tab-build" href="#build" aria-controls="build"><span class="tab-n">06</span>Build guide</a>
+    <a class="tab" role="tab" id="tab-making" href="#making" aria-controls="making"><span class="tab-n">07</span>How it is made</a>
   </div>
 </nav>
 <main>
@@ -262,65 +262,6 @@ main img { cursor: zoom-in; }
     <figure><img src="renders/stacked.png" alt="Both halves stacked floor to floor, seen at an angle" width="1200" height="900" loading="lazy"><figcaption>Stacked back to back, keys facing out.</figcaption></figure>
     <figure><img src="renders/stacked_side.png" alt="Both halves stacked floor to floor, seen from the side" width="1200" height="900" loading="lazy"><figcaption>Stacked floor to floor for travel.</figcaption></figure>
   </div>
-  <p class="next"><a href="#making">Next: How it is made <span aria-hidden="true">→</span></a></p>
-</section>
-
-<section class="panel" id="making" role="tabpanel" aria-labelledby="tab-making" tabindex="-1">
-  <section class="stack">
-    <span class="eyebrow">Toolchain</span>
-    <h2>Everything is a script</h2>
-    <div class="tools">
-      <div class="tool"><b>Python + shapely</b><p>One <code class="num">design.json</code> places everything from the key layout: the Xiao, battery, connector, screws and magnets. The tent angle is the smallest one the parts under the PCB fit beneath.</p></div>
-      <div class="tool"><b>KiCad 9 Python API</b><p>Runs headless in the official container. Footprints are written as text, checked against KiCad's library, Seeed's OPL library and kiswitch, then the board is built by script.</p></div>
-      <div class="tool"><b>Freerouting 2.2</b><p>Autoroutes the board; pours and stitching vias go on afterwards.</p></div>
-      <div class="tool"><b>kicad-cli</b><p>Design-rule check, Gerbers and drill files for JLCPCB, and every render on this page.</p></div>
-      <div class="tool"><b>manifold3d</b><p>Builds the base and plate as solids, then intersects every part with them. Anything that isn't <span class="num">0 mm³</span> fails.</p></div>
-    </div>
-    <figure class="col">
-      <img src="design.png" alt="Top view of the left half's placement: sockets, Xiao, battery, JST socket, magnets, screws, reset button and pad slots" width="782" height="833" loading="lazy">
-      <figcaption>The placement design.json describes, left half from above: sockets red, Xiao blue, battery yellow, floor magnets purple, anti-slip pads black, screws dark grey.</figcaption>
-    </figure>
-  </section>
-
-  <section class="stack">
-    <span class="eyebrow">How a language model does it</span>
-    <h2>No CAD window, just a loop</h2>
-    <p class="col">A model can't drag parts around in a GUI, so the design lives in code and every judgement is a number or a picture it can inspect.</p>
-    <ol class="loop">
-      <li><strong>Generate</strong>Placement, footprints, board, solids, all from scripts.</li>
-      <li><strong>Check</strong>DRC with zero errors, and the fit check at <span class="num">0 mm³</span>.</li>
-      <li><strong>Look</strong>Render the board and case, then read the images.</li>
-      <li><strong>Fix upstream</strong>Change the generator, never the output by hand.</li>
-      <li><strong>Regenerate</strong>Rerun the whole chain from <code>design.py</code>.</li>
-    </ol>
-  </section>
-
-  <section class="stack">
-    <span class="eyebrow">Checks</span>
-    <h2>What gets checked</h2>
-    <p class="col">Every part that could collide is modelled, and the fit check fails on anything above <span class="num">0 mm³</span>. Some checks cover how the keyboard is assembled and used, not only where parts sit:</p>
-    <div class="finds col">
-      <div class="find"><div><h3>A USB-C cable seats fully</h3><p>A recess the size of the largest Type-C overmold (<span class="num">12.35 × 6.5 mm</span>) reaches the port, and the PCB edge is notched in front of it. The check plugs in a cable of that size.</p></div></div>
-      <div class="find"><div><h3>The PCB drops straight in</h3><p>The power switch's lever reaches past the PCB edge, so it slides down a slot open to the top. The slot widens outwards so a fingernail reaches the lever. The check sweeps the lever along the drop-in path.</p></div></div>
-      <div class="find"><div><h3>Room for tolerances</h3><p><span class="num">0.5 mm</span> around the PCB and plate covers JLCPCB's ±<span class="num">0.2 mm</span> outline tolerance plus print shrinkage.</p></div></div>
-      <div class="find"><div><h3>One magnet throughout</h3><p>Thirteen <span class="num">8 × 1.5 mm N52</span> discs per half: six along the seam and seven underneath, including three circular stand contacts. Each pocket keeps <span class="num">0.5 mm</span> of plastic all round, measured against the printed base. The larger battery raises the PCB and case by 1.8 mm without changing the PCB outline or wiring.</p></div></div>
-    </div>
-<pre class="term">$ python check_fit.py
-sockets vs base                       0.000 mm3
-xiao vs base                          0.000 mm3
-battery vs sockets                    0.000 mm3
-plate vs base                         0.000 mm3
-usb plug vs base                      0.000 mm3
-usb plug vs pcb                       0.000 mm3
-switch lever (dropping in) vs base    0.000 mm3
-reset button body vs plate            0.000 mm3
-seam magnet 1 (+0.5 all round) vs voids    0.000 mm3
-magnets (+0.5) vs each other          0.000 mm3
-stacked: left pads vs right pads      0.000 mm3
-balance, unibody      nearest key  2.79 mm inside (2.0 needed): ok
-<span class="ok">ALL CLEAR</span></pre>
-    <p class="note col">Excerpt of the output.</p>
-  </section>
   <p class="next"><a href="#dock">Next: The dock <span aria-hidden="true">→</span></a></p>
 </section>
 
@@ -1278,6 +1219,65 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <!-- /BUILD.md -->
     </div>
     </div>
+  </section>
+</section>
+  <p class="next"><a href="#making">Next: How it is made <span aria-hidden="true">→</span></a></p>
+
+<section class="panel" id="making" role="tabpanel" aria-labelledby="tab-making" tabindex="-1">
+  <section class="stack">
+    <span class="eyebrow">Toolchain</span>
+    <h2>Everything is a script</h2>
+    <div class="tools">
+      <div class="tool"><b>Python + shapely</b><p>One <code class="num">design.json</code> places everything from the key layout: the Xiao, battery, connector, screws and magnets. The tent angle is the smallest one the parts under the PCB fit beneath.</p></div>
+      <div class="tool"><b>KiCad 9 Python API</b><p>Runs headless in the official container. Footprints are written as text, checked against KiCad's library, Seeed's OPL library and kiswitch, then the board is built by script.</p></div>
+      <div class="tool"><b>Freerouting 2.2</b><p>Autoroutes the board; pours and stitching vias go on afterwards.</p></div>
+      <div class="tool"><b>kicad-cli</b><p>Design-rule check, Gerbers and drill files for JLCPCB, and every render on this page.</p></div>
+      <div class="tool"><b>manifold3d</b><p>Builds the base and plate as solids, then intersects every part with them. Anything that isn't <span class="num">0 mm³</span> fails.</p></div>
+    </div>
+    <figure class="col">
+      <img src="design.png" alt="Top view of the left half's placement: sockets, Xiao, battery, JST socket, magnets, screws, reset button and pad slots" width="782" height="833" loading="lazy">
+      <figcaption>The placement design.json describes, left half from above: sockets red, Xiao blue, battery yellow, floor magnets purple, anti-slip pads black, screws dark grey.</figcaption>
+    </figure>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">How a language model does it</span>
+    <h2>No CAD window, just a loop</h2>
+    <p class="col">A model can't drag parts around in a GUI, so the design lives in code and every judgement is a number or a picture it can inspect.</p>
+    <ol class="loop">
+      <li><strong>Generate</strong>Placement, footprints, board, solids, all from scripts.</li>
+      <li><strong>Check</strong>DRC with zero errors, and the fit check at <span class="num">0 mm³</span>.</li>
+      <li><strong>Look</strong>Render the board and case, then read the images.</li>
+      <li><strong>Fix upstream</strong>Change the generator, never the output by hand.</li>
+      <li><strong>Regenerate</strong>Rerun the whole chain from <code>design.py</code>.</li>
+    </ol>
+  </section>
+
+  <section class="stack">
+    <span class="eyebrow">Checks</span>
+    <h2>What gets checked</h2>
+    <p class="col">Every part that could collide is modelled, and the fit check fails on anything above <span class="num">0 mm³</span>. Some checks cover how the keyboard is assembled and used, not only where parts sit:</p>
+    <div class="finds col">
+      <div class="find"><div><h3>A USB-C cable seats fully</h3><p>A recess the size of the largest Type-C overmold (<span class="num">12.35 × 6.5 mm</span>) reaches the port, and the PCB edge is notched in front of it. The check plugs in a cable of that size.</p></div></div>
+      <div class="find"><div><h3>The PCB drops straight in</h3><p>The power switch's lever reaches past the PCB edge, so it slides down a slot open to the top. The slot widens outwards so a fingernail reaches the lever. The check sweeps the lever along the drop-in path.</p></div></div>
+      <div class="find"><div><h3>Room for tolerances</h3><p><span class="num">0.5 mm</span> around the PCB and plate covers JLCPCB's ±<span class="num">0.2 mm</span> outline tolerance plus print shrinkage.</p></div></div>
+      <div class="find"><div><h3>One magnet throughout</h3><p>Thirteen <span class="num">8 × 1.5 mm N52</span> discs per half: six along the seam and seven underneath, including three circular stand contacts. Each pocket keeps <span class="num">0.5 mm</span> of plastic all round, measured against the printed base. The larger battery raises the PCB and case by 1.8 mm without changing the PCB outline or wiring.</p></div></div>
+    </div>
+<pre class="term">$ python check_fit.py
+sockets vs base                       0.000 mm3
+xiao vs base                          0.000 mm3
+battery vs sockets                    0.000 mm3
+plate vs base                         0.000 mm3
+usb plug vs base                      0.000 mm3
+usb plug vs pcb                       0.000 mm3
+switch lever (dropping in) vs base    0.000 mm3
+reset button body vs plate            0.000 mm3
+seam magnet 1 (+0.5 all round) vs voids    0.000 mm3
+magnets (+0.5) vs each other          0.000 mm3
+stacked: left pads vs right pads      0.000 mm3
+balance, unibody      nearest key  2.79 mm inside (2.0 needed): ok
+<span class="ok">ALL CLEAR</span></pre>
+    <p class="note col">Excerpt of the output.</p>
   </section>
 </section>
 
