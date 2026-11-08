@@ -176,11 +176,11 @@ def _sensor_screws(L):
 
 
 def _module(kind, switch="mx"):
-    """A module's solids (dock frame) as (solid, rgb): lid, tray, bump-ons, magnets, screws, parts."""
+    """A module as built (dock frame) as (solid, rgb): lid, tray, bump-ons, magnets, parts. No screws, as on
+    the halves: the closed module's fasteners are hidden in its lid and tray, and the exploded views show them."""
     import module_shell as M
     mod, L, lid, tray, ps = _built(kind, switch)
     out = [(lid, vrml.CASE), (tray, vrml.CASE), (M.bumpons(), vrml.PAD), (_module_magnets(M), vrml.METAL),
-           (M.lid_fasteners(_height(mod, kind, switch)), vrml.METAL), (_sensor_screws(L), vrml.METAL),
            (M.floor_magnet(), vrml.METAL)]
     for name, m in ps:
         m = _shown(mod, kind, name, m, L)
@@ -221,7 +221,7 @@ def module_instruction_scenes(kind, switch="mx"):
     import module_shell as M
     mod, L, lid, tray, ps = _built(kind, switch)
     structure = [(lid.translate((0, 0, 24)), LID_RGB), (tray, TRAY_RGB), (M.lid_fasteners(_height(mod, kind, switch), 38), SCREW_RGB)]
-    seam = [(lid, LID_RGB), (tray, TRAY_RGB), (M.lid_fasteners(_height(mod, kind, switch)), SCREW_RGB)]
+    seam = [(lid, LID_RGB), (tray, TRAY_RGB)]
     populated = [(tray, TRAY_RGB), (M.floor_magnet(), vrml.METAL), (_sensor_screws(L), SCREW_RGB)]
     for label, solid in ps:
         if not _on_lid(label):

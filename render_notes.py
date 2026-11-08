@@ -25,7 +25,7 @@ def main():
     font = ImageFont.truetype("/usr/share/fonts/liberation/LiberationSans-Regular.ttf", 26)
     notes = {
         "structure": "THE PRINTED PARTS | grey: lid | blue: tray | orange: four M3 x 8 screws, from the top",
-        "seam": "CLOSED | grey lid on the blue tray | four M3 x 8 flat heads",
+        "seam": "CLOSED | grey lid on the blue tray",
         "tray": "IN THE TRAY | main board in place, lid off | no wires shown",
         "stack": "IN THE TRAY | battery, sensor board, nice!nano go in first, main board on top | no wires shown",
         "reset": "RESET | press from below through the floor with the pin (orange) | take the module out of the dock first",
