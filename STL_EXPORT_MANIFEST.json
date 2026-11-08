@@ -92,30 +92,30 @@
     },
     {
       "path": "case/insert.stl",
-      "sha256": "f47da25f18895618b3bdcbedc2b77b895c18e06a73471007576d30d3366c5a04",
-      "bytes": 90184,
-      "triangles": 1802,
+      "sha256": "009e3ad21f03ad71b5c9cce6d2ffd733d1060f5c9952c38ffeb58df44788a488",
+      "bytes": 132384,
+      "triangles": 2646,
       "components": 1,
-      "volume_mm3": 71503.60319,
+      "volume_mm3": 71566.53705,
       "size_mm": [
         55.95002,
         100.81739,
-        21.47732
+        21.97732
       ],
       "watertight": true,
       "winding": true
     },
     {
       "path": "stls/insert.stl",
-      "sha256": "f47da25f18895618b3bdcbedc2b77b895c18e06a73471007576d30d3366c5a04",
-      "bytes": 90184,
-      "triangles": 1802,
+      "sha256": "009e3ad21f03ad71b5c9cce6d2ffd733d1060f5c9952c38ffeb58df44788a488",
+      "bytes": 132384,
+      "triangles": 2646,
       "components": 1,
-      "volume_mm3": 71503.60319,
+      "volume_mm3": 71566.53705,
       "size_mm": [
         55.95002,
         100.81739,
-        21.47732
+        21.97732
       ],
       "watertight": true,
       "winding": true
@@ -296,6 +296,36 @@
         55.13846,
         84.83187,
         3.28
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": ".render/dock_halves.stl",
+      "sha256": "60677b8485f06018e6830de6c44a1189c49e158b23080cec5a91d142bfcb8e00",
+      "bytes": 830084,
+      "triangles": 16600,
+      "components": 2,
+      "volume_mm3": 131772.07324,
+      "size_mm": [
+        219.7718,
+        111.95235,
+        29.63715
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": ".render/dock_ugreen.stl",
+      "sha256": "8ec4ae0c334134c126f484acc1fc9d2006e0434517e285a11c101afb84523768",
+      "bytes": 10284,
+      "triangles": 204,
+      "components": 1,
+      "volume_mm3": 35668.77583,
+      "size_mm": [
+        85.0,
+        105.0,
+        4.0
       ],
       "watertight": true,
       "winding": true

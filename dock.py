@@ -457,10 +457,10 @@ def board_diamond():
     return affinity.translate(both, -cx, -cy), affinity.translate(line, -cx, -cy)
 
 
-def relief(top_poly, z):
-    """The diamond drawn in sunk lines, RELIEF deep, on the spine's top (its outline and the seam between
-    the halves), as large as fits RELIEF's margin inside the top, wherever along it that is."""
-    h, w, margin = RELIEF
+def diamond_fit(top_poly):
+    """The joined board's diamond, scaled and placed as large as fits RELIEF's margin inside the top,
+    wherever along it that is. Returns the placed outline, the placed seam and the scale."""
+    _, _, margin = RELIEF
     shape, seam = board_diamond()
     room = top_poly.buffer(-margin)
     x0, y0, x1, y1 = room.bounds
@@ -475,9 +475,21 @@ def relief(top_poly, z):
             best = (lo, y)
     k, y = best
     place = lambda g: affinity.translate(affinity.scale(g, k, k, origin=(0, 0)), 0, y)
-    shape = place(shape)
-    drawing = unary_union([shape.exterior.buffer(w / 2), place(seam).buffer(w / 2, cap_style=2)])
-    return extrude(drawing.intersection(shape.buffer(w / 2)), z - h, z + 1), k
+    return place(shape), place(seam), k
+
+
+def relief_solid(shape, seam, z):
+    """The diamond drawn in sunk lines, RELIEF deep, on a top at z."""
+    h, w, _ = RELIEF
+    drawing = unary_union([shape.exterior.buffer(w / 2), seam.buffer(w / 2, cap_style=2)])
+    return extrude(drawing.intersection(shape.buffer(w / 2)), z - h, z + 1)
+
+
+def relief(top_poly, z):
+    """The diamond drawn in sunk lines, RELIEF deep, on the spine's top (its outline and the seam between
+    the halves), as large as fits RELIEF's margin inside the top, wherever along it that is."""
+    shape, seam, k = diamond_fit(top_poly)
+    return relief_solid(shape, seam, z), k
 
 
 def spine_back_y(p):

@@ -86,7 +86,7 @@
         1568,
         1176
       ],
-      "sha256": "69344d72676b187bdbff01865abe37b4eaa769461d49db4aee651d6eab654b07"
+      "sha256": "20784eaf966911c7ac3bc5535d90fb2c08e6fc33f8240c660fbe27dfe839a6b3"
     },
     {
       "path": "renders/dock_under.png",
@@ -632,7 +632,7 @@
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "f80b00c56dfe4405dd7999a375b7713b6891173417c35b401b5b2b824a52b90c"
+      "sha256": "f4888bc5d08535fdcf88a37bbd6dd114f2ff72ff47a6712a207fc200ee50e9d8"
     },
     {
       "path": "build_pcb.py",
@@ -660,7 +660,7 @@
     },
     {
       "path": "dock.py",
-      "sha256": "8ab9d1e27246d0bec6791b77aea19a15cadbb617d3fd2d6589c01d5f8d5bd351"
+      "sha256": "cc6a50e73cc0f003c1a462f6e50813d18a7bc1e82a721ec16bced37e732ae59f"
     },
     {
       "path": "footprints.py",
@@ -668,7 +668,7 @@
     },
     {
       "path": "insert.py",
-      "sha256": "072d7d644154e67b7dc5db47cf7f132fb20b5515bcc427872afff0bbd17a759f"
+      "sha256": "c189db216b978071d6e4c335bc218fef9d0747fedd0f14919a758ca6ae6293bb"
     },
     {
       "path": "layout.py",
@@ -765,10 +765,6 @@
     {
       "path": "vrml.py",
       "sha256": "6a98eba0532f105d5fb0197a23fa0adddf1562ee9f25d77d62ad8277633e4121"
-    },
-    {
-      "path": "xiao_alternatives.json",
-      "sha256": "f8bc9d9a19568e8379b2fde636ba505e5eba4a4c81e6823d7e3d55fe51ef5eb0"
     }
   ],
   "note": "Freshness checked against the final scene and both final PCBs."

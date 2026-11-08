@@ -172,7 +172,8 @@ stand it is a tented, splayed unibody, sturdier than the magnets at the seam alo
   carrying on both halves' walls, its point cut to a flat as wide as the joined board's front
   flat (about 20 mm). Its middle is a **drawer** (`DRAWER`), pulled out through the front, for a module
   (below) or the **placeholder** (`insert.py`, `case/insert.stl`): a solid block with the modules'
-  outline and magnets, flush with the halves, the joined board's diamond cut into its top. The
+  outline and magnets, flush with the halves, the joined board's diamond cut into its top, and
+  **PRISMA** in 0.5 mm low relief behind it. The
   drawer is open at both the top and the front. Its sides are straight and uninterrupted: no
   raised ends at the mouth, no ribs or matching grooves. The insert's front is shaped in 3D by
   the halves' exact front facet planes, rather than set back to a vertical wall, so the assembled

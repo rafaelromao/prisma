@@ -34,7 +34,7 @@ and three are glued on the aluminium Ugreen base, paired with opposite poles fac
 tilting phone platform, using the mirrored 1:1 SVG templates in `case/`. The platform needs a
 **54 mm clear flat contact patch**.
 
-**Drawer placeholder:** `case/insert.stl` (71.5 cm³, solid), for when neither module is in the drawer:
+**Drawer placeholder:** `case/insert.stl` (71.6 cm³, solid, with PRISMA in low relief), for when neither module is in the drawer:
 **6 common discs**, three a side.
 
 **Magnet total:** both halves 26 + dock and base 31 + stands 6 + placeholder 6 + both pointing modules 14
