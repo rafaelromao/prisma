@@ -1,7 +1,7 @@
-"""Check the independent-stand contact and write 1:1 magnet-placement templates.
+"""Check direct steel-platform contact and write 1:1 alignment templates.
 
 This specifies the minimum clear flat contact patch, not unmeasured Ugreen platform dimensions.
-Glue three of the common 8 x 1.5 mm discs to each platform, on the circular pattern.
+The existing three case magnets attract the steel platform; no platform magnets are added.
 Run from the repository root: python3 stand_mount.py
 """
 import math
@@ -75,21 +75,20 @@ def check():
     cog, mass = estimated_centre_of_gravity()
     assert np.linalg.norm(cog[:2] - centre) < 0.5, "ring is no longer centred on the estimated mass"
     assert Polygon(points).contains(Point(cog[:2])), "centre of gravity lies outside the support triangle"
-    # Floor pockets open at the case's floor plane. The common stand magnets meet them flush,
-    # leaving the bump-ons above the platform rather than rocking the keyboard on its feet.
-    stand_disc = C.D["magnet_nominal_size"][1]
+    # Floor pockets open at z=0. Feet project below that plane, but are OUTSIDE the
+    # contact patch. Check all ten possible positions, not just one half's five feet.
+    foot_radius = C.D["pads"]["size"][0] / 2
+    foot_clearance = min(math.dist(p, centre) - foot_radius - radius
+                         for slot in C.D["pads"]["slots"] for p in C.plan(slot))
+    assert foot_clearance > 0, "platform reaches a foot: direct steel contact is obstructed"
     triangle = Polygon(points)
     for tilt in (0, 20, 35):
-        shift = (cog[2] + stand_disc) * math.tan(math.radians(tilt))
+        shift = cog[2] * math.tan(math.radians(tilt))
         for direction in range(0, 360, 30):
             load = Point(cog[0] + shift * math.cos(math.radians(direction)),
                          cog[1] + shift * math.sin(math.radians(direction)))
             assert triangle.contains(load), "gravity projection leaves the stand-contact triangle"
-    for half in (0, 1):
-        clearance = C.pads(half).bounding_box()[2] + stand_disc
-        assert clearance > 0.5
-        print("  %s half: three platform magnets, feet %.2f mm clear of the platform" %
-              ("left" if half == 0 else "right", clearance))
+    print("  steel contact: no added discs; all foot edges %.2f mm outside the contact circle" % foot_clearance)
     print("  required flat contact circle: %.1f mm; real platform fit remains unconfirmed" %
           mount["contact_diameter"])
     print("  ring radius %.1f mm, estimated COG (%.2f, %.2f) mm, estimated assembled mass %.1f g" %
@@ -109,7 +108,7 @@ def main():
             circles.append('<circle cx="%.4f" cy="%.4f" r="%g"/>' % (x, y, C.D["magnet_floor_size"][0] / 2))
             circles.append('<path d="M %.4f %.4f h 2 M %.4f %.4f v 2"/>' % (x - 1, y, x, y - 1))
         svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="%gmm" height="%gmm" '
-               'viewBox="%g %g %g %g"><title>%s half stand magnets: print at 100%%</title>'
+                'viewBox="%g %g %g %g"><title>%s half steel-platform alignment: print at 100%%</title>'
                '<g fill="none" stroke="black" stroke-width="0.15">'
                '<circle r="%g" stroke-dasharray="1 1"/><circle r="%g" stroke-dasharray="0.5 1"/>%s</g>'
                '<text x="0" y="1" text-anchor="middle" font-size="2">%s / 100%%</text></svg>') % (

@@ -17,7 +17,7 @@ packs come in round numbers anyway.
 | 9 | Reset button: SMD tact switch 5.1 × 5.1 mm, **2.0 mm tall**, 4 gull-wing legs (XKB TS-1187A-B-D-B or equivalent) | 2 (+3) | `5.1x5.1x2.0 SMD tactile switch 4 pin` | On the switch face, in the nook above the thumbs: reset, or double-tap for the bootloader, with the case closed. The height matters: 2.0 mm puts the plunger 0.2 mm under the plate's top. The common 1.5 mm one (LCSC C318884) fits too, but then sits 0.7 mm down and needs a fingernail or a pen tip. |
 | 10 | Disc magnets 8 × 1.5 mm, N52 | 26 (+4) | `8x1.5mm N52 neodymium magnet` | Thirteen per half: four stacking positions, three circular stand contacts, six inner-wall magnets evenly spread at 17.8 mm pitch. The same part is used in every accessory. |
 | 11 | M3 × 8 flat-head screws, 90° countersunk (ISO 10642 / DIN 7991) | 8 | `M3x8 countersunk flat head screw` | Four per half: through the plate (the head sits flush in its countersink) and the PCB, threading into the solid base (2.5 mm pilot holes). |
-| 12 | Silicone bump-ons 8 × 2 mm, self-adhesive | 10 (+6) | `8x2mm silicone bumpon self adhesive` | Five per half, in the slots under the floor (see BUILD.md). Use the specified 2.0 mm height to retain the checked stand-platform clearance. |
+| 12 | Silicone bump-ons 8 × 2 mm, self-adhesive | 10 (+6) | `8x2mm silicone bumpon self adhesive` | Five per half, in the slots under the floor (see BUILD.md). The specified height preserves stacked fit; they lie outside the centred 54 mm stand contact circle. |
 | 13 | Filament | ~170 g | Nylon (PA) | Case left + right (solid base, 65.9 cm³ each) and the two top plates (4.3 cm³ each); approximately 160 g solid nylon before print overhead. |
 
 **Cyberdeck dock (optional):** `case/dock.stl` (about 83 cm³, 95 g of Nylon), for a Ugreen folding phone
@@ -30,15 +30,18 @@ place. A magnet chain must attract throughout: half → dock → insert. Three b
 and three are glued on the aluminium Ugreen base, paired with opposite poles facing. Add **6 more
 8 × 2 mm bump-ons**, three under each wing.
 
-**Independent tenting (optional):** two Ugreen stands and **6 common discs**, three glued to each
-tilting phone platform, using the mirrored 1:1 SVG templates in `case/`. The platform needs a
-**54 mm clear flat contact patch**.
+**Independent tenting (optional):** two stands with **steel tilting phone platforms**. The owner
+confirmed magnetic attraction on the actual supports. **No extra discs**: the existing case
+magnets meet the steel directly. Use the mirrored SVGs in `case/` for alignment only.
+Minimum centred clear flat contact circle **54 mm**; prefer about **60 mm** if it clears the
+feet and obstructions. Attraction alone does not qualify retention at a typing angle.
 
 **Drawer placeholder:** `case/insert.stl` (71.6 cm³, solid, with PRISMA in low relief), for when neither module is in the drawer:
 **6 common discs**, three a side.
 
-**Magnet total:** both halves 26 + dock and base 31 + stands 6 + placeholder 6 + both pointing modules 14
-= **83 discs**, before spares.
+**Magnet total:** both halves 26 + dock and base 31 + placeholder 6 + both pointing modules 14
+= **77 discs**, before spares. The three discs glued to the dock stand's aluminium **base**
+are unchanged; these are separate from the independent steel **platforms**.
 
 **Drawer modules (optional).** Either slides into the dock's drawer from the front, or snaps onto either
 half's inner wall on the desk. Everything below is per module, and most of it is the same part you already
@@ -49,14 +52,14 @@ buy for the halves.
 | Printed tray, `case/module_tray.stl` | 1 | | The same print for every module |
 | Printed lid | 1 | | `trackball/case/lid.stl` (MX), `trackball/case/lid_choc.stl` (Choc v1) or `trackpad/case/lid.stl` |
 | PCB, `trackball/fab/trackball_jlcpcb.zip` | 1 (order 5) | (JLCPCB) | 2 layers, 1.6 mm, 53.7 × 99.5 mm. One breakaway panel of three boards (main, sensor, controller), for both pointing modules and either controller: nice!nano v2 or plain XIAO nRF52840. JLCPCB may count this as three designs and add a fee: enter Different Design = 3 and confirm on the quote |
-| M3 × 8 flat-head screws | 6 | same as item 11 | Four through the lid, two intended for the sensor board; check sensor screw depth before installing the battery |
+| M3 × 8 flat-head screws | 6 | same as item 11 | Four through the lid unchanged; finish the two sensor-board screws to ≤7.6 mm overall, deburr, then verify seating, engagement and ≥0.3 mm tip clearance before installing electronics/battery (BUILD.md) |
 | Disc magnets 8 × 1.5 mm, N52 | 7 | same as item 10 | Three a side, one in the floor |
 | Silicone bump-ons 8 × 2 mm | 3 | same as item 12 | |
 | Slide switch MSK-12C02 | 1 | same as item 8 | On the main board, lever out of the back wall |
 | Reset button TS-1187A | 1 | same as item 9 | On the sensor board, facing down |
 | nice!nano v2 or clone | 1 | `nice!nano v2` / `SuperMini nRF52840` | Face down on the controller board's header, USB-C flush with the back. Only a genuine nice!nano v2's pin rows have been checked: compare a clone's against the wiring diagram before soldering |
 | **Alternative** to nice!nano: plain XIAO nRF52840 or Super52840 | 1 | same as item 2 | Same panel and header; set its jumper and use its own firmware. Its USB-C mouth sits 0.2 mm inside the back. Real fit and operation remain unverified; Super52840 support is experimental |
-| 2.54 mm pin header | 11 pins | `2.54 mm male header` | Two 5-pin lengths and a loose pin, under the controller. Plastic 2.5 mm thick |
+| Compatible 2.54 mm-pitch pin header | 11 pins | `2.54 mm round pin header 0.6mm` | Two 5-pin lengths and a loose pin, under the controller. Plastic 2.54 mm thick. Measure actual pins and controller holes: standard 0.64 mm square pins interfere with the Ø0.75 mm Seeed reference holes; round Ø0.6 mm is a candidate, not a hardware qualification. Never force pins |
 | Extra-long 2.54 mm pin header, 15 mm | 8 pins | `2.54 mm header 15 mm long` | Stacking pins between the controller board and main board: two 3-pin lengths and two single pins. Check where the plastic sits: short end at least 2.35 mm, long end at least 6.7 mm |
 | LiPo battery 752025, 250 mAh | 1 | `752025 lipo 250mah` | 7.5 × 20 × 25 mm, not the halves' larger cell. Over 20.5 mm wide, it fouls the controller board's arms |
 | 30 AWG stranded wire | 80 to 100 mm per wire | `30 AWG silicone wire` | About 25 mm for the two wires from the controller |
@@ -73,7 +76,7 @@ buy for the halves.
 |---|---|---|---|
 | Cirque TM040040-2023-302 or I²C-configured kit | 1 | `Cirque 40mm I2C flat overlay` | Use the supplied I²C breakout and flat cable; on SPI-labelled kits remove R1 for I²C, keeping R7/R8 for 3.3 V |
 | Supplied I²C breakout with pull-ups + 12-pin FFC | 1 + 1 | supplied with the kit | Reserved maximum breakout envelope 24 × 18 × 4.5 mm; confirm actual size and FFC contact orientation. Four MCU wires to breakout, separate DR wire directly to Cirque underside |
-| Choc v1 switches, sockets and keycaps | 2 + 2 + 2 | same as items 3, 4, 5 | |
+| Choc v1 switches, sockets and keycaps | 2 + 2 + 2 | same as items 3, 4, 5 | Compact caps only: 17.5 × 16.5 mm, rotated with the switches (17.5 mm front-to-back here). Centred nominal pad gap 0.585 mm, potentially 0.285 mm after radial seat play; verify actual placement/travel/wobble. |
 
 Consumables: thin solder (0.5–0.6 mm), flux, a little kapton tape, thin double-sided tape (0.25 mm at most) for the controller board's seats, CA glue
 or epoxy for the magnets, removable adhesive dots for the trackpad, thin card for the sensor's

@@ -60,6 +60,9 @@ BEARING_ANGLE = 40.0           # contact angle below the ball's equator
 SENSOR_BELOW = 3.4             # room under it, over the reinforced foot roofs
 LENS_ABOVE = 2.0               # nominal lens reference plane over the sensor board's top
 SENSOR_SHIM = 0.4              # the posts' top under the nominal board: shimmed at assembly
+SENSOR_SCREW_LENGTH = 7.6       # finish the two M3 x 8 tips to this maximum before assembly
+SENSOR_SCREW_EXTRA = 0.2        # explicit axial uncertainty budget, not a claimed screw standard
+SENSOR_PILOT_BOTTOM = .95
 WORK = 2.4                     # PMW3610: lens reference plane to the ball (2.2 to 2.6)
 SENSOR_BOARD = (28.0, 30.0)    # w, l, centred on the ball's axis: the sensor, its parts, wires, reset
 OPT = (2.988, 0.0)             # the optical centre in the PMW3610 footprint (siderakb, CERN-OHL-P),
@@ -321,7 +324,7 @@ def tray(L):
     for x, y in M.lid_screws():
         sh -= Manifold.cylinder(PCB_TOP - 13.9 + 1, M.SCREW["pilot"] / 2, circular_segments=24).translate((x, y, 13.9))
     for x, y in sensor_holes(L):
-        sh -= Manifold.cylinder(PLATE_TOP + SENSOR_BELOW, M.SCREW["pilot"] / 2, circular_segments=24).translate((x, y, .95))
+        sh -= Manifold.cylinder(PLATE_TOP + SENSOR_BELOW, M.SCREW["pilot"] / 2, circular_segments=24).translate((x, y, SENSOR_PILOT_BOTTOM))
     # reset: the button faces down from the sensor board; a pin hole through the floor under it
     rx, ry = sensor_reset(L)
     sh -= Manifold.cylinder(M.BOTTOM_T + 2, 1.25, circular_segments=24).translate((rx, ry, M.FEET - 1))
@@ -366,6 +369,20 @@ def sensor_holes(L):
     """The sensor board's two screw holes (dock frame)."""
     bx, by = L["ball"]
     return [(bx + x, by - y) for x, y in SENSOR_PARTS["H"]]
+
+
+def sensor_screw_stack(shim=SENSOR_SHIM, length=SENSOR_SCREW_LENGTH):
+    """Nominal flat-head seating in a straight PCB hole, not a hardware measurement.
+
+    The model's cone runs from radius 1.5 to 3.0 over head_h. Its narrow end
+    descends into the 3.4 mm hole before contacting the hole's upper edge.
+    """
+    seating = M.SCREW["head_h"] * (M.SCREW["hole"] / 2 - 1.5) / (3.0 - 1.5)
+    board_top = PLATE_TOP + SENSOR_BELOW - SENSOR_SHIM + shim + PCB_T
+    head_top = board_top + M.SCREW["head_h"] - seating
+    tip = head_top - length
+    return dict(seating=seating, head_top=head_top, tip=tip,
+                pilot_clearance=tip - SENSOR_PILOT_BOTTOM, floor_clearance=tip - M.FEET)
 
 
 def sensor_reset(L):

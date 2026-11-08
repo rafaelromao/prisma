@@ -65,21 +65,26 @@ heights are matched.
 Each half has three extra floor magnets on a **44 mm circle**, spaced **120° apart** around
 the estimated assembled centre of gravity. The pattern is derived from a mass-weighted model
 of the nylon case, PCB, battery, switches and magnets, checked by `stand_mount.py`; it is not
-a measured balance point. Add three mates of the same **8 × 1.5 mm** size
-to the **tilting phone platform**, not the stand's base, with opposite poles facing the half.
-For both halves independently, use two stands and six platform magnets. Glue the mates
-while aligned with their own half; the right pattern is mirrored. The stand magnets stand
-1.5 mm above the platform, so the keyboard's bump-ons remain **0.6 mm clear** and cannot rock it.
+a measured balance point. Use two **steel tilting phone platforms**, not the stands' bases.
+The owner has tested the platforms and confirmed that they attract magnets. The existing
+case magnets attach directly: **no extra platform magnets or glue are required**.
+All ten possible foot positions lie outside the centred 54 mm circular contact patch,
+with at least **11.55 mm planar edge clearance**. They do not create an air gap there.
+Keep the case magnets flush and adhesive off their faces. A larger or noncircular platform
+must be checked against the feet, rubber coverings, lips and other obstructions separately.
 The estimated gravity projection remains inside the three-contact triangle through 35° of tilt;
 this does not certify the magnets' holding force or the stand's own stability.
 
-`python3 stand_mount.py` checks the group and writes 1:1 templates:
+`python3 stand_mount.py` checks the group and writes 1:1 alignment templates (not glue guides):
 [left](case/stand_magnet_template_left.svg), [right](case/stand_magnet_template_right.svg).
 Print at 100%: the dashed contact boundary is **54 mm** across; the magnet-centre circle is 44 mm.
 That is the required clear flat
-patch, **not a confirmed Ugreen measurement**. Measure the real platform, including rubber,
-lips and obstructions, before gluing. Magnet holding force, adhesive strength and stability at
-the chosen tilt need a physical load test. The render uses an illustrative stand/platform.
+patch, **not a confirmed Ugreen measurement**. The 54 mm circle leaves only 1 mm from an
+8 mm magnet's edge to the platform edge; prefer about **60 mm** where the real platform
+still clears all feet. Measure its shape and surface before use. Steel attraction is confirmed,
+but slip/peel resistance, typing loads and stability at the chosen tilt still need a physical
+load test. Aluminium and nonmagnetic stainless steel are unsuitable; some stainless grades
+are magnetic, so test the actual platform. The render uses an illustrative stand/platform.
 
 ![Each half on its own tilting stand](renders/independent_tenting.png)
 
@@ -103,10 +108,16 @@ The board is made in one batch, so check what software can't:
    and `.render/fw_right.overlay`.
 
 Checked by the scripts: JLCPCB's limits in the DRC (`pcb/prisma.kicad_dru`: annular ring
-0.18, pad holes 0.45 apart, tracks and clearance 0.10, silkscreen 1.0 mm text with a 0.15 stroke),
+ 0.18, pad holes 0.45 apart, tracks and clearance 0.10, silkscreen 1.0 mm text with a 0.15 stroke),
 no tracks under the module's antenna, every net against its intent and the firmware's pin lists
 (`check_pcb.py`), both modules' underside pads against the board's copper, and every part, plug,
 screw, magnet and pad against the case (`check_fit.py`).
+
+**Fabrication gate:** the battery holes have a 0.6 mm drill in a 0.96 mm pad: a **0.18 mm
+annular ring**, the configured absolute minimum, not the 0.25 mm recommendation. The small
+ring preserves the underside-pad and routing clearances; do not enlarge it without rerouting
+and rechecking both module options. Obtain the fabricator's explicit acceptance of these
+holes before ordering. A clean DRC does not establish production yield.
 
 ## Files
 
@@ -279,11 +290,24 @@ halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halv
   Seeed STEP reference, but actual revisions, clones, wiring and retention still need checking.
 - The sensor's posts print 0.4 mm low. Equal shims can adjust the optical gap, but the real ball-to-board
   distance and lens reference-plane height must be measured; see `BUILD.md` for the calculation and limits.
+  Finish the two sensor-board screws to **≤7.6 mm overall** and deburr them outside the assembly.
+  Head seating in the straight PCB hole consumes 0.22 mm in the model; verify at least 0.3 mm
+  tip clearance and adequate engagement at the actual shim thickness before installing the battery.
+  The four lid screws remain M3 × 8, unmodified.
 
 ### Prisma Trackpad (`trackpad/trackpad.py`)
 
 The same module with a 40 mm Cirque (TM040040, I²C) in the lid instead of the ball. It uses the Choc
 sockets on the shared main board and stands at the Choc lid's height, 1.2 mm over the halves.
+
+- Use compact **17.5 × 16.5 mm Choc caps**. Conventional twin-stem caps rotate with the
+  switch, putting **17.5 mm front-to-back** here; they cannot be independently quarter-turned.
+  The centred nominal pad-to-cap gap is **0.585 mm**; an 18 mm square envelope has only
+  **0.335 mm**. The seat's 0.3 mm radial allowance can reduce these to **0.285/0.035 mm**
+  before print error or wobble. Check actual pad placement, adhesive, cap travel and wobble;
+  these are not first-print fit guarantees. The front screw centres are now
+  x = ±21.0, y = −91.5 mm, leaving **2.087 mm** from the countersink envelope to the pad seat
+  (formerly 0.871 mm). Use the new tray and lids together; PCB holes and key positions are unchanged.
 
 - Retain the supplied I²C breakout with its pull-up resistors and original 12-pin flat cable.
   Four wires connect the MCU to the breakout; one separate DR wire connects the MCU directly to the
@@ -368,6 +392,11 @@ b prisma -c   # central left, peripheral left/right, dongle
 ```
 
 ## Regenerating
+
+See [PRINT_READINESS.md](PRINT_READINESS.md) for the pre-print acceptance gates. Nominal
+collision tests do not qualify Nylon shrinkage, support removal, magnetic retention or a one-shot print.
+The linked review's claim-by-claim results and independent blind-review follow-up are in
+[PREPRINT_VERIFICATION.md](PREPRINT_VERIFICATION.md).
 
 For a mechanical blind review or print-readiness review, apply [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md), including opposing pockets in the populated assembly.
 

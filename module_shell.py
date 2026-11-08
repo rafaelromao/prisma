@@ -45,7 +45,7 @@ BOSS = (MAG_D + 1.0, MAG_H + 0.1 + 0.9)         # 0.9 mm backing, glue-clearance
 _S = K.D["screw"]                  # the halves' M3 x 8 flat head (90-degree countersunk)
 SCREW = dict(pilot=_S["pilot_d"], post=5.8, head=_S["head_d"], hole=_S["pcb_hole"],
              boss=_S["boss_d"], length=_S["length"], cone=1.5, head_h=1.65)
-FRONT_SCREW = (19.5, -91.5)        # into the tray's front posts, clear of the ball and the pad
+FRONT_SCREW = (21.0, -91.5)        # front posts only (no PCB holes); >2 mm from head to pad seat
 PCB_SCREW = (12.3, -54.0)          # through the main board, beside the first key; far enough back to leave the trackpad's seat a web
 BUMPON = (8.0, 2.0)                # the case's 8 x 2 mm bump-ons, recessed to stand FEET proud
 SPINE_TOP = K.spine_height(P)
@@ -275,12 +275,13 @@ def bumpons():
     return out
 
 
-def flat_screw(x, y, head_z):
+def flat_screw(x, y, head_z, length=None):
     """The halves' M3 x 8, 90-degree flat head, driven from above; head_z is its top face.
     Its thread forms in the pilot, so the modelled shank overlaps the plastic on purpose."""
+    length = SCREW["length"] if length is None else length
     head = Manifold.cylinder(SCREW["head_h"], 1.5, 3.0, circular_segments=40).translate((0, 0, -SCREW["head_h"]))
-    shank = Manifold.cylinder(SCREW["length"] - SCREW["head_h"], 1.5, circular_segments=32).translate(
-        (0, 0, -SCREW["length"]))
+    shank = Manifold.cylinder(length - SCREW["head_h"], 1.5, circular_segments=32).translate(
+        (0, 0, -length))
     cross = Manifold.cube((3.4, .6, .5)).translate((-1.7, -.3, -.49))
     cross += Manifold.cube((.6, 3.4, .5)).translate((-.3, -1.7, -.49))
     return ((head + shank) - cross).translate((x, y, head_z))

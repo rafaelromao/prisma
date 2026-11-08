@@ -2,11 +2,11 @@
   "files": [
     {
       "path": "case/case_left.stl",
-      "sha256": "e14c306147994fba6092565f47ba3aec0269c5bf08f2e0c75af12fcf1b7c72d7",
+      "sha256": "df78624ab3ac4a841ff6a62f00df9fca335060464dc05fd40b9f0257a4ddf83e",
       "bytes": 415184,
       "triangles": 8302,
       "components": 1,
-      "volume_mm3": 65886.03707,
+      "volume_mm3": 65884.5989,
       "size_mm": [
         93.01289,
         100.45101,
@@ -17,11 +17,11 @@
     },
     {
       "path": "stls/case_left.stl",
-      "sha256": "e14c306147994fba6092565f47ba3aec0269c5bf08f2e0c75af12fcf1b7c72d7",
+      "sha256": "df78624ab3ac4a841ff6a62f00df9fca335060464dc05fd40b9f0257a4ddf83e",
       "bytes": 415184,
       "triangles": 8302,
       "components": 1,
-      "volume_mm3": 65886.03707,
+      "volume_mm3": 65884.5989,
       "size_mm": [
         93.01289,
         100.45101,
@@ -32,11 +32,11 @@
     },
     {
       "path": "case/case_right.stl",
-      "sha256": "59d48a27cdd7ca45d9575d1ff68910422ad5656859963f92f6978a7c676fde08",
+      "sha256": "b7418517d6efaaf4cddcaefeb6ac7aa9aa605584b0d469bbad720d47590d1984",
       "bytes": 415084,
       "triangles": 8300,
       "components": 1,
-      "volume_mm3": 65886.03649,
+      "volume_mm3": 65884.59826,
       "size_mm": [
         93.01288,
         100.45101,
@@ -47,11 +47,11 @@
     },
     {
       "path": "stls/case_right.stl",
-      "sha256": "59d48a27cdd7ca45d9575d1ff68910422ad5656859963f92f6978a7c676fde08",
+      "sha256": "b7418517d6efaaf4cddcaefeb6ac7aa9aa605584b0d469bbad720d47590d1984",
       "bytes": 415084,
       "triangles": 8300,
       "components": 1,
-      "volume_mm3": 65886.03649,
+      "volume_mm3": 65884.59826,
       "size_mm": [
         93.01288,
         100.45101,
@@ -122,11 +122,11 @@
     },
     {
       "path": "case/module_tray.stl",
-      "sha256": "6d42be2dcf0e2f44f2d01420bde4eaf2999500dea484ae928390e33cfd4addc4",
+      "sha256": "c6c455574bdc0118db045d33223c8f831251271197c57f10c5e657e8725efa38",
       "bytes": 246284,
       "triangles": 4924,
       "components": 1,
-      "volume_mm3": 18028.33938,
+      "volume_mm3": 18030.95043,
       "size_mm": [
         55.95002,
         100.81739,
@@ -137,11 +137,11 @@
     },
     {
       "path": "stls/module_tray.stl",
-      "sha256": "6d42be2dcf0e2f44f2d01420bde4eaf2999500dea484ae928390e33cfd4addc4",
+      "sha256": "c6c455574bdc0118db045d33223c8f831251271197c57f10c5e657e8725efa38",
       "bytes": 246284,
       "triangles": 4924,
       "components": 1,
-      "volume_mm3": 18028.33938,
+      "volume_mm3": 18030.95043,
       "size_mm": [
         55.95002,
         100.81739,
@@ -212,11 +212,11 @@
     },
     {
       "path": "trackball/case/lid.stl",
-      "sha256": "3e767c6eb6ba06c23676910f8196dfb83fd269214b6930fe04ac511fcaf71e70",
-      "bytes": 594984,
-      "triangles": 11898,
+      "sha256": "31b1c154ccb2003d390b50b70541387d54686e0471fce981bce1e736b4233408",
+      "bytes": 604184,
+      "triangles": 12082,
       "components": 1,
-      "volume_mm3": 5567.06088,
+      "volume_mm3": 5550.78058,
       "size_mm": [
         55.13846,
         84.83187,
@@ -227,11 +227,11 @@
     },
     {
       "path": "stls/trackball_lid.stl",
-      "sha256": "3e767c6eb6ba06c23676910f8196dfb83fd269214b6930fe04ac511fcaf71e70",
-      "bytes": 594984,
-      "triangles": 11898,
+      "sha256": "31b1c154ccb2003d390b50b70541387d54686e0471fce981bce1e736b4233408",
+      "bytes": 604184,
+      "triangles": 12082,
       "components": 1,
-      "volume_mm3": 5567.06088,
+      "volume_mm3": 5550.78058,
       "size_mm": [
         55.13846,
         84.83187,
@@ -242,11 +242,11 @@
     },
     {
       "path": "trackball/case/lid_choc.stl",
-      "sha256": "e8e79b0b290bff938826329210bc4987ee8a15c464184b8c45e95ab5d4fd3e2e",
-      "bytes": 536984,
-      "triangles": 10738,
+      "sha256": "7f4c76dfe25d4e440734f769cf58ae42b62988b4dc7dc8ff5f5905918deac204",
+      "bytes": 535384,
+      "triangles": 10706,
       "components": 1,
-      "volume_mm3": 3530.05695,
+      "volume_mm3": 3524.00602,
       "size_mm": [
         55.13846,
         84.83187,
@@ -257,11 +257,11 @@
     },
     {
       "path": "stls/trackball_lid_choc.stl",
-      "sha256": "e8e79b0b290bff938826329210bc4987ee8a15c464184b8c45e95ab5d4fd3e2e",
-      "bytes": 536984,
-      "triangles": 10738,
+      "sha256": "7f4c76dfe25d4e440734f769cf58ae42b62988b4dc7dc8ff5f5905918deac204",
+      "bytes": 535384,
+      "triangles": 10706,
       "components": 1,
-      "volume_mm3": 3530.05695,
+      "volume_mm3": 3524.00602,
       "size_mm": [
         55.13846,
         84.83187,
@@ -272,11 +272,11 @@
     },
     {
       "path": "trackpad/case/lid.stl",
-      "sha256": "1903de697f671444c51bc8f2122ac1b87071cb0d3d15174a8762c59c71a34eca",
-      "bytes": 255884,
-      "triangles": 5116,
+      "sha256": "bfec0912b8eb2c45f0355af1433bec189f63136f6baa3be55f254449d18382cb",
+      "bytes": 260184,
+      "triangles": 5202,
       "components": 1,
-      "volume_mm3": 2027.37745,
+      "volume_mm3": 2037.1478,
       "size_mm": [
         55.13846,
         84.83187,
@@ -287,45 +287,15 @@
     },
     {
       "path": "stls/trackpad_lid.stl",
-      "sha256": "1903de697f671444c51bc8f2122ac1b87071cb0d3d15174a8762c59c71a34eca",
-      "bytes": 255884,
-      "triangles": 5116,
+      "sha256": "bfec0912b8eb2c45f0355af1433bec189f63136f6baa3be55f254449d18382cb",
+      "bytes": 260184,
+      "triangles": 5202,
       "components": 1,
-      "volume_mm3": 2027.37745,
+      "volume_mm3": 2037.1478,
       "size_mm": [
         55.13846,
         84.83187,
         3.28
-      ],
-      "watertight": true,
-      "winding": true
-    },
-    {
-      "path": ".render/dock_halves.stl",
-      "sha256": "60677b8485f06018e6830de6c44a1189c49e158b23080cec5a91d142bfcb8e00",
-      "bytes": 830084,
-      "triangles": 16600,
-      "components": 2,
-      "volume_mm3": 131772.07324,
-      "size_mm": [
-        219.7718,
-        111.95235,
-        29.63715
-      ],
-      "watertight": true,
-      "winding": true
-    },
-    {
-      "path": ".render/dock_ugreen.stl",
-      "sha256": "8ec4ae0c334134c126f484acc1fc9d2006e0434517e285a11c101afb84523768",
-      "bytes": 10284,
-      "triangles": 204,
-      "components": 1,
-      "volume_mm3": 35668.77583,
-      "size_mm": [
-        85.0,
-        105.0,
-        4.0
       ],
       "watertight": true,
       "winding": true

@@ -168,10 +168,10 @@ def _colour(name):
 def _sensor_screws(L):
     import module_shell as M
     import trackball.trackball as B
-    top = B.PLATE_TOP + B.SENSOR_BELOW + B.PCB_T + M.SCREW["head_h"]
+    top = B.sensor_screw_stack()["head_top"]
     out = Manifold()
     for x, y in B.sensor_holes(L):
-        out += M.flat_screw(x, y, top)
+        out += M.flat_screw(x, y, top, length=B.SENSOR_SCREW_LENGTH)
     return out
 
 
@@ -272,12 +272,9 @@ def independent_tenting():
     out = []
     for half, sx in ((0, 1), (1, -1)):
         parts = [(base, UGREEN), (arm, UGREEN), (platform, UGREEN)]
-        for x, y in C.plan(D["stand_mount"]["magnets"]):
-            d, h = D["magnet_nominal_size"]
-            disc = Manifold.cylinder(h, d / 2, circular_segments=32).translate((x - cx, -y - cy, 0))
-            parts.append((raised(disc), vrml.METAL))
+        # Existing case magnets contact the steel platform at z=0; no glued mates.
         for m, rgb in left_half() + [(C.pads(half), vrml.PAD)]:
-            parts.append((raised(C.real(m).translate((-cx, -cy, D["magnet_nominal_size"][1]))), rgb))
+            parts.append((raised(C.real(m).translate((-cx, -cy, 0))), rgb))
         for m, rgb in parts:
             if sx < 0:
                 m = m.mirror((1, 0, 0))

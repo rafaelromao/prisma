@@ -168,8 +168,7 @@ for mx, my in D["magnets_floor"]:
     magnets += Manifold.cylinder(mf_h, mf_d / 2, circular_segments=32).translate((X, Y, 0))
 pilots = Manifold()
 for hx, hy in D["mount_holes"]:
-    X, Y = C.plan([(hx, hy)])[0]
-    pilots += Manifold.cylinder(60, C.PILOT_R, circular_segments=20).translate((X, Y, C.PILOT_FLOOR))
+    pilots += C.pilot_hole(hx, hy)
 overlap("pad slots (+0.5 skin) vs pockets", grown, pockets)
 overlap("pad slots (+0.5 skin) vs magnets", grown, magnets)
 overlap("pad slots (+0.5 skin) vs pilot holes", grown, pilots)

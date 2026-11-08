@@ -15,7 +15,7 @@ from trackpad import trackpad as T
 class StlExportTest(unittest.TestCase):
     def test_all_printable_variants_survive_binary_stl_quantization(self):
         half = C.real(C.build())
-        plate = C.plate()[0]
+        plate = C.real(C.plate()[0]).mirror((0, 0, 1)).translate((0, 0, C.PLATE["thick"]))
         solids = {"left": half, "right": C.mirrored(half), "plate_left": plate,
                   "plate_right": plate.mirror((1, 0, 0)), "dock": dock.make().solid,
                   "cover": insert.build()[0]}
@@ -25,6 +25,11 @@ class StlExportTest(unittest.TestCase):
                                   ("trackpad", T.lid(T.place()), T.H)):
             solids[name] = lid.mirror((0, 0, 1)).translate((0, 0, height))
         record = np.dtype([("normal", "<f4", 3), ("vertices", "<f4", (3, 3)), ("attribute", "<u2")])
+        published = {"left": "case/case_left.stl", "right": "case/case_right.stl",
+                     "plate_left": "case/plate_left.stl", "plate_right": "case/plate_right.stl",
+                     "dock": "case/dock.stl", "cover": "case/insert.stl",
+                     "tray": "case/module_tray.stl", "mx": "trackball/case/lid.stl",
+                     "choc": "trackball/case/lid_choc.stl", "trackpad": "trackpad/case/lid.stl"}
         with tempfile.TemporaryDirectory(dir="/tmp/opencode", prefix="prisma-stl-test-") as folder:
             for name, solid in solids.items():
                 with self.subTest(variant=name):
@@ -48,6 +53,15 @@ class StlExportTest(unittest.TestCase):
                     signed_volume = np.einsum("ij,ij->i", triangles[:, 0],
                                                np.cross(triangles[:, 1], triangles[:, 2])).sum() / 6
                     self.assertAlmostEqual(signed_volume, solid.volume(), delta=0.05)
+                    # Compare the regenerated quantized vertices, not just volume:
+                    # relocated holes can preserve volume. Avoid near-coincident 3D
+                    # booleans, which are unnecessarily expensive on a full dock.
+                    generated_vertices = vertices
+                    data = Path(published[name]).read_bytes()
+                    triangles = np.frombuffer(data, dtype=record, offset=84)["vertices"]
+                    vertices = np.unique(triangles.reshape(-1, 3), axis=0)
+                    np.testing.assert_allclose(vertices, generated_vertices, rtol=0, atol=1e-4,
+                                               err_msg="published STL differs from current CAD")
 
 
 if __name__ == "__main__":

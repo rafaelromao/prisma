@@ -266,7 +266,7 @@ main img { cursor: zoom-in; }
 
   <section class="stack col">
     <h3>Independent tenting</h3>
-    <p>Use two steel phone stands. The half's three stand magnets, 120° apart on a 44 mm circle around its estimated centre of gravity, pull directly on the tilting platform (not the base), so no extra discs are needed. The 2.0 mm bump-ons hold the half off the metal, so the grip is weaker than with glued discs. Aluminium and stainless steel won't attract. The platform needs a clear flat 54 mm contact patch, and the weight stays inside the contact triangle through 35° of tilt. Test with your own stand before typing on it.</p>
+    <p>Use two steel phone stands: magnetic attraction on the actual supports has been tested. The half's three stand magnets, 120° apart on a 44 mm circle around its estimated centre of gravity, pull directly on the tilting platform (not the base); no extra discs are needed. All foot positions lie at least 11.55 mm outside the centred 54 mm contact circle, so they do not create an air gap there. Keep magnets flush and faces free of glue. The 54 mm minimum leaves only 1 mm radial magnet-edge margin; prefer about 60 mm if the real platform still clears the feet and obstructions. Aluminium and nonmagnetic stainless steel are unsuitable. The estimated gravity projection stays inside the contact triangle through 35° of tilt, but slip, peel and typing-load retention still need testing.</p>
     <figure><img src="renders/independent_tenting.png" alt="Each keyboard half independently tented on an illustrative phone stand" width="1600" height="1200" loading="lazy"><figcaption>Independent platforms, on stand-in stands.</figcaption></figure>
   </section>
   <p class="next"><a href="#dock">Next: Cyberdeck <span aria-hidden="true">→</span></a></p>
@@ -463,7 +463,7 @@ packs come in round numbers anyway.</p>
 <td>Silicone bump-ons 8 × 2 mm, self-adhesive</td>
 <td>10 (+6)</td>
 <td><code>8x2mm silicone bumpon self adhesive</code></td>
-<td>Five per half, in the slots under the floor (see BUILD.md). Use the specified 2.0 mm height to retain the checked stand-platform clearance.</td>
+<td>Five per half, in the slots under the floor (see BUILD.md). The specified height preserves stacked fit; they lie outside the centred 54 mm stand contact circle.</td>
 </tr>
 <tr>
 <td>13</td>
@@ -483,13 +483,16 @@ and 6 also face the insert through a 0.6 mm inner skin. Load them from outside, 
 place. A magnet chain must attract throughout: half → dock → insert. Three base discs go in the dock
 and three are glued on the aluminium Ugreen base, paired with opposite poles facing. Add <strong>6 more
 8 × 2 mm bump-ons</strong>, three under each wing.</p>
-<p><strong>Independent tenting (optional):</strong> two Ugreen stands and <strong>6 common discs</strong>, three glued to each
-tilting phone platform, using the mirrored 1:1 SVG templates in <code>case/</code>. The platform needs a
-<strong>54 mm clear flat contact patch</strong>.</p>
+<p><strong>Independent tenting (optional):</strong> two stands with <strong>steel tilting phone platforms</strong>. The owner
+confirmed magnetic attraction on the actual supports. <strong>No extra discs</strong>: the existing case
+magnets meet the steel directly. Use the mirrored SVGs in <code>case/</code> for alignment only.
+Minimum centred clear flat contact circle <strong>54 mm</strong>; prefer about <strong>60 mm</strong> if it clears the
+feet and obstructions. Attraction alone does not qualify retention at a typing angle.</p>
 <p><strong>Drawer placeholder:</strong> <code>case/insert.stl</code> (71.6 cm³, solid, with PRISMA in low relief), for when neither module is in the drawer:
 <strong>6 common discs</strong>, three a side.</p>
-<p><strong>Magnet total:</strong> both halves 26 + dock and base 31 + stands 6 + placeholder 6 + both pointing modules 14
-= <strong>83 discs</strong>, before spares.</p>
+<p><strong>Magnet total:</strong> both halves 26 + dock and base 31 + placeholder 6 + both pointing modules 14
+= <strong>77 discs</strong>, before spares. The three discs glued to the dock stand's aluminium <strong>base</strong>
+are unchanged; these are separate from the independent steel <strong>platforms</strong>.</p>
 <p><strong>Drawer modules (optional).</strong> Either slides into the dock's drawer from the front, or snaps onto either
 half's inner wall on the desk. Everything below is per module, and most of it is the same part you already
 buy for the halves.</p>
@@ -525,7 +528,7 @@ buy for the halves.</p>
 <td>M3 × 8 flat-head screws</td>
 <td>6</td>
 <td>same as item 11</td>
-<td>Four through the lid, two intended for the sensor board; check sensor screw depth before installing the battery</td>
+<td>Four through the lid unchanged; finish the two sensor-board screws to ≤7.6 mm overall, deburr, then verify seating, engagement and ≥0.3 mm tip clearance before installing electronics/battery (BUILD.md)</td>
 </tr>
 <tr>
 <td>Disc magnets 8 × 1.5 mm, N52</td>
@@ -564,10 +567,10 @@ buy for the halves.</p>
 <td>Same panel and header; set its jumper and use its own firmware. Its USB-C mouth sits 0.2 mm inside the back. Real fit and operation remain unverified; Super52840 support is experimental</td>
 </tr>
 <tr>
-<td>2.54 mm pin header</td>
+<td>Compatible 2.54 mm-pitch pin header</td>
 <td>11 pins</td>
-<td><code>2.54 mm male header</code></td>
-<td>Two 5-pin lengths and a loose pin, under the controller. Plastic 2.5 mm thick</td>
+<td><code>2.54 mm round pin header 0.6mm</code></td>
+<td>Two 5-pin lengths and a loose pin, under the controller. Plastic 2.54 mm thick. Measure actual pins and controller holes: standard 0.64 mm square pins interfere with the Ø0.75 mm Seeed reference holes; round Ø0.6 mm is a candidate, not a hardware qualification. Never force pins</td>
 </tr>
 <tr>
 <td>Extra-long 2.54 mm pin header, 15 mm</td>
@@ -657,7 +660,7 @@ buy for the halves.</p>
 <td>Choc v1 switches, sockets and keycaps</td>
 <td>2 + 2 + 2</td>
 <td>same as items 3, 4, 5</td>
-<td></td>
+<td>Compact caps only: 17.5 × 16.5 mm, rotated with the switches (17.5 mm front-to-back here). Centred nominal pad gap 0.585 mm, potentially 0.285 mm after radial seat play; verify actual placement/travel/wobble.</td>
 </tr>
 </tbody>
 </table></div>
@@ -918,8 +921,8 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li>To take a module out, hold the dock and push the tip of the rear hood forwards with a finger through the dock's rear passage, then pull the module out of the front. Unplug USB first.</li>
 <li>The USB-C port is nominally flush with the module's back, with nothing under it. Feed a plug through the dock's <strong>12.8 mm rear passage</strong>. A 12.35 × 6.5 mm overmold is the nominal modelled envelope, not a guaranteed fit for every plug or printed dock; check the real plug, cable and passage.</li>
 <li>The rear hood and the dock meet at a 45° slope with 0.4 mm clearance.</li>
-<li>For independent tenting, print <code>case/stand_magnet_template_left.svg</code> and <code>case/stand_magnet_template_right.svg</code> at 100% and check the 54 mm boundary with a ruler. Glue three discs to each stand's <strong>tilting phone platform</strong>, not its base; the patterns are mirrored and the magnet centres form a 44 mm circle.</li>
-<li>The platform needs a clear flat 54 mm patch. Use <strong>2.0 mm bump-ons</strong>. Start flat, support the half while increasing the tilt, then test typing on it before relying on it.</li>
+<li>For independent tenting, use the tested <strong>steel tilting phone platforms</strong>. <strong>Do not glue extra discs onto them</strong>: the half's existing three stand magnets attract the steel directly. The SVG templates in <code>case/</code> are 1:1 alignment guides; print at 100% and check the 54 mm boundary with a ruler.</li>
+<li>The minimum centred contact circle is 54 mm (44 mm magnet-centre circle). All foot positions lie at least 11.55 mm outside its edge, so the feet do <strong>not</strong> space the magnets off this steel patch. Prefer about 60 mm for more edge margin, checking the actual shape against feet, rubber and lips. Keep magnet faces flush and clean; any recess, coating or adhesive can reduce grip. Use <strong>2.0 mm bump-ons</strong> for stacked fit. Start flat, support the half while increasing the tilt, and test slip, peel, typing loads and stand stability before relying on it. The confirmed attraction is not a retention qualification.</li>
 </ul>
 <h3 id="b-pointing-modules">Pointing modules</h3>
 <p>Both modules are built the same way as a half: a <strong>tray</strong>, a <strong>lid</strong>, and the same <strong>M3 × 8 flat-head screws</strong> going in from the top. The tray is one print, shared by all of them. Only the lid changes: <code>trackball/case/lid.stl</code> (MX), <code>trackball/case/lid_choc.stl</code> (Choc v1) or <code>trackpad/case/lid.stl</code>.</p>
@@ -962,8 +965,10 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li>
 <p><strong>Controller board.</strong></p>
 </li>
-<li><strong>Set the jumper,</strong> on the underside, the face without <code>MCU FACE DOWN</code>. Bridge the middle <code>3V</code> pad to <code>X</code> for a XIAO or <code>N</code> for a nice!nano. Never bridge all three: on a nice!nano that ties reset to the 3.3 V rail.</li>
-<li><strong>Fit the header.</strong> Cut two 5-pin lengths of standard 2.54 mm header. Before you solder anything, try a pin in the controller's holes: Seeed's model shows them narrower than a square pin's diagonal, so a pin may need a firm press. Set the short ends down through rows 3 to 7 of each column from the top face, so the plastic sits on the top face and the long ends stand up, then solder them from underneath. Pull one loose pin from a spare length and solder it into the left column's row 2, the single hole behind the strip, at the USB end, at the same height: the tray's magnet boss leaves no room for plastic there. Trim the tails underneath to about 1 mm.</li>
+<li><strong>Set the jumper,</strong> on the underside, the face without <code>MCU FACE DOWN</code>. Bridge the middle <code>3V</code> pad to <code>X</code> for a XIAO or <code>N</code> for a nice!nano. Never bridge all three: on a nice!nano that ties reset to the 3.3 V rail.<ul>
+<li><strong>Fit a compatible header.</strong> Measure the actual controller's holes and the pins before soldering. The Seeed reference has Ø0.75 mm holes: a common 0.64 mm square pin has a 0.905 mm diagonal and does not fit that model. <strong>Do not force it</strong> or enlarge plated controller holes. A 2.54 mm-pitch header with round Ø0.6 mm pins is a candidate, not a confirmed fit; verify pin diameter, actual hole tolerance, plastic height (2.54 mm) and solder engagement. The reference came from Seeed's Sense resources, so confirm the selected plain XIAO or clone separately. Cut two compatible 5-pin lengths. Set the short ends down through rows 3 to 7 of each column from the top face, so the plastic sits on the top face and the long ends stand up, then solder them from underneath. Pull one compatible loose pin from a spare length and solder it into the left column's row 2, the single hole behind the strip, at the USB end, at the same height: the tray's magnet boss leaves no room for plastic there. Trim the tails underneath to about 1 mm.</li>
+</ul>
+</li>
 <li><strong>Flash the controller first,</strong> while its reset is in reach, then <strong>fit it</strong> face down, its USB-C over the notch. Rest it on the plastic, level, and solder the pins on its back. Trim them to 0.6 mm at most above the controller: the sockets are close above it. Power it from USB and check that it connects: its keys and sensor are not joined until the stacking pins are soldered. Solder its two wires now, about 25 mm each: battery and reset, from the table under Wiring. They will not reach the main board yet.</li>
 <li><strong>Fit the stacking pins</strong> last, keeping them square. Use 15 mm extra-long header with a short end of at least 2.35 mm and a long end of at least 6.7 mm: two 3-pin lengths for the columns beside the controller, and one pin each for the two outer holes. Sand the cut ends of the plastic flush, so they sit square. Their plastic belongs near the <strong>main board's underside</strong>, not this board. Fit the short ends up into the main board's eight stacking holes. On the left, three in a line: <code>K2</code>, the outer hole of the joined <code>CS</code> pair, and <code>K1</code>, with <code>GND</code> set further out ahead of them. On the right, the outer holes of the joined <code>CK</code>, <code>IO</code> and <code>MO</code> pairs in a line, and the outer hole of the joined <code>3V</code> pair set further out ahead of them. The stacking <code>GND</code> is not the pad marked <code>G</code>, which takes a wire. Then stand the main board over this board on a 6.75 mm spacer (6.6 to 6.9 mm works), with the long ends down through this board's holes. Solder them to <strong>this board only</strong>, from underneath. Lift the main board off, and trim the tails underneath to about 1 mm.</li>
 </ol>
@@ -1169,7 +1174,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <p><img alt="Battery, sensor board and nice!nano in the tray" src="renders/trackball_stack.png" /></p>
 <ol>
 <li><strong>Battery.</strong> Lower it straight into its cradle. Its 7.5 mm thickness has room to spare, but measure a protected pack first, including tape, tabs and leads. Never force it.</li>
-<li><strong>Sensor board.</strong> Before installing the battery, check the two M3 × 8 screws against the actual PCB, posts and floor: the PCB holes are not countersunk, and screw-head dimensions and shim thickness affect the available depth. Do not drive a screw into the floor or toward the battery; the required engagement and clearance have not been physically verified. Trackball: determine the actual unshimmed distance <strong>H</strong> from the top of the board on the posts to the ball surface on the optical axis with the lid, bearings and ball seated. Measure <strong>X</strong> from the board top to the lens reference plane specified by the PMW3610 data sheet. Place one equal-thickness shim under each post, each of thickness <strong>H − X − 2.4 mm</strong>, and verify the assembled reference-plane-to-ball gap is 2.2–2.6 mm. The nominal model gives H = 4.8 mm, but actual dimensions may differ. If the calculated thickness is negative, shimming cannot correct it: do not force the assembly. Trackpad: no optical gap to set, but put the same <strong>0.4 mm</strong> washer under each post: the posts print 0.4 mm low, and without it each screw tip lands exactly on the bottom of its pilot, with no clearance. Fit the board parts face down only after checking screw depth.</li>
+<li><strong>Sensor board.</strong> Prepare its two M3 × 8 flat-head screws <strong>outside the assembly</strong>, before installing electronics or the battery: shorten/file their tips to <strong>7.6 mm maximum finished overall length</strong>, deburr and remove all swarf. These are the only screws to shorten. The straight Ø3.4 mm PCB holes are not countersunk: the model's head descends <strong>0.22 mm</strong> before seating. An unmodified 8 mm screw bottoms <strong>0.22 mm past</strong> the pilot end without a shim; a 0.4 mm shim leaves only <strong>0.18 mm</strong> nominal tip clearance. Finished 7.6 mm screws with that shim leave <strong>0.58 mm</strong> nominal clearance (0.38 mm with a further 0.2 mm axial uncertainty). Measure the actual head seating, screw length, PCB, posts and shim: retain at least <strong>0.3 mm tip-to-pilot-bottom clearance</strong> and sufficient thread engagement. If needed, select a shorter compatible screw or finish it further; never use tightening force to obtain clearance. Trackball: determine the actual unshimmed distance <strong>H</strong> from the top of the board on the posts to the ball surface on the optical axis with the lid, bearings and ball seated. Measure <strong>X</strong> from the board top to the lens reference plane specified by the PMW3610 data sheet. Place one equal-thickness shim under each post, each of thickness <strong>H − X − 2.4 mm</strong>, and verify the assembled reference-plane-to-ball gap is 2.2–2.6 mm. The nominal model gives H = 4.8 mm, but actual dimensions may differ. If the calculated thickness is negative, shimming cannot correct it: do not force the assembly. Do not change optical shims merely to make a screw fit; recheck/shorten the screw for the measured optical stack. Trackpad: no optical gap to set, but put the same <strong>0.4 mm</strong> washer under each post because the posts print 0.4 mm low. Fit the board parts face down only after checking screw depth. Actual fastener tolerances and assembled engagement still require physical verification.</li>
 <li><strong>Controller on its board.</strong> Hold the stack with the front tilted up, about 18°, and lower it in about 3 mm forward of its place. Move it back so the USB end goes in first: a nice!nano's board edges go into the two pockets in the back wall. Lower the front until the board's ears rest on their seats, with the ribs ahead of its arms and the small posts behind its rear corners. These stops take a plug's push and pull, with about 0.4 mm of play on a nice!nano and 0.65 mm on a XIAO. A thin double-sided tape (0.25 mm at most) on the seats keeps the board down. Check that the USB-C mouth lines up with the opening, and test a real plug before going on. A XIAO's mouth sits 0.2 mm inside the back. The cell's end is 0.4 mm ahead of the board, so make sure no battery tape or wire is caught there.</li>
 <li><strong>Main board.</strong> Before lowering it, meter the stack: <code>3V</code> and ground must not beep together, and each stacking pin must beep to its header pin. Then lower the board flat, feeding the eight stacking pins through those eight holes, and the controller's two wires up through <code>VBAT</code> and <code>R2</code>. The pins' plastic stops about 0.25 mm short of its underside. The two side posts come up through its large holes and it rests on their shoulders and on the ledge at the back wall. The power lever goes down its slot. Solder the eight pins and the two wires from above. Each pin's pad is joined to a wire pad, so its joint may melt that wire's: keep them brief, and keep the joints concave. Trim the pins to 0.6 mm at most: the Choc and trackpad lids sit 1 mm over them, and the lid's lip passes close to the two rear pins, so dry-fit the lid. Now test everything together, before the lid: the battery, the power switch, both keys, the sensor or trackpad, and reset.</li>
 </ol>
@@ -1179,7 +1184,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li><strong>Trackball only.</strong> Glue the three ceramic balls into the lid's cup.</li>
 <li><strong>Lid.</strong> Rear first: tilt the lid, push its two rear hooks into the slots in the back wall, then lower the front. It locates on the tray's rim.</li>
 <li><strong>Four M3 × 8 screws</strong> into the lid's countersinks, as on a half: they go into the tray's four posts. Turn them in slowly, and stop when the heads sit flush.</li>
-<li>Clip the switches through the lid into the sockets, fit the keycaps, and drop the ball in.</li>
+<li>Clip the switches through the lid into the sockets, fit the keycaps, and drop the ball in. On the trackpad, use <strong>17.5 × 16.5 mm compact Choc caps</strong>. Conventional twin-stem caps rotate with the switch, putting <strong>17.5 mm front-to-back</strong> here; do not assume they can turn independently. The centred nominal pad gap is <strong>0.585 mm</strong>; an 18 mm square envelope has only <strong>0.335 mm</strong>. The seat's 0.3 mm radial play can reduce those gaps to <strong>0.285/0.035 mm</strong> before other tolerances. Centre and secure the pad with the actual adhesive, then verify full key travel and wobble without contact. Stop if tolerances cannot preserve clearance; nominal tests do not guarantee fit. Use the current tray and lid together: the front screw pair moved 1.5 mm outwards to retain a 2.087 mm screw-to-pad-seat web. Tighten only to flush, never to force a distorted lid flat.</li>
 </ol>
 <p>Stick three 8 × 2 mm bump-ons into the floor's recesses.</p>
 <h3 id="b-power-and-reset">Power and reset</h3>
@@ -1213,14 +1218,15 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 </ul>
 <h3 id="b-printing">Printing</h3>
 <ul>
-<li><strong>Base:</strong> floor-down, no supports (the wall over the USB recess and the roofs of the pad slots, 8.6 mm wide, bridge). For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.</li>
+<li><strong>Base:</strong> floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately <strong>14.6 mm</strong> and pad-slot roofs span <strong>8.6 mm</strong>. Inspect bridge direction, anchoring and sag with the intended dry-Nylon profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.</li>
 <li><strong>Plate:</strong> <strong>top face down</strong>: the STL is already oriented that way, with the pillars and screw bosses pointing up. The reset button's cone narrows upwards at 45° from the bed (4.2 mm to 2.8 mm over the first 0.7 mm) and needs no support. Print it solid, at 0.2 mm layers. The switch cutouts are 14.0 mm (13.8 mm + 0.1 mm per side); if your switches are loose or tight, change <code>cut_tol</code> in <code>design.py</code> and regenerate.</li>
-<li><strong>Module tray:</strong> floor down; the rear hood's underside is designed at 45° for support-free printing. Use 4 walls: the screw posts and the 0.9 mm magnet backings carry the load.</li>
+<li><strong>Module tray:</strong> floor down; the rear hood's underside is designed at 45°. Inspect the <strong>12.8 mm USB bridge</strong> and resulting sag clearance to the real plug/controller before assuming support-free printing. Use 4 walls: the screw posts and the 0.9 mm magnet backings carry the load.</li>
 <li><strong>Module lids:</strong> top face down; the trackball's cup grows out of the lid as it prints. The intended orientation is support-free.</li>
 <li>Review all module overhangs, particularly the rear hooks, cup and pad ledge, in the actual slicer; support-free printing has not been physically verified. Add removable support if the chosen material and slicer require it, keeping mating surfaces accessible for cleanup.</li>
-<li><strong>Dock:</strong> flat side down, with supports inside the pocket.</li>
+<li><strong>Dock:</strong> flat side down, with supports inside the stand-base pocket: its roof is at Z = 4.3 mm and has about <strong>5,900 mm²</strong> of downward-facing horizontal area. Inspect support-interface material, gap, density, access and removal in the actual slicer. Supports must be removable without damaging the pocket roof, magnet skins or fit surfaces. Measure the cleaned pocket against the actual base; it is not a support-free bridge.</li>
 <li><strong>Fit:</strong> nominal allowances include 0.35 mm round a module in the drawer, 0.3 mm round a half on the dock, 0.25 mm round a lid in its tray and 0.15 mm radially round a magnet. These are not guarantees against cumulative print error, warping or elephant foot. Calibrate shrinkage and elephant-foot compensation, and use the same filament and settings for mating parts. Check fits before installing electronics; careful local cleanup may be needed, and a successful first print is not guaranteed.</li>
 <li><strong>Nylon:</strong> dry the filament before printing. It's tough enough to take the self-tapping threads without cracking, and its softness damps key noise.</li>
+<li><strong>Release gate:</strong> follow <a href="PRINT_READINESS.md">PRINT_READINESS.md</a>. Inspect continuous toolpaths through every <strong>0.6–0.9 mm</strong> magnet backing/skin, not just the outer mesh. A hypothetical 0.5% error over the 199 mm dock is about 1 mm, greater than the local fit allowances. Measure differential shrinkage and warping of mating parts with the chosen material/profile before a complete build; ±0.2 mm translation tests do not cover either. Never scale just one mating part blindly: that also moves magnets and screw centres. If calibration cannot meet the fit budget, stop and revise/regenerate the geometry.</li>
 </ul>
 <!-- /BUILD.md -->
     </div>

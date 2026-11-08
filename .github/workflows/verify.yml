@@ -1,0 +1,33 @@
+name: Verify geometry and boards
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  mechanical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - run: mkdir -p /tmp/opencode
+      - run: python -m unittest test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option trackball.test_layout
+      - run: python check_fit.py
+      - run: python stand_mount.py
+      - run: python verify_artifacts.py
+
+  electrical:
+    runs-on: ubuntu-latest
+    container: docker.io/kicad/kicad:9.0
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir -p .render
+      - run: kicad-cli pcb drc --exit-code-violations --severity-error --format json -o .render/prisma-drc.json pcb/prisma.kicad_pcb
+      - run: kicad-cli pcb drc --exit-code-violations --severity-error --format json -o .render/module-drc.json trackball/pcb/trackball.kicad_pcb
+      - run: python3 check_pcb.py
+      - run: python3 trackball/check_controller_pcb.py

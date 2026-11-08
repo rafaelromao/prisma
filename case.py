@@ -103,6 +103,13 @@ def to_desk_solid(m):
     return m.translate((WALL_IN, 0, Z0))
 
 
+def pilot_hole(hx, hy):
+    """PCB-normal pilot clipped above the flat desk-frame floor skin."""
+    pilot = to_desk_solid(Manifold.cylinder(120, PILOT_R, circular_segments=20)
+                          .translate((hx, hy, -60)))
+    return pilot.trim_by_plane((0, 0, 1), PILOT_FLOOR)
+
+
 def slab(poly, z0, z1):
     """A shapely polygon (PCB plan) extruded between PCB-frame heights z0 and z1."""
     polys = getattr(poly, "geoms", [poly])
@@ -204,10 +211,10 @@ def build():
     for v in voids:
         shell -= v
 
-    # Screw pilot holes, from the PCB down into the solid base.
+    # Pilots follow the PCB normal, like the plate holes and screws, NOT desk Z.
+    # Clip their lower ends in the desk frame to retain the flat floor skin.
     for hx, hy in D["mount_holes"]:
-        X, Y = plan([(hx, hy)])[0]
-        shell -= Manifold.cylinder(60, PILOT_R, circular_segments=20).translate((X, Y, PILOT_FLOOR))
+        shell -= pilot_hole(hx, hy)
 
     # Floor magnets (back-to-back), pressed in from below; 0.5 mm skin above.
     mf_d, mf_h = D["magnet_floor_size"]

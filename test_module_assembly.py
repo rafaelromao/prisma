@@ -3,6 +3,7 @@ import math
 import unittest
 
 from manifold3d import Manifold
+from shapely import affinity
 from shapely.geometry import Point, box
 
 import module_shell as M
@@ -33,6 +34,34 @@ class ModuleAssemblyTest(unittest.TestCase):
         for name, solid in [("tray", self.tray)] + [(m[0], m[1]) for m in self.modules]:
             with self.subTest(part=name):
                 self.assertEqual(sum(c.volume() > 1e-6 for c in solid.decompose()), 1)
+
+    def test_trackpad_front_countersinks_keep_a_two_mm_web(self):
+        # Seat includes 0.3 mm radial assembly clearance, not just the nominal pad.
+        seat_radius = T.PAD["d"] / 2 + T.PAD["clr"]
+        for screw in M.lid_screws()[:2]:
+            web = math.dist(screw, self.P["pad"]) - M.SCREW["head"] / 2 - seat_radius
+            self.assertGreaterEqual(web, 2.0)
+            # Verify the web is solid in the generated lid, below its top face.
+            a = Point(screw)
+            b = Point(self.P["pad"])
+            from shapely.geometry import LineString
+            line = LineString([a, b])
+            start = line.interpolate(M.SCREW["head"] / 2 + .1)
+            end = line.interpolate(line.length - seat_radius - .1)
+            probe = M.extrude(LineString([start, end]).buffer(.05), T.H - .2, T.H - .1)
+            self.assertLess(abs((probe - dict((n, lid) for n, lid, _, _ in self.modules)["trackpad"]).volume()), TOL)
+
+    def test_specified_compact_choc_caps_clear_the_trackpad(self):
+        # Conventional twin-stem caps turn WITH the Choc switch. Choc's
+        # footprint is reversed 180 degrees relative to the MX orientation.
+        envelope = affinity.rotate(box(-17.5 / 2, -16.5 / 2, 17.5 / 2, 16.5 / 2),
+                                   B.SWITCH_ANGLE + 180, origin=(0, 0))
+        pad = Point(self.P["pad"])
+        for x, y in self.P["keys"]:
+            cap = affinity.translate(envelope, xoff=x, yoff=y)
+            gap = cap.distance(pad) - T.PAD["d"] / 2
+            self.assertGreaterEqual(gap, .58)
+            self.assertGreaterEqual(gap - T.PAD["clr"], .28)
 
     def test_one_tray_and_one_screw_type(self):
         self.assertEqual(T.H, M.CHOC_TOP)
@@ -92,11 +121,21 @@ class ModuleAssemblyTest(unittest.TestCase):
                     self.assertAlmostEqual(edge - plain, expected_gain, delta=.05)
 
     def test_sensor_board_screws_do_not_break_through_the_floor(self):
-        tip = B.PLATE_TOP + B.SENSOR_BELOW - B.SENSOR_SHIM + B.PCB_T + M.SCREW["head_h"] - M.SCREW["length"]
+        untrimmed = B.sensor_screw_stack(shim=0, length=8)
+        self.assertAlmostEqual(untrimmed["seating"], .22)
+        self.assertAlmostEqual(untrimmed["pilot_clearance"], -.22)
+        self.assertAlmostEqual(B.sensor_screw_stack(length=8)["pilot_clearance"], .18)
+        # Specified finished tips, including a further 0.2 mm axial uncertainty,
+        # retain at least 0.3 mm to the pilot bottom at the nominal 0.4 mm shim.
+        stack = B.sensor_screw_stack(length=B.SENSOR_SCREW_LENGTH + B.SENSOR_SCREW_EXTRA)
+        self.assertGreaterEqual(stack["pilot_clearance"], .3)
         for x, y in B.sensor_holes(self.L):
-            self.assertGreater(tip, .95 - 1e-6)     # no shim at all
             skin = Manifold.cylinder(.4, 2.0, circular_segments=40).translate((x, y, M.FEET + .02))
             self.assertLess(abs((skin - self.tray).volume()), TOL)
+            screw = M.flat_screw(x, y, stack["head_top"], length=B.SENSOR_SCREW_LENGTH + B.SENSOR_SCREW_EXTRA)
+            # The pilot core and the space below the tip must remain clear;
+            # thread interference in the post wall is intentional.
+            self.assertAlmostEqual(screw.bounding_box()[2], stack["tip"])
 
     def test_front_facet_runs_the_full_height_of_the_upper_bevel(self):
         from shapely.geometry import LineString
@@ -258,7 +297,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         for part in (self.tray, self.modules[2][1]):
             self.assertLess(hit(board + cable, part), TOL)
         for x, y in B.sensor_holes(self.L):
-            screw = M.flat_screw(x, y, B.PLATE_TOP + B.SENSOR_BELOW + B.PCB_T + M.SCREW['head_h'])
+            screw = M.flat_screw(x, y, B.sensor_screw_stack()["head_top"], length=B.SENSOR_SCREW_LENGTH)
             self.assertLess(hit(board + cable, screw), TOL)
         self.assertLess(abs((T.breakout_visual(self.P) - board).volume()), TOL)
         self.assertLess(abs((T.ffc_visual(self.P) - cable).volume()), TOL)
