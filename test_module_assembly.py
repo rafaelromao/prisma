@@ -4,7 +4,7 @@ import unittest
 
 from manifold3d import Manifold
 from shapely import affinity
-from shapely.geometry import Point, box
+from shapely.geometry import Point, Polygon, box
 
 import module_shell as M
 from trackball import trackball as B
@@ -69,6 +69,24 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertEqual(M.SCREW["pilot"], 2.5)
         self.assertLess(abs((T.parts(self.P, self.main_plan, self.sensor_plan)[0][1]).volume()
                             - dict(self.modules[1][2])["CHOC 1"].volume()), 1e-6)
+
+    def test_switch_mount_sections_use_family_specific_dimensions(self):
+        import case as C
+        self.assertAlmostEqual(B.CHOC_CUT, C.PLATE["cut"] + 2 * C.PLATE["cut_tol"])
+        self.assertAlmostEqual(B.CHOC_CUT, 14.0)
+        self.assertAlmostEqual(C.PLATE["gap"] + C.PLATE["thick"], 2.2)
+        self.assertAlmostEqual(B.CHOC["below_plate"], 2.2)
+        self.assertAlmostEqual(B.MX["below_plate"], 5.0)
+        for name, lid, _, height in self.modules:
+            thick = B.TOP_T if name == "mx" else C.PLATE["thick"]
+            width = B.MX_CUT if name == "mx" else B.CHOC_CUT
+            for fraction in (.05, .5, .95):
+                rings = [Polygon(p) for p in lid.slice(height - thick * fraction).to_polygons()]
+                for x, y in self.L["keys"]:
+                    hole = min((p for p in rings if p.contains(Point(x, y))), key=lambda p: p.area)
+                    with self.subTest(variant=name, depth=fraction, key=(x, y)):
+                        self.assertAlmostEqual(hole.bounds[2] - hole.bounds[0], width, places=4)
+                        self.assertAlmostEqual(hole.bounds[3] - hole.bounds[1], width, places=4)
 
     def test_every_hole_is_a_plain_countersink_at_the_top(self):
         for name, lid, _, height in self.modules:

@@ -242,11 +242,11 @@
     },
     {
       "path": "trackball/case/lid_choc.stl",
-      "sha256": "7f4c76dfe25d4e440734f769cf58ae42b62988b4dc7dc8ff5f5905918deac204",
-      "bytes": 535384,
-      "triangles": 10706,
+      "sha256": "e568b93d0a236e3b152b823c2e9270b34e4b6229e49ecab6ce6037858d1a1c22",
+      "bytes": 535284,
+      "triangles": 10704,
       "components": 1,
-      "volume_mm3": 3524.00602,
+      "volume_mm3": 3537.54206,
       "size_mm": [
         55.13846,
         84.83187,
@@ -257,11 +257,11 @@
     },
     {
       "path": "stls/trackball_lid_choc.stl",
-      "sha256": "7f4c76dfe25d4e440734f769cf58ae42b62988b4dc7dc8ff5f5905918deac204",
-      "bytes": 535384,
-      "triangles": 10706,
+      "sha256": "e568b93d0a236e3b152b823c2e9270b34e4b6229e49ecab6ce6037858d1a1c22",
+      "bytes": 535284,
+      "triangles": 10704,
       "components": 1,
-      "volume_mm3": 3524.00602,
+      "volume_mm3": 3537.54206,
       "size_mm": [
         55.13846,
         84.83187,
@@ -272,11 +272,11 @@
     },
     {
       "path": "trackpad/case/lid.stl",
-      "sha256": "bfec0912b8eb2c45f0355af1433bec189f63136f6baa3be55f254449d18382cb",
+      "sha256": "7d882970420405571fbc5c63ceacf1a9ddb213d075f1645ae173d5fd1bd620da",
       "bytes": 260184,
       "triangles": 5202,
       "components": 1,
-      "volume_mm3": 2037.1478,
+      "volume_mm3": 2050.68383,
       "size_mm": [
         55.13846,
         84.83187,
@@ -287,11 +287,11 @@
     },
     {
       "path": "stls/trackpad_lid.stl",
-      "sha256": "bfec0912b8eb2c45f0355af1433bec189f63136f6baa3be55f254449d18382cb",
+      "sha256": "7d882970420405571fbc5c63ceacf1a9ddb213d075f1645ae173d5fd1bd620da",
       "bytes": 260184,
       "triangles": 5202,
       "components": 1,
-      "volume_mm3": 2037.1478,
+      "volume_mm3": 2050.68383,
       "size_mm": [
         55.13846,
         84.83187,

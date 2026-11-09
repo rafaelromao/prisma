@@ -42,7 +42,8 @@ from controllers import XIAO_LENGTH, XIAO_SETBACK, XIAO_USB_OVERHANG
 
 H = M.FLUSH + 4.0
 TOP_T = 1.5                    # the top: an MX plate (1.5 mm)
-MX_CUT = 14.0 + 0.2            # plate cutout: printed holes come out small
+MX_CUT = 14.0 + 0.2            # nominal MX opening + provisional FDM compensation; qualify printed fit
+CHOC_CUT = C.PLATE["cut"] + 2 * C.PLATE["cut_tol"]  # same Choc mounting allowance as the halves
 MX_PITCH = 19.05
 SWITCH_ANGLE = 270             # sockets face the wider side of the rearward key's offset centre
 KEYS_REAR_SHIFT = 4.2          # clears the trackpad front facet without crowding the power-switch pads
@@ -346,13 +347,14 @@ def lid(L, switch="mx", ball=True):
     spec = MX if switch == "mx" else CHOC
     height = PCB_TOP + spec["below_plate"]
     top_t = TOP_T if switch == "mx" else 1.2
+    cut = MX_CUT if switch == "mx" else CHOC_CUT
     sh = M.lid_blank(height, top_t)
     if ball:
         bx, by = L["ball"]
         sh += cup(L)
         sh -= Manifold.cylinder(top_t + 1, L["r_top"], circular_segments=120).translate((bx, by, height - top_t - 0.5))
     for kx, ky in L["keys"]:
-        sh -= Manifold.cube((MX_CUT, MX_CUT, top_t + 1)).translate((kx - MX_CUT / 2, ky - MX_CUT / 2, height - top_t - 0.5))
+        sh -= Manifold.cube((cut, cut, top_t + 1)).translate((kx - cut / 2, ky - cut / 2, height - top_t - 0.5))
     main_plan = main_board_plan(L)
     back = L["back"]
     sh -= box3(-2.5, back - M.WALL - 1.5, PCB_TOP, 2.5, back + 1.5, PCB_TOP + 2.6)

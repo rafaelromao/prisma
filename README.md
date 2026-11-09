@@ -393,6 +393,11 @@ b prisma -c   # central left, peripheral left/right, dongle
 
 ## Regenerating
 
+Switch mounting dimensions and manufacturer sources are recorded in
+[SWITCH_MOUNT_RESEARCH.md](SWITCH_MOUNT_RESEARCH.md). Choc module openings now match
+the halves' 14.0 mm CAD aperture rather than reusing the MX lid's 14.2 mm aperture.
+Printed snap retention still requires qualification with the selected switches/material.
+
 See [PRINT_READINESS.md](PRINT_READINESS.md) for the pre-print acceptance gates. Nominal
 collision tests do not qualify Nylon shrinkage, support removal, magnetic retention or a one-shot print.
 The linked review's claim-by-claim results and independent blind-review follow-up are in

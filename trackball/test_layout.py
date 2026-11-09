@@ -16,12 +16,13 @@ class LayoutTest(unittest.TestCase):
     def test_rearward_keys_retain_a_closed_plate_rim(self):
         layout = T.place()
         for name, spec in (("mx", T.MX), ("choc", T.CHOC)):
+            width = T.MX_CUT if name == "mx" else T.CHOC_CUT
             height = T.PCB_TOP + spec["below_plate"]
             inset = min(max(height - T.M.FLUSH, 0), T.M.UPPER_BEVEL)
             top = T.M.OUTLINE.buffer(-inset, join_style=2)
             for x, y in layout["keys"]:
-                cut = box(x - T.MX_CUT / 2, y - T.MX_CUT / 2,
-                          x + T.MX_CUT / 2, y + T.MX_CUT / 2)
+                cut = box(x - width / 2, y - width / 2,
+                           x + width / 2, y + width / 2)
                 with self.subTest(switch=name, key_y=y):
                     self.assertTrue(top.buffer(-.7, join_style=2).covers(cut),
                                     "switch aperture breaks out of the plate rim")

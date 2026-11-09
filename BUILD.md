@@ -319,6 +319,13 @@ Press straight down into the cone above the thumbs with a fingertip (the pad, no
 
 ## Printing
 
+Switch mounts: see [SWITCH_MOUNT_RESEARCH.md](SWITCH_MOUNT_RESEARCH.md) for the
+manufacturer drawings and qualification limits. All Choc v1 retaining plates use
+1.2 mm thickness, a 2.2 mm PCB-to-plate-top stack and 14.0 mm CAD apertures.
+The MX lid uses 1.5 mm thickness, a 5.0 mm stack and 14.2 mm CAD apertures.
+The opening allowances are provisional FDM compensation, not manufacturer tolerances.
+Measure finished openings and verify both switch clips engage before installing electronics.
+
 - **Base:** floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately **14.6 mm** and pad-slot roofs span **8.6 mm**. Inspect bridge direction, anchoring and sag with the intended dry-Nylon profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.
 - **Plate:** **top face down**: the STL is already oriented that way, with the pillars and screw bosses pointing up. The reset button's cone narrows upwards at 45° from the bed (4.2 mm to 2.8 mm over the first 0.7 mm) and needs no support. Print it solid, at 0.2 mm layers. The switch cutouts are 14.0 mm (13.8 mm + 0.1 mm per side); if your switches are loose or tight, change `cut_tol` in `design.py` and regenerate.
 - **Module tray:** floor down; the rear hood's underside is designed at 45°. Inspect the **12.8 mm USB bridge** and resulting sag clearance to the real plug/controller before assuming support-free printing. Use 4 walls: the screw posts and the 0.9 mm magnet backings carry the load.
