@@ -14,6 +14,7 @@ time. Both halves use the same PCB, turned over for the right half.
   - Lead-free: about 360 °C.
 - Thin solder (0.5–0.6 mm), a **flux pen**, fine tweezers, kapton tape, isopropyl alcohol and a brush.
 - A multimeter with a continuity beep.
+- A **Choc switch puller** with thin, hooked blades, for taking switches out of the plate (see "Taking a switch out" below). The plates and lids are cut for U-shaped spring tweezers whose tips are flat steel blades about 3.7 mm wide and 0.2 mm thick, hooked inward; a plain keycap puller is not enough.
 - Optional: a magnifier or phone camera to inspect the small pads.
 
 ## The two faces
@@ -138,7 +139,7 @@ The base is solid up to the PCB's underside, with a pocket for every part. The P
 3. Lower the PCB, parts face down, into the base. Each part drops into its pocket, the switch lever slides down its slot, and the USB-C port lines up with its recess. Nothing should need force: every pocket has 0.6 mm of clearance, and the PCB 0.5 mm to the outer walls.
 4. Lay the plate on top, its pillars and screw bosses resting on the PCB, and fit the four **M3 × 8 flat-head** screws through the plate and PCB. They cut their own thread in the Nylon: turn them in slowly, and stop when the heads sit flush in their countersinks.
 5. Clip the switches through the plate into the sockets, then fit the keycaps.
-   The reset button now sits under a cone in the plate, between the index finger's bottom key and the thumbs. Its plunger is 0.2 mm under the plate's top, so keycaps and palms don't reach it.
+   Each opening has two small grooves, one on each side along the switch's latches, for the puller (see "Taking a switch out"). The reset button now sits under a cone in the plate, between the index finger's bottom key and the thumbs. Its plunger is 0.2 mm under the plate's top, so keycaps and palms don't reach it.
 6. **Anti-slip pads.** Each floor has five slots, each long enough for two pads. Stick one 8 × 2 mm bump-on into **one end** of every slot and leave the other end empty: when the halves are stacked back to back, the other half's pad drops into that empty end, so the floors and magnets still meet.
 
    The rule is the same on both halves: turn the half over and go **clockwise round the floor**. In every slot, the pad goes in the end you reach **second**. Then each half's five pads sit in the ends the other half leaves empty.
@@ -146,6 +147,17 @@ The base is solid up to the PCB's underside, with a pocket for every part. The P
    ![Both floors from below: the pads in black](renders/pads.png)
 
    Clean the slots with isopropyl alcohol first and press each pad down firmly against the slot's roof, centred in its round end. Stack the halves to check: they should close flat, with no rocking.
+
+## Taking a switch out
+
+The plates and the Choc lids carry two grooves per switch, as on the ZSA Voyager, because a Choc switch has no side indents for a puller to grip. A switch is held by four latch barbs under the plate's lip; a pull on the keycap is not meant to release it.
+
+1. Pull the keycap straight up with a keycap puller.
+2. Squeeze the puller's blades together just enough to drop one into each groove, on the two sides of the switch where its latches are (the left and right edges of the opening on the halves, turned with the key; the front and back on the modules). Each groove is 4.2 mm wide and reaches 1.2 mm past the opening.
+3. Let the hooked tips go under the flange, squeeze gently, and lift **straight up**. A tilt bends the switch's pins and can lift the socket.
+4. To refit, press the new switch straight down until it clicks.
+
+Try it on one switch before the board is closed up, with your own puller: the grooves are sized to a 3.7 mm × 0.2 mm blade. If yours is wider, change `GROOVE_W` in `switch_mount.py` and regenerate.
 
 ## Optional stands and drawer retention
 
@@ -325,6 +337,9 @@ manufacturer drawings and qualification limits. All Choc v1 retaining plates use
 The MX lid uses 1.5 mm thickness, a 5.0 mm stack and 14.2 mm CAD apertures.
 The opening allowances are provisional FDM compensation, not manufacturer tolerances.
 Measure finished openings and verify both switch clips engage before installing electronics.
+Every Choc plate and lid also has two 4.2 mm pull grooves per switch, cut 1.2 mm past the opening
+on its latch edges; the MX lid has none. Check that a switch seats flat, resists a pull on its keycap,
+and comes out with your puller (see "Taking a switch out").
 
 - **Base:** floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately **14.6 mm** and pad-slot roofs span **8.6 mm**. Inspect bridge direction, anchoring and sag with the intended dry-Nylon profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.
 - **Plate:** **top face down**: the STL is already oriented that way, with the pillars and screw bosses pointing up. The reset button's cone narrows upwards at 45° from the bed (4.2 mm to 2.8 mm over the first 0.7 mm) and needs no support. Print it solid, at 0.2 mm layers. The switch cutouts are 14.0 mm (13.8 mm + 0.1 mm per side); if your switches are loose or tight, change `cut_tol` in `design.py` and regenerate.

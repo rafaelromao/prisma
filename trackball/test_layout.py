@@ -20,9 +20,10 @@ class LayoutTest(unittest.TestCase):
             height = T.PCB_TOP + spec["below_plate"]
             inset = min(max(height - T.M.FLUSH, 0), T.M.UPPER_BEVEL)
             top = T.M.OUTLINE.buffer(-inset, join_style=2)
+            reach = T.SM.GROOVE_REACH if name == "choc" else 0     # the Choc lids' grooves run along y
             for x, y in layout["keys"]:
-                cut = box(x - width / 2, y - width / 2,
-                           x + width / 2, y + width / 2)
+                cut = box(x - width / 2, y - width / 2 - reach,
+                           x + width / 2, y + width / 2 + reach)
                 with self.subTest(switch=name, key_y=y):
                     self.assertTrue(top.buffer(-.7, join_style=2).covers(cut),
                                     "switch aperture breaks out of the plate rim")

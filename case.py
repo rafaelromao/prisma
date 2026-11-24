@@ -28,6 +28,7 @@ import numpy as np
 from manifold3d import CrossSection, FillRule, JoinType, Manifold
 
 import design as DZ
+import switch_mount as SM
 from shapely import affinity
 from shapely.geometry import Polygon, box
 from shapely.ops import unary_union
@@ -271,9 +272,10 @@ def plate():
     for a_ in adds:
         body += a_
 
-    # Switch cutouts, countersinks, and the solder-blob pocket.
+    # Switch cutouts with their pull grooves (switch_mount.py), countersinks, and the solder-blob pocket.
     for (x, y), r in keys.values():
         body -= Manifold.cube((cut, cut, 10), center=True).rotate((0, 0, r)).translate((x, y, 0))
+        body -= SM.pull_grooves((x, y), r, cut / 2, -gap - 1, t + 1)
     for hx, hy in D["mount_holes"]:
         depth = head_r - hole_r                              # 90-degree cone
         body -= Manifold.cylinder(depth + 0.01, hole_r, head_r, circular_segments=40).translate(

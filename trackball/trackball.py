@@ -36,6 +36,7 @@ from shapely.ops import unary_union
 
 import case as C
 import module_shell as M
+import switch_mount as SM
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))     # last: this file is itself "trackball"
 from controller_pinout import HEADER, LINKS, ROWS
 from controllers import XIAO_LENGTH, XIAO_SETBACK, XIAO_USB_OVERHANG
@@ -355,6 +356,10 @@ def lid(L, switch="mx", ball=True):
         sh -= Manifold.cylinder(top_t + 1, L["r_top"], circular_segments=120).translate((bx, by, height - top_t - 0.5))
     for kx, ky in L["keys"]:
         sh -= Manifold.cube((cut, cut, top_t + 1)).translate((kx - cut / 2, ky - cut / 2, height - top_t - 0.5))
+        if switch == "choc":
+            # Pull grooves through the lip, along the latch axis: the footprint's peg axis is its x axis,
+            # which SWITCH_ANGLE (270) turns to the plan's y. The MX lid has none.
+            sh -= SM.pull_grooves((kx, ky), 90, cut / 2, height - top_t - 0.01, height + 0.5)
     main_plan = main_board_plan(L)
     back = L["back"]
     sh -= box3(-2.5, back - M.WALL - 1.5, PCB_TOP, 2.5, back + 1.5, PCB_TOP + 2.6)

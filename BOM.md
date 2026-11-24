@@ -18,7 +18,13 @@ packs come in round numbers anyway.
 | 10 | Disc magnets 8 × 1.5 mm, N52 | 26 (+4) | `8x1.5mm N52 neodymium magnet` | Thirteen per half: four stacking positions, three circular stand contacts, six inner-wall magnets evenly spread at 17.8 mm pitch. The same part is used in every accessory. |
 | 11 | M3 × 8 flat-head screws, 90° countersunk (ISO 10642 / DIN 7991) | 8 | `M3x8 countersunk flat head screw` | Four per half: through the plate (the head sits flush in its countersink) and the PCB, threading into the solid base (2.5 mm pilot holes). |
 | 12 | Silicone bump-ons 8 × 2 mm, self-adhesive | 10 (+6) | `8x2mm silicone bumpon self adhesive` | Five per half, in the slots under the floor (see BUILD.md). The specified height preserves stacked fit; they lie outside the centred 54 mm stand contact circle. |
-| 13 | Filament | ~170 g | Nylon (PA) | Case left + right (solid base, 65.9 cm³ each) and the two top plates (4.3 cm³ each); approximately 160 g solid nylon before print overhead. |
+| 13 | Filament | ~170 g | Nylon (PA) | Case left + right (solid base, 65.9 cm³ each) and the two top plates (4.1 cm³ each); approximately 160 g solid nylon before print overhead. |
+
+**Switch puller:** one Choc switch puller with thin, hooked blades, to take switches out of the plates and
+Choc lids (BUILD.md, "Taking a switch out"). The grooves are sized for U-shaped spring tweezers whose tips are flat
+steel blades about 3.7 mm wide and 0.2 mm thick, hooked inward (the owner's is a green-coated U-shaped one). Check
+the blade width of whatever you buy against the grooves (`GROOVE_W` in `switch_mount.py`) before printing. A
+keycap puller alone does not release a seated Choc switch.
 
 **Cyberdeck dock (optional):** `case/dock.stl` (about 83 cm³, 95 g of Nylon), for a Ugreen folding phone
 stand with an 85 × 105 × 4 mm base, or on its own as a tented unibody. Print it flat side down, with

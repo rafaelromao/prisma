@@ -5,8 +5,11 @@ import unittest
 from manifold3d import Manifold
 from shapely import affinity
 from shapely.geometry import Point, Polygon, box
+from shapely.ops import unary_union
 
+import case as C
 import module_shell as M
+import switch_mount as SM
 from trackball import trackball as B
 from trackpad import trackpad as T
 
@@ -80,13 +83,41 @@ class ModuleAssemblyTest(unittest.TestCase):
         for name, lid, _, height in self.modules:
             thick = B.TOP_T if name == "mx" else C.PLATE["thick"]
             width = B.MX_CUT if name == "mx" else B.CHOC_CUT
+            reach = 0 if name == "mx" else SM.GROOVE_REACH      # the Choc lids' pull grooves run along y
             for fraction in (.05, .5, .95):
                 rings = [Polygon(p) for p in lid.slice(height - thick * fraction).to_polygons()]
                 for x, y in self.L["keys"]:
                     hole = min((p for p in rings if p.contains(Point(x, y))), key=lambda p: p.area)
                     with self.subTest(variant=name, depth=fraction, key=(x, y)):
                         self.assertAlmostEqual(hole.bounds[2] - hole.bounds[0], width, places=4)
-                        self.assertAlmostEqual(hole.bounds[3] - hole.bounds[1], width, places=4)
+                        self.assertAlmostEqual(hole.bounds[3] - hole.bounds[1], width + 2 * reach, places=4)
+
+    def test_choc_stack_matches_the_drawing(self):
+        self.assertAlmostEqual(B.CHOC["below_plate"], SM.STACK)
+        self.assertAlmostEqual(M.CHOC_TOP - M.PCB_TOP, SM.STACK)
+
+    def test_choc_lids_have_pull_grooves_cut_through_with_nothing_under_them(self):
+        # Along y, the latch axis: two grooves a switch, from the opening's edge outwards. The lip is cut
+        # clear through, the blade's 1 mm of room under it is empty (no cup, ledge, boss or tray wall), and
+        # the groove ends well inside the lid's top face.
+        half = B.CHOC_CUT / 2
+        for name, lid, _, height in self.modules:
+            if name == "mx":
+                continue
+            lip_under = height - C.PLATE["thick"]
+            face = unary_union([Polygon(p) for p in lid.slice(height - .05).to_polygons()])
+            for x, y in self.L["keys"]:
+                for side in (-1, 1):
+                    a, b = sorted((y + side * half, y + side * (half + SM.GROOVE_REACH)))
+                    groove = box(x - SM.GROOVE_W / 2, a, x + SM.GROOVE_W / 2, b).buffer(-.01, join_style=2)
+                    with self.subTest(variant=name, key=(x, y), side=side):
+                        self.assertLess(hit(M.extrude(groove, lip_under + .05, height - .05), lid), TOL)
+                        under = M.extrude(groove, lip_under - 1.0, lip_under - .01)
+                        self.assertLess(hit(under, lid), TOL)
+                        self.assertLess(hit(under, self.tray), TOL)
+                        self.assertTrue(face.buffer(-2.0).covers(groove), "groove too near the lid's edge")
+            (x1, y1), (x2, y2) = self.L["keys"]
+            self.assertGreaterEqual(abs(y2 - y1) - 2 * (half + SM.GROOVE_REACH), 2.0)   # lip left between them
 
     def test_every_hole_is_a_plain_countersink_at_the_top(self):
         for name, lid, _, height in self.modules:
