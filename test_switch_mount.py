@@ -71,6 +71,8 @@ class DrawingNumbersTest(unittest.TestCase):
             for actual, target in zip(values, expected[quantity], strict=True):
                 self.assertAlmostEqual(actual, target, msg=quantity)
         self.assertAlmostEqual(SM.tolerance_budget(opening=13.8)["clearance"][1], 0)
+        low_stack = SM.tolerance_budget()["stack"][0]
+        self.assertGreaterEqual(low_stack - SM.HOOK_DROP + 1e-9, .20)
 
 
 class HalvesPlateTest(unittest.TestCase):
@@ -117,25 +119,42 @@ class HalvesPlateTest(unittest.TestCase):
                 with self.subTest(key=key, side=sign):
                     self.assertAlmostEqual(hit(probe, self.plate), probe.volume(), delta=1e-3)
 
-    def lip_regions(self, kind):
+    def lip_regions(self, kind, *, exclude_pads=True):
         outline = Polygon(C.D["plate_outline"]).buffer(-C.PLATE["chamfer"] - .1)
         heads = [Point(h).buffer(C.SCREW["head_d"] / 2 + .1) for h in C.D["mount_holes"]]
-        away = unary_union(list(self.openings.values()) + [g for gs in self.grooves.values() for g in gs]
-                           + heads + [p.buffer(SM.PAD_MARGIN) for p in self.pads])
+        cutouts = list(self.openings.values()) + [g for gs in self.grooves.values() for g in gs] + heads
+        if exclude_pads:
+            cutouts.extend(pad.buffer(SM.PAD_MARGIN) for pad in self.pads)
+        away = unary_union(cutouts)
         for key, (centre, angle) in self.keys.items():
             for index, zone in enumerate(SM.latch_zones(centre, angle, self.half, kind)):
                 region = zone.intersection(outline).difference(away)
-                if region.area > 1e-6:
-                    yield key, index, region
+                yield key, index, region
 
     def test_every_latch_keeps_the_full_lip_under_it(self):
         for kind in ("contact", "support"):
             regions = list(self.lip_regions(kind))
-            self.assertGreaterEqual(len(regions), 45)
+            self.assertEqual(len(regions), 48)
             for key, index, region in regions:
                 probe = prism(region.buffer(-.01), .02, self.t - .02)
                 with self.subTest(kind=kind, key=key, latch=index):
+                    self.assertGreater(probe.volume(), 1e-3)
                     self.assertAlmostEqual(hit(probe, self.plate), probe.volume(), delta=1e-3)
+
+    def assert_minimum_bearing(self, plate, orient, side):
+        regions = list(self.lip_regions("contact", exclude_pads=False))
+        self.assertEqual(len(regions), 48)
+        for key, index, region in regions:
+            # The underside of the lip is z=0. Sample 0.02–0.04 mm above it.
+            probe = orient(prism(region, .02, .04))
+            area = hit(probe, plate) / .02
+            # L6 needs clearance under one ring_bottom latch.
+            minimum = 1.65 if (key, index) == ("ring_bottom", 3) else 2.00
+            with self.subTest(plate=side, key=key, latch=index):
+                self.assertGreaterEqual(area, minimum)
+
+    def test_minimum_bearing_in_the_cad_plate(self):
+        self.assert_minimum_bearing(self.plate, lambda probe: probe, "CAD")
 
     def test_the_pocket_covers_the_pads_and_margin(self):
         pocket = C.blob_pocket_plan()
@@ -154,7 +173,8 @@ class HalvesPlateTest(unittest.TestCase):
         self.assertEqual(len(reaching), 2)
 
     def test_the_puller_envelope_clears_the_plate_and_solder(self):
-        blob = prism(C.solder_blob_plan(), -self.gap, -self.gap + 1.4)
+        blob = C.module_solder_envelope(-self.gap)
+        self.assertLess(hit(blob, self.plate), 1e-3)
         reset = prism(C.reset_pocket_plan().buffer(2.0), -self.gap, self.t)
         for key, (centre, angle) in self.keys.items():
             envelope = SM.puller_envelope(centre, angle, self.half, self.t, self.t + 8)
@@ -169,6 +189,7 @@ class HalvesPlateTest(unittest.TestCase):
 
         for side in ("left", "right"):
             solid = stl_solid(f"case/plate_{side}.stl")
+            self.assert_minimum_bearing(solid, lambda probe: print_orientation(probe, side), side)
             for key, grooves in self.grooves.items():
                 for index, groove in enumerate(grooves):
                     probe = prism(groove.buffer(-.02), -self.gap + .01, self.t + 1)

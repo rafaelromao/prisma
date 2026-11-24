@@ -640,11 +640,11 @@
     },
     {
       "path": "case.py",
-      "sha256": "5d1ae7dfa39ba171b23d19be0bac92fbe1c684091dcd1c3043a1e06901d2d6d3"
+      "sha256": "76a0d1d325e52cc67fa34f1310d7ca3557018323c7865d2a5b31ccd3307d880e"
     },
     {
       "path": "check_fit.py",
-      "sha256": "d3ed4f85b5c602213525a5b4678e51ff41d2a1cf659acb904678d80f8e31d578"
+      "sha256": "14a5929028473a0a3b4b3540c34be2ab165ccef61e42b68d1025b8f8110f5474"
     },
     {
       "path": "check_pcb.py",
@@ -736,7 +736,7 @@
     },
     {
       "path": "test_switch_mount.py",
-      "sha256": "89c1969eb46c3ca354eb5b0dbf39467a76be9185b5eca10245805fd4909ebcb8"
+      "sha256": "4bd1691c207aba33cbdb465cdad3da72bb242b00e1753897332678bc5b8c49e6"
     },
     {
       "path": "test_xiao_option.py",

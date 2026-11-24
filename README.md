@@ -334,7 +334,7 @@ Pinnacle driver), pinned in `zmk/config/west.yml`. Key 1 clicks left; key 2 clic
 held turns pointing into scrolling; both together click middle. If the pointer runs the wrong way,
 check the selected driver's orientation settings against its binding before changing the overlay.
 
-`python3 -m unittest test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option trackball.test_layout`
+`python3 -m unittest test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option test_switch_mount trackball.test_layout`
 runs the checks.
 
 For the XIAO shields, initialize a west workspace from `zmk/config/west.yml`, then build ZMK's `app`

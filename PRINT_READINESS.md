@@ -80,7 +80,7 @@ There is currently no measured printer profile or shrinkage/warp qualification i
 Install `requirements.txt`, then run:
 
 ```sh
-python3 -m unittest test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option trackball.test_layout
+python3 -m unittest test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option test_switch_mount trackball.test_layout
 python3 check_fit.py
 python3 stand_mount.py
 python3 verify_artifacts.py

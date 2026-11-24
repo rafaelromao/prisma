@@ -80,9 +80,20 @@ lid) carry two grooves per switch, built by `switch_mount.py`:
 
 The 0.5 mm solder pocket would otherwise thin the 1.2 mm plate lip to 0.7 mm under two of the
 48 latches. The pocket now leaves full-thickness support where possible and stays open within
-0.3 mm of every plated module pad. At `middle_bottom`, the entire contact zone retains the
-full lip. At `ring_bottom`, the L6 pad limits it to about 76% of the contact zone. The interference
-check uses the carved pocket and tests independently check the pad margin.
+0.3 mm of every plated module pad.
+
+The CAD plate and both exported plate STLs are checked for all 48 latch contacts per half.
+Bearing area is the average occupied area from 0.02 to 0.04 mm above the underside of the uncut
+lip, within each drawing-derived contact zone after excluding the switch opening, pull groove,
+plate-edge allowance and screw seat. The CAD result is 2.04 mm² for 47 latches, including all
+four at `middle_bottom`. The one `ring_bottom` latch affected by L6 retains 1.69 mm², about 83%
+of the 2.04 mm² available there. Regression floors are 2.00 mm² and 1.65 mm² respectively.
+These floors track CAD geometry. PLA retention still requires a physical test.
+
+The solder interference check extrudes the plated module pad bounds, expanded by 0.30 mm
+laterally, from the board surface to 1.40 mm above it. The envelope depends only on the placed
+footprint and these allowances. It is checked against the plate and the puller path. Verify
+the allowances against actual solder joints.
 
 ### Tolerance budget
 
@@ -103,9 +114,11 @@ switch may fail to latch.
 ### Puller envelope
 
 The model covers blade descent beside the flange and a hook extending an estimated 1.9 mm
-below it. This leaves 0.3 mm above the PCB at nominal dimensions. The tests probe the plates,
+below it. This leaves 0.30 mm above the PCB at the nominal 2.20 mm stack and 0.20 mm at
+the 2.10 mm low stack. The tests probe the plates,
 solder model, reset pocket, module trays and assembled module components. The hook depth
-estimate comes from a photo. Check the actual puller with the keyboard powered off.
+estimate comes from a photo. Measure the actual hook and check insertion overtravel and tilt
+with the keyboard powered off.
 
 ### Reference designs read (nothing copied)
 

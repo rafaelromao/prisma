@@ -314,9 +314,12 @@ def blob_pocket_plan():
     return Polygon(D["blob_zone"]).difference(carved_lip())
 
 
-def solder_blob_plan():
-    """Model solder blobs inside the pocket, clear of the retained latch lip."""
-    return Polygon(D["blob_zone"]).buffer(-0.5).difference(carved_lip())
+def module_solder_envelope(pcb_top):
+    """Bound solder by footprint pad bounds plus 0.30 mm laterally and 1.40 mm above the PCB."""
+    solder = Manifold()
+    for pad in module_pads():
+        solder += slab(pad.buffer(0.30), pcb_top, pcb_top + 1.40)
+    return solder
 
 
 def reset_pocket_plan():
