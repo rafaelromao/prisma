@@ -13,7 +13,7 @@ Verification date: 2026-11-08. See PRINT_READINESS.md for the remaining physical
 | Trackpad gap 0.335 mm to 18 mm cap envelope | Independently reproduced 0.335471 mm from nominal source coordinates | Confirmed conservative-envelope margin; compact Choc caps required, actual travel/wobble remains a physical gate |
 | Dock support dependency | Binary STL downward-facing horizontal area at Z = 4.3 mm: 5,900.424 mm² | Confirmed; explicit support/interface/removal and cleaned-pocket dimensional gates added |
 | Dock and drawer tolerance | Existing rigid translation tests do not model scale/warp | Retained nominal clearances; removed the source comment promising no sanding. Added combined-edge-error budgets and material-specific long-span/warping qualification; no unsupported one-shot promise |
-| Main/module USB bridges | Nominal 14.6/12.8 mm spans remain | Explicit intended-profile bridge/sag/real-plug checks, not a claim of validated Nylon bridging |
+| Main/module USB bridges | Nominal 14.6/12.8 mm spans remain | Check bridge sag and real plug clearance with the intended PLA profile |
 | Thin magnetic skins | Nominal 0.6–0.9 mm retaining/backing sections remain | Actual per-layer extrusion continuity and cleanup are mandatory slicer gates |
 | Battery-hole annular ring | Ø0.6 drill / Ø0.96 pad gives 0.18 mm radial copper | Confirmed absolute-minimum design; retained due underside-pad/routing constraints. Fabricator acceptance required; no false claim of recommended margin |
 | Controller stacking alignment | KiCad checker measured all eight corresponding pairs; worst offset 0.0000 mm | Passed nominal alignment and every controller/header/stacking/jumper net check |

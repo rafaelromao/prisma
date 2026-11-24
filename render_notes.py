@@ -31,7 +31,7 @@ def main():
         "reset": "RESET | press from below through the floor with the pin (orange) | take the module out of the dock first",
         "rear": "BACK | power slider above USB-C, the same on every module",
     }
-    for kind in ("trackball", "trackball_choc", "trackpad"):
+    for kind in ("trackball", "trackball_mx", "trackpad"):
         for view, text in notes.items():
             path = Path(f"renders/{kind}_{view}.png")
             if not path.exists():

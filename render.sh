@@ -40,7 +40,7 @@ r --rotate '-50,0,-150'   --zoom 0.001  -o renders/dock_base.png       .render/d
 
 # the drawer modules (scene.py): closed, cut open down the middle, and snapped onto the left half
 r --rotate '-45,0,-30'    --zoom 0.0018 -o renders/trackball.png           .render/trackball.kicad_pcb
-r --rotate '-45,0,-30'    --zoom 0.0018 -o renders/trackball_choc.png      .render/trackball_choc.kicad_pcb
+r --rotate '-45,0,-30'    --zoom 0.0018 -o renders/trackball_mx.png         .render/trackball_mx.kicad_pcb
 r --rotate '-35,0,-60'    --zoom 0.0022 -o renders/trackball_open.png      .render/trackball_open.kicad_pcb
 r --rotate '-45,0,-20'    --zoom 0.0011 -o renders/trackball_with_half.png .render/trackball_with_half.kicad_pcb
 r --rotate '-45,0,-30'    --zoom 0.0015 -o renders/trackpad.png            .render/trackpad.kicad_pcb
@@ -54,7 +54,7 @@ for kind in trackball trackpad; do
     r --rotate '-25,0,-130' --zoom 0.0013 -o renders/${kind}_usb_open.png .render/${kind}_usb_open.kicad_pcb
     r --rotate '-30,0,150' --zoom 0.00095 -o renders/${kind}_usb_dock.png .render/${kind}_usb_dock.kicad_pcb
 done
-for kind in trackball trackball_choc trackpad; do
+for kind in trackball trackball_mx trackpad; do
     r --rotate '-55,0,-25' --zoom 0.0013 -o renders/${kind}_structure.png .render/${kind}_structure.kicad_pcb
     r --rotate '-55,0,-25' --zoom 0.0017 -o renders/${kind}_seam.png .render/${kind}_seam.kicad_pcb
     r --rotate '-40,0,-25' --zoom 0.0017 -o renders/${kind}_tray.png .render/${kind}_tray.kicad_pcb

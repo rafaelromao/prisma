@@ -130,7 +130,7 @@ PART_RGB = {"ball": BALL_RGB, "pad": PAD_RGB, "pad's back parts": vrml.CHIP, "ba
             "reset": vrml.BUTTON, "power switch": vrml.METAL}
 
 
-def _built(kind, switch="mx"):
+def _built(kind, switch="choc"):
     """(module, its layout, lid, tray, its parts): the trackpad shares the trackball's tray."""
     import importlib
     import trackball.trackball as B
@@ -175,7 +175,7 @@ def _sensor_screws(L):
     return out
 
 
-def _module(kind, switch="mx"):
+def _module(kind, switch="choc"):
     """A module as built (dock frame) as (solid, rgb): lid, tray, bump-ons, magnets, parts. No screws, as on
     the halves: the closed module's fasteners are hidden in its lid and tray, and the exploded views show them."""
     import module_shell as M
@@ -209,14 +209,14 @@ def module_assembly(kind):
     mod, L, lid, tray, ps = _built(kind)
     up = (0, 0, 30)
     out = [(lid.translate(up), vrml.CASE), (tray, vrml.CASE), (M.bumpons(), vrml.PAD), (_module_magnets(M), vrml.METAL),
-           (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(mod.H, 42), vrml.METAL), (_sensor_screws(L), vrml.METAL)]
+           (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(_height(mod, kind, "choc"), 42), vrml.METAL), (_sensor_screws(L), vrml.METAL)]
     for name, solid in ps:
         solid = _shown(mod, kind, name, solid, L)
         out.append((solid.translate(up) if _on_lid(name) else solid, _colour(name)))
     return out
 
 
-def module_instruction_scenes(kind, switch="mx"):
+def module_instruction_scenes(kind, switch="choc"):
     """Engineering views in contrast colours: the real printed parts, nothing sectioned."""
     import module_shell as M
     mod, L, lid, tray, ps = _built(kind, switch)
@@ -307,11 +307,11 @@ def module_scenes(k):
         half = [(plan(flat(plan(m)).translate((n[0] * shift, n[1] * shift, 0))), rgb)
                 for m, rgb in left_half() + [(C.pads(0), vrml.PAD)]]
         scenes[kind + "_with_half"] = scenes[kind] + half
-        if kind == "trackball":
-            choc_parts, _ = _module(kind, "choc")
-            scenes["trackball_choc"] = [(plan(m), rgb) for m, rgb in choc_parts]
-            for label, solids in module_instruction_scenes(kind, "choc").items():
-                scenes["trackball_choc_" + label] = [(plan(m), rgb) for m, rgb in solids]
+        if kind == "trackball":      # the trackball is shown with its Choc lid; the MX lid is the alternative
+            mx_parts, _ = _module(kind, "mx")
+            scenes["trackball_mx"] = [(plan(m), rgb) for m, rgb in mx_parts]
+            for label, solids in module_instruction_scenes(kind, "mx").items():
+                scenes["trackball_mx_" + label] = [(plan(m), rgb) for m, rgb in solids]
         connected = parts + _usb_parts(kind)
         scenes[kind + "_usb"] = [(plan(m), rgb) for m, rgb in connected]
         cut = [(m.trim_by_plane((-1, 0, 0), 0.0), rgb) for m, rgb in parts]

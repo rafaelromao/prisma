@@ -5,8 +5,12 @@ import unittest
 from manifold3d import Manifold
 from shapely import affinity
 from shapely.geometry import Point, Polygon, box
+from shapely.ops import unary_union
 
+import case as C
 import module_shell as M
+import switch_mount as SM
+from test_switch_mount import stl_solid
 from trackball import trackball as B
 from trackpad import trackpad as T
 
@@ -80,13 +84,94 @@ class ModuleAssemblyTest(unittest.TestCase):
         for name, lid, _, height in self.modules:
             thick = B.TOP_T if name == "mx" else C.PLATE["thick"]
             width = B.MX_CUT if name == "mx" else B.CHOC_CUT
+            reach = 0 if name == "mx" else SM.GROOVE_REACH      # the Choc lids' pull grooves run along y
             for fraction in (.05, .5, .95):
                 rings = [Polygon(p) for p in lid.slice(height - thick * fraction).to_polygons()]
                 for x, y in self.L["keys"]:
                     hole = min((p for p in rings if p.contains(Point(x, y))), key=lambda p: p.area)
                     with self.subTest(variant=name, depth=fraction, key=(x, y)):
                         self.assertAlmostEqual(hole.bounds[2] - hole.bounds[0], width, places=4)
-                        self.assertAlmostEqual(hole.bounds[3] - hole.bounds[1], width, places=4)
+                        self.assertAlmostEqual(hole.bounds[3] - hole.bounds[1], width + 2 * reach, places=4)
+
+    def test_choc_stack_matches_the_drawing(self):
+        self.assertAlmostEqual(B.CHOC["below_plate"], SM.STACK)
+        self.assertAlmostEqual(M.CHOC_TOP - M.PCB_TOP, SM.STACK)
+
+    def choc_lids(self):
+        return [module for module in self.modules if module[0] != "mx"]
+
+    def test_choc_lids_have_pull_grooves_cut_through_with_nothing_under_them(self):
+        # Along y, the latch axis: two grooves a switch, from the opening's edge outwards. The lip is cut
+        # clear through, the blade's 1 mm of room under it is empty (no cup, ledge, boss or tray wall), and
+        # the groove ends well inside the lid's top face.
+        half = B.CHOC_CUT / 2
+        for name, lid, _, height in self.choc_lids():
+            lip_under = height - C.PLATE["thick"]
+            face = unary_union([Polygon(p) for p in lid.slice(height - .05).to_polygons()])
+            for key in self.L["keys"]:
+                for index, groove in enumerate(SM.groove_plans(key, 90, half)):
+                    probe = groove.buffer(-.02)
+                    with self.subTest(variant=name, key=key, groove=index):
+                        self.assertLess(hit(M.extrude(probe, lip_under + .05, height - .05), lid), TOL)
+                        under = M.extrude(probe, lip_under - 1.0, lip_under - .01)
+                        self.assertLess(hit(under, lid), TOL)
+                        self.assertLess(hit(under, self.tray), TOL)
+                        self.assertTrue(face.buffer(-2.0).covers(groove))
+            first, second = self.L["keys"]
+            gap = SM.groove_plans(first, 90, half)[1].distance(SM.groove_plans(second, 90, half)[0])
+            self.assertGreaterEqual(gap, 2.0)
+
+    def test_the_pullers_envelope_clears_the_choc_modules(self):
+        half = B.CHOC_CUT / 2
+        for name, lid, parts, height in self.choc_lids():
+            for key in self.L["keys"]:
+                envelope = SM.puller_envelope(key, 90, half, height, height + 8)
+                with self.subTest(variant=name, key=key):
+                    self.assertLess(hit(envelope, lid), TOL)
+                    self.assertLess(hit(envelope, self.tray), TOL)
+                    for part, solid in parts:
+                        if not part.startswith("keycap"):
+                            self.assertLess(hit(envelope, solid), TOL, part)
+
+    def latch_regions(self, lid, height, kind):
+        half = B.CHOC_CUT / 2
+        keys = self.L["keys"]
+        openings = [box(x - half, y - half, x + half, y + half) for x, y in keys]
+        grooves = [groove for key in keys for groove in SM.groove_plans(key, 90, half)]
+        away = unary_union(openings + grooves)
+        face = unary_union([Polygon(p) for p in lid.slice(height - .05).to_polygons()]).buffer(-.05)
+        for key in keys:
+            for index, zone in enumerate(SM.latch_zones(key, 90, half, kind)):
+                region = zone.difference(away).intersection(face)
+                if region.area > 1e-6:
+                    yield key, index, region
+
+    def test_choc_lids_keep_the_full_lip_under_each_latch(self):
+        for name, lid, _, height in self.choc_lids():
+            for kind in ("contact", "support"):
+                regions = list(self.latch_regions(lid, height, kind))
+                self.assertEqual(len(regions), 8)
+                for key, index, region in regions:
+                    probe = M.extrude(region.buffer(-.01), height - C.PLATE["thick"] + .02, height - .02)
+                    with self.subTest(variant=name, kind=kind, key=key, latch=index):
+                        self.assertAlmostEqual(hit(probe, lid), probe.volume(), delta=TOL)
+
+    def test_exported_choc_lids_have_the_grooves_and_lip(self):
+        paths = {"choc": "trackball/case/lid_choc.stl", "trackpad": "trackpad/case/lid.stl"}
+        for name, lid, _, height in self.choc_lids():
+            solid = stl_solid(paths[name])
+            lip_under = height - C.PLATE["thick"]
+            for key in self.L["keys"]:
+                for index, groove in enumerate(SM.groove_plans(key, 90, B.CHOC_CUT / 2)):
+                    probe = M.extrude(groove.buffer(-.02), lip_under - .5, height + .5)
+                    probe = probe.mirror((0, 0, 1)).translate((0, 0, height))
+                    with self.subTest(variant=name, key=key, groove=index):
+                        self.assertLess(hit(probe, solid), 1e-2)
+            for key, index, region in self.latch_regions(lid, height, "support"):
+                probe = M.extrude(region.buffer(-.01), lip_under + .02, height - .02)
+                probe = probe.mirror((0, 0, 1)).translate((0, 0, height))
+                with self.subTest(variant=name, key=key, latch=index):
+                    self.assertAlmostEqual(hit(probe, solid), probe.volume(), delta=1e-2)
 
     def test_every_hole_is_a_plain_countersink_at_the_top(self):
         for name, lid, _, height in self.modules:

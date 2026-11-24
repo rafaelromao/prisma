@@ -58,8 +58,7 @@ keys = DZ.layout_left()
 bodies = unary_union([DZ.place(DZ.rect(PL["cut"], PL["cut"]), *keys[n]) for n in DZ.KEY_ORDER])
 overlap("switch bodies vs plate", C.slab(bodies, C.PCB_T, z_plate + PL["thick"]),
         plate.translate((0, 0, z_plate)))
-blob = Polygon(D["blob_zone"]).buffer(-0.5)          # blobs up to 1.4 mm tall over the Xiao area
-overlap("solder blobs vs plate", C.slab(blob, C.PCB_T, C.PCB_T + 1.4), plate.translate((0, 0, z_plate)))
+overlap("solder blobs vs plate", C.module_solder_envelope(C.PCB_T), plate.translate((0, 0, z_plate)))
 
 # The reset button (switch face): its body, collar and plunger against the plate; the plunger's
 # column up through the plate must be open (pressed straight down from above); a solder blob

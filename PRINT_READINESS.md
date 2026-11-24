@@ -52,7 +52,7 @@ There is currently no measured printer profile or shrinkage/warp qualification i
   inspect their interface and removal route, and verify the cleaned pocket fits the real base.
   Do not accept an unsupported full-width bridge or inaccessible/trapped supports.
 - **USB bridges:** inspect the half's approximately 14.6 mm span, module's 12.8 mm span and
-  8.6 mm pad-slot roofs. Qualify Nylon sag with the real plug and board clearances.
+  8.6 mm pad-slot roofs. Check PLA bridge sag with the real plug and board clearances.
 - **Thin skins:** inspect every layer/toolpath through 0.6–0.9 mm magnetic backings and
   retaining skins; verify continuity with the actual extrusion width. Do not force magnets.
 - **Trackpad:** check actual cap dimensions, stem wobble, switch travel, pad size and adhesive;
@@ -80,7 +80,7 @@ There is currently no measured printer profile or shrinkage/warp qualification i
 Install `requirements.txt`, then run:
 
 ```sh
-python3 -m unittest test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option trackball.test_layout
+python3 -m unittest test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option test_switch_mount trackball.test_layout
 python3 check_fit.py
 python3 stand_mount.py
 python3 verify_artifacts.py
