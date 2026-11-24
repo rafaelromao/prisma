@@ -234,11 +234,11 @@ module; only the lid changes.
 - **Retention:** three common magnets a side where the halves' inner-wall magnets are (the 2nd, 4th and
   6th), at the same height over the plane both stand on, plus one in the floor over its mate in the drawer.
 
-| **Trackball** | **The parts** |
+| **Trackball (Choc v1 lid)** | **The parts** |
 |---|---|
 | ![](renders/trackball.png) | ![](renders/trackball_structure.png) |
-| **Choc v1 lid, same tray and boards** | **Inside (cut through the middle)** |
-| ![](renders/trackball_choc.png) | ![](renders/trackball_open.png) |
+| **The MX lid, same tray and boards** | **Inside (cut through the middle)** |
+| ![](renders/trackball_mx.png) | ![](renders/trackball_open.png) |
 | **On a half, on the desk** | **Its boards (front / back)** |
 | ![](renders/trackball_with_half.png) | ![](renders/trackball_board_top.png) ![](renders/trackball_board_bottom.png) |
 | **Trackpad** | **The parts** |

@@ -175,12 +175,14 @@ Try it on one switch before the board is closed up, with your own puller: the gr
 
 Both modules are built the same way as a half: a **tray**, a **lid**, and the same **M3 × 8 flat-head screws** going in from the top. The tray is one print, shared by all of them. Only the lid changes: `trackball/case/lid.stl` (MX), `trackball/case/lid_choc.stl` (Choc v1) or `trackpad/case/lid.stl`.
 
+The first row of renders is the trackball with its Choc lid, the second the same module with the MX lid, the third the trackpad.
+
 The raised lid has upper facets on its **front and both sides**, starting at the halves' top-surface height. Below that height the front keeps the drawer's matching profile for horizontal removal.
 
 | The parts, lid raised | Closed |
 |---|---|
 | ![](renders/trackball_structure.png) | ![](renders/trackball_seam.png) |
-| ![](renders/trackball_choc_structure.png) | ![](renders/trackball_choc_seam.png) |
+| ![](renders/trackball_mx_structure.png) | ![](renders/trackball_mx_seam.png) |
 | ![](renders/trackpad_structure.png) | ![](renders/trackpad_seam.png) |
 
 The same main board holds the two keys and the power switch on both modules. A battery and the controller, on its own small board, sit under it. The same sensor board holds the reset button at the front; on the trackpad it carries nothing else. Everything is hand-soldered with an iron: no paste or hot air. The trackpad retains its supplied I²C breakout and flat cable, plus a separate DR wire.

@@ -23,7 +23,7 @@ def main():
                                   max(scene_stamp, half_stamp))]
     if stale:
         raise RuntimeError("Stale renders: " + ", ".join(stale))
-    required = [f"{k}_{v}.png" for k in ("trackball", "trackball_choc", "trackpad")
+    required = [f"{k}_{v}.png" for k in ("trackball", "trackball_mx", "trackpad")
                 for v in ("structure", "seam", "tray", "stack", "reset")]
     required += [f"{k}_{v}.png" for k in ("trackball", "trackpad")
                  for v in ("rear", "assembly", "under", "usb", "usb_open", "usb_dock")]
