@@ -22,6 +22,7 @@ KiCad's 3D renders.
 import json
 import math
 import os
+import re
 import shutil
 
 import numpy as np
@@ -281,9 +282,41 @@ def plate():
         body -= Manifold.cylinder(depth + 0.01, hole_r, head_r, circular_segments=40).translate(
             (hx, hy, t - depth))
         body -= Manifold.cylinder(t + gap + 1, hole_r, circular_segments=24).translate((hx, hy, -gap - 0.5))
-    body -= slab(blob, -gap - 1, PLATE["blob_pocket"])
+    body -= slab(blob_pocket_plan(), -gap - 1, PLATE["blob_pocket"])
     body -= reset_cut()
     return body, pillars
+
+
+def module_pads():
+    """Read both faces of the reversible module footprint in plate coordinates."""
+    with open("pcb/prisma.pretty/nRF52840_Module_Reversible.kicad_mod") as footprint:
+        text = footprint.read()
+    pads = re.findall(r'\(pad "[^"]*" thru_hole \w+ \(at ([-\d.]+) ([-\d.]+)(?: [-\d.]+)?\) '
+                      r'\(size ([-\d.]+) ([-\d.]+)\)', text)
+    if len(pads) != len(re.findall(r'" thru_hole ', text)) or not pads:
+        raise ValueError("Could not read all plated holes in the reversible module footprint")
+    centre, angle = (D["xiao"]["x"], D["xiao"]["y"]), D["xiao"]["r"]
+    return [DZ.place(box(x - w / 2, y - h / 2, x + w / 2, y + h / 2), centre, angle)
+            for x, y, w, h in (map(float, pad) for pad in pads)]
+
+
+def carved_lip():
+    """Keep full plate thickness under latches wherever the solder pads allow it."""
+    keys = DZ.layout_left()
+    half = (PLATE["cut"] + 2 * PLATE["cut_tol"]) / 2
+    zones = unary_union([zone for key in DZ.KEY_ORDER for zone in SM.latch_zones(*keys[key], half, "support")])
+    keepout = unary_union([pad.buffer(SM.PAD_MARGIN) for pad in module_pads()])
+    return zones.difference(keepout)
+
+
+def blob_pocket_plan():
+    """Subtract the retained latch lip from the solder pocket."""
+    return Polygon(D["blob_zone"]).difference(carved_lip())
+
+
+def solder_blob_plan():
+    """Model solder blobs inside the pocket, clear of the retained latch lip."""
+    return Polygon(D["blob_zone"]).buffer(-0.5).difference(carved_lip())
 
 
 def reset_pocket_plan():

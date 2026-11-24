@@ -68,14 +68,44 @@ lid) carry two grooves per switch, built by `switch_mount.py`:
 - **Where:** the latch edges, centred in the 3.5 mm gap between the two latches. The edges between
   them are not used: the halves have only 3.0 mm of plate between rows (17 mm pitch), and two grooves
   there would leave 0.6 mm.
-- **Size:** 4.2 mm wide, cut 1.2 mm past the opening (8.2 mm from the centre, against the flange's
-  edge at 7.5 mm), through the lip. The plate's underside is open there: nothing sits under a groove.
-- **Why:** sized for the owner's puller, measured with calipers: U-shaped spring tweezers whose tips
-  are flat steel blades 3.72 mm wide and 0.19 mm thick, hooked inward, about 28 mm apart at rest.
-  The width is the blade plus 0.25 mm each side for the printed edge.
-- **Cost:** a 4.2 mm groove takes about 0.3 mm (9%) off the inner end of each latch's 3.5 mm bearing.
-- **Plate left (CAD):** in the halves at least 2.8 mm to the next opening, 1.6 mm to the next groove and
-  1.5 mm to the plate's edge; in the modules 2.65 mm between the two keys' facing grooves.
+- **Size:** 4.0 mm wide with 0.25 mm rounded outer corners, extending 1.2 mm past the opening.
+- **Puller:** the measured hooked steel blades are 3.72 mm wide and 0.19 mm thick. The groove leaves
+  0.14 mm of nominal CAD clearance per side for the blade.
+- **Latch bearing:** the groove removes about 0.2 mm (5.7%) from the inner end of each 3.5 mm latch.
+  The first 4.2 mm design removed 0.3 mm. Latch positions were scaled from the drawing.
+- **Minimum CAD clearance:** 2.8 mm to the next opening, 1.6 mm to the next groove and 1.6 mm to the
+  plate edge on the halves. The two keys’ facing grooves on each module are 2.65 mm apart.
+
+### Latch support around the solder pocket
+
+The 0.5 mm solder pocket would otherwise thin the 1.2 mm plate lip to 0.7 mm under two of the
+48 latches. The pocket now leaves full-thickness support where possible and stays open within
+0.3 mm of every plated module pad. At `middle_bottom`, the entire contact zone retains the
+full lip. At `ring_bottom`, the L6 pad limits it to about 76% of the contact zone. The interference
+check uses the carved pocket and tests independently check the pad margin.
+
+### Tolerance budget
+
+The budget combines the switch drawing tolerances with assumed ±0.10 mm print error for each
+of the opening width and lip thickness. Measure both dimensions on the intended PLA print.
+
+| Dimension (mm) | Worst | Nominal | Best |
+|---|---:|---:|---:|
+| Latch bearing per side at a 14.0 mm opening | 0.10 | 0.25 | 0.40 |
+| Opening minus switch body across its width | -0.10 | 0.20 | 0.50 |
+| Latch slot minus lip thickness | -0.10 | 0.10 | 0.30 |
+| Flange underside above PCB | 2.10 | 2.20 | 2.30 |
+
+A 13.8 mm opening increases nominal latch bearing to 0.35 mm and leaves zero nominal body
+clearance. Negative body clearance means the switch may bind. Negative latch slack means the
+switch may fail to latch.
+
+### Puller envelope
+
+The model covers blade descent beside the flange and a hook extending an estimated 1.9 mm
+below it. This leaves 0.3 mm above the PCB at nominal dimensions. The tests probe the plates,
+solder model, reset pocket, module trays and assembled module components. The hook depth
+estimate comes from a photo. Check the actual puller with the keyboard powered off.
 
 ### Reference designs read (nothing copied)
 
@@ -119,3 +149,11 @@ This is a separate product revision; do not silently substitute its dimensions f
   must not block clips. Check the complete PCB/plate stack, not plate thickness alone.
 - Qualify the selected filament/profile on a representative mount before accepting a
   one-shot print. No material-specific hole or snap-retention qualification exists here yet.
+
+For physical qualification, print a representative one-key mount in PLA using the final
+orientation and slicer profile. Include the real lip and the solder pocket where relevant.
+Check the body fit, both latch pairs, and the entire hook path. Start with the 4.0 mm groove
+and compare 4.1 or 4.2 mm samples if the measured puller binds. Check the pocketed latches at
+`ring_bottom` and `middle_bottom` for flex. Confirm the switch stays seated during repeated
+keycap removal, then inspect the lip, groove corners and socket after at least 20 extraction
+and reinsertion cycles. The repository does not include a dedicated coupon generator.

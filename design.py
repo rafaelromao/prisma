@@ -53,8 +53,8 @@ FIT = 0.5                          # PCB and plate to the outer walls: JLCPCB's 
 CAP_CLEAR = 0.75                   # keycap to wall
 FLOOR = 2.6                        # floor; 6x2 magnets sit in pockets in it
 # Case screws: M3 x 8 flat head (90-degree countersunk, ISO 10642 / DIN 7991), through the plate
-# and the PCB, self-tapping into the solid Nylon base: a thread-forming screw grips well there
-# and needs no heat. For heat-set inserts instead, set pilot_d to the insert's hole (about 4.0
+# and the PCB, self-tapping into the solid PLA base. Verify thread formation in a printed pilot hole.
+# For heat-set inserts, set pilot_d to the insert's hole (about 4.0
 # for an M3 x 4 x 4.2 insert).
 SCREW = {"name": "M3", "pcb_hole": 3.4, "head_d": 6.4, "boss_d": 7.6, "pilot_d": 2.5, "length": 8.0}
 # Top plate (Choc v1: 13.8 mm body through the plate, flange 2.2 mm over the PCB, clips take

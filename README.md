@@ -43,10 +43,10 @@ readings that row really is.
 | Wiring | Diodeless, one pin per key (11 Xiao pins + NFC1) |
 | Case | Solid base, a pocket per part (0.6 mm clearance), 0.5 mm around the PCB and plate (0.3 at the seam), 93 × 100.5 mm per half at the girdle (the rim is 91.6 × 96.5), with a 45° chamfer under it; tent 6.6°; 20.4 mm at the seam, 10.5 mm at the outer edge (plate included, keycaps excluded). Five pad slots under the floor (below) |
 | Anti-slip pads | 5 × 8×2 mm silicone bump-ons per half, as on the original Diamond's base: each slot under the floor (8.6 mm wide, 1.1 deep) holds two pad spots, 8.7 mm apart. Each half sticks its pad in a different end, so stacked, each pad drops into the other half's empty end and the floors (and magnets) still meet. Every key centre sits at least 2.8 mm inside each half's pads, so a press on a border key can't tip it |
-| Top plate | Covers the whole board: 1.2 mm Choc v1 plate, 1.0 mm over the PCB (the flange sits 2.2 mm up), 14.0 mm cutouts (`cut_tol` 0.1 per side) with two 4.2 mm pull grooves each for a hooked-blade switch puller (`switch_mount.py`), a 0.5 mm pocket over the Xiao area for solder blobs, a pocket and cone over the reset button, support pillars, countersunk screw bosses, chamfered bottom edge |
+| Top plate | Covers the whole board: 1.2 mm Choc v1 plate, 1.0 mm over the PCB (the flange sits 2.2 mm up), 14.0 mm cutouts (`cut_tol` 0.1 per side) with two 4.0 mm pull grooves each for a hooked-blade switch puller (`switch_mount.py`), a 0.5 mm pocket over the Xiao area for solder blobs, a pocket and cone over the reset button, support pillars, countersunk screw bosses, chamfered bottom edge |
 | Power | XIAO nRF52840 or Super52840, 500 mAh 1S LiPo (nominal 7 × 20 × 40 mm) on a JST PH 2.0 socket, MSK-12C02 power switch next to the USB port on the lower outer facet. The wall has a recess the size of a USB-C overmold (14.6 × 7.4 mm, rounded corners, room for a module whose port sits off centre) in front of the port, and a slot open to the top for the lever, widening outwards for a fingernail, with a rounded floor |
 | Reset | A 5.1 × 5.1 × 2.0 mm SMD tact switch (TS-1187A) on the switch face, in the nook between the index finger's bottom key and the thumbs, 7.6 mm from the nearest keycap. It reaches through a 45° cone in the plate (4.2 mm across at the top, 2.8 at the throat) with its plunger 0.2 mm under the plate's top: a fingertip presses it, keycaps and palms don't. Press once to reboot, twice for the bootloader, with the case closed |
-| Screws | 4 × M3 × 8 flat head (90° countersunk) per half: through the plate and PCB, self-tapping into the solid Nylon base (2.5 mm pilot). `SCREW` in `design.py` switches to heat-set inserts |
+| Screws | 4 × M3 × 8 flat head (90° countersunk) per half: through the plate and PCB, self-tapping into the solid PLA base (2.5 mm pilot). `SCREW` in `design.py` switches to heat-set inserts |
 | Magnets | One part everywhere: 8 × 1.5 mm N52 discs. Each half has 13: 4 original stacking positions, 3 stand contacts on a circle around the estimated centre of gravity, and 6 evenly spread across the inner wall at 17.8 mm pitch. Every pocket keeps 0.5 mm of plastic all round |
 | Assembly | Iron only: no reflow-only parts |
 
@@ -64,7 +64,7 @@ heights are matched.
 
 Each half has three extra floor magnets on a **44 mm circle**, spaced **120° apart** around
 the estimated assembled centre of gravity. The pattern is derived from a mass-weighted model
-of the nylon case, PCB, battery, switches and magnets, checked by `stand_mount.py`; it is not
+of the PLA case, PCB, battery, switches and magnets, checked by `stand_mount.py`; it is not
 a measured balance point. Use two **steel tilting phone platforms**, not the stands' bases.
 The owner has tested the platforms and confirmed that they attract magnets. The existing
 case magnets attach directly: **no extra platform magnets or glue are required**.
@@ -402,7 +402,7 @@ cut for the puller described there; the numbers and what is and is not verified 
 Printed snap retention still requires qualification with the selected switches/material.
 
 See [PRINT_READINESS.md](PRINT_READINESS.md) for the pre-print acceptance gates. Nominal
-collision tests do not qualify Nylon shrinkage, support removal, magnetic retention or a one-shot print.
+collision tests do not qualify PLA shrinkage, support removal, magnetic retention or a one-shot print.
 The linked review's claim-by-claim results and independent blind-review follow-up are in
 [PREPRINT_VERIFICATION.md](PREPRINT_VERIFICATION.md).
 

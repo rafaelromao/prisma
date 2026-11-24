@@ -137,7 +137,7 @@ The base is solid up to the PCB's underside, with a pocket for every part. The P
 1. Fit **13 common 8 × 1.5 mm N52 discs per half** (polarity!): seven underneath and six along the seam. Dry-fit first, without forcing the plastic, then apply a little suitable adhesive. Keep adhesive off the mating faces.
 2. Lay the battery in its bay and plug it into the JST socket. The plug and the slack of its leads sit in the bay, between the battery and the socket.
 3. Lower the PCB, parts face down, into the base. Each part drops into its pocket, the switch lever slides down its slot, and the USB-C port lines up with its recess. Nothing should need force: every pocket has 0.6 mm of clearance, and the PCB 0.5 mm to the outer walls.
-4. Lay the plate on top, its pillars and screw bosses resting on the PCB, and fit the four **M3 × 8 flat-head** screws through the plate and PCB. They cut their own thread in the Nylon: turn them in slowly, and stop when the heads sit flush in their countersinks.
+4. Lay the plate on top, its pillars and screw bosses resting on the PCB, and fit the four **M3 × 8 flat-head** screws through the plate and PCB. Turn the screws in slowly by hand to form threads in the PLA pilot holes. Stop when the heads sit flush in the countersinks. Check the fit in a representative printed pilot before assembling the case.
 5. Clip the switches through the plate into the sockets, then fit the keycaps.
    Each opening has two small grooves, one on each side along the switch's latches, for the puller (see "Taking a switch out"). The reset button now sits under a cone in the plate, between the index finger's bottom key and the thumbs. Its plunger is 0.2 mm under the plate's top, so keycaps and palms don't reach it.
 6. **Anti-slip pads.** Each floor has five slots, each long enough for two pads. Stick one 8 × 2 mm bump-on into **one end** of every slot and leave the other end empty: when the halves are stacked back to back, the other half's pad drops into that empty end, so the floors and magnets still meet.
@@ -152,12 +152,12 @@ The base is solid up to the PCB's underside, with a pocket for every part. The P
 
 The plates and the Choc lids carry two grooves per switch, as on the ZSA Voyager, because a Choc switch has no side indents for a puller to grip. A switch is held by four latch barbs under the plate's lip; a pull on the keycap is not meant to release it.
 
-1. Pull the keycap straight up with a keycap puller.
-2. Squeeze the puller's blades together just enough to drop one into each groove, on the two sides of the switch where its latches are (the left and right edges of the opening on the halves, turned with the key; the front and back on the modules). Each groove is 4.2 mm wide and reaches 1.2 mm past the opening.
+1. Switch the keyboard off, unplug USB, and remove any module from the dock before inserting the metal puller. Then pull the keycap straight up with a keycap puller.
+2. Squeeze the puller's blades together just enough to drop one into each groove, on the two sides of the switch where its latches are (the left and right edges of the opening on the halves, turned with the key; the front and back on the modules). Each groove is 4.0 mm wide with 0.25 mm rounded outer corners and reaches 1.2 mm past the opening.
 3. Let the hooked tips go under the flange, squeeze gently, and lift **straight up**. A tilt bends the switch's pins and can lift the socket.
 4. To refit, press the new switch straight down until it clicks.
 
-Try it on one switch before the board is closed up, with your own puller: the grooves are sized to a 3.7 mm × 0.2 mm blade. If yours is wider, change `GROOVE_W` in `switch_mount.py` and regenerate.
+Try it on one switch before the board is closed up, with your own puller: the grooves are sized to a 3.72 mm × 0.19 mm blade, with 0.14 mm clearance per side in CAD. If yours is wider, change `GROOVE_W` in `switch_mount.py` and regenerate.
 
 ## Optional stands and drawer retention
 
@@ -339,16 +339,16 @@ manufacturer drawings and qualification limits. All Choc v1 retaining plates use
 The MX lid uses 1.5 mm thickness, a 5.0 mm stack and 14.2 mm CAD apertures.
 The opening allowances are provisional FDM compensation, not manufacturer tolerances.
 Measure finished openings and verify both switch clips engage before installing electronics.
-Every Choc plate and lid also has two 4.2 mm pull grooves per switch, cut 1.2 mm past the opening
+Every Choc plate and lid also has two 4.0 mm pull grooves per switch, cut 1.2 mm past the opening
 on its latch edges; the MX lid has none. Check that a switch seats flat, resists a pull on its keycap,
 and comes out with your puller (see "Taking a switch out").
 
-- **Base:** floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately **14.6 mm** and pad-slot roofs span **8.6 mm**. Inspect bridge direction, anchoring and sag with the intended dry-Nylon profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.
+- **Base:** floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately **14.6 mm** and pad-slot roofs span **8.6 mm**. Inspect bridge direction, anchoring and sag with the intended PLA profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.
 - **Plate:** **top face down**: the STL is already oriented that way, with the pillars and screw bosses pointing up. The reset button's cone narrows upwards at 45° from the bed (4.2 mm to 2.8 mm over the first 0.7 mm) and needs no support. Print it solid, at 0.2 mm layers. The switch cutouts are 14.0 mm (13.8 mm + 0.1 mm per side); if your switches are loose or tight, change `cut_tol` in `design.py` and regenerate.
 - **Module tray:** floor down; the rear hood's underside is designed at 45°. Inspect the **12.8 mm USB bridge** and resulting sag clearance to the real plug/controller before assuming support-free printing. Use 4 walls: the screw posts and the 0.9 mm magnet backings carry the load.
 - **Module lids:** top face down; the trackball's cup grows out of the lid as it prints. The intended orientation is support-free.
 - Review all module overhangs, particularly the rear hooks, cup and pad ledge, in the actual slicer; support-free printing has not been physically verified. Add removable support if the chosen material and slicer require it, keeping mating surfaces accessible for cleanup.
 - **Dock:** flat side down, with supports inside the stand-base pocket: its roof is at Z = 4.3 mm and has about **5,900 mm²** of downward-facing horizontal area. Inspect support-interface material, gap, density, access and removal in the actual slicer. Supports must be removable without damaging the pocket roof, magnet skins or fit surfaces. Measure the cleaned pocket against the actual base; it is not a support-free bridge.
 - **Fit:** nominal allowances include 0.35 mm round a module in the drawer, 0.3 mm round a half on the dock, 0.25 mm round a lid in its tray and 0.15 mm radially round a magnet. These are not guarantees against cumulative print error, warping or elephant foot. Calibrate shrinkage and elephant-foot compensation, and use the same filament and settings for mating parts. Check fits before installing electronics; careful local cleanup may be needed, and a successful first print is not guaranteed.
-- **Nylon:** dry the filament before printing. It's tough enough to take the self-tapping threads without cracking, and its softness damps key noise.
+- **PLA:** use the filament and slicer profile intended for the final print. Check bridge sag, screw-pilot fit and cracking, and Choc switch retention on representative geometry before printing the complete set.
 - **Release gate:** follow [PRINT_READINESS.md](PRINT_READINESS.md). Inspect continuous toolpaths through every **0.6–0.9 mm** magnet backing/skin, not just the outer mesh. A hypothetical 0.5% error over the 199 mm dock is about 1 mm, greater than the local fit allowances. Measure differential shrinkage and warping of mating parts with the chosen material/profile before a complete build; ±0.2 mm translation tests do not cover either. Never scale just one mating part blindly: that also moves magnets and screw centres. If calibration cannot meet the fit budget, stop and revise/regenerate the geometry.

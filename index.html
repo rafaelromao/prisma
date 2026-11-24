@@ -468,9 +468,9 @@ packs come in round numbers anyway.</p>
 <tr>
 <td>13</td>
 <td>Filament</td>
-<td>~170 g</td>
-<td>Nylon (PA)</td>
-<td>Case left + right (solid base, 65.9 cm³ each) and the two top plates (4.1 cm³ each); approximately 160 g solid nylon before print overhead.</td>
+<td>~180 g</td>
+<td>PLA</td>
+<td>Case left + right (solid base, 65.9 cm³ each) and the two top plates (4.1 cm³ each); approximately 174 g of solid PLA at 1.24 g/cm³, before print overhead.</td>
 </tr>
 </tbody>
 </table></div>
@@ -479,7 +479,7 @@ Choc lids (BUILD.md, "Taking a switch out"). The grooves are sized for U-shaped 
 steel blades about 3.7 mm wide and 0.2 mm thick, hooked inward (the owner's is a green-coated U-shaped one). Check
 the blade width of whatever you buy against the grooves (<code>GROOVE_W</code> in <code>switch_mount.py</code>) before printing. A
 keycap puller alone does not release a seated Choc switch.</p>
-<p><strong>Cyberdeck dock (optional):</strong> <code>case/dock.stl</code> (about 83 cm³, 95 g of Nylon), for a Ugreen folding phone
+<p><strong>Cyberdeck dock (optional):</strong> <code>case/dock.stl</code> (about 83 cm³, 103 g of solid PLA), for a Ugreen folding phone
 stand with an 85 × 105 × 4 mm base, or on its own as a tented unibody. Print it flat side down, with
 supports inside the pocket (its roof spans 85 mm). It takes <strong>31 common 8 × 1.5 mm discs</strong>:
 12 under the halves (six per half), 12 in the drawer walls (six per side), 6 for the three base-magnet
@@ -911,7 +911,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li>Fit <strong>13 common 8 × 1.5 mm N52 discs per half</strong> (polarity!): seven underneath and six along the seam. Dry-fit first, without forcing the plastic, then apply a little suitable adhesive. Keep adhesive off the mating faces.</li>
 <li>Lay the battery in its bay and plug it into the JST socket. The plug and the slack of its leads sit in the bay, between the battery and the socket.</li>
 <li>Lower the PCB, parts face down, into the base. Each part drops into its pocket, the switch lever slides down its slot, and the USB-C port lines up with its recess. Nothing should need force: every pocket has 0.6 mm of clearance, and the PCB 0.5 mm to the outer walls.</li>
-<li>Lay the plate on top, its pillars and screw bosses resting on the PCB, and fit the four <strong>M3 × 8 flat-head</strong> screws through the plate and PCB. They cut their own thread in the Nylon: turn them in slowly, and stop when the heads sit flush in their countersinks.</li>
+<li>Lay the plate on top, its pillars and screw bosses resting on the PCB, and fit the four <strong>M3 × 8 flat-head</strong> screws through the plate and PCB. Turn the screws in slowly by hand to form threads in the PLA pilot holes. Stop when the heads sit flush in the countersinks. Check the fit in a representative printed pilot before assembling the case.</li>
 <li>Clip the switches through the plate into the sockets, then fit the keycaps.
    Each opening has two small grooves, one on each side along the switch's latches, for the puller (see "Taking a switch out"). The reset button now sits under a cone in the plate, between the index finger's bottom key and the thumbs. Its plunger is 0.2 mm under the plate's top, so keycaps and palms don't reach it.</li>
 <li><strong>Anti-slip pads.</strong> Each floor has five slots, each long enough for two pads. Stick one 8 × 2 mm bump-on into <strong>one end</strong> of every slot and leave the other end empty: when the halves are stacked back to back, the other half's pad drops into that empty end, so the floors and magnets still meet.</li>
@@ -922,12 +922,12 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <h3 id="b-taking-a-switch-out">Taking a switch out</h3>
 <p>The plates and the Choc lids carry two grooves per switch, as on the ZSA Voyager, because a Choc switch has no side indents for a puller to grip. A switch is held by four latch barbs under the plate's lip; a pull on the keycap is not meant to release it.</p>
 <ol>
-<li>Pull the keycap straight up with a keycap puller.</li>
-<li>Squeeze the puller's blades together just enough to drop one into each groove, on the two sides of the switch where its latches are (the left and right edges of the opening on the halves, turned with the key; the front and back on the modules). Each groove is 4.2 mm wide and reaches 1.2 mm past the opening.</li>
+<li>Switch the keyboard off, unplug USB, and remove any module from the dock before inserting the metal puller. Then pull the keycap straight up with a keycap puller.</li>
+<li>Squeeze the puller's blades together just enough to drop one into each groove, on the two sides of the switch where its latches are (the left and right edges of the opening on the halves, turned with the key; the front and back on the modules). Each groove is 4.0 mm wide with 0.25 mm rounded outer corners and reaches 1.2 mm past the opening.</li>
 <li>Let the hooked tips go under the flange, squeeze gently, and lift <strong>straight up</strong>. A tilt bends the switch's pins and can lift the socket.</li>
 <li>To refit, press the new switch straight down until it clicks.</li>
 </ol>
-<p>Try it on one switch before the board is closed up, with your own puller: the grooves are sized to a 3.7 mm × 0.2 mm blade. If yours is wider, change <code>GROOVE_W</code> in <code>switch_mount.py</code> and regenerate.</p>
+<p>Try it on one switch before the board is closed up, with your own puller: the grooves are sized to a 3.72 mm × 0.19 mm blade, with 0.14 mm clearance per side in CAD. If yours is wider, change <code>GROOVE_W</code> in <code>switch_mount.py</code> and regenerate.</p>
 <h3 id="b-optional-stands-and-drawer-retention">Optional stands and drawer retention</h3>
 <ul>
 <li>Use the same <strong>8 × 1.5 mm N52 discs everywhere</strong>. The dock takes six wing magnets and six side magnets per half, <strong>three base pairs</strong> (three of those discs are glued to the Ugreen base) and one upward-facing disc in the drawer floor: <strong>31 discs total</strong>. No underside contact sits near the drawer retention magnet: at least 1 mm of plastic separates their pockets, even with each 0.2 mm off. Leave the rear free for USB and the cable.</li>
@@ -1240,18 +1240,18 @@ manufacturer drawings and qualification limits. All Choc v1 retaining plates use
 The MX lid uses 1.5 mm thickness, a 5.0 mm stack and 14.2 mm CAD apertures.
 The opening allowances are provisional FDM compensation, not manufacturer tolerances.
 Measure finished openings and verify both switch clips engage before installing electronics.
-Every Choc plate and lid also has two 4.2 mm pull grooves per switch, cut 1.2 mm past the opening
+Every Choc plate and lid also has two 4.0 mm pull grooves per switch, cut 1.2 mm past the opening
 on its latch edges; the MX lid has none. Check that a switch seats flat, resists a pull on its keycap,
 and comes out with your puller (see "Taking a switch out").</p>
 <ul>
-<li><strong>Base:</strong> floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately <strong>14.6 mm</strong> and pad-slot roofs span <strong>8.6 mm</strong>. Inspect bridge direction, anchoring and sag with the intended dry-Nylon profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.</li>
+<li><strong>Base:</strong> floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately <strong>14.6 mm</strong> and pad-slot roofs span <strong>8.6 mm</strong>. Inspect bridge direction, anchoring and sag with the intended PLA profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.</li>
 <li><strong>Plate:</strong> <strong>top face down</strong>: the STL is already oriented that way, with the pillars and screw bosses pointing up. The reset button's cone narrows upwards at 45° from the bed (4.2 mm to 2.8 mm over the first 0.7 mm) and needs no support. Print it solid, at 0.2 mm layers. The switch cutouts are 14.0 mm (13.8 mm + 0.1 mm per side); if your switches are loose or tight, change <code>cut_tol</code> in <code>design.py</code> and regenerate.</li>
 <li><strong>Module tray:</strong> floor down; the rear hood's underside is designed at 45°. Inspect the <strong>12.8 mm USB bridge</strong> and resulting sag clearance to the real plug/controller before assuming support-free printing. Use 4 walls: the screw posts and the 0.9 mm magnet backings carry the load.</li>
 <li><strong>Module lids:</strong> top face down; the trackball's cup grows out of the lid as it prints. The intended orientation is support-free.</li>
 <li>Review all module overhangs, particularly the rear hooks, cup and pad ledge, in the actual slicer; support-free printing has not been physically verified. Add removable support if the chosen material and slicer require it, keeping mating surfaces accessible for cleanup.</li>
 <li><strong>Dock:</strong> flat side down, with supports inside the stand-base pocket: its roof is at Z = 4.3 mm and has about <strong>5,900 mm²</strong> of downward-facing horizontal area. Inspect support-interface material, gap, density, access and removal in the actual slicer. Supports must be removable without damaging the pocket roof, magnet skins or fit surfaces. Measure the cleaned pocket against the actual base; it is not a support-free bridge.</li>
 <li><strong>Fit:</strong> nominal allowances include 0.35 mm round a module in the drawer, 0.3 mm round a half on the dock, 0.25 mm round a lid in its tray and 0.15 mm radially round a magnet. These are not guarantees against cumulative print error, warping or elephant foot. Calibrate shrinkage and elephant-foot compensation, and use the same filament and settings for mating parts. Check fits before installing electronics; careful local cleanup may be needed, and a successful first print is not guaranteed.</li>
-<li><strong>Nylon:</strong> dry the filament before printing. It's tough enough to take the self-tapping threads without cracking, and its softness damps key noise.</li>
+<li><strong>PLA:</strong> use the filament and slicer profile intended for the final print. Check bridge sag, screw-pilot fit and cracking, and Choc switch retention on representative geometry before printing the complete set.</li>
 <li><strong>Release gate:</strong> follow <a href="PRINT_READINESS.md">PRINT_READINESS.md</a>. Inspect continuous toolpaths through every <strong>0.6–0.9 mm</strong> magnet backing/skin, not just the outer mesh. A hypothetical 0.5% error over the 199 mm dock is about 1 mm, greater than the local fit allowances. Measure differential shrinkage and warping of mating parts with the chosen material/profile before a complete build; ±0.2 mm translation tests do not cover either. Never scale just one mating part blindly: that also moves magnets and screw centres. If calibration cannot meet the fit budget, stop and revise/regenerate the geometry.</li>
 </ul>
 <!-- /BUILD.md -->

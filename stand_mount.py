@@ -25,7 +25,7 @@ def mesh_centroid(solid):
 
 
 def estimated_centre_of_gravity():
-    """Mass-weighted estimate, not a measured balance point. Assumptions: solid nylon 1.14 g/cc,
+    """Mass-weighted estimate, not a measured balance point. Assumptions: solid PLA 1.24 g/cc,
     FR4 1.85 g/cc, battery 12 g, each switch/cap/socket 2/0.6/0.3 g, MCU/JST/switch 3/0.7/0.3 g,
     neodymium 7.5 g/cc. The right half mirrors this estimate. Verify the assembled hardware.
     """
@@ -33,9 +33,9 @@ def estimated_centre_of_gravity():
     def add(mass, solid):
         parts.append((mass, mesh_centroid(solid)))
     body = C.build()
-    add(body.volume() / 1000 * 1.14, body)
+    add(body.volume() / 1000 * 1.24, body)
     plate, _ = C.plate()
-    add(plate.volume() / 1000 * 1.14,
+    add(plate.volume() / 1000 * 1.24,
         C.to_desk_solid(plate.translate((0, 0, C.PCB_T + C.PLATE["gap"]))))
     pcb = C.to_desk_solid(C.slab(Polygon(C.D["pcb_outline"]), 0, C.PCB_T))
     add(pcb.volume() / 1000 * 1.85, pcb)
