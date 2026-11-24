@@ -23,7 +23,11 @@ jobs:
 
   electrical:
     runs-on: ubuntu-latest
-    container: docker.io/kicad/kicad:9.0
+    container:
+      image: docker.io/kicad/kicad:9.0
+      # The image's default user (kicad) cannot write the runner's temp files, so actions/checkout
+      # fails with EACCES before any check runs. Run as root, as the job needs no other user.
+      options: --user root
     steps:
       - uses: actions/checkout@v4
       - run: mkdir -p .render
