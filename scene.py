@@ -466,6 +466,24 @@ def main():
         (M.bumpons(), vrml.PAD), (_module_magnets(M), vrml.METAL),
         (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(insert.H, 38), SCREW_RGB))]
     scenes["placeholder_structure"] = {"speck": [0.0, 55.0], "z": -1.5, "size": 100.0}
+    import dongle as G
+    for oled in (False, True):
+        lid, tray, parts = G.build(oled)
+        name = "dongle_oled" if oled else "dongle_headless"
+        common = [(tray, TRAY_RGB), (M.bumpons(), vrml.PAD),
+                  (_module_magnets(M), vrml.METAL), (M.floor_magnet(), vrml.METAL)]
+        colors = {"500 mAh cell envelope": vrml.BATTERY, "OLED": (.08, .15, .19),
+                  "insulated carrier": (.8, .8, .75), "cell adhesive": (.8, .8, .75)}
+        electronics = [(solid, colors.get(label, vrml.XIAO_PCB)) for label, solid in parts]
+        dock[name] = [(C.real(m), rgb) for m, rgb in common + electronics +
+                      [(lid, LID_RGB), (M.lid_fasteners(G.H), SCREW_RGB)]]
+        exploded = common + [(m.translate((0, 0, 24 if label in ("OLED", "OLED connector envelope") else 0)),
+                              colors.get(label, vrml.XIAO_PCB)) for label, m in parts]
+        dock[name + "_structure"] = [(C.real(m), rgb) for m, rgb in exploded +
+                                     [(lid.translate((0, 0, 24)), LID_RGB),
+                                      (M.lid_fasteners(G.H, 38), SCREW_RGB)]]
+        for key in (name, name + "_structure"):
+            scenes[key] = {"speck": [0.0, 55.0], "z": -1.5, "size": 100.0}
     dock["independent_tenting"] = independent_tenting()
     scenes["independent_tenting"] = {"speck": [0.0, 0.0], "z": 0.0, "size": 270.0}
     # the modules: the speck in the battery (its front corner on the left, standing on the plate)

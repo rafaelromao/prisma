@@ -106,3 +106,7 @@ the reservation, stop and revise the removable carrier or controller
 arrangement within the same enclosure; do not compress the cell or alter
 any PCB. Follow [PRINT_READINESS.md](PRINT_READINESS.md) and
 [REVIEW_CHECKLIST.md](REVIEW_CHECKLIST.md).
+
+## Powered central variant (draft)
+
+The standard tray is unchanged. See [DONGLE.md](DONGLE.md) for the 500 mAh XIAO central, headless and OLED lids, shared electrical board stack and outstanding qualification. Both lids preserve the common screw/foot/magnet/hood interface; no new PCB or tray export.

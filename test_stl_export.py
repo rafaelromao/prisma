@@ -8,6 +8,7 @@ import numpy as np
 import case as C
 import dock
 import insert
+import dongle as D
 from trackball import trackball as B
 from trackpad import trackpad as T
 
@@ -38,6 +39,8 @@ class StlExportTest(unittest.TestCase):
                                   ("trackpad", T.lid(T.place()), T.H)):
             solids[name] = lid.mirror((0, 0, 1)).translate((0, 0, height))
         solids["trackpad_retainer"] = T.retainer_print()
+        for oled in (False, True):
+            solids[D.NAMES[oled]] = D.lid_print(oled)
         record = np.dtype([("normal", "<f4", 3), ("vertices", "<f4", (3, 3)), ("attribute", "<u2")])
         published = {"left": "case/case_left.stl", "right": "case/case_right.stl",
                      "plate_left": "case/plate_left.stl", "plate_right": "case/plate_right.stl",
@@ -45,6 +48,8 @@ class StlExportTest(unittest.TestCase):
                      "tray": "case/module_tray.stl", "mx": "trackball/case/lid.stl",
                      "choc": "trackball/case/lid_choc.stl", "trackpad": "trackpad/case/lid.stl",
                      "trackpad_retainer": "trackpad/case/retainer.stl"}
+        for oled in (False, True):
+            published[D.NAMES[oled]] = str(D.paths(oled)[0])
         with tempfile.TemporaryDirectory(dir="/tmp/opencode", prefix="prisma-stl-test-") as folder:
             for name, solid in solids.items():
                 with self.subTest(variant=name):

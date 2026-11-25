@@ -113,6 +113,38 @@
       "sha256": "351183c941375522d6922fbe650c67bbb0ae5e531634bf15fb79c2b5e11600f7"
     },
     {
+      "path": "renders/dongle_headless.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "95d975f52c47291c7eef30f8b761d138fa13a39300e8872970225d817ecf3e96"
+    },
+    {
+      "path": "renders/dongle_headless_structure.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "69c85f43dc3703a45bd8a1fa4304dbf1145d2946d91ef0a57c78c39590021fb0"
+    },
+    {
+      "path": "renders/dongle_oled.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "1daee0529a9d4abb1d670317957eba414eb9a2595b1d83bf958336cd9accce49"
+    },
+    {
+      "path": "renders/dongle_oled_structure.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "0a263edae01f9f3983596b193025c96cd5432e7bbbf861ac9aa333460dfd261d"
+    },
+    {
       "path": "renders/full.png",
       "size": [
         1568,
@@ -140,9 +172,9 @@
       "path": "renders/modules.png",
       "size": [
         1800,
-        7000
+        7500
       ],
-      "sha256": "940d02e4d1f28f2503280780bd6ea18bdb95e9c7581c84fecf5ba8d590df8c66"
+      "sha256": "f76403a453031399e0acdf3f4dfbc7441c6b14a26b39e5533a5ce3bc0d874c27"
     },
     {
       "path": "renders/pads.png",
@@ -636,11 +668,11 @@
   "inputs": [
     {
       "path": ".render/scenes.json",
-      "sha256": "a5757a0dc0c6340de87721498f4c27bd9f886d04d03950ed65ff7cbe624edcd6"
+      "sha256": "549e651b3a413689f0000fddc62830589a10ad9ae79d6e199d3e88a7374fb62f"
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "07064d9ef8c81d8c580f089644bd5d2e081eaee9e078feac872b0414ff003598"
+      "sha256": "d5ae65f8dfec24a06e10b6959744bd1bd99d659a093af0b07e0fbca2c174a04f"
     },
     {
       "path": "build_pcb.py",
@@ -669,6 +701,10 @@
     {
       "path": "dock.py",
       "sha256": "02de9fd24bac1fc9f864874d6f88ab6cedba9dead7a3c4d95c8cab7ab4dc583b"
+    },
+    {
+      "path": "dongle.py",
+      "sha256": "66a685b84985df37de88af9a549ad1066acd907180f6f7ae9341ad4cc5995960"
     },
     {
       "path": "footprints.py",
@@ -700,7 +736,7 @@
     },
     {
       "path": "render.sh",
-      "sha256": "3c8c2dcca165cc8ab04a46a6a68ea52dfbde49cea3c8b3f12be130238a803ff8"
+      "sha256": "ca96b6b6b0c7f399165101666b48a066937a905cd6805d81ce583cb9baf5ceb4"
     },
     {
       "path": "render_boards.py",
@@ -708,7 +744,7 @@
     },
     {
       "path": "render_manifest.py",
-      "sha256": "d28336a7e3de9a8cb747e002bfca313a4b7845ee0c1ac889629ac1f896fa87ba"
+      "sha256": "995a4013aad0541c8d195cb23d0bec83f41f67cf8aacb815e84d80710a93ab24"
     },
     {
       "path": "render_notes.py",
@@ -716,7 +752,7 @@
     },
     {
       "path": "scene.py",
-      "sha256": "2c9c142efb3e0d6ca0b480d0c4bcdc433b1cd845d951f212c3cb34099e989e2c"
+      "sha256": "941effff34cc793b26f7afd21b28994724d3ef8754b29420bac3d977fd3df8a6"
     },
     {
       "path": "stand_mount.py",
@@ -729,6 +765,10 @@
     {
       "path": "switch_mount.py",
       "sha256": "b27d038ed0e5ff772de819f07883714e94164e48ea7518e5be7086fcf655df9e"
+    },
+    {
+      "path": "test_dongle.py",
+      "sha256": "f56d9e602f6dc664b512c3228a2ddcc70542570574ab1f78b9f4bd8d11611656"
     },
     {
       "path": "test_drawer.py",
@@ -744,7 +784,7 @@
     },
     {
       "path": "test_stl_export.py",
-      "sha256": "5d4a64b4efe90e7029988d5dabc1f34c98ffcfd47a769c50a6ed9a6962bfccd1"
+      "sha256": "798de20f159deb6d8309580254e2f7359ad10373bb489a9a1989c5a71efd5a41"
     },
     {
       "path": "test_switch_mount.py",
@@ -789,23 +829,9 @@
   ],
   "note": "Listed PNGs refreshed from the final scene; other views verified against the preceding manifest.",
   "updated_views": [
-    "dock_insert.png",
-    "dock_unibody.png",
-    "dock_unibody_side.png",
-    "placeholder_structure.png",
-    "trackpad.png",
-    "trackpad_assembly.png",
-    "trackpad_open.png",
-    "trackpad_rear.png",
-    "trackpad_reset.png",
-    "trackpad_seam.png",
-    "trackpad_stack.png",
-    "trackpad_structure.png",
-    "trackpad_tray.png",
-    "trackpad_under.png",
-    "trackpad_usb.png",
-    "trackpad_usb_dock.png",
-    "trackpad_usb_open.png",
-    "trackpad_with_half.png"
+    "dongle_headless.png",
+    "dongle_headless_structure.png",
+    "dongle_oled.png",
+    "dongle_oled_structure.png"
   ]
 }
