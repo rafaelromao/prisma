@@ -40,6 +40,126 @@ class ModuleAssemblyTest(unittest.TestCase):
             with self.subTest(part=name):
                 self.assertEqual(sum(c.volume() > 1e-6 for c in solid.decompose()), 1)
 
+    def test_trackpad_edge_retention_and_service_sequence(self):
+        L = self.P
+        _, lid, parts, _ = self.modules[2]
+        parts = dict(parts)
+        pad = parts["pad"]
+        q = T.RETAINER
+        clips = T.retainers(L)
+        self.assertEqual(len(T.retainer_print().decompose()), 2)
+        # Original vertical insertion remains possible with the clips removed.
+        for lift in (.05, .5, 2, 10):
+            self.assertLess(hit(pad.translate((0, 0, lift)), lid), TOL)
+        for i, clip in enumerate(clips):
+            self.assertLess(hit(clip, lid + pad + parts["pad's back parts"]), TOL)
+            # Slide outward with the lid removed, then withdraw from below.
+            for dx in (0, .25, .5, .75, 1.0, q["slide"]):
+                self.assertLess(hit(T.retainer_poses(L, outward=dx)[i], lid + pad), TOL)
+            for dz in (.1, .5, 1, 2, 4, 8):
+                self.assertLess(hit(T.retainer_poses(L, outward=q["slide"], down=dz)[i], lid + pad), TOL)
+            for dx, dy in ((0, 0), (.3, 0), (-.3, 0), (0, .3), (0, -.3)):
+                moved = pad.translate((dx, dy, q["axial_play"] + .25))
+                self.assertGreater(hit(clip, moved), .05)
+            self.assertGreaterEqual(q["edge_overlap"] - T.PAD["clr"], .5)
+        # At a small upward displacement the pad cannot tilt past both hooks:
+        # the opposite edge meets either the ledge or one of the clips.
+        px, py = L["pad"]
+        blockers = lid + clips[0] + clips[1]
+        centred = pad.translate((-px, -py, -T.H))
+        for roll in range(-3, 4):
+            for pitch in range(-3, 4):
+                tilted = centred.rotate((roll, pitch, 0)).translate((px, py, T.H + .45))
+                self.assertGreater(hit(tilted, blockers), .05, (roll, pitch))
+
+    def test_trackpad_retainer_fasteners_and_populated_clearances(self):
+        L = self.P
+        _, lid, parts, _ = self.modules[2]
+        parts = dict(parts)
+        q = T.RETAINER
+        z = T.retainer_floor()
+        engagement = q["length"] - q["flange"]
+        stack_tol = q["length_tol"] + q["flange_tol"]
+        self.assertEqual(q["diameter"], 3.0)
+        self.assertEqual(q["pilot"], M.SCREW["pilot"])
+        self.assertIn(q["length"], (4.0, 5.0, 6.0, 7.0, 8.0, 16.0))
+        self.assertGreaterEqual(q["clearance"] - q["diameter"], .3)
+        self.assertGreaterEqual(engagement - stack_tol, 2.6 - 1e-6)
+        self.assertGreaterEqual(q["head_d"] - q["clearance"], 1.4)
+        self.assertGreaterEqual(q["boss_r"] - q["clearance"] / 2, .5)
+        # The boss may use part of the 0.3 mm assembly clearance below the seat
+        # plane, but its wall must never reach the pad itself; the 3-D check
+        # above proves each placed hook misses the pad.
+        for _, sx, sy in T.RETAINER_STATIONS:
+            self.assertGreaterEqual(math.hypot(sx, sy) - q["boss_r"], T.PAD["d"] / 2)
+        self.assertGreaterEqual(q["boss_depth"] - q["roof"] - engagement - stack_tol, .3)
+        self.assertGreaterEqual(q["boss_r"] - q["pilot"] / 2, 1.0)
+        hardware = M.lid_fasteners(T.H)
+        for x, y in B.sensor_holes(L):
+            hardware += M.flat_screw(x, y, B.sensor_screw_stack()["head_top"], B.SENSOR_SCREW_LENGTH)
+        from trackball.controllers import xiao
+        other_controller = xiao(B.xiao_back(L), B.SOCKET_BOT - B.NANO_GAP - B.NANO[2])
+        obstacle = self.tray + hardware + B.stacking_pins(L) + other_controller
+        for name, solid in parts.items():
+            if not name.startswith("pad retainer"):
+                obstacle += solid
+        thick_flange_screws = T.retainer_screws(L, extra=q["length_tol"], flange_error=q["flange_tol"])
+        thin_flange_screws = T.retainer_screws(L, extra=q["length_tol"], flange_error=-q["flange_tol"])
+        for i, ((angle, sx, sy), clip, screw) in enumerate(
+                zip(T.RETAINER_STATIONS, T.retainers(L), T.retainer_screws(L))):
+            def at_station(solid, height, sx=sx, sy=sy, angle=angle):
+                return T.at_pad(solid.translate((sx, sy, height)), L, angle)
+
+            core = at_station(Manifold.cylinder(engagement + stack_tol, q["pilot"] / 2 - .05,
+                                                circular_segments=40), z)
+            self.assertLess(hit(core, lid), TOL)
+            # Do not let the outer bevel, slot or existing countersink silently
+            # remove the thread wall or the flange's bearing land. The ring stops
+            # at the boss top: any extra thread depth lands in the lid plate and
+            # its own pilot, not in the printed boss.
+            boss_h = q["boss_depth"] - T.TOP_T - .04
+            ring = (Manifold.cylinder(boss_h, q["boss_r"] - .05, circular_segments=48)
+                    - Manifold.cylinder(boss_h, q["pilot"] / 2 + .05, circular_segments=48))
+            self.assertLess((at_station(ring, z + .02) - lid).volume(), TOL)
+            # The head overhangs the boss; the clip must still bear on the full boss face.
+            bearing = (Manifold.cylinder(.1, q["boss_r"] - .05, circular_segments=48)
+                       - Manifold.cylinder(.1, q["clearance"] / 2 + .05, circular_segments=48))
+            self.assertLess((at_station(bearing, z - q["flange"] + .02) - clip).volume(), TOL)
+            skin = at_station(Manifold.cylinder(q["roof"] - .05, q["pilot"] / 2,
+                                                circular_segments=40), T.H - q["roof"] + .02)
+            self.assertLess((skin - lid).volume(), TOL)
+            self.assertLess(hit(screw, clip), TOL)
+            self.assertLess(hit(clip + thick_flange_screws[i] + thin_flange_screws[i], obstacle), TOL)
+            driver = at_station(Manifold.cylinder(30, q["head_d"] / 2, circular_segments=40),
+                                z - q["flange"] - q["head_h"] - 30)
+            self.assertLess(hit(driver, lid + clip + parts["pad"] + parts["pad's back parts"]), TOL)
+        # The retainer and fasteners travel with the lid as it closes about the
+        # existing rear hooks. Wires are flexible and require a real slack check.
+        moving_hardware = Manifold()
+        for solid in T.retainers(L) + thick_flange_screws + thin_flange_screws:
+            moving_hardware += solid
+        moving = moving_hardware + parts["pad"] + parts["pad's back parts"]
+        fixed = self.tray + hardware + other_controller + B.stacking_pins(L)
+        for name, solid in parts.items():
+            if name not in ("pad", "pad's back parts", "FFC bend envelope") and not name.startswith(
+                    ("pad retainer", "CHOC", "keycap")):
+                fixed += solid
+        # Common lid fasteners are installed only after closure.
+        fixed -= M.lid_fasteners(T.H)
+        pivot = M.OUTLINE.bounds[3]
+        # Existing lid/tray sweep remains separately checked; here check the
+        # moving sensor/retention parts against the populated fixed assembly.
+        local_wiring = parts["FFC bend envelope"] + T.dr_lead_corridor()
+        for tenth in range(0, 121, 5):
+            def tilt(solid):
+                return solid.translate((0, -pivot, -M.FLUSH)).rotate(
+                    (-tenth / 10, 0, 0)).translate((0, pivot, M.FLUSH))
+
+            self.assertLess(hit(tilt(moving), fixed), .05)
+            # These fixed keepouts reserve space, not wire shapes through the
+            # entire motion. Actual slack and bend radius still need a dry fit.
+            self.assertLess(hit(tilt(moving_hardware), local_wiring), TOL)
+
     def test_trackpad_front_countersinks_keep_a_two_mm_web(self):
         # Seat includes 0.3 mm radial assembly clearance, not just the nominal pad.
         seat_radius = T.PAD["d"] / 2 + T.PAD["clr"]
@@ -72,6 +192,10 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertEqual(T.H, M.CHOC_TOP)
         self.assertEqual(M.SCREW["length"], 8.0)
         self.assertEqual(M.SCREW["pilot"], 2.5)
+        # The retainer stays on the project's M3 family, with a 4-8 mm or 16 mm screw.
+        self.assertEqual(T.RETAINER["diameter"], 3.0)
+        self.assertEqual(T.RETAINER["pilot"], M.SCREW["pilot"])
+        self.assertIn(T.RETAINER["length"], (4.0, 5.0, 6.0, 7.0, 8.0, 16.0))
         self.assertLess(abs((T.parts(self.P, self.main_plan, self.sensor_plan)[0][1]).volume()
                             - dict(self.modules[1][2])["CHOC 1"].volume()), 1e-6)
 
@@ -435,7 +559,8 @@ class ModuleAssemblyTest(unittest.TestCase):
 
     def test_pad_wires_have_a_way_down(self):
         # The separate DR lead passes beside, not through, the retained FFC bend envelope.
-        wires = Manifold.cylinder(6.2, .45, circular_segments=32).translate((4.8, -60.2, 10.8))
+        wires = T.dr_lead_corridor()
+        self.assertLess(hit(wires, self.tray + self.modules[2][1]), TOL)
         for label, solid in self.modules[2][2]:
             if label not in ("pad's back parts", "pad"):
                 self.assertLess(hit(wires, solid), TOL, label)

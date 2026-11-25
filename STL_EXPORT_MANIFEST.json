@@ -272,30 +272,60 @@
     },
     {
       "path": "trackpad/case/lid.stl",
-      "sha256": "cb73e4e1c6595c4eec869e824af33744545ff131a6dfc88897753d61739f8794",
-      "bytes": 276184,
-      "triangles": 5522,
+      "sha256": "280d5059f80db2dea0bd5ccd879cb2c1bbfb461d3dec7b12d0f3f800e4c0d4a0",
+      "bytes": 325384,
+      "triangles": 6506,
       "components": 1,
-      "volume_mm3": 2027.77563,
+      "volume_mm3": 2021.8912,
       "size_mm": [
         55.13846,
         84.83187,
-        3.28
+        4.0
       ],
       "watertight": true,
       "winding": true
     },
     {
       "path": "stls/trackpad_lid.stl",
-      "sha256": "cb73e4e1c6595c4eec869e824af33744545ff131a6dfc88897753d61739f8794",
-      "bytes": 276184,
-      "triangles": 5522,
+      "sha256": "280d5059f80db2dea0bd5ccd879cb2c1bbfb461d3dec7b12d0f3f800e4c0d4a0",
+      "bytes": 325384,
+      "triangles": 6506,
       "components": 1,
-      "volume_mm3": 2027.77563,
+      "volume_mm3": 2021.8912,
       "size_mm": [
         55.13846,
         84.83187,
-        3.28
+        4.0
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "trackpad/case/retainer.stl",
+      "sha256": "3fd2be4d6743f3d15f88b273410156807dd5c3ed430fd84c342cff19c364d8ad",
+      "bytes": 35084,
+      "triangles": 700,
+      "components": 2,
+      "volume_mm3": 67.45361,
+      "size_mm": [
+        15.42,
+        6.2,
+        8.25
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "stls/trackpad_retainer.stl",
+      "sha256": "3fd2be4d6743f3d15f88b273410156807dd5c3ed430fd84c342cff19c364d8ad",
+      "bytes": 35084,
+      "triangles": 700,
+      "components": 2,
+      "volume_mm3": 67.45361,
+      "size_mm": [
+        15.42,
+        6.2,
+        8.25
       ],
       "watertight": true,
       "winding": true
@@ -341,6 +371,10 @@
     [
       "trackpad/case/lid.stl",
       "stls/trackpad_lid.stl"
+    ],
+    [
+      "trackpad/case/retainer.stl",
+      "stls/trackpad_retainer.stl"
     ]
   ],
   "note": "Binary topology/copy integrity only; not a physical buildability certificate."
