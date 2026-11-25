@@ -1,4 +1,4 @@
-# Powered Prisma drawer central — draft qualification guide
+# Powered Prisma drawer central — qualification guide
 
 Issue #6, on top of the common tray, retainer and passive-lid changes.
 The drawer is a wireless **central**, not a third pointing peripheral.
@@ -11,10 +11,11 @@ Reuse the exact common tray, four M3 × 8 flat-head lid screws, six side
 magnets, one floor magnet and three 8 × 2 mm feet. Both lids retain the
 standard Choc height (1.2 mm above the halves' inner edges), rear hooks,
 switch cutout and USB/reset access. No changes to the printed tray or any PCB.
-The OLED variant has a top aperture and two internal locating rails; the
-headless version has a closed roof. Export top-down with `python dongle.py`
-to `case/dongle_lid.stl` and `case/dongle_oled_lid.stl`, copied to `stls/`.
-These are source designs until verified and exported.
+The OLED variant has a recessed glass aperture, two locating rails and two
+lands that bear on the non-active PCB ends. The headless roof is closed.
+`python dongle.py` exports both lids top-down. The
+[headless STL](stls/dongle_lid.stl) and [OLED STL](stls/dongle_oled_lid.stl)
+are CAD-verified prototypes, not physically qualified parts.
 
 ### Required parts and wiring
 
@@ -32,23 +33,27 @@ These are source designs until verified and exported.
 | OLED retention | Removable dielectric tape at non-active board ends, not on glass; optional thin clear insulating window after measuring height |
 | OLED harness | Original PH2.0 plug or compatible low-profile insulated harness; four conductors, strain relief and service slack |
 
-Vendor: https://www.waveshare.com/product/displays/0.91inch-oled-module.htm
-The vendor specifies the PCB outline, active area 22.38 × 5.58 mm and 3.3/5 V
-operation. The 3 mm body-depth and 5.5 mm local connector-depth envelopes
-in CAD are **not manufacturer-confirmed thicknesses**. Measure actual
-glass offset, PCB, connector and cable bend before printing; the provisional
-27 × 8.5 mm aperture must expose the entire active area without bearing
-on the glass. If the plug fails the envelope, try a compatible lower-profile
-wire exit or a smaller/thinner unmodified 3.3 V SSD1306 module first.
+The [vendor](https://www.waveshare.com/0.91inch-oled-module.htm) specifies the
+36 × 12.5 mm PCB outline, 22.38 × 5.58 mm active area and 3.3/5 V operation.
+The 31 × 10.5 × 1.35 mm glass, 2.3 mm PCB/parts depth below the PCB face,
+and 5.5 mm local connector depth below the lid are **unmeasured fit limits**.
+The plug and bend keepout extends 3 mm beyond the PCB. Check the actual
+glass offset and board-end bearing surfaces; the 32 × 11.5 mm aperture
+surrounds the recessed glass, not just its active pixels. If the original
+plug fails the envelope, evaluate a lower-profile harness or a smaller
+unmodified 3.3 V SSD1306 module.
 Do not raise the lid or reduce battery capacity without reviewing clearance.
 
 Follow the XIAO option in BUILD.md: populate the MSK switch, XIAO header,
 eight links, correct XIAO 3.3 V selection and VBAT/R2 connections;
 populate only TS-1187A on the reset board. Leave key sockets, switches,
 sensor, optical parts, regulator and unused passive footprints empty.
-Connect reset board G/RST only, as for the trackpad. Keep the original
-switch/power circuit and verify polarity and continuity before connecting
-a battery. The existing board exposes solder pads, not a battery socket.
+Connect reset board G/RST only, as for the trackpad. Solder the battery to
+the main board's **`+` (BAT+) and `−` (GND)** pads. **Do not connect the
+pack to `VBAT`**: that is the switched output to XIAO BAT+, not the battery
+input. Before connecting the pack or USB, meter polarity and continuity:
+main `+` to `VBAT` open with the switch off and continuous with it on;
+main `−` to `G` continuous in both positions.
 Switch off disconnects battery; USB can still power MCU; charge with switch on.
 Disconnect USB and physically isolate the battery before wiring.
 
@@ -68,7 +73,8 @@ XIAO antenna; verify RF link and battery clearance in both assemblies.
 ## Packing and assembly
 
 1. Measure the protected pack's entire body (reference 41 mm long, maximum
-   45 × 20.4 × 8 mm envelope, tabs included; lead exit separately).
+   45 × 20.0 × 8 mm installed envelope, tabs and insulation included;
+   lead exit separately).
    Reject any larger pack or one with an incompatible lead exit; the actual
    owner's 500 mAh cell has not been measured. Do not use a smaller capacity.
 2. Fit reset-only board first with shims and qualified screws, meter reset.
@@ -80,15 +86,15 @@ XIAO antenna; verify RF link and battery clearance in both assemblies.
    never clamp or wrap it tightly. Verify retention in all orientations.
 3. Place the cell rear-aligned at y=-42.5, with adhesive thickness 0.15 mm;
    maximum modeled cell top z=18.25 mm, below main PCB underside.
-   Route rear leads toward VBAT/G, insulated and strain-relieved away from
+    Route rear leads to main-board `+`/`−`, insulated and strain-relieved away from
    screw tips, magnets, solder joints and antenna. The modeled local lead
    exit is not a complete harness. Dry-fit the actual routing and any inline
    connector before soldering. Follow the existing controller insertion
    and stacking order. No board cutting, drilling or rerouting.
 4. OLED: place the board from below with screen toward aperture, orient the
    connector toward the right end. Seat the non-active PCB edges against the
-   lid, not the glass; use removable insulating tape to retain the PCB to the
-   rails. Ensure the tape, plug and solder joints clear the pouch and screws.
+    end lands, not the glass; use removable insulating tape to retain the PCB.
+    Ensure tape, plug and solder joints clear the pouch and screws.
    Route harness along a free side corridor, protect it from the rim and
    allow the lid to tilt open without loading the plug. Unplug display before
    removing lid. Measure real cable routing; do not pinch the cable to close.
@@ -102,7 +108,8 @@ XIAO antenna; verify RF link and battery clearance in both assemblies.
 Companion draft [keyboards PR #41](https://github.com/rafaelromao/keyboards/pull/41)
 targets branch `prisma` and corrects stale shield symbols/includes.
 Use the existing project container and pinned ZMK dependencies. After checking
-out the companion branch, run `b prisma -c -p` (all five targets).
+out the companion branch, run `b prisma -c -p`. This also builds four
+additional pointing-central targets; they are not required for the powered drawer.
 Flash `prisma_peripheral_left-zmk.uf2` and `prisma_peripheral_right-zmk.uf2`
 to the halves; flash `prisma_central_dongle-zmk.uf2` for headless or
 `prisma_central_dongle_oled-zmk.uf2` for OLED, never the standalone left central.
@@ -110,9 +117,13 @@ Both central targets use the XIAO board and shared transform/keymap, two
 BLE split peers, USB and BLE host support. OLED uses the ZMK built-in status
 screen rather than the previous external 128×64 display module. Validate
 layer, battery and connection widgets on the actual 128×32 panel.
-No UF2 is published or claimed to build here.
+At companion head `1b2093e3` on ZMK `9ebbeff0`, both dongle variants, both
+peripherals and the standalone left central built locally for `xiao_ble//zmk`.
+The generated configs confirm USB, BLE and two split peers on each dongle;
+the OLED image selects a 128 × 32 SSD1306 with P0.04 SCL and P0.05 SDA.
+UF2s were generated for verification, not published or flashed.
 
-## Validation and regeneration (blocking)
+## Validation and regeneration
 
 - Run inherited PR #7–#9 checks, then `python dongle.py`,
   `mkdir -p /tmp/opencode && python -m unittest test_dongle test_stl_export test_half_battery test_drawer test_module_assembly test_xiao_option test_switch_mount trackball.test_layout`,
@@ -120,10 +131,10 @@ No UF2 is published or claimed to build here.
   Inspect the exact CAD solids, all component/fastener collisions, tolerances,
   lid closure sweep, cable fit, both-half attachment, dock removal, standing
   plane and USB/control access. Inspect binary STL topology and public copies.
-- Run `python vrml.py`, `python scene.py`, `./kicad.sh python3 render_boards.py`,
-  `./render.sh`, `python render_manifest.py`, `python page.py`. Inspect
-  headless/OLED and exploded scenes; regenerate/commit actual affected assets
-  and manifests, reconcile page links. No STL, render or manifest regenerated here.
+- Run `python vrml.py`, `python scene.py` and `./kicad.sh python3 render_boards.py`.
+  Refresh `dongle_headless.png`, `dongle_oled.png`, `dongle_headless_structure.png`
+  and `dongle_oled_structure.png` using `./render.sh` and
+  `python render_manifest.py --update` with those basenames, then `python page.py`.
 - Run both electrical DRCs, `python3 check_pcb.py` and
   `python3 trackball/check_controller_pcb.py`. Compare geometry, nets and
   Gerber/drill bytes against PR #9, ignoring only proved metadata. Never
@@ -137,5 +148,5 @@ No UF2 is published or claimed to build here.
   relief, temperatures and charging; confirm safe repeatable service.
   No physical testing, battery dimension or runtime measurement performed.
 
-Until all applicable gates pass, this is a draft/source implementation,
-not print-ready, firmware-ready or safe to assemble unattended.
+Until physical qualification passes and the companion firmware lands,
+do not present this as a print-ready or field-tested assembly.

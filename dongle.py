@@ -7,6 +7,7 @@ a battery or display into an enclosure that fails these checks.
 from pathlib import Path
 import shutil
 
+import numpy as np
 from shapely.geometry import box
 
 import case as C
@@ -16,13 +17,18 @@ from trackball import trackball as B
 from trackball.controllers import xiao, xiao_usb_z
 
 H = M.CHOC_TOP
-OLED_Y = -76.0
+OLED_Y = -80.0
 # Waveshare SKU 14657, SSD1306 128x32, 36 x 12.5 mm PCB.
-# Depth, connector and active-area offset require real-part qualification.
-OLED_W, OLED_L, OLED_DEPTH = 36.0, 12.5, 3.0
+OLED_W, OLED_L = 36.0, 12.5
+# Maximum proposed packing envelopes; only the PCB outline is vendor-dimensioned.
+# Measure front glass, PCB/parts depth and the mated cable before assembly.
+OLED_PCB_Z = M.FLUSH - .45  # face of the PCB, seated against dedicated land pads
+OLED_DEPTH = 2.3           # PCB and underside parts (except the end connector)
+GLASS_W, GLASS_L, GLASS_T = 31.0, 10.5, 1.35
+GLASS_X = -.3
 OLED_CLR = .3
-WINDOW_W, WINDOW_L = 27.0, 8.5
-OLED_Z = M.FLUSH - OLED_DEPTH
+WINDOW_W, WINDOW_L = 32.0, 11.5
+OLED_Z = OLED_PCB_Z - OLED_DEPTH
 BAT_ADHESIVE = .15
 NAMES = {False: "dongle_lid", True: "dongle_oled_lid"}
 KEEP = ("main board", "power switch", "controller board", "controller header",
@@ -34,14 +40,15 @@ def rect(w, length, x=0, y=OLED_Y):
 
 
 def display():
-    """Conservative body depth from the underside of the lid; connector separate."""
-    return M.extrude(rect(OLED_W, OLED_L), OLED_Z, M.FLUSH)
+    """PCB/parts and recessed front glass, on separate datums; connector separate."""
+    return (M.extrude(rect(OLED_W, OLED_L), OLED_Z, OLED_PCB_Z)
+            + M.extrude(rect(GLASS_W, GLASS_L, x=GLASS_X), OLED_PCB_Z - .01,
+                        OLED_PCB_Z + GLASS_T))
 
 
 def connector():
-    """Provisional right-end low-profile plug and bend envelope, outside cell width."""
-    return B.box3(12.5, OLED_Y - 4, M.FLUSH - 5.5,
-                  18.0, OLED_Y + 4, OLED_Z)
+    """Right-end socket, mated plug and local bend; deliberately extend beyond the PCB."""
+    return B.box3(12.5, OLED_Y - 5.5, M.FLUSH - 5.5, 21.0, OLED_Y + 5.5, OLED_Z)
 
 
 def lid(oled=False):
@@ -55,15 +62,16 @@ def lid(oled=False):
     sh -= B.box3(-3.55, main.bounds[3] - 3.35, B.PCB_TOP - .01,
                  3.55, main.bounds[3] - .25, B.PCB_TOP + 1.55)
     if oled:
-        # Seat against the roof; thin integral rails locate the PCB on its
-        # non-active long edges. Removable dielectric retention tape at the
-        # board ends, not over the glass, holds it against the seat.
+        # Locate the non-active edges with rails and end lands. The window
+        # surrounds the whole recessed glass: its edges never bear lid load.
         outer = rect(OLED_W + 2 * (OLED_CLR + 1.0), OLED_L + 2 * (OLED_CLR + 1.0))
         pocket = rect(OLED_W + 2 * OLED_CLR, OLED_L + 2 * OLED_CLR)
         rails = outer.difference(pocket).intersection(
-            rect(OLED_W - 2.0, OLED_L + 2 * (OLED_CLR + 1.0)))
+            rect(OLED_W - 4.0, OLED_L + 2 * (OLED_CLR + 1.0)))
         sh += M.extrude(rails, M.FLUSH - 1.4, M.FLUSH + .02)
-        sh -= M.extrude(rect(WINDOW_W, WINDOW_L), M.FLUSH - .02, H + .1)
+        for x in (-17.25, 17.25):
+            sh += M.extrude(rect(1.3, 9.0, x=x), OLED_PCB_Z, M.FLUSH + .02)
+        sh -= M.extrude(rect(WINDOW_W, WINDOW_L, x=GLASS_X), M.FLUSH - .02, H + .1)
     return M.lid_holes(M.bevel(sh, H), H)
 
 
@@ -134,17 +142,39 @@ def check(oled=False, length=MB.MAX_LENGTH):
     for i, (name, solid) in enumerate(new.items()):
         for label, obstacle in list(new.items())[i + 1:]:
             clear(solid, obstacle, name + "/" + label)
-    _, plug, cable = M.usb_connection(B.xiao_back(L), xiao_usb_z(
-        B.SOCKET_BOT - B.NANO_GAP - B.NANO[2]))
-    clear(plug + cable, cover + bottom, "USB plug")
-    M.check_dock_and_desk(bottom, cover, H, components, feet=M.bumpons())
+    packing = (new["500 mAh cell envelope"] + new["battery lead exit"])
+    obstacles = cover + bottom
+    for _, solid in fixed:
+        obstacles += solid
+    if oled:
+        obstacles += display() + connector()
+    for dx in (-MB.LATERAL_ALLOWANCE, MB.LATERAL_ALLOWANCE):
+        clear(packing.translate((dx, 0, 0)), obstacles, f"pack lateral clearance ({dx:+.2f} mm)")
+    dock = M.K.make()
+    M.check_dock_and_desk(bottom, cover, H, components, k=dock)
     assert sum(p.volume() > 1e-6 for p in cover.decompose()) == 1
+
+
+def usb_insertion_clearance(oled=False):
+    """Sweep a complete illustrative straight USB-C plug from outside the dock."""
+    L = B.place()
+    metal, plug, cable = M.usb_connection(B.xiao_back(L), xiao_usb_z(
+        B.SOCKET_BOT - B.NANO_GAP - B.NANO[2]))
+    dock = M.K.make()
+    half = dock.p(M.K.HALF)
+    docked = (dock.solid + half + half.mirror((1, 0, 0))).translate((0, 0, -M.FLOOR_Z))
+    obstacles = docked + tray() + lid(oled)
+    # The metal tip intentionally enters the MCU receptacle, not the enclosure.
+    for offset in np.arange(0, 25, .5):
+        swept = (metal + plug + cable).translate((0, offset, 0))
+        assert abs((swept ^ obstacles).volume()) < 1e-3, ("USB insertion", offset)
 
 
 def main():
     for oled in (False, True):
         for length in (MB.REFERENCE_LENGTH, MB.MAX_LENGTH):
             check(oled, length)
+        usb_insertion_clearance(oled)
         source, public = paths(oled)
         source.parent.mkdir(parents=True, exist_ok=True)
         public.parent.mkdir(parents=True, exist_ok=True)

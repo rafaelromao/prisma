@@ -34,10 +34,10 @@ r --side right            --zoom 0.0006 -o renders/cyberdeck_side.png  .render/c
 r --rotate '-50,0,-25'    --zoom 0.0009 -o renders/dock_unibody.png    .render/dock_unibody.kicad_pcb
 r --side left             --zoom 0.0009 -o renders/dock_unibody_side.png .render/dock_unibody.kicad_pcb
 r --rotate '-50,0,-25'    --zoom 0.0009 -o renders/dock_insert.png     .render/dock_insert.kicad_pcb
-r --rotate '-50,0,-25'    --zoom 0.0018 -o renders/placeholder_structure.png .render/placeholder_structure.kicad_pcb
+r --rotate '-50,0,-25'    --zoom 0.0015 -o renders/placeholder_structure.png .render/placeholder_structure.kicad_pcb
 for kind in dongle_headless dongle_oled; do
     r --rotate '-50,0,-25' --zoom 0.0018 -o "renders/$kind.png" ".render/$kind.kicad_pcb"
-    r --rotate '-50,0,-25' --zoom 0.0018 -o "renders/${kind}_structure.png" ".render/${kind}_structure.kicad_pcb"
+    r --rotate '-50,0,-25' --zoom 0.0015 -o "renders/${kind}_structure.png" ".render/${kind}_structure.kicad_pcb"
 done
 r --rotate '-40,0,25'     --zoom 0.001  -o renders/dock.png            .render/dock.kicad_pcb
 r --rotate '140,0,-25'    --zoom 0.001  -o renders/dock_under.png      .render/dock.kicad_pcb

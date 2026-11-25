@@ -21,10 +21,28 @@ class DongleTest(unittest.TestCase):
         self.assertLess(abs((a - b).volume()) + abs((b - a).volume()), 1e-3)
         self.assertNotIn("OLED", dict(D.parts(False)))
         self.assertIn("OLED", dict(D.parts(True)))
-        aperture = M.extrude(D.rect(D.WINDOW_W - .2, D.WINDOW_L - .2),
+        aperture = M.extrude(D.rect(D.WINDOW_W - .2, D.WINDOW_L - .2, x=D.GLASS_X),
                              M.FLUSH + .1, D.H - .1)
         self.assertAlmostEqual((D.lid(False) ^ aperture).volume(), aperture.volume(), delta=1e-3)
         self.assertLess(abs((D.lid(True) ^ aperture).volume()), 1e-3)
+
+    def test_oled_bears_on_pcb_ends_not_glass_and_has_a_cell_gap(self):
+        lid = D.lid(True)
+        display = D.display()
+        glass_top = D.OLED_PCB_Z + D.GLASS_T
+        self.assertGreaterEqual(D.H - glass_top, .25)
+        glass_play = D.rect(D.GLASS_W + .3, D.GLASS_L + .3, x=D.GLASS_X)
+        self.assertLess(abs((M.extrude(glass_play, D.OLED_PCB_Z, glass_top) ^ lid).volume()), 1e-3)
+        for x in (-17.25, 17.25):
+            land = M.extrude(D.rect(1.0, 8.0, x=x), D.OLED_PCB_Z + .02, M.FLUSH)
+            self.assertLess(abs((land - lid).volume()), 1e-3)
+        self.assertGreaterEqual(D.OLED_Z - D.cell().bounding_box()[5], .4)
+        self.assertGreater(D.connector().bounding_box()[3], display.bounding_box()[3] + 2)
+
+    def test_docked_usb_insert_and_remove(self):
+        for oled in (False, True):
+            with self.subTest(oled=oled):
+                D.usb_insertion_clearance(oled)
 
     def test_lid_closure_and_reset_access(self):
         L = B.place()
