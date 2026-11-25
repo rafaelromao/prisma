@@ -14,7 +14,8 @@ import module_shell as M
 # envelope, including protection/tabs. The actual selected pack must be measured.
 REFERENCE_LENGTH = 41.0
 MAX_LENGTH = 45.0
-MAX_WIDTH = 20.4
+MAX_WIDTH = 20.0  # installed pack, including insulation; nominal tray throat is 20.4
+LATERAL_ALLOWANCE = .15  # per side; leaves at least .05 mm at the nominal throat
 MAX_THICKNESS = 8.0
 REAR = -42.5
 SHEET_WIDTH = 20.0
