@@ -55,7 +55,7 @@ buy for the halves.
 
 | Every module | Qty | Search for | Notes |
 |---|---|---|---|
-| Printed tray, `case/module_tray.stl` | 1 | | The same print for every module |
+| Printed tray, `case/module_tray.stl` | 1 | | The same print for every module; see [common drawer interface](DRAWER_INTERFACE.md) for the future removable long-cell carrier |
 | Printed lid | 1 | | `trackball/case/lid.stl` (MX), `trackball/case/lid_choc.stl` (Choc v1) or `trackpad/case/lid.stl` |
 | PCB, `trackball/fab/trackball_jlcpcb.zip` | 1 (order 5) | (JLCPCB) | 2 layers, 1.6 mm, 53.7 × 99.5 mm. One breakaway panel of three boards (main, sensor, controller), for both pointing modules and either controller: nice!nano v2 or plain XIAO nRF52840. JLCPCB may count this as three designs and add a fee: enter Different Design = 3 and confirm on the quote |
 | M3 × 8 flat-head screws | 6 | same as item 11 | Four through the lid unchanged; finish the two sensor-board screws to ≤7.6 mm overall, deburr, then verify seating, engagement and ≥0.3 mm tip clearance before installing electronics/battery (BUILD.md) |

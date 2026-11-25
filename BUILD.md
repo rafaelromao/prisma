@@ -290,6 +290,8 @@ On the **plain XIAO nRF52840**, the `VBAT` and `R2` wires start on the two small
 
 ### Into the tray
 
+The pointing modules retain the original 250 mAh cradle. The future 500 mAh dongle uses the same tray with a removable insulated carrier; see the [common drawer interface](DRAWER_INTERFACE.md) for the reservation and measurement gates.
+
 Work in this order, power off, with the magnets already glued in. Before putting the battery in, perform the sensor screw depth check in step 2. The picture shows the first three steps done.
 
 ![Battery, sensor board and nice!nano in the tray](renders/trackball_stack.png)

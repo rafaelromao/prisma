@@ -9,6 +9,7 @@ from shapely.ops import unary_union
 
 import case as C
 import module_shell as M
+import module_battery as MB
 import switch_mount as SM
 from test_switch_mount import stl_solid
 from trackball import trackball as B
@@ -73,6 +74,58 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertEqual(M.SCREW["pilot"], 2.5)
         self.assertLess(abs((T.parts(self.P, self.main_plan, self.sensor_plan)[0][1]).volume()
                             - dict(self.modules[1][2])["CHOC 1"].volume()), 1e-6)
+
+    def test_trackpad_uses_identical_complete_tray(self):
+        other = B.tray(self.P)
+        self.assertLess(abs((self.tray - other).volume()), TOL)
+        self.assertLess(abs((other - self.tray).volume()), TOL)
+
+    def test_long_cell_reservation_reuses_existing_tray_and_reset_board(self):
+        from trackball.controllers import xiao
+        parts = dict(self.modules[1][2])
+        keep = ("main board", "power switch", "controller board",
+                "controller header", "stacking pins' plastic", "sensor board", "reset")
+        controller = xiao(B.xiao_back(self.L), B.SOCKET_BOT - B.NANO_GAP - B.NANO[2])
+        hardware = [(label, parts[label]) for label in keep]
+        hardware += [("XIAO", controller), ("stacking pins", B.stacking_pins(self.L)),
+                     ("floor magnet", M.floor_magnet()), ("feet", M.bumpons()),
+                     ("standard lid fixture", MB.interface_lid()),
+                     ("lid screws", M.lid_fasteners(M.CHOC_TOP))]
+        for x, y in B.sensor_holes(self.L):
+            hardware.append(("sensor screw", M.flat_screw(
+                x, y, B.sensor_screw_stack()["head_top"], B.SENSOR_SCREW_LENGTH)))
+        carrier = MB.carrier()
+        self.assertLess(hit(carrier, self.tray), TOL)
+        for length in (MB.REFERENCE_LENGTH, MB.MAX_LENGTH):
+            with self.subTest(length=length):
+                cell = MB.long_cell(length)
+                lead = MB.lead_exit()
+                self.assertLess(hit(cell, carrier), TOL)
+                self.assertLess(hit(lead, carrier + cell), TOL)
+                self.assertLess(hit(cell + lead, self.tray), TOL)
+                for label, solid in hardware:
+                    self.assertLess(hit(carrier + cell + lead, solid), TOL, label)
+                # Lower the carrier and cell before installing the upper board.
+                # The reset board remains in place, including the screw heads.
+                screws = Manifold()
+                for label, solid in hardware:
+                    if label == "sensor screw":
+                        screws += solid
+                obstacle = self.tray + parts["sensor board"] + screws
+                for dx in (-MB.LATERAL_ALLOWANCE, 0, MB.LATERAL_ALLOWANCE):
+                    shifted_cell = cell.translate((dx, 0, 0))
+                    for lift in range(0, 41):
+                        self.assertLess(hit((carrier + shifted_cell).translate((0, 0, lift)),
+                                            obstacle), TOL, (dx, lift))
+                    for label, solid in hardware:
+                        self.assertLess(hit(shifted_cell, solid), TOL, (dx, label))
+        self.assertGreater(hit(MB.long_cell(), parts["nice!nano"]), TOL)
+        self.assertGreater(B.PCB_TOP - B.PCB_T - (MB.CELL_Z + MB.MAX_THICKNESS), .7)
+
+    def test_long_cell_envelope_rejects_oversized_packs(self):
+        for kwargs in ({"length": 46}, {"width": MB.MAX_WIDTH + .01}, {"thickness": 8.1}):
+            with self.subTest(pack=kwargs), self.assertRaises(ValueError):
+                MB.long_cell(**kwargs)
 
     def test_switch_mount_sections_use_family_specific_dimensions(self):
         import case as C
