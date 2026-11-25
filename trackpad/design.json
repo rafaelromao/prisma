@@ -185,27 +185,37 @@
  ],
  "breakout_lift": 2.5,
  "retainer": {
-  "diameter": 2.0,
-  "length": 3.0,
-  "pilot": 1.65,
-  "clearance": 2.35,
-  "head_d": 3.8,
-  "head_h": 1.6,
+  "diameter": 3.0,
+  "length": 4.0,
+  "pilot": 2.5,
+  "clearance": 3.4,
+  "head_d": 5.5,
+  "head_h": 2.0,
   "flange": 1.2,
-  "boss_depth": 3.0,
+  "boss_depth": 4.0,
   "roof": 0.6,
-  "boss_r": 1.95,
-  "screw_x": 22.1,
-  "screw_y": 3.8,
-  "slide": 1.35,
+  "boss_r": 2.25,
+  "slide": 1.55,
   "axial_play": 0.2,
   "length_tol": 0.1,
   "flange_tol": 0.1,
-  "edge_overlap": 0.9,
+  "edge_overlap": 0.8,
   "lip_t": 0.8,
   "angles": [
-   -55,
-   -165
+   -10.76,
+   -169.24
+  ],
+  "stations": [
+   [
+    -10.76,
+    22.16,
+    -4.4
+   ],
+   [
+    -169.24,
+    22.16,
+    4.4
+   ]
   ]
  }
 }

@@ -29,17 +29,28 @@ H = M.PCB_TOP + B.CHOC["below_plate"]   # the Choc trackball's height
 TOP_T = 1.2                    # the top: a Choc plate (the switches clip into 1.2 to 1.3 mm)
 # TM040040 spec: 0.99 mm PCB + overlay, 5.15 +/- 0.2 mm with components, none in the outer 2 mm ring.
 # Keep the original seat and pad datum; the ledge supports the free underside ring.
-# Two removable hooks capture only the front-side edge sectors, with no adhesive or preload.
+# Two removable hooks capture only the two side edge sectors, with no adhesive or preload.
 PAD = dict(d=40.0, t=1.2, back=4.4, clr=0.3, rim=1.0, ledge=1.8, gap=12.0)
-# M2 x 3 pan-head, length under head. The shorter, narrower screw puts both
-# mounts in clear pockets between the unchanged tray bosses and the main board.
-# Printed thread pull-out strength and actual hardware remain to be qualified.
-RETAINER = dict(diameter=2.0, length=3.0, pilot=1.65, clearance=2.35,
-                 head_d=3.8, head_h=1.6, flange=1.2, boss_depth=3.0, roof=.6,
-                 boss_r=1.95, screw_x=22.1, screw_y=3.8, slide=1.35, axial_play=.2,
+# M3 x 4 pan-head, length under head. The project uses M3 fasteners only; the
+# short screw still fits the blind lid bosses without touching the PCB or tray.
+# Each station is (hook/slot angle about the pad centre, local screw x, local
+# screw y). The screw is offset sideways from the slot so the stem channel does
+# not cut the pilot, and the hook pair is a mirror set. Printed thread pull-out
+# strength, the 0.55 mm bearing land and the actual hardware remain to be
+# qualified.
+RETAINER = dict(diameter=3.0, length=4.0, pilot=M.SCREW["pilot"], clearance=3.4,
+                 head_d=5.5, head_h=2.0, flange=1.2, boss_depth=4.0, roof=.6,
+                 boss_r=2.25, slide=1.55, axial_play=.2,
                  length_tol=.1, flange_tol=.1,
-                 edge_overlap=.9, lip_t=.8)
-RETAINER_ANGLES = (-55, -165)  # about the pad centre, measured from +X
+                 edge_overlap=.8, lip_t=.8)
+# A mirror pair on the two flanks: nearly opposite lips catch a tilt about
+# either horizontal axis. The flanks keep the 5.5 mm screw head inside the
+# tray's top rim through the whole lid-closing sweep, clear of the lid's front
+# countersink webs. Both screws sit 4.4 mm tangentially off the stem channel,
+# clear of the 2.5 mm pilot and the 3.8 mm channel, and each boss stays outside
+# the 40 mm pad.
+RETAINER_STATIONS = ((-10.76, 22.16, -4.4), (-169.24, 22.16, 4.4))
+RETAINER_ANGLES = tuple(station[0] for station in RETAINER_STATIONS)
 BREAKOUT = (24.0, 18.0, 4.5)   # reserved maximum envelope, including parts/connector, not a measured kit
 BREAKOUT_LIFT = 2.5            # insulating spacer clears the sensor-board screw heads; no holder
 NANO = B.NANO
@@ -130,21 +141,20 @@ def retainer_floor():
     return H - RETAINER["boss_depth"]
 
 
-def _clip():
+def _clip(sx, sy):
     """One keyed hook. Insert through the slot from below, slide in, screw to the boss.
 
     The hard flange seats on the boss, not on the sensor. The top hook has axial
-    play above the nominal overlay; its inner edge covers only the outer 0.9 mm.
+    play above the nominal overlay; its inner edge covers only the outer 0.8 mm.
     """
     q = RETAINER
     z = retainer_floor()
-    sx, sy = q["screw_x"], q["screw_y"]
-    stem = box(20.5, -1.6, 21.65, 1.6)
+    stem = box(20.8, -1.6, 21.5, 1.6)
     flange = stem.union(Point(sx, sy).buffer(q["boss_r"], quad_segs=16)).convex_hull
     clip = M.extrude(flange, z - q["flange"], z)
     clip += M.extrude(stem, z - .02, H + q["axial_play"] + q["lip_t"])
     clip += box3(PAD["d"] / 2 - q["edge_overlap"], -1.6, H + q["axial_play"],
-                 21.65, 1.6, H + q["axial_play"] + q["lip_t"])
+                 21.5, 1.6, H + q["axial_play"] + q["lip_t"])
     hole = Manifold.cylinder(q["flange"] + .1, q["clearance"] / 2,
                              circular_segments=40).translate((sx, sy, z - q["flange"] - .04))
     return clip - hole
@@ -156,43 +166,57 @@ def retainers(L):
 
 def retainer_poses(L, outward=0, down=0):
     """Clip positions along their individual straight assembly/removal paths."""
-    clip = _clip().translate((outward, 0, -down))
-    return [at_pad(clip, L, angle) for angle in RETAINER_ANGLES]
+    out = []
+    for angle, sx, sy in RETAINER_STATIONS:
+        clip = _clip(sx, sy).translate((outward, 0, -down))
+        out.append(at_pad(clip, L, angle))
+    return out
 
 
 def retainer_print():
-    """Print two copies, lying on the hook's side so its lip is not a vertical cantilever."""
-    m = _clip().rotate((90, 0, 0))
-    x, y, z = m.bounding_box()[:3]
-    return m.translate((-x, -y, -z))
+    """Print the left/right pair, each lying on its side so the lip is not a cantilever."""
+    pair = []
+    for _, sx, sy in RETAINER_STATIONS:
+        m = _clip(sx, sy).rotate((90, 0, 0))
+        x, y, z = m.bounding_box()[:3]
+        pair.append(m.translate((-x, -y, -z)))
+    gap = 5.0
+    right, left = pair
+    left = left.translate((right.bounding_box()[3] + gap, 0, 0))
+    return right + left
 
 
 def retainer_screws(L, heads_only=False, extra=0.0, flange_error=0.0):
     q = RETAINER
     z = retainer_floor() - q["flange"] - flange_error
-    x, y = q["screw_x"], q["screw_y"]
     head = Manifold.cylinder(q["head_h"], q["head_d"] / 2, circular_segments=48)
-    screw = head.translate((x, y, z - q["head_h"]))
-    if not heads_only:
-        screw += Manifold.cylinder(q["length"] + extra, q["diameter"] / 2, circular_segments=48).translate((x, y, z))
-    return [at_pad(screw, L, angle) for angle in RETAINER_ANGLES]
+    out = []
+    for angle, sx, sy in RETAINER_STATIONS:
+        screw = head.translate((sx, sy, z - q["head_h"]))
+        if not heads_only:
+            screw += Manifold.cylinder(q["length"] + extra, q["diameter"] / 2,
+                                       circular_segments=48).translate((sx, sy, z))
+        out.append(at_pad(screw, L, angle))
+    return out
 
 
 def _retainer_mounts(sh, L):
     q = RETAINER
     z = retainer_floor()
-    x, y = q["screw_x"], q["screw_y"]
     boss = Manifold.cylinder(q["boss_depth"] - TOP_T + .02, q["boss_r"],
-                             circular_segments=64).translate((x, y, z))
+                             circular_segments=64)
     # The blind hole opens on the underside. Leave the full 0.6 mm roof.
     pilot = Manifold.cylinder(q["boss_depth"] - q["roof"] + .02, q["pilot"] / 2,
-                              circular_segments=48).translate((x, y, z - .02))
+                              circular_segments=48).translate((0, 0, -.02))
     # Insertion clearance for the lip, and a narrow keyed stem channel. The
-    # rest of the original ledge remains unchanged, including the rear gap.
-    slot = box3(20.15, -1.9, z - .1, 23.15, 1.9, H + 1.1)
-    for angle in RETAINER_ANGLES:
-        sh += at_pad(boss, L, angle)
-        sh -= at_pad(pilot + slot, L, angle)
+    # channel starts 0.4 mm outside the 20.3 mm pad opening, so the lid keeps a
+    # printable web instead of a sliver. Its outer edge stays within the top
+    # bevel; the vertical wall below is at least 0.45 mm. The rest of the
+    # original ledge remains unchanged, including the rear gap.
+    slot = box3(20.70, -1.9, z - .1, 23.10, 1.9, H + 1.1)
+    for angle, sx, sy in RETAINER_STATIONS:
+        sh += at_pad(boss.translate((sx, sy, z)), L, angle)
+        sh -= at_pad(pilot.translate((sx, sy, z)) + slot, L, angle)
     return sh
 
 
@@ -244,7 +268,8 @@ def main():
     json.dump(dict(layout={k: v for k, v in L.items()}, height=H, screws=M.lid_screws(), feet=M.feet_spots(),
                     wiring=wiring(), controllers=SIGNALS['trackpad'], gpio=GPIO,
                      breakout_envelope=BREAKOUT, breakout_lift=BREAKOUT_LIFT,
-                     retainer=dict(RETAINER, angles=RETAINER_ANGLES)), open(os.path.join(HERE, "design.json"), "w"), indent=1,
+                     retainer=dict(RETAINER, angles=RETAINER_ANGLES,
+                                   stations=RETAINER_STATIONS)), open(os.path.join(HERE, "design.json"), "w"), indent=1,
               default=lambda o: [float(v) for v in o])
     return L, lid_m, tray_m, ps
 

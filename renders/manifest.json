@@ -102,7 +102,7 @@
         1568,
         1176
       ],
-      "sha256": "0ef572944d26fde039d5030ef8f88d51818b406a2204030cc893fbfc900827b5"
+      "sha256": "28476538ef9395fc6017ef9626d679b32a24fcbe6008ad988165c33b7b4f8f9e"
     },
     {
       "path": "renders/dock_unibody_side.png",
@@ -110,7 +110,7 @@
         1568,
         1176
       ],
-      "sha256": "b513f2a002b218595bee0184f85a9c4e93a7dfeac4f3396a60ce3ef235d1faad"
+      "sha256": "a545784f9f79fbef509a9214c5c199c3340346663185bb0961674ff983d084cf"
     },
     {
       "path": "renders/full.png",
@@ -142,7 +142,7 @@
         1800,
         6500
       ],
-      "sha256": "4870f3ea071cea213cc8a9190b613bda75c8f4f3ad01f697b8555aed150345c9"
+      "sha256": "39e480dccf3c52995c281d6b638fbb6158046cbb5081a435926f3bfacbe8afb8"
     },
     {
       "path": "renders/pads.png",
@@ -470,7 +470,7 @@
         1568,
         1176
       ],
-      "sha256": "bb8a3683755bb0856e1c9c8de793ee2fda5a9f6ef20fc8b44ca8672dc6051d9e"
+      "sha256": "905d48be5fa6886948de29b4d1e27469362a9bd6992d24a8a01f14d12a09f065"
     },
     {
       "path": "renders/trackpad_assembly.png",
@@ -478,7 +478,7 @@
         1568,
         1176
       ],
-      "sha256": "38a4fd3d4dc032298ab7ea450258b89494e6c5cef9ce99d851c832ae79dc540b"
+      "sha256": "73b83791ecf8fd8f7436a476dd555b8bdd39f6d1da9c38b52979814b41940001"
     },
     {
       "path": "renders/trackpad_open.png",
@@ -486,7 +486,7 @@
         1568,
         1176
       ],
-      "sha256": "1d35a8ba362cd82e43a2d8fd7dbebd28043abe9e01adad76116b5bf3055a9593"
+      "sha256": "55430da093fdcf934de60ff9c719e188219d09b2517c6b59bad9351c3947ecc9"
     },
     {
       "path": "renders/trackpad_rear.png",
@@ -494,7 +494,7 @@
         1568,
         1176
       ],
-      "sha256": "fa629db769b0c8d0272aa5d5736158ec37398406bc8fe97ab9a0c8aaeb8d216a"
+      "sha256": "cb82738cf0122e04c5dd31f7134629b6fdccbf87df1864e0e5ab418af8de4a24"
     },
     {
       "path": "renders/trackpad_reset.png",
@@ -502,7 +502,7 @@
         1568,
         1176
       ],
-      "sha256": "857de62d046d708ba64d8444db2cf9996c9799bfcd2aa3ad25b36f8213902a5a"
+      "sha256": "987ff59ea99826e378f3d2667c62267fab950d903bd3c0f356300f3b142cc22c"
     },
     {
       "path": "renders/trackpad_seam.png",
@@ -510,7 +510,7 @@
         1568,
         1176
       ],
-      "sha256": "80ea8f0c577fbe43a6e54c5eaf126490ab46e007c0716eb3dc4b69e40a349d30"
+      "sha256": "d1a34862c229ffd467e94e46a89b06e6366127ca74b385c255f8daf3dbd324f2"
     },
     {
       "path": "renders/trackpad_stack.png",
@@ -518,7 +518,7 @@
         1568,
         1176
       ],
-      "sha256": "e83683a007b4e7464e94d80cd7d3294cbdc79faa3738ce54bfb5cf705df07b94"
+      "sha256": "be6a89757b688a7a4a959f2b0f672f30d6a03f8738081a1d8ba09f70a36702ef"
     },
     {
       "path": "renders/trackpad_structure.png",
@@ -526,7 +526,7 @@
         1568,
         1176
       ],
-      "sha256": "63925db6e23b75665fb24172f57fdcfcb20b838f0740505f4123c6b82cf5b0fb"
+      "sha256": "6f3da06120c3e9447db00f0f164e4a1a7ea1c434d5ab8916345235eea7d6639d"
     },
     {
       "path": "renders/trackpad_tray.png",
@@ -534,7 +534,7 @@
         1568,
         1176
       ],
-      "sha256": "ecd01cccd8ffb4ac0db37b87e56f7d6edbf7cfa18cfa3de200d5d97d24b0c4cd"
+      "sha256": "fca8032fab3edf29364f47f9b986567d3736349cb0cf045eb4133e13ade91a35"
     },
     {
       "path": "renders/trackpad_under.png",
@@ -542,7 +542,7 @@
         1568,
         1176
       ],
-      "sha256": "c8e787960db4bc8059b68a3537fc312b52157ce66df510582fd2c7ef14de538b"
+      "sha256": "faa5c33c61f16cf5f28979dd0f8fb71fe290da831f3f554d4d101675a595e592"
     },
     {
       "path": "renders/trackpad_usb.png",
@@ -550,7 +550,7 @@
         1568,
         1176
       ],
-      "sha256": "d9b40b13c2eea2449c52bfc2c9b532207acfe4af7573dacffa078dd463a9590a"
+      "sha256": "370e3755fb3348c22320ecadbf5b0880db5462ac4913e62e53defab693683f67"
     },
     {
       "path": "renders/trackpad_usb_dock.png",
@@ -558,7 +558,7 @@
         1568,
         1176
       ],
-      "sha256": "7795076c6b7e69f734434d43970d707e284e004469241a7da57d333fa2d6513c"
+      "sha256": "0ee165e8509a57a081781b6449dbeaa66fba83772fae9f2d59abbc4ac71990e8"
     },
     {
       "path": "renders/trackpad_usb_open.png",
@@ -566,7 +566,7 @@
         1568,
         1176
       ],
-      "sha256": "46fe8eab5f8fc56a07b6125d1a7da8255ce0fd890b58d5ca9e64062e5a5185d4"
+      "sha256": "4fd95ed7d77de3fd86e05dc5dff3b1acabf25b8ae915a8a6ba3d752e37fb1503"
     },
     {
       "path": "renders/trackpad_with_half.png",
@@ -574,7 +574,7 @@
         1568,
         1176
       ],
-      "sha256": "610b20c914f13c3c3c85e1c57c17ee21cabb8fd5ea31f3dd45f2fbcaf8898b22"
+      "sha256": "3931bab8ebfb897757c88682dec756939adf1416c7ce7533579c135b22180467"
     },
     {
       "path": "renders/unibody.png",
@@ -632,7 +632,7 @@
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "ac83c394a2deba25aac09d1012e2ba827d0ea66d01667ad80b12deb9bacf1fbe"
+      "sha256": "81da3dfae9b23c4b42b1b4c64c6dcd8b6a37d700c7a6434be5171433fd219274"
     },
     {
       "path": "build_pcb.py",
@@ -732,7 +732,7 @@
     },
     {
       "path": "test_module_assembly.py",
-      "sha256": "250661ed1313db3d968cd893ee3ff5d3033cb04bfcb8108be4015b64f0a80528"
+      "sha256": "f516f44734df34067f75fc846984e3106b9519b97aa49bde4e7cb73f850c494a"
     },
     {
       "path": "test_stl_export.py",
@@ -768,11 +768,11 @@
     },
     {
       "path": "trackpad/trackpad.py",
-      "sha256": "cc0698451bf85e02dcbbfb13af769b17905fcade9f3ef74a4e03a9cb5067e2c3"
+      "sha256": "1c5c0f7b332447ed5e9a5901455e1299a190c131b6d85d04e2116be68115e158"
     },
     {
       "path": "verify_artifacts.py",
-      "sha256": "fc16626368b73b98df63412d0fd8c5cd535e8dff992fc3d2c2956305fa16dee2"
+      "sha256": "089d91b3a721b7f547313ffd761952ca6fb54ca67dcb872c88f11c2c4db8d2b7"
     },
     {
       "path": "vrml.py",
@@ -781,6 +781,8 @@
   ],
   "note": "Listed PNGs refreshed from the final scene; other views verified against the preceding manifest.",
   "updated_views": [
+    "dock_unibody.png",
+    "dock_unibody_side.png",
     "trackpad.png",
     "trackpad_assembly.png",
     "trackpad_open.png",

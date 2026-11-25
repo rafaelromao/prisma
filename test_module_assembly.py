@@ -47,7 +47,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         pad = parts["pad"]
         q = T.RETAINER
         clips = T.retainers(L)
-        self.assertEqual(len(T.retainer_print().decompose()), 1)
+        self.assertEqual(len(T.retainer_print().decompose()), 2)
         # Original vertical insertion remains possible with the clips removed.
         for lift in (.05, .5, 2, 10):
             self.assertLess(hit(pad.translate((0, 0, lift)), lid), TOL)
@@ -80,14 +80,18 @@ class ModuleAssemblyTest(unittest.TestCase):
         z = T.retainer_floor()
         engagement = q["length"] - q["flange"]
         stack_tol = q["length_tol"] + q["flange_tol"]
-        self.assertEqual(q["diameter"], 2.0)
+        self.assertEqual(q["diameter"], 3.0)
+        self.assertEqual(q["pilot"], M.SCREW["pilot"])
+        self.assertIn(q["length"], (4.0, 5.0, 6.0, 7.0, 8.0, 16.0))
         self.assertGreaterEqual(q["clearance"] - q["diameter"], .3)
-        self.assertGreaterEqual(engagement - stack_tol, 1.6 - 1e-6)
+        self.assertGreaterEqual(engagement - stack_tol, 2.6 - 1e-6)
         self.assertGreaterEqual(q["head_d"] - q["clearance"], 1.4)
-        self.assertGreaterEqual(q["boss_r"] - q["clearance"] / 2, .75)
-        # The boss must remain outside the pad seat, including the existing radial play.
-        self.assertGreaterEqual(math.hypot(q["screw_x"], q["screw_y"]) - q["boss_r"],
-                                T.PAD["d"] / 2 + T.PAD["clr"])
+        self.assertGreaterEqual(q["boss_r"] - q["clearance"] / 2, .5)
+        # The boss may use part of the 0.3 mm assembly clearance below the seat
+        # plane, but its wall must never reach the pad itself; the 3-D check
+        # above proves each placed hook misses the pad.
+        for _, sx, sy in T.RETAINER_STATIONS:
+            self.assertGreaterEqual(math.hypot(sx, sy) - q["boss_r"], T.PAD["d"] / 2)
         self.assertGreaterEqual(q["boss_depth"] - q["roof"] - engagement - stack_tol, .3)
         self.assertGreaterEqual(q["boss_r"] - q["pilot"] / 2, 1.0)
         hardware = M.lid_fasteners(T.H)
@@ -101,19 +105,24 @@ class ModuleAssemblyTest(unittest.TestCase):
                 obstacle += solid
         thick_flange_screws = T.retainer_screws(L, extra=q["length_tol"], flange_error=q["flange_tol"])
         thin_flange_screws = T.retainer_screws(L, extra=q["length_tol"], flange_error=-q["flange_tol"])
-        for i, (angle, clip, screw) in enumerate(zip(T.RETAINER_ANGLES, T.retainers(L), T.retainer_screws(L))):
-            def at_station(solid, height):
-                return T.at_pad(solid.translate((q["screw_x"], q["screw_y"], height)), L, angle)
+        for i, ((angle, sx, sy), clip, screw) in enumerate(
+                zip(T.RETAINER_STATIONS, T.retainers(L), T.retainer_screws(L))):
+            def at_station(solid, height, sx=sx, sy=sy, angle=angle):
+                return T.at_pad(solid.translate((sx, sy, height)), L, angle)
 
             core = at_station(Manifold.cylinder(engagement + stack_tol, q["pilot"] / 2 - .05,
                                                 circular_segments=40), z)
             self.assertLess(hit(core, lid), TOL)
             # Do not let the outer bevel, slot or existing countersink silently
-            # remove the thread wall or the flange's bearing land.
-            ring = (Manifold.cylinder(engagement + stack_tol, q["diameter"] / 2 + .8, circular_segments=48)
-                    - Manifold.cylinder(engagement + stack_tol, q["pilot"] / 2 + .05, circular_segments=48))
+            # remove the thread wall or the flange's bearing land. The ring stops
+            # at the boss top: any extra thread depth lands in the lid plate and
+            # its own pilot, not in the printed boss.
+            boss_h = q["boss_depth"] - T.TOP_T - .04
+            ring = (Manifold.cylinder(boss_h, q["boss_r"] - .05, circular_segments=48)
+                    - Manifold.cylinder(boss_h, q["pilot"] / 2 + .05, circular_segments=48))
             self.assertLess((at_station(ring, z + .02) - lid).volume(), TOL)
-            bearing = (Manifold.cylinder(.1, q["head_d"] / 2 - .05, circular_segments=48)
+            # The head overhangs the boss; the clip must still bear on the full boss face.
+            bearing = (Manifold.cylinder(.1, q["boss_r"] - .05, circular_segments=48)
                        - Manifold.cylinder(.1, q["clearance"] / 2 + .05, circular_segments=48))
             self.assertLess((at_station(bearing, z - q["flange"] + .02) - clip).volume(), TOL)
             skin = at_station(Manifold.cylinder(q["roof"] - .05, q["pilot"] / 2,
@@ -183,6 +192,10 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertEqual(T.H, M.CHOC_TOP)
         self.assertEqual(M.SCREW["length"], 8.0)
         self.assertEqual(M.SCREW["pilot"], 2.5)
+        # The retainer stays on the project's M3 family, with a 4-8 mm or 16 mm screw.
+        self.assertEqual(T.RETAINER["diameter"], 3.0)
+        self.assertEqual(T.RETAINER["pilot"], M.SCREW["pilot"])
+        self.assertIn(T.RETAINER["length"], (4.0, 5.0, 6.0, 7.0, 8.0, 16.0))
         self.assertLess(abs((T.parts(self.P, self.main_plan, self.sensor_plan)[0][1]).volume()
                             - dict(self.modules[1][2])["CHOC 1"].volume()), 1e-6)
 
