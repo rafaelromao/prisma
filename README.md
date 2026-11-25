@@ -314,7 +314,7 @@ sockets on the shared main board and stands at the Choc lid's height, 1.2 mm ove
 
 - The original pad ledge supports the underside perimeter. Two identical printed keyed clips
   (`trackpad/case/retainer.stl`, print twice) hook over opposite outer edge sectors and
-  attach from inside with M2 × 3 pan-head screws. No sensor adhesive. The raised hooks
+  attach from inside with M3 × 4 pan-head screws. No sensor adhesive. The raised hooks
   leave the original pad datum, key positions, cable clearance and tray unchanged.
   Qualify the actual overlay edge, printed fit and screw engagement before use; see BUILD.md.
 - Retain the supplied I²C breakout with its pull-up resistors and original 12-pin flat cable.

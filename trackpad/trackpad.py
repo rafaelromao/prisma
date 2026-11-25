@@ -31,11 +31,12 @@ TOP_T = 1.2                    # the top: a Choc plate (the switches clip into 1
 # Keep the original seat and pad datum; the ledge supports the free underside ring.
 # Two removable side hooks capture only the outer edge, with no adhesive or preload.
 PAD = dict(d=40.0, t=1.2, back=4.4, clr=0.3, rim=1.0, ledge=1.8, gap=12.0)
-# M2 pan-head, length under head. These are provisional printable-pilot dimensions,
-# not an assumption that all M2 hardware has the same head or usable thread.
-RETAINER = dict(length=3.0, pilot=1.65, clearance=2.3, head_d=3.8, head_h=1.5,
-                flange=1.2, boss_depth=3.0, roof=.6, boss_r=2.0,
-                screw_x=21.7, screw_y=5.4, slide=1.35, axial_play=.2,
+# M3 x 4 pan-head, length under head. Use the existing M3 pilot diameter,
+# but a shorter screw than the tray's M3 x 8 to preserve the blind roof.
+# Head envelope and thread pull-out strength require physical qualification.
+RETAINER = dict(diameter=3.0, length=4.0, pilot=M.SCREW["pilot"], clearance=3.4,
+                head_d=5.6, head_h=2.4, flange=1.2, boss_depth=4.0, roof=.6,
+                boss_r=2.9, screw_x=22.0, screw_y=7.8, slide=1.35, axial_play=.2,
                 edge_overlap=.9, lip_t=.8)
 BREAKOUT = (24.0, 18.0, 4.5)   # reserved maximum envelope, including parts/connector, not a measured kit
 BREAKOUT_LIFT = 2.5            # insulating spacer clears the sensor-board screw heads; no holder
@@ -160,7 +161,7 @@ def retainer_screws(L, heads_only=False, extra=0.0):
     head = Manifold.cylinder(q["head_h"], q["head_d"] / 2, circular_segments=48)
     screw = head.translate((x, y, z - q["head_h"]))
     if not heads_only:
-        screw += Manifold.cylinder(q["length"] + extra, 1.0, circular_segments=48).translate((x, y, z))
+        screw += Manifold.cylinder(q["length"] + extra, q["diameter"] / 2, circular_segments=48).translate((x, y, z))
     return [_at_pad(screw, L, side) for side in (1, -1)]
 
 

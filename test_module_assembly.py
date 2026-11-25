@@ -70,7 +70,15 @@ class ModuleAssemblyTest(unittest.TestCase):
         q = T.RETAINER
         z = T.retainer_floor()
         engagement = q["length"] - q["flange"]
-        self.assertGreaterEqual(engagement, 1.8 - 1e-6)
+        self.assertEqual(q["diameter"], 3.0)
+        self.assertEqual(q["pilot"], M.SCREW["pilot"])
+        self.assertGreaterEqual(q["clearance"] - q["diameter"], .4 - 1e-6)
+        self.assertGreaterEqual(engagement, 2.8 - 1e-6)
+        self.assertGreaterEqual(q["head_d"] - q["clearance"], 2.0)
+        self.assertGreaterEqual(q["boss_r"] - q["clearance"] / 2, 1.0)
+        # The boss must remain outside the pad seat, including the existing radial play.
+        self.assertGreaterEqual(math.hypot(q["screw_x"], q["screw_y"]) - q["boss_r"],
+                                T.PAD["d"] / 2 + T.PAD["clr"])
         self.assertGreaterEqual(q["boss_depth"] - q["roof"] - engagement - .2, .3)
         self.assertGreaterEqual(q["boss_r"] - q["pilot"] / 2, 1.0)
         hardware = M.lid_fasteners(T.H)
@@ -88,6 +96,14 @@ class ModuleAssemblyTest(unittest.TestCase):
             core = Manifold.cylinder(engagement + .2, q["pilot"] / 2 - .05,
                                       circular_segments=40).translate((x, y, z))
             self.assertLess(hit(core, lid), TOL)
+            # Do not let the outer bevel, slot or existing countersink silently
+            # remove the M3 thread wall or the flange's bearing land.
+            ring = (Manifold.cylinder(engagement, q["diameter"] / 2 + 1.0, circular_segments=48)
+                    - Manifold.cylinder(engagement, q["pilot"] / 2 + .05, circular_segments=48))
+            self.assertLess((ring.translate((x, y, z + .02)) - lid).volume(), TOL)
+            bearing = (Manifold.cylinder(.1, q["head_d"] / 2 - .05, circular_segments=48)
+                       - Manifold.cylinder(.1, q["clearance"] / 2 + .05, circular_segments=48))
+            self.assertLess((bearing.translate((x, y, z - q["flange"] + .02)) - clip).volume(), TOL)
             skin = Manifold.cylinder(q["roof"] - .05, q["pilot"] / 2,
                                       circular_segments=40).translate((x, y, T.H - q["roof"] + .02))
             self.assertLess((skin - lid).volume(), TOL)

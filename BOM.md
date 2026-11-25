@@ -81,7 +81,7 @@ buy for the halves.
 | Trackpad | Qty | Search for | Notes |
 |---|---|---|---|
 | Printed edge retainer, `trackpad/case/retainer.stl` | 2 | | Identical keyed clips, rotated 180° relative to each other |
-| M2 × 3 mm pan-head screws | 2 | `M2x3 pan head machine screw` | Under-head length, head ≤3.8 mm diameter and ≤1.5 mm height; blind printed pilots, verify engagement and tip clearance |
+| M3 × 4 mm pan-head screws | 2 | `M3x4 pan head machine screw` | Under-head length, head ≤5.6 mm diameter and ≤2.4 mm height; blind printed pilots, verify engagement and tip clearance |
 | Cirque TM040040-2023-302 or I²C-configured kit | 1 | `Cirque 40mm I2C flat overlay` | Use the supplied I²C breakout and flat cable; on SPI-labelled kits remove R1 for I²C, keeping R7/R8 for 3.3 V |
 | Supplied I²C breakout with pull-ups + 12-pin FFC | 1 + 1 | supplied with the kit | Reserved maximum breakout envelope 24 × 18 × 4.5 mm; confirm actual size and FFC contact orientation. Four MCU wires to breakout, separate DR wire directly to Cirque underside |
 | Choc v1 switches, sockets and keycaps | 2 + 2 + 2 | same as items 3, 4, 5 | Compact caps only: 17.5 × 16.5 mm, rotated with the switches (17.5 mm front-to-back here). Centred nominal pad gap 0.585 mm, potentially 0.285 mm after radial seat play; verify actual placement/travel/wobble. |
