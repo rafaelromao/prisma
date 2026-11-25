@@ -1,9 +1,9 @@
 """Passive drawer lid: one print on the canonical pointing-module tray.
 
 The assembled module uses the existing feet, magnets, rear hooks and four
-M3 x 8 flat-head screws. No electronics, no dedicated bottom. The standard
-low lid is 1.2 mm above the halves' top-edge datum: an exactly flush top
-would bottom the unchanged screws in the tray's pilots.
+M3 x 8 flat-head screws. No electronics, no dedicated bottom. The roof is
+1.0 mm above the halves' top-edge datum: a flush roof would bottom the
+unchanged screws in the tray's pilots.
 """
 from pathlib import Path
 import shutil
@@ -14,11 +14,11 @@ import case as C
 import module_shell as M
 from trackball import trackball as B
 
-H = M.CHOC_TOP
-TOP_T = H - M.FLUSH
+TOP_T = 1.0
+H = M.FLUSH + TOP_T
 # Thicken the broad forward roof down into the empty enclosure, without
 # crossing the post tops or extending into the rear hook/service region.
-ROOF_EXTRA = .8
+ROOF_EXTRA = 1.0
 SOURCE = Path("case/placeholder_lid.stl")
 PUBLIC = Path("stls/placeholder_lid.stl")
 

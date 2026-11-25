@@ -91,36 +91,6 @@
       "winding": true
     },
     {
-      "path": "case/insert.stl",
-      "sha256": "009e3ad21f03ad71b5c9cce6d2ffd733d1060f5c9952c38ffeb58df44788a488",
-      "bytes": 132384,
-      "triangles": 2646,
-      "components": 1,
-      "volume_mm3": 71566.53705,
-      "size_mm": [
-        55.95002,
-        100.81739,
-        21.97732
-      ],
-      "watertight": true,
-      "winding": true
-    },
-    {
-      "path": "stls/insert.stl",
-      "sha256": "009e3ad21f03ad71b5c9cce6d2ffd733d1060f5c9952c38ffeb58df44788a488",
-      "bytes": 132384,
-      "triangles": 2646,
-      "components": 1,
-      "volume_mm3": 71566.53705,
-      "size_mm": [
-        55.95002,
-        100.81739,
-        21.97732
-      ],
-      "watertight": true,
-      "winding": true
-    },
-    {
       "path": "case/module_tray.stl",
       "sha256": "c6c455574bdc0118db045d33223c8f831251271197c57f10c5e657e8725efa38",
       "bytes": 246284,
@@ -146,6 +116,36 @@
         55.95002,
         100.81739,
         20.97732
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "case/placeholder_lid.stl",
+      "sha256": "0a38203ed1f314169ccb9c29ba9b01a7a0ce37c7e2c83bcd1b189bcd071fd513",
+      "bytes": 77084,
+      "triangles": 1540,
+      "components": 1,
+      "volume_mm3": 5647.85662,
+      "size_mm": [
+        55.13846,
+        84.83187,
+        3.08
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "stls/placeholder_lid.stl",
+      "sha256": "0a38203ed1f314169ccb9c29ba9b01a7a0ce37c7e2c83bcd1b189bcd071fd513",
+      "bytes": 77084,
+      "triangles": 1540,
+      "components": 1,
+      "volume_mm3": 5647.85662,
+      "size_mm": [
+        55.13846,
+        84.83187,
+        3.08
       ],
       "watertight": true,
       "winding": true
@@ -272,11 +272,11 @@
     },
     {
       "path": "trackpad/case/lid.stl",
-      "sha256": "cb73e4e1c6595c4eec869e824af33744545ff131a6dfc88897753d61739f8794",
-      "bytes": 276184,
-      "triangles": 5522,
+      "sha256": "693cd4063bf3ff59d6755812b06ed22d5ba68662ef68014412cfc1af15a5a051",
+      "bytes": 320184,
+      "triangles": 6402,
       "components": 1,
-      "volume_mm3": 2027.77563,
+      "volume_mm3": 1992.5789,
       "size_mm": [
         55.13846,
         84.83187,
@@ -287,15 +287,45 @@
     },
     {
       "path": "stls/trackpad_lid.stl",
-      "sha256": "cb73e4e1c6595c4eec869e824af33744545ff131a6dfc88897753d61739f8794",
-      "bytes": 276184,
-      "triangles": 5522,
+      "sha256": "693cd4063bf3ff59d6755812b06ed22d5ba68662ef68014412cfc1af15a5a051",
+      "bytes": 320184,
+      "triangles": 6402,
       "components": 1,
-      "volume_mm3": 2027.77563,
+      "volume_mm3": 1992.5789,
       "size_mm": [
         55.13846,
         84.83187,
         3.28
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "trackpad/case/retainer.stl",
+      "sha256": "a7f258ad89590e83977d566c633608c9b683e259f0842535c4ffee3bc48059cd",
+      "bytes": 17284,
+      "triangles": 344,
+      "components": 1,
+      "volume_mm3": 37.26859,
+      "size_mm": [
+        4.95,
+        5.2,
+        7.35
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "stls/trackpad_retainer.stl",
+      "sha256": "a7f258ad89590e83977d566c633608c9b683e259f0842535c4ffee3bc48059cd",
+      "bytes": 17284,
+      "triangles": 344,
+      "components": 1,
+      "volume_mm3": 37.26859,
+      "size_mm": [
+        4.95,
+        5.2,
+        7.35
       ],
       "watertight": true,
       "winding": true
@@ -315,12 +345,12 @@
       "stls/dock.stl"
     ],
     [
-      "case/insert.stl",
-      "stls/insert.stl"
-    ],
-    [
       "case/module_tray.stl",
       "stls/module_tray.stl"
+    ],
+    [
+      "case/placeholder_lid.stl",
+      "stls/placeholder_lid.stl"
     ],
     [
       "case/plate_left.stl",
@@ -341,6 +371,10 @@
     [
       "trackpad/case/lid.stl",
       "stls/trackpad_lid.stl"
+    ],
+    [
+      "trackpad/case/retainer.stl",
+      "stls/trackpad_retainer.stl"
     ]
   ],
   "note": "Binary topology/copy integrity only; not a physical buildability certificate."

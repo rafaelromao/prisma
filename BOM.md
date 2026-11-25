@@ -42,7 +42,7 @@ magnets meet the steel directly. Use the mirrored SVGs in `case/` for alignment 
 Minimum centred clear flat contact circle **54 mm**; prefer about **60 mm** if it clears the
 feet and obstructions. Attraction alone does not qualify retention at a typing angle.
 
-**Passive drawer placeholder:** one common tray (`case/module_tray.stl`), one plain top lid (`case/placeholder_lid.stl`, CAD export pending), four M3 × 8 flat-head screws, seven common discs (three a side, one in the floor), and three 8 × 2 mm bump-ons. No electronics, battery or sensor screws. Swap the lid on a spare empty tray or reuse an existing unpopulated tray. See [passive lid verification](PLACEHOLDER_LID.md); the old solid insert is retired.
+**Passive drawer placeholder:** one common tray (`case/module_tray.stl`), one [plain top lid](stls/placeholder_lid.stl), four M3 × 8 flat-head screws, seven common discs (three a side, one in the floor), and three 8 × 2 mm bump-ons. No electronics, battery or sensor screws. Swap the lid on a spare empty tray or reuse an existing unpopulated tray. See [passive lid qualification](PLACEHOLDER_LID.md); the old solid insert is retired.
 
 **Magnet total:** both halves 26 + dock and base 31 + placeholder 7 + both pointing modules 14
 = **78 discs**, before spares, if building three complete separate trays. The three discs glued to the dock stand's aluminium **base**
@@ -79,8 +79,8 @@ buy for the halves.
 
 | Trackpad | Qty | Search for | Notes |
 |---|---|---|---|
-| Printed edge retainer, `trackpad/case/retainer.stl` | 2 | | Identical keyed clips, rotated 180° relative to each other |
-| M3 × 4 mm pan-head screws | 2 | `M3x4 pan head machine screw` | Under-head length, head ≤5.6 mm diameter and ≤2.4 mm height; blind printed pilots, verify engagement and tip clearance |
+| Printed edge retainer, `trackpad/case/retainer.stl` | 2 | | Identical keyed clips, one in each front-side seat |
+| M2 × 3 mm pan-head screws | 2 | `M2x3 pan head machine screw` | Under-head length, head ≤3.8 mm diameter and ≤1.6 mm height; blind printed pilots, verify engagement and tip clearance |
 | Cirque TM040040-2023-302 or I²C-configured kit | 1 | `Cirque 40mm I2C flat overlay` | Use the supplied I²C breakout and flat cable; on SPI-labelled kits remove R1 for I²C, keeping R7/R8 for 3.3 V |
 | Supplied I²C breakout with pull-ups + 12-pin FFC | 1 + 1 | supplied with the kit | Reserved maximum breakout envelope 24 × 18 × 4.5 mm; confirm actual size and FFC contact orientation. Four MCU wires to breakout, separate DR wire directly to Cirque underside |
 | Choc v1 switches, sockets and keycaps | 2 + 2 + 2 | same as items 3, 4, 5 | Compact caps only: 17.5 × 16.5 mm, rotated with the switches (17.5 mm front-to-back here). Centred nominal pad gap 0.585 mm, potentially 0.285 mm after radial seat play; verify actual placement/travel/wobble. |

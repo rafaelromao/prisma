@@ -2,7 +2,24 @@
 # Renders the board variants made by render_boards.py.
 set -eu
 cd "$(dirname "$(readlink -f "$0")")"
+# Optional output basenames let a mechanical-only change rerender just
+# the affected views with the same camera and quality as a full run.
+selected="$*"
 r() {
+    if [ -n "$selected" ]; then
+        output=
+        for arg do
+            if [ "$output" = next ]; then
+                output=${arg##*/}
+                break
+            fi
+            [ "$arg" != -o ] || output=next
+        done
+        case " $selected " in
+            *" $output "*) ;;
+            *) return 0 ;;
+        esac
+    fi
     if ./kicad.sh kicad-cli pcb render --quality high --background opaque -w 1600 -h 1200 "$@" > .render/render-command.log 2>&1; then
         return 0
     else
@@ -85,6 +102,8 @@ if [ -f trackball/pcb/trackball.kicad_pcb ]; then
     r --side top    --zoom 0.85 -o renders/trackball_board_top.png    trackball/pcb/trackball.kicad_pcb
     r --side bottom --zoom 0.85 -o renders/trackball_board_bottom.png trackball/pcb/trackball.kicad_pcb
 fi
+
+[ -z "$selected" ] || exit 0
 
 # BUILD.md's close-ups of the Xiao area on each half's switch face (mask and silkscreen; the right
 # half mirrored, as you see it turned over).

@@ -86,7 +86,7 @@
         1568,
         1176
       ],
-      "sha256": "224a1e277f64f0708b77c7bbd344eafedbf32664a0e116ae91e740472b065a41"
+      "sha256": "a793fe3c20ea2896061fba2d7515ec8b0ef31545c526ce7a4e89f03d1b1e0232"
     },
     {
       "path": "renders/dock_under.png",
@@ -140,9 +140,9 @@
       "path": "renders/modules.png",
       "size": [
         1800,
-        6500
+        7000
       ],
-      "sha256": "ecce49d1fd3a174fbe593fa40d1c9d30f40accfeb56b156e1d542912e915947a"
+      "sha256": "62041c1e1563b13c16b7cb3347f5c67fa4548a427d9f29e4b5bcf510d3525496"
     },
     {
       "path": "renders/pads.png",
@@ -167,6 +167,14 @@
         1176
       ],
       "sha256": "5d4f33571a228de86660e97d92cb84e5c233ac2a82c8ae8da27f69078ba23202"
+    },
+    {
+      "path": "renders/placeholder_structure.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "7f26fe916295a9e7c208a774ad594ff9c98c3a61807841a1a34e65a04278bf56"
     },
     {
       "path": "renders/plate.png",
@@ -470,7 +478,7 @@
         1568,
         1176
       ],
-      "sha256": "b65265680f12d285ec1e9627dbb4b9a24507975a7d7b34cc2975c66f669ab5c1"
+      "sha256": "bb8a3683755bb0856e1c9c8de793ee2fda5a9f6ef20fc8b44ca8672dc6051d9e"
     },
     {
       "path": "renders/trackpad_assembly.png",
@@ -478,7 +486,7 @@
         1568,
         1176
       ],
-      "sha256": "2a7f0a97e7c976b120497d9f90848007ef5002e36d20089fe9910e41c97a48b7"
+      "sha256": "38a4fd3d4dc032298ab7ea450258b89494e6c5cef9ce99d851c832ae79dc540b"
     },
     {
       "path": "renders/trackpad_open.png",
@@ -486,7 +494,7 @@
         1568,
         1176
       ],
-      "sha256": "51783ae873933435421bb1f65ffa55b5a73556496107e688cc125d299be37991"
+      "sha256": "1d35a8ba362cd82e43a2d8fd7dbebd28043abe9e01adad76116b5bf3055a9593"
     },
     {
       "path": "renders/trackpad_rear.png",
@@ -494,15 +502,15 @@
         1568,
         1176
       ],
-      "sha256": "9d2b39c8eb886681a423b3ff5da24e3fa841bd6b5fec831560a317478d002098"
+      "sha256": "fa629db769b0c8d0272aa5d5736158ec37398406bc8fe97ab9a0c8aaeb8d216a"
     },
     {
       "path": "renders/trackpad_reset.png",
       "size": [
         1568,
-        1256
+        1176
       ],
-      "sha256": "c274c9364f5425c2f498122f15a34c2b31c3a92974a8dab2a10cca0f2ee61e16"
+      "sha256": "857de62d046d708ba64d8444db2cf9996c9799bfcd2aa3ad25b36f8213902a5a"
     },
     {
       "path": "renders/trackpad_seam.png",
@@ -510,15 +518,15 @@
         1568,
         1176
       ],
-      "sha256": "f067fd9858f212ba5d4e7f1405417d5cf06af6569de2fdc1138d3c69e70e97ee"
+      "sha256": "80ea8f0c577fbe43a6e54c5eaf126490ab46e007c0716eb3dc4b69e40a349d30"
     },
     {
       "path": "renders/trackpad_stack.png",
       "size": [
         1568,
-        1256
+        1176
       ],
-      "sha256": "dd08044f86b630cf3e34b63515cad3229331eefa641d8478cabe629881b10d9c"
+      "sha256": "e83683a007b4e7464e94d80cd7d3294cbdc79faa3738ce54bfb5cf705df07b94"
     },
     {
       "path": "renders/trackpad_structure.png",
@@ -526,15 +534,15 @@
         1568,
         1176
       ],
-      "sha256": "04d0fce78110a52b8917716f95b0159dc70c8ba894c2c727a81daead4572f375"
+      "sha256": "63925db6e23b75665fb24172f57fdcfcb20b838f0740505f4123c6b82cf5b0fb"
     },
     {
       "path": "renders/trackpad_tray.png",
       "size": [
         1568,
-        1256
+        1176
       ],
-      "sha256": "46c0d8d9012419f50e2300e9071cbb4f59a0c272e597e559752cfe7561c9d0c6"
+      "sha256": "ecd01cccd8ffb4ac0db37b87e56f7d6edbf7cfa18cfa3de200d5d97d24b0c4cd"
     },
     {
       "path": "renders/trackpad_under.png",
@@ -542,7 +550,7 @@
         1568,
         1176
       ],
-      "sha256": "6229ce581c785f8387902ca8f3117f3b53b93f88deb6dbda4dc989b06f09d9b9"
+      "sha256": "c8e787960db4bc8059b68a3537fc312b52157ce66df510582fd2c7ef14de538b"
     },
     {
       "path": "renders/trackpad_usb.png",
@@ -550,7 +558,7 @@
         1568,
         1176
       ],
-      "sha256": "a4ccb80c75d254d38926cc4e82b2fbf989a00639edbd70868ed89db0c8e4b84c"
+      "sha256": "d9b40b13c2eea2449c52bfc2c9b532207acfe4af7573dacffa078dd463a9590a"
     },
     {
       "path": "renders/trackpad_usb_dock.png",
@@ -558,7 +566,7 @@
         1568,
         1176
       ],
-      "sha256": "7279cc59b537f3b9a0ddd85098fd0e21c11373fdce4dc46bcafa681c6a3604a6"
+      "sha256": "7795076c6b7e69f734434d43970d707e284e004469241a7da57d333fa2d6513c"
     },
     {
       "path": "renders/trackpad_usb_open.png",
@@ -566,7 +574,7 @@
         1568,
         1176
       ],
-      "sha256": "25d2208f427d19cf8c7ead7125fd8061b83c6dd49788d69e04ae5b2a8e6489ee"
+      "sha256": "46fe8eab5f8fc56a07b6125d1a7da8255ce0fd890b58d5ca9e64062e5a5185d4"
     },
     {
       "path": "renders/trackpad_with_half.png",
@@ -574,7 +582,7 @@
         1568,
         1176
       ],
-      "sha256": "2fa61ccf0f4e141dd5a7dad29b8544daa32b9e155e1a70766049af2bf0df4beb"
+      "sha256": "610b20c914f13c3c3c85e1c57c17ee21cabb8fd5ea31f3dd45f2fbcaf8898b22"
     },
     {
       "path": "renders/unibody.png",
@@ -628,11 +636,11 @@
   "inputs": [
     {
       "path": ".render/scenes.json",
-      "sha256": "4e2dfa2ee02b25ba88d3195ec74c991fb4d7ca00864cc537b5f7a693a5a79e66"
+      "sha256": "a5757a0dc0c6340de87721498f4c27bd9f886d04d03950ed65ff7cbe624edcd6"
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "e3ef4dce70a0eed2dff8995cb88a1944f0da9b0f150a91b25dfe646babd2b84d"
+      "sha256": "2336aa36a5fa9a6ec33fe9e89362f79b1e7d8f76806493ced24e9fb0f8751610"
     },
     {
       "path": "build_pcb.py",
@@ -668,7 +676,7 @@
     },
     {
       "path": "insert.py",
-      "sha256": "c189db216b978071d6e4c335bc218fef9d0747fedd0f14919a758ca6ae6293bb"
+      "sha256": "f099e5baee31c152fe65ad440231e6ae9b86175c1e10edbe6a655b1ab523315f"
     },
     {
       "path": "layout.py",
@@ -677,6 +685,10 @@
     {
       "path": "magnets.py",
       "sha256": "a25d3cbea41a09db9819618d4b1b586ef8aff7406f698993ef4e6c51d7bba27d"
+    },
+    {
+      "path": "module_battery.py",
+      "sha256": "3aa611ea99ab3a2e4e77ae70d9269ac37f7be62cf6bb809c552d181e17fb7f8d"
     },
     {
       "path": "module_shell.py",
@@ -688,7 +700,7 @@
     },
     {
       "path": "render.sh",
-      "sha256": "947e2d046c049ceced567460f25bef5d0974eec983f025dbc49e4b0cf08e983b"
+      "sha256": "3c8c2dcca165cc8ab04a46a6a68ea52dfbde49cea3c8b3f12be130238a803ff8"
     },
     {
       "path": "render_boards.py",
@@ -696,7 +708,7 @@
     },
     {
       "path": "render_manifest.py",
-      "sha256": "ddd09c21798f4267f80b48a298d1dff9335ad1de5bd5a08846c9324f60699005"
+      "sha256": "d28336a7e3de9a8cb747e002bfca313a4b7845ee0c1ac889629ac1f896fa87ba"
     },
     {
       "path": "render_notes.py",
@@ -704,7 +716,7 @@
     },
     {
       "path": "scene.py",
-      "sha256": "cfeb59fd15b25aa82cf4bb7de6da3cbc97a79ead55931992d444fd1ff94a0483"
+      "sha256": "2c9c142efb3e0d6ca0b480d0c4bcdc433b1cd845d951f212c3cb34099e989e2c"
     },
     {
       "path": "stand_mount.py",
@@ -720,7 +732,7 @@
     },
     {
       "path": "test_drawer.py",
-      "sha256": "c8fad33e4fc288fb6b572315c160929567475a1d2cbe85f2e60bf246d1a443f4"
+      "sha256": "f6fbd3c81ba3c6ff1f3f240405335672a4110cabbc572fcf05a29f595d61b42c"
     },
     {
       "path": "test_half_battery.py",
@@ -728,11 +740,11 @@
     },
     {
       "path": "test_module_assembly.py",
-      "sha256": "0421e0cd52dfd7a7c151c17a086bd54d7a52ecb689a566d62eb34f57d27c9b4d"
+      "sha256": "d763de96df6b022fcb0b4a3cfd27bdc40a4b8553851fb67b1b8d3fd3a39a5326"
     },
     {
       "path": "test_stl_export.py",
-      "sha256": "cc1a735a5e065f4908080aa6afecfcb2c7c376e96eb17c72a4781916bbc5283c"
+      "sha256": "5d4a64b4efe90e7029988d5dabc1f34c98ffcfd47a769c50a6ed9a6962bfccd1"
     },
     {
       "path": "test_switch_mount.py",
@@ -760,11 +772,11 @@
     },
     {
       "path": "trackball/trackball.py",
-      "sha256": "33c6142d4ee96ed1f1d82a7fd88a11205b986bc0044a3d3ea3a244fa1c5c73d3"
+      "sha256": "03d825562a2f4e69f4c839a6c3e7acedabb9f35ade0eb4fe2c8affc1eb9ac6c2"
     },
     {
       "path": "trackpad/trackpad.py",
-      "sha256": "d8c7c34e3ec0601da796de148975aca6130cc5244d6f8696c0dc06ef9c272807"
+      "sha256": "cc0698451bf85e02dcbbfb13af769b17905fcade9f3ef74a4e03a9cb5067e2c3"
     },
     {
       "path": "verify_artifacts.py",
@@ -775,5 +787,9 @@
       "sha256": "6a98eba0532f105d5fb0197a23fa0adddf1562ee9f25d77d62ad8277633e4121"
     }
   ],
-  "note": "Freshness checked against the final scene and both final PCBs."
+  "note": "Listed PNGs refreshed from the final scene; other views verified against the preceding manifest.",
+  "updated_views": [
+    "dock_insert.png",
+    "placeholder_structure.png"
+  ]
 }

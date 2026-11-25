@@ -20,6 +20,7 @@ jobs:
       - run: python check_fit.py
       - run: python stand_mount.py
       - run: python verify_artifacts.py
+      - run: git diff --exit-code -- STL_EXPORT_MANIFEST.json
 
   electrical:
     runs-on: ubuntu-latest
