@@ -1,8 +1,7 @@
 # Passive drawer lid (#5)
 
-**Draft: source only, not qualified or print-ready.** The old solid insert
-has been retired (its two STL copies are removed; the existing
-`renders/dock_insert.png` is a legacy view until regenerated).
+The old solid insert has been retired. The shared-tray lid's STL and dock
+views are CAD-verified; the physical assembly is not yet qualified.
 
 The passive module is the canonical `case/module_tray.stl` plus a
 plain, removable top-down `case/placeholder_lid.stl` (public copy
@@ -12,11 +11,12 @@ sensor screws, keys or decorations. The existing control passages remain
 empty and unsealed for tray reuse; it is not dust- or water-tight.
 The lid has no control openings. Do not print or modify the tray per variant.
 
-The nominal lid top is FLUSH + 1.2 mm. At FLUSH the standard screws
-would bottom out (13.477 mm tip vs 13.9 mm pilot bottom); the standard low
-lid gives 0.777 mm nominal tip clearance (0.577 mm with 0.2 mm extra screw
-length), and 5.8 mm nominal engagement. The broad roof is 2.0 mm nominal
-(1.2 mm upper roof plus 0.8 mm inset thickening); the thinner rear hook
+The nominal lid top is FLUSH + 1.0 mm. At FLUSH the standard screws
+would bottom out (13.477 mm tip vs 13.9 mm pilot bottom). A 0.923 mm rise is
+the theoretical minimum for 0.3 mm tip clearance plus 0.2 mm screw allowance.
+The 1.0 mm upper roof gives 0.577 mm nominal tip clearance (0.377 mm with
+the allowance), and 6.0 mm nominal engagement. The broad roof is 2.0 mm nominal
+(1.0 mm upper roof plus 1.0 mm inset thickening); the thinner rear hook
 and perimeter region follows the shared interface. These are CAD
 dimensions, not validated measurements. The plain top avoids relief
 weakening the roof. No claim of solid-block strength or dock reinforcement.
@@ -24,8 +24,7 @@ weakening the roof. No claim of solid-block strength or dock reinforcement.
 ## Regeneration and acceptance gates
 
 Run from the repository root with the pinned requirements and KiCad/render
-toolchain. The source and tests are intentionally not a substitute for
-the generated binaries; do not publish the new lid until these pass.
+toolchain. These checks are not a substitute for physical tests.
 
 ```sh
 python insert.py
@@ -37,15 +36,14 @@ python verify_artifacts.py
 python vrml.py
 python scene.py
 ./kicad.sh python3 render_boards.py
-./render.sh
-python render_manifest.py
+./render.sh dock_insert.png placeholder_structure.png
+python render_manifest.py --update dock_insert.png placeholder_structure.png
 python page.py
 ```
 
-First complete PR #8's retainer export and any inherited regeneration gates.
 Check actual binary STL topology, orientation, connected material, source/public
 parity, vertices, and updated manifests; inspect the dock and exploded
-`placeholder_structure` imagery, then update legacy/pending notices.
+`placeholder_structure` imagery.
 Run the electrical CI checks and compare regenerated PCB geometry, netlists,
 Gerber and drill data to the pinned baseline; never commit changed fabrication
 outputs. Stored PCB blob equality is distinct from regenerated equivalence.
@@ -68,5 +66,4 @@ outputs. Stored PCB blob equality is distinct from regenerated equivalence.
 - Check the unused openings remain harmless and nothing loose can enter the
   assembly during intended handling. No electronics are installed.
 
-No CAD execution, STL generation, rendering, physical tests or electrical
-regeneration were performed in the editing environment.
+Physical tests and electrical regeneration were not performed.

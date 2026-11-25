@@ -29,7 +29,8 @@ uses the standard low-lid height, with a locally thickened broad roof.
 At `M.FLUSH`, an 8 mm screw tip would be at Z=13.477, below the existing
 Z=13.9 pilot bottom; the 1.2 mm rise avoids this without changing the tray
 or screw standard. See [passive lid verification](PLACEHOLDER_LID.md).
-The solid insert is retired; the dongle (#6) is separate.
+The installed passive lid is only 1.0 mm above FLUSH, using the standard
+M3 × 8 screws. The solid insert is retired; the dongle (#6) is separate.
 
 ## Battery reservation
 
@@ -88,7 +89,7 @@ insertion path. `test_drawer.py` covers the blank interface and dock/desk
 fit. `test_stl_export.py` checks the canonical binary and public copy;
 the shared tray geometry and published STL bytes remain unchanged. The carrier
 is cut sheet and spacers, not a new STL. The passive lid has its own export
-and render sources, pending execution; the dongle will need its own assets.
+and updated dock/assembly views; the dongle will need its own assets.
 
 PCB freeze: do not change `B.place()`, board plans, PCB footprints, holes,
 netlists, pin assignments or fabrication artifacts. The existing mechanical

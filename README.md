@@ -128,8 +128,8 @@ holes before ordering. A clean DRC does not establish production yield.
 | `pcb/` | The KiCad 9 project, its footprint library, 3D stand-ins, and DRC rules |
 | `case/case_left.stl`, `case/case_right.stl` | The printed base |
 | `case/plate_left.stl`, `case/plate_right.stl` | The printed top plate, oriented top face down for printing |
-| `case/dock.stl`, `case/placeholder_lid.stl` | The cyberdeck dock, and the passive lid for the common drawer tray (lid export pending) |
-| `stls/` | The same printable parts under print-friendly names: case and plate left/right, dock, passive lid (export pending), module tray, and the trackball/trackpad lids |
+| `case/dock.stl`, `case/placeholder_lid.stl` | The cyberdeck dock and the passive lid for the common drawer tray |
+| `stls/` | The same parts under print-friendly names: case and plate left/right, dock, passive lid, module tray, and the trackball/trackpad lids |
 | `stand_mount.py`, `case/stand_magnet_template_*.svg` | Independent-stand contact check and 1:1 platform-magnet templates |
 | `trackball/`, `trackpad/` | The drawer modules: scripts, `case/` STLs; the trackball's board in `pcb/` and `fab/` |
 | `zmk/` | The modules' ZMK shields |
@@ -228,7 +228,7 @@ either half's inner wall on the desk, or sits on its own on its bump-ons. They a
 tray, a lid, and the same M3 × 8 flat-head screws from the top. The tray is one print, shared by every
 module; only the lid changes for pointing devices. The [common drawer interface](DRAWER_INTERFACE.md)
 uses the same tray for the passive lid and reserves it for the future 500 mAh dongle using a removable
-insulated carrier. See [passive lid verification](PLACEHOLDER_LID.md) for pending exports and checks.
+insulated carrier. See [passive lid qualification](PLACEHOLDER_LID.md) before relying on the hollow module.
 
 - **Shared by both:** the tray, the main board (keys, hot-swap sockets, power switch), a controller on its own small board,
   a 752025 (250 mAh) battery, and a sensor board holding the reset button. All in the same places, so the
@@ -245,7 +245,7 @@ insulated carrier. See [passive lid verification](PLACEHOLDER_LID.md) for pendin
 | ![](renders/trackball_with_half.png) | ![](renders/trackball_board_top.png) ![](renders/trackball_board_bottom.png) |
 | **Trackpad** | **The parts** |
 | ![](renders/trackpad.png) | ![](renders/trackpad_structure.png) |
-| **On a half, on the desk** | **Legacy solid-placeholder render (replacement pending)** |
+| **On a half, on the desk** | **Passive lid on the common tray** |
 | ![](renders/trackpad_with_half.png) | ![](renders/dock_insert.png) |
 
 ### USB-C

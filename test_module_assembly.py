@@ -47,18 +47,20 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertLess(abs((self.tray - tray).volume()), TOL)
         self.assertLess(hit(lid, tray), TOL)
         self.assertEqual(sum(c.volume() > 1e-6 for c in lid.decompose()), 1)
-        self.assertAlmostEqual(lid.bounding_box()[5], M.CHOC_TOP)
+        self.assertAlmostEqual(lid.bounding_box()[5], insert.H)
         self.assertAlmostEqual(insert.lid_print().bounding_box()[2], 0)
-        self.assertAlmostEqual(insert.H - M.FLUSH, 1.2)
+        self.assertAlmostEqual(insert.H - M.FLUSH, 1.0)
         # Broad closed roof: probe from just below the seam to just below
         # the top; no key, optical or display openings.
         roof = Manifold.cube((10, 36, 1.9)).translate(
-            (-5, -80, M.FLUSH - .75))
+            (-5, -80, M.FLUSH - .95))
         self.assertLess(abs((roof - lid).volume()), TOL)
         # Empty interior below the roof; no full-height insert or filler.
         void = Manifold.cube((6, 20, 3)).translate((-3, -72, M.FLUSH - 5))
         self.assertLess(hit(void, lid + tray), TOL)
         # Same screws, pilot depth and driver access as the standard lid.
+        # True flush fails with a common screw, even before tolerances.
+        self.assertLess(M.FLUSH - M.SCREW["length"], 13.9)
         tip = insert.H - M.SCREW["length"] - .2
         self.assertGreaterEqual(tip - 13.9, .3)
         self.assertGreaterEqual(M.PCB_TOP - (insert.H - M.SCREW["length"]), 3)
