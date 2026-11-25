@@ -42,18 +42,17 @@ magnets meet the steel directly. Use the mirrored SVGs in `case/` for alignment 
 Minimum centred clear flat contact circle **54 mm**; prefer about **60 mm** if it clears the
 feet and obstructions. Attraction alone does not qualify retention at a typing angle.
 
-**Drawer placeholder:** `case/insert.stl` (71.6 cm³, solid, with PRISMA in low relief), for when neither module is in the drawer:
-**6 common discs**, three a side.
+**Passive drawer placeholder:** one common tray (`case/module_tray.stl`), one [plain top lid](stls/placeholder_lid.stl), four M3 × 8 flat-head screws, seven common discs (three a side, one in the floor), and three 8 × 2 mm bump-ons. No electronics, battery or sensor screws. Swap the lid on a spare empty tray or reuse an existing unpopulated tray. See [passive lid qualification](PLACEHOLDER_LID.md); the old solid insert is retired.
 
-**Magnet total:** both halves 26 + dock and base 31 + placeholder 6 + both pointing modules 14
-= **77 discs**, before spares. The three discs glued to the dock stand's aluminium **base**
+**Magnet total:** both halves 26 + dock and base 31 + placeholder 7 + both pointing modules 14
+= **78 discs**, before spares, if building three complete separate trays. The three discs glued to the dock stand's aluminium **base**
 are unchanged; these are separate from the independent steel **platforms**.
 
 **Drawer modules (optional).** Either slides into the dock's drawer from the front, or snaps onto either
 half's inner wall on the desk. Everything below is per module, and most of it is the same part you already
 buy for the halves.
 
-| Every module | Qty | Search for | Notes |
+| Every pointing module | Qty | Search for | Notes |
 |---|---|---|---|
 | Printed tray, `case/module_tray.stl` | 1 | | The same print for every module; see [common drawer interface](DRAWER_INTERFACE.md) for the future removable long-cell carrier |
 | Printed lid | 1 | | `trackball/case/lid.stl` (MX), `trackball/case/lid_choc.stl` (Choc v1) or `trackpad/case/lid.stl` |

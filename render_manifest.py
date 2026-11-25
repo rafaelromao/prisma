@@ -45,7 +45,7 @@ def main():
                 for v in ("structure", "seam", "tray", "stack", "reset")]
     required += [f"{k}_{v}.png" for k in ("trackball", "trackpad")
                  for v in ("rear", "assembly", "under", "usb", "usb_open", "usb_dock")]
-    required += ['trackball_xiao_stack.png', 'trackball_xiao_usb_open.png', 'trackball_board_stack.png',
+    required += ['dock_insert.png', 'placeholder_structure.png', 'trackball_xiao_stack.png', 'trackball_xiao_usb_open.png', 'trackball_board_stack.png',
                  'trackball_board_stack_exploded.png', 'trackball_board_stack_top.png', 'stack_alignment.png',
                  'trackball_board_stack_nano.png', 'trackball_board_stack_nano_exploded.png', 'trackball_board_stack_nano_top.png',
                  'trackball_board_stack_wires.png', 'trackball_board_stack_nano_wires.png']

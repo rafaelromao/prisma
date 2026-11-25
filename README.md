@@ -128,8 +128,8 @@ holes before ordering. A clean DRC does not establish production yield.
 | `pcb/` | The KiCad 9 project, its footprint library, 3D stand-ins, and DRC rules |
 | `case/case_left.stl`, `case/case_right.stl` | The printed base |
 | `case/plate_left.stl`, `case/plate_right.stl` | The printed top plate, oriented top face down for printing |
-| `case/dock.stl`, `case/insert.stl` | The cyberdeck dock, and the placeholder for its drawer (below) |
-| `stls/` | The same printable parts under print-friendly names: case and plate left/right, dock, drawer insert, module tray, and the trackball/trackpad lids |
+| `case/dock.stl`, `case/placeholder_lid.stl` | The cyberdeck dock and the passive lid for the common drawer tray |
+| `stls/` | The same parts under print-friendly names: case and plate left/right, dock, passive lid, module tray, and the trackball/trackpad lids |
 | `stand_mount.py`, `case/stand_magnet_template_*.svg` | Independent-stand contact check and 1:1 platform-magnet templates |
 | `trackball/`, `trackpad/` | The drawer modules: scripts, `case/` STLs; the trackball's board in `pcb/` and `fab/` |
 | `zmk/` | The modules' ZMK shields |
@@ -182,9 +182,9 @@ stand it is a tented, splayed unibody, sturdier than the magnets at the seam alo
 - **A spine** between the halves, level with their seam walls' top edges, its front and back
   carrying on both halves' walls, its point cut to a flat as wide as the joined board's front
   flat (about 20 mm). Its middle is a **drawer** (`DRAWER`), pulled out through the front, for a module
-  (below) or the **placeholder** (`insert.py`, `case/insert.stl`): a solid block with the modules'
-  outline and magnets, flush with the halves, the joined board's diamond cut into its top, and
-  **PRISMA** in 0.5 mm low relief behind it. The
+  (below) or the **passive placeholder** (`insert.py`, `case/placeholder_lid.stl`): the same
+  common tray with a plain closed top, 1.2 mm above the halves' top edges to keep the standard
+  M3 × 8 screws. No electronics. The
   drawer is open at both the top and the front. Its sides are straight and uninterrupted: no
   raised ends at the mouth, no ribs or matching grooves. The insert's front is shaped in 3D by
   the halves' exact front facet planes, rather than set back to a vertical wall, so the assembled
@@ -199,11 +199,11 @@ stand it is a tented, splayed unibody, sturdier than the magnets at the seam alo
   magnets per side, evenly spaced at y = -7.0, 28.6 and 64.2 mm (seam magnets 2, 4 and
   6, every other magnet in the six-position row). The same insert magnets meet either half directly on the desk.
   Check magnetic holding force with real magnets before relying on it to carry the assembly.
-- **A magnet under each pointing module:** one more 8 × 1.5 mm N52 disc in the module's floor and its
+- **A magnet under each shared-tray module:** one more 8 × 1.5 mm N52 disc in the module's floor and its
   mate in the drawer floor, on the centreline at y = −48.3 mm. Only three underside stand contacts are used, so at least 1 mm of plastic remains between opposing pocket envelopes, even with each pocket 0.2 mm off.
   The rear stays free for USB-C and the power switch.
 - **Lap use:** the rear hood recess and USB passage remove material from the dock spine, and an
-  insert is not bonded to it. Test a printed dock under load before relying on it for lap use.
+  module is not bonded to it. The hollow placeholder does not inherit the old solid insert's load capacity. Test the printed dock and lid under load before relying on them for lap use.
 - **Magnets in the wings** under six of each half's seven floor magnets. `MAG_COST` rejects
   positions that would add more than 1° to the tent needed for the base pocket. `MAG_ROOF`
   keeps 1 mm under a pocket over the base. Pockets near a 45° wall are nudged inwards to retain
@@ -227,8 +227,8 @@ Two standalone ZMK pointing devices. Either slides into the dock's drawer from t
 either half's inner wall on the desk, or sits on its own on its bump-ons. They are built like a half: a
 tray, a lid, and the same M3 × 8 flat-head screws from the top. The tray is one print, shared by every
 module; only the lid changes for pointing devices. The [common drawer interface](DRAWER_INTERFACE.md)
-reserves the same tray for the future passive lid and 500 mAh dongle using a removable
-insulated carrier. The existing solid placeholder remains separate until its follow-up.
+uses the same tray for the passive lid and reserves it for the future 500 mAh dongle using a removable
+insulated carrier. See [passive lid qualification](PLACEHOLDER_LID.md) before relying on the hollow module.
 
 - **Shared by both:** the tray, the main board (keys, hot-swap sockets, power switch), a controller on its own small board,
   a 752025 (250 mAh) battery, and a sensor board holding the reset button. All in the same places, so the
@@ -245,7 +245,7 @@ insulated carrier. The existing solid placeholder remains separate until its fol
 | ![](renders/trackball_with_half.png) | ![](renders/trackball_board_top.png) ![](renders/trackball_board_bottom.png) |
 | **Trackpad** | **The parts** |
 | ![](renders/trackpad.png) | ![](renders/trackpad_structure.png) |
-| **On a half, on the desk** | **The placeholder in the drawer** |
+| **On a half, on the desk** | **Passive lid on the common tray** |
 | ![](renders/trackpad_with_half.png) | ![](renders/dock_insert.png) |
 
 ### USB-C
@@ -432,7 +432,7 @@ python3 dock.py          # the cyberdeck dock's STL, and its fit check: all 0 mm
 python3 trackball/trackball.py && ./trackball/route.sh && ./trackball/fab.sh   # the three-board panel and gerbers
 ./kicad.sh python3 trackball/check_controller_pcb.py   # every pad, header pin and jumper net
 python3 trackpad/trackpad.py                       # trackpad module: case and fit check
-python3 insert.py                                  # the drawer's placeholder
+python3 insert.py                                  # passive lid only; shared tray is unchanged
 python3 vrml.py && python3 scene.py && ./kicad.sh python3 render_boards.py && ./render.sh
 python3 page.py          # index.html's BOM and build-guide sections, from BOM.md and BUILD.md
 ```

@@ -114,7 +114,11 @@ def dock_scenes():
     base = stand[:1]
     import insert
     import module_shell as M
-    ins = [(plan(insert.build()[0].translate((0, 0, M.FLOOR_Z))), vrml.CASE)]
+    lid, tray = insert.build()
+    passive = [(tray, vrml.CASE), (lid, vrml.CASE), (M.bumpons(), vrml.PAD),
+               (_module_magnets(M), vrml.METAL), (M.floor_magnet(), vrml.METAL),
+               (M.lid_fasteners(insert.H), vrml.METAL)]
+    ins = [(plan(m.translate((0, 0, M.FLOOR_Z))), rgb) for m, rgb in passive]
     return {"cyberdeck": dock + left + right + stand, "dock": dock, "dock_base": dock + base,
             "dock_unibody": dock + left + right, "dock_insert": dock + ins + left + right}
 
@@ -454,6 +458,14 @@ def main():
     mods.pop("trackpad_docked")
     for name in dock:
         scenes[name] = {"speck": [0.0, 7.0], "z": -12.0, "size": 215.0}
+    import insert
+    import module_shell as M
+    passive_lid, passive_tray = insert.build()
+    dock["placeholder_structure"] = [(C.real(m), rgb) for m, rgb in (
+        (passive_tray, TRAY_RGB), (passive_lid.translate((0, 0, 24)), LID_RGB),
+        (M.bumpons(), vrml.PAD), (_module_magnets(M), vrml.METAL),
+        (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(insert.H, 38), SCREW_RGB))]
+    scenes["placeholder_structure"] = {"speck": [0.0, 55.0], "z": -1.5, "size": 100.0}
     dock["independent_tenting"] = independent_tenting()
     scenes["independent_tenting"] = {"speck": [0.0, 0.0], "z": 0.0, "size": 270.0}
     # the modules: the speck in the battery (its front corner on the left, standing on the plate)

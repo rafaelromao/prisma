@@ -25,8 +25,8 @@ class DrawerTest(unittest.TestCase):
             main_plan, sensor_plan = trackball.main_board_plan(layout), trackball.sensor_board_plan(layout)
             lid = mod.lid(layout)
             cls.modules.append((name, tray + lid, Manifold(), mod.H, mod.parts(layout, main_plan, sensor_plan), M.bumpons()))
-        cover, _ = insert.build()
-        cls.modules.append(("cover", cover, Manifold(), insert.H, [], Manifold()))
+        cover, bottom = insert.build()
+        cls.modules.append(("cover", bottom + cover, Manifold(), insert.H, [], M.bumpons()))
 
     def test_standard_blank_interface_on_the_canonical_tray(self):
         lid = MB.interface_lid()
@@ -170,7 +170,10 @@ class DrawerTest(unittest.TestCase):
                 # decompose() also returns negative-volume boundaries of enclosed voids;
                 # those are not detached pieces of printable material.
                 if name == "cover":
-                    self.assertEqual(sum(c.volume() > 1e-6 for c in shell.decompose()), 1)
+                    lid, tray = insert.build()
+                    self.assertLess(abs((lid ^ tray).volume()), 1e-3)
+                    for part in (lid, tray):
+                        self.assertEqual(sum(c.volume() > 1e-6 for c in part.decompose()), 1)
 
 
 if __name__ == "__main__":
