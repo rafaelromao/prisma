@@ -453,3 +453,7 @@ Credits: the Choc hot-swap footprint follows [kiswitch](https://github.com/kiswi
 KiCad's `Button_Switch_SMD:SW_SPST_TL3342` from the
 [official footprint library](https://gitlab.com/kicad/libraries/kicad-footprints) (CC-BY-SA 4.0), which
 matches XKB's TS-1187A land pattern.
+
+## Powered drawer central (draft)
+
+The fourth common-tray module uses an existing three-board panel with reset and power switch only, a genuine XIAO nRF52840, a protected 500 mAh cell on the removable dielectric carrier, and a plain or optional SSD1306 OLED lid. It is the ZMK central for both wireless halves. See [dongle design, wiring, firmware and qualification](DONGLE.md) and [companion firmware PR](https://github.com/rafaelromao/keyboards/pull/41). CAD source only: STL/render regeneration, firmware builds and physical validation are pending. No PCB changes.

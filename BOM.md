@@ -90,3 +90,7 @@ or epoxy for the magnets, thin card for the sensor's
 shims, and a 2.5 mm insulating spacer/tape stack for the I²C breakout (no printed holder).
 
 Soldering, assembly and printing: see [BUILD.md](BUILD.md).
+
+## Powered central dongle (draft)
+
+Add one unchanged three-board pointing panel, genuine XIAO nRF52840 and existing links, MSK-12C02, TS-1187A, protected 500 mAh 1S pack, removable dielectric carrier/adhesive, common tray, four M3 × 8 lid screws, two qualified reset-board screws/shims, seven magnets and three bump-ons. Omit all pointing sensors, sockets, keys and optical parts. Optional Waveshare 14657 128×32 SSD1306 OLED, insulated four-wire harness and removable retention tape. Use one plain or OLED lid, not both; see [DONGLE.md](DONGLE.md) for dimensions, part qualification and pending exports. Dongle quantities are additional to the existing totals.
