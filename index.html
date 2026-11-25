@@ -277,7 +277,7 @@ main img { cursor: zoom-in; }
     <span class="eyebrow">Cyberdeck</span>
     <h2>A dock for a phone stand</h2>
     <p>A phone on a Ugreen folding stand is the computer and the screen. The dock is one printed part that holds both halves around it. It sits over the stand's base, which stays on the desk on its own feet and carries the phone; behind the dock the base is bare, its hinge half a millimetre off the halves and the spine. Without the stand, the dock is a sturdier, more tented unibody.</p>
-    <p>It continues the halves' 45° bottom facets down to the desk, with 12° of splay and 5.70° of extra tent (about 12.3° in all). The middle is a front-opening drawer for a trackball, a trackpad or a solid placeholder, which slide out horizontally. At the back, each insert extends only its top into a 45° hood over a matching dock support, 0.4 mm clear.</p>
+    <p>It continues the halves' 45° bottom facets down to the desk, with 12° of splay and 5.70° of extra tent (about 12.3° in all). The middle is a front-opening drawer for a trackball, a trackpad or a passive placeholder on the common tray, which slide out horizontally. At the back, each insert extends only its top into a 45° hood over a matching dock support, 0.4 mm clear.</p>
     <p>Everything is held by the same 8 × 1.5 mm N52 discs. Six wing magnets mate six of each half's seven floor magnets, and three more per side pass through 0.6 mm inner skins to the insert, so every join attracts: half → dock → insert. One more disc in the drawer floor grips a module from below, and three pairs attach the dock to the Ugreen base. The rear stays free for USB and the power switch. The dock measures 199.0 × 111.3 × 29.8 mm (about 83 cm³).</p>
   </section>
 
@@ -294,7 +294,7 @@ main img { cursor: zoom-in; }
   </div>
 
   <div class="grid2">
-    <figure><img src="renders/dock_insert.png" alt="Both halves on the dock with the solid placeholder in the drawer, its diamond and PRISMA in low relief" width="1600" height="1200" loading="lazy"><figcaption>With the placeholder in the drawer.</figcaption></figure>
+    <figure><img src="renders/dock_insert.png" alt="Both halves on the dock with the solid placeholder in the drawer, its diamond and PRISMA in low relief" width="1600" height="1200" loading="lazy"><figcaption>Legacy solid-placeholder render; the new shared-tray lid imagery is pending regeneration.</figcaption></figure>
     <figure><img src="renders/dock_unibody_side.png" alt="The unibody on the dock from the side" width="1600" height="1200" loading="lazy"><figcaption>The unibody from the side.</figcaption></figure>
     <figure><img src="renders/dock.png" alt="The dock alone: two wings with floor magnets, the drawer between them" width="1600" height="1200" loading="lazy"><figcaption>The dock alone: wing magnets, pad recesses, drawer.</figcaption></figure>
     <figure><img src="renders/dock_base.png" alt="The dock on the Ugreen base seen from behind, the base's back strip left bare" width="1600" height="1200" loading="lazy"><figcaption>From behind, on the base: bare round the hinge.</figcaption></figure>
@@ -308,7 +308,7 @@ main img { cursor: zoom-in; }
     <span class="eyebrow">Pointing</span>
     <h2>A trackball or a trackpad, in the drawer</h2>
     <p>Two ZMK pointing modules that slide into the dock's drawer or snap onto a half on the desk. They are built like a half: a tray, a lid, and the same M3 × 8 flat-head screws from the top. Tray, main board, battery, power switch and reset button are shared. The controller, a nice!nano v2 or a plain XIAO nRF52840, sits on its own small board under the main board.</p>
-    <p>The <a href="DRAWER_INTERFACE.md">common drawer interface</a> reserves the same tray for a future passive lid and 500 mAh dongle with a removable insulated carrier. The existing pointing-module geometry is unchanged.</p>
+    <p>The <a href="DRAWER_INTERFACE.md">common drawer interface</a> uses the same tray for the passive lid and reserves it for a future 500 mAh dongle with a removable insulated carrier. The passive lid has a plain top 1.2 mm above the halves’ edges; no electronics. <a href="PLACEHOLDER_LID.md">Export and qualification are pending</a>.</p>
     <figure><img src="renders/trackball_structure.png" alt="Trackball module with the grey lid raised off the blue tray and four orange screws above it" width="1600" height="1280" loading="lazy"><figcaption>Lid, tray and four M3 × 8 screws from the top.</figcaption></figure>
     <p>Three side magnets per side use every other position in the halves' six-magnet row, and one disc in the module's floor mates with the drawer floor. To remove a module, push its rear hood forwards through the dock's rear passage.</p>
     <p><strong>Trackball:</strong> a 34 mm ball and PMW3610 sensor, with two Choc v1 hot-swap keys on one shared PCB: the same switches and caps as the halves. The PCB also takes MX sockets; populate one socket family and print the matching lid.</p>
@@ -494,10 +494,9 @@ confirmed magnetic attraction on the actual supports. <strong>No extra discs</st
 magnets meet the steel directly. Use the mirrored SVGs in <code>case/</code> for alignment only.
 Minimum centred clear flat contact circle <strong>54 mm</strong>; prefer about <strong>60 mm</strong> if it clears the
 feet and obstructions. Attraction alone does not qualify retention at a typing angle.</p>
-<p><strong>Drawer placeholder:</strong> <code>case/insert.stl</code> (71.6 cm³, solid, with PRISMA in low relief), for when neither module is in the drawer:
-<strong>6 common discs</strong>, three a side.</p>
-<p><strong>Magnet total:</strong> both halves 26 + dock and base 31 + placeholder 6 + both pointing modules 14
-= <strong>77 discs</strong>, before spares. The three discs glued to the dock stand's aluminium <strong>base</strong>
+<p><strong>Passive drawer placeholder:</strong> one common tray (<code>case/module_tray.stl</code>), one plain top lid (<code>case/placeholder_lid.stl</code>, CAD export pending), four M3 × 8 flat-head screws, seven common discs (three a side, one in the floor), and three 8 × 2 mm bump-ons. No electronics, battery or sensor screws. Swap the lid on a spare empty tray or reuse an existing unpopulated tray. See <a href="PLACEHOLDER_LID.md">passive lid verification</a>; the old solid insert is retired.</p>
+<p><strong>Magnet total:</strong> both halves 26 + dock and base 31 + placeholder 7 + both pointing modules 14
+= <strong>78 discs</strong>, before spares, if building three complete separate trays. The three discs glued to the dock stand's aluminium <strong>base</strong>
 are unchanged; these are separate from the independent steel <strong>platforms</strong>.</p>
 <p><strong>Drawer modules (optional).</strong> Either slides into the dock's drawer from the front, or snaps onto either
 half's inner wall on the desk. Everything below is per module, and most of it is the same part you already
@@ -505,7 +504,7 @@ buy for the halves.</p>
 <div class="table"><table>
 <thead>
 <tr>
-<th>Every module</th>
+<th>Every pointing module</th>
 <th>Qty</th>
 <th>Search for</th>
 <th>Notes</th>
@@ -937,7 +936,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <ul>
 <li>Use the same <strong>8 × 1.5 mm N52 discs everywhere</strong>. The dock takes six wing magnets and six side magnets per half, <strong>three base pairs</strong> (three of those discs are glued to the Ugreen base) and one upward-facing disc in the drawer floor: <strong>31 discs total</strong>. No underside contact sits near the drawer retention magnet: at least 1 mm of plastic separates their pockets, even with each 0.2 mm off. Leave the rear free for USB and the cable.</li>
 <li>Each drawer insert takes three evenly spaced side magnets per side (seam positions 2, 4 and 6). The halves and dock have six per side at 17.8 mm pitch; the inserts use every other position. Check the full half → dock → insert polarity chain before gluing.</li>
-<li>Each pointing module also takes <strong>one disc in its floor</strong>, on the centreline, directly above the drawer's. Glue both flush or slightly recessed, opposite poles facing. They grip the module from below, whatever the side magnets manage through the walls.</li>
+<li>Each shared-tray module (including the passive placeholder) also takes <strong>one disc in its floor</strong>, on the centreline, directly above the drawer's. Glue both flush or slightly recessed, opposite poles facing. They grip the module from below, whatever the side magnets manage through the walls.</li>
 <li>The nominal magnet pockets are Ø8.3 mm for 8 mm discs; never force a magnet in.</li>
 <li>To take a module out, hold the dock and push the tip of the rear hood forwards with a finger through the dock's rear passage, then pull the module out of the front. Unplug USB first.</li>
 <li>The USB-C port is nominally flush with the module's back, with nothing under it. Feed a plug through the dock's <strong>12.8 mm rear passage</strong>. A 12.35 × 6.5 mm overmold is the nominal modelled envelope, not a guaranteed fit for every plug or printed dock; check the real plug, cable and passage.</li>
@@ -945,6 +944,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li>For independent tenting, use the tested <strong>steel tilting phone platforms</strong>. <strong>Do not glue extra discs onto them</strong>: the half's existing three stand magnets attract the steel directly. The SVG templates in <code>case/</code> are 1:1 alignment guides; print at 100% and check the 54 mm boundary with a ruler.</li>
 <li>The minimum centred contact circle is 54 mm (44 mm magnet-centre circle). All foot positions lie at least 11.55 mm outside its edge, so the feet do <strong>not</strong> space the magnets off this steel patch. Prefer about 60 mm for more edge margin, checking the actual shape against feet, rubber and lips. Keep magnet faces flush and clean; any recess, coating or adhesive can reduce grip. Use <strong>2.0 mm bump-ons</strong> for stacked fit. Start flat, support the half while increasing the tilt, and test slip, peel, typing loads and stand stability before relying on it. The confirmed attraction is not a retention qualification.</li>
 </ul>
+<p><strong>Passive placeholder:</strong> Print the common tray (or reuse an empty one) and the top-down <code>case/placeholder_lid.stl</code> after its CAD export is verified. Fit six side magnets, one floor magnet and three bump-ons exactly as for a pointing module. Leave the existing rear USB/power and underside reset passages empty; there are no live parts to expose, and no extra openings are cut in the lid. Fit the rear hooks first, lower the front, then secure four M3 × 8 flat-head screws flush, without overtightening. The plain top is 1.2 mm above the halves' top-edge datum to retain the standard screw interface. Do not use the retired solid insert or claim its load capacity for this hollow assembly. Check lid flex, screw retention, feet, magnet polarity and peel/slip, and dock insertion/removal and desk fit before relying on it for lap use. See <a href="PLACEHOLDER_LID.md">qualification and regeneration</a>.</p>
 <h3 id="b-pointing-modules">Pointing modules</h3>
 <p>Both modules are built the same way as a half: a <strong>tray</strong>, a <strong>lid</strong>, and the same <strong>M3 × 8 flat-head screws</strong> going in from the top. The tray is one print, shared by all of them. Only the lid changes: <code>trackball/case/lid.stl</code> (MX), <code>trackball/case/lid_choc.stl</code> (Choc v1) or <code>trackpad/case/lid.stl</code>.</p>
 <p>The first row of renders is the trackball with its Choc lid, the second the same module with the MX lid, the third the trackpad.</p>

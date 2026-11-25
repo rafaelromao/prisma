@@ -24,12 +24,12 @@ pilots are required for this approach.
 | Insertion | Rear hooks first for lid; horizontal front removal for the complete module |
 
 A non-pointing standard-height blank fixture in `module_battery.interface_lid()`
-exercises the existing interface. It is not the finished placeholder (#5)
-or dongle (#6). A strictly flush passive lid needs an inset/recessed design
-and compatible screw length: at `M.FLUSH`, an 8 mm screw tip is at Z=13.477,
-below the existing Z=13.9 pilot bottom. Do not force it or deepen the pilot;
-#5 must verify a shorter compatible M3 fastener or use the standard low-lid
-height. The existing solid insert remains a legacy printable until #5.
+exercises the existing interface. The passive lid in `insert.py` (#5)
+uses the standard low-lid height, with a locally thickened broad roof.
+At `M.FLUSH`, an 8 mm screw tip would be at Z=13.477, below the existing
+Z=13.9 pilot bottom; the 1.2 mm rise avoids this without changing the tray
+or screw standard. See [passive lid verification](PLACEHOLDER_LID.md).
+The solid insert is retired; the dongle (#6) is separate.
 
 ## Battery reservation
 
@@ -86,10 +86,9 @@ isolated. Existing soldered stacking pins may require desoldering for service.
 reference/maximum long-cell envelope, carrier, selected electronics and
 insertion path. `test_drawer.py` covers the blank interface and dock/desk
 fit. `test_stl_export.py` checks the canonical binary and public copy;
-the original pointing geometry and published STL bytes are deliberately
-unchanged, so the existing pointing renders remain valid. The carrier is
-cut sheet and spacers, not a new STL. The finished placeholder and dongle
-will need their own exports and renders.
+the shared tray geometry and published STL bytes remain unchanged. The carrier
+is cut sheet and spacers, not a new STL. The passive lid has its own export
+and render sources, pending execution; the dongle will need its own assets.
 
 PCB freeze: do not change `B.place()`, board plans, PCB footprints, holes,
 netlists, pin assignments or fabrication artifacts. The existing mechanical

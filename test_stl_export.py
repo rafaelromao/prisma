@@ -21,12 +21,17 @@ class StlExportTest(unittest.TestCase):
         for folder in (Path("trackball/case"), Path("trackpad/case")):
             self.assertEqual(list(folder.glob("*tray*.stl")), [])
 
+    def test_placeholder_lid_public_copy(self):
+        self.assertEqual(insert.SOURCE.read_bytes(), insert.PUBLIC.read_bytes())
+        self.assertFalse(Path("case/insert.stl").exists())
+        self.assertFalse(Path("stls/insert.stl").exists())
+
     def test_all_printable_variants_survive_binary_stl_quantization(self):
         half = C.real(C.build())
         plate = C.real(C.plate()[0]).mirror((0, 0, 1)).translate((0, 0, C.PLATE["thick"]))
         solids = {"left": half, "right": C.mirrored(half), "plate_left": plate,
                   "plate_right": plate.mirror((1, 0, 0)), "dock": dock.make().solid,
-                  "cover": insert.build()[0]}
+                  "cover": insert.lid_print()}
         layout = B.place()
         solids["tray"] = B.tray(layout).translate((0, 0, -B.M.FEET))
         for name, lid, height in (("mx", B.lid(layout, "mx"), B.H), ("choc", B.lid(layout, "choc"), B.M.CHOC_TOP),
@@ -36,7 +41,7 @@ class StlExportTest(unittest.TestCase):
         record = np.dtype([("normal", "<f4", 3), ("vertices", "<f4", (3, 3)), ("attribute", "<u2")])
         published = {"left": "case/case_left.stl", "right": "case/case_right.stl",
                      "plate_left": "case/plate_left.stl", "plate_right": "case/plate_right.stl",
-                     "dock": "case/dock.stl", "cover": "case/insert.stl",
+                     "dock": "case/dock.stl", "cover": "case/placeholder_lid.stl",
                      "tray": "case/module_tray.stl", "mx": "trackball/case/lid.stl",
                      "choc": "trackball/case/lid_choc.stl", "trackpad": "trackpad/case/lid.stl",
                      "trackpad_retainer": "trackpad/case/retainer.stl"}

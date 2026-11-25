@@ -8,6 +8,7 @@ from shapely.geometry import Point, Polygon, box
 from shapely.ops import unary_union
 
 import case as C
+import insert
 import module_shell as M
 import module_battery as MB
 import switch_mount as SM
@@ -39,6 +40,41 @@ class ModuleAssemblyTest(unittest.TestCase):
         for name, solid in [("tray", self.tray)] + [(m[0], m[1]) for m in self.modules]:
             with self.subTest(part=name):
                 self.assertEqual(sum(c.volume() > 1e-6 for c in solid.decompose()), 1)
+
+    def test_passive_lid_reuses_complete_tray_and_standard_mounts(self):
+        lid, tray = insert.build()
+        self.assertLess(abs((tray - self.tray).volume()), TOL)
+        self.assertLess(abs((self.tray - tray).volume()), TOL)
+        self.assertLess(hit(lid, tray), TOL)
+        self.assertEqual(sum(c.volume() > 1e-6 for c in lid.decompose()), 1)
+        self.assertAlmostEqual(lid.bounding_box()[5], M.CHOC_TOP)
+        self.assertAlmostEqual(insert.lid_print().bounding_box()[2], 0)
+        self.assertAlmostEqual(insert.H - M.FLUSH, 1.2)
+        # Broad closed roof: probe from just below the seam to just below
+        # the top; no key, optical or display openings.
+        roof = Manifold.cube((10, 36, 1.9)).translate(
+            (-5, -80, M.FLUSH - .75))
+        self.assertLess(abs((roof - lid).volume()), TOL)
+        # Empty interior below the roof; no full-height insert or filler.
+        void = Manifold.cube((6, 20, 3)).translate((-3, -72, M.FLUSH - 5))
+        self.assertLess(hit(void, lid + tray), TOL)
+        # Same screws, pilot depth and driver access as the standard lid.
+        tip = insert.H - M.SCREW["length"] - .2
+        self.assertGreaterEqual(tip - 13.9, .3)
+        self.assertGreaterEqual(M.PCB_TOP - (insert.H - M.SCREW["length"]), 3)
+        for x, y in M.lid_screws():
+            head = Manifold.cylinder(1.45, 1.75, 3.1, circular_segments=48).translate(
+                (x, y, insert.H - 1.45))
+            self.assertLess(hit(head, lid), TOL)
+            pilot = Manifold.cylinder(M.PCB_TOP - tip, 1.2, circular_segments=40).translate((x, y, tip))
+            self.assertLess(hit(pilot, tray), TOL)
+        pivot = M.OUTLINE.bounds[3]
+        for tenth in range(0, 121, 5):
+            tilted = lid.translate((0, -pivot, -M.FLUSH)).rotate(
+                (-tenth / 10, 0, 0)).translate((0, pivot, M.FLUSH))
+            self.assertLess(hit(tilted, tray), .05)
+        # Unused control openings belong to the common tray. Nothing is
+        # populated; the lid has no additional control cutouts.
 
     def test_trackpad_edge_retention_and_service_sequence(self):
         L = self.P
