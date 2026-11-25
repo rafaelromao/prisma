@@ -1,18 +1,26 @@
 # Trackpad edge retainer (issue #4)
 
 The common tray and the PCBs are unchanged. The original ledge supports the pad;
-two identical keyed hooks capture its front-side edge sectors. Each hook rises
+a mirrored pair of keyed hooks captures its two side edge sectors. Each hook rises
 1.0 mm above the lid, below the keycaps. The pad stays in its original position.
-Confirm the actual overlay has an inactive edge for the nominal 0.9 mm overlap
+Confirm the actual overlay has an inactive edge for the nominal 0.8 mm overlap
 and that the nominal 0.2 mm vertical play does not become preload.
 
-The M3 retainer design interfered with the tray and main PCB. Use two **M2 × 3 mm
-pan-head screws** (under-head length, head ≤3.8 mm diameter and ≤1.6 mm height)
-in the new 1.65 mm blind pilots. The screw bears on the clip, not the pad.
-With ±0.1 mm each for screw length and flange thickness, modeled engagement is
-1.6–2.0 mm and tip clearance is at least 0.4 mm, before print error at the
-pilot bottom. Verify actual pull-out strength and at least 0.3 mm tip clearance.
-Do not substitute the M3 × 8 enclosure screws.
+The hooks use the project's M3 family: two **M3 × 4 mm pan-head screws**
+(under-head length, head ≤5.5 mm diameter and ≤2.0 mm height) in Ø2.5 mm,
+3.4 mm-deep blind pilots, with the screws 4.4 mm tangentially off the insertion channel. The
+screw bears on the clip, not the pad. With ±0.1 mm each for screw length and
+flange thickness, modeled engagement is 2.6–3.0 mm and tip clearance is at
+least 0.4 mm, before print error at the pilot bottom. Verify actual pull-out
+strength and at least 0.4 mm tip clearance. Do not substitute the M3 × 8
+enclosure screws.
+
+The stations are the two flanks, not the front corners. An M3 head is 5.5 mm
+across, and at the corners it would hit the tray's front rim as the lid closes
+and the lid's countersink webs; the flanks leave the boss outside the pad and
+inside the rim through the whole closing sweep. The earlier smaller-screw
+attempt is superseded; the current design and bill of materials use only M3
+fasteners.
 
 ## Regeneration and qualification
 
