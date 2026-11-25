@@ -112,13 +112,18 @@ class ModuleAssemblyTest(unittest.TestCase):
                     if label == "sensor screw":
                         screws += solid
                 obstacle = self.tray + parts["sensor board"] + screws
-                for lift in range(0, 41):
-                    self.assertLess(hit((carrier + cell).translate((0, 0, lift)), obstacle), TOL)
+                for dx in (-MB.LATERAL_ALLOWANCE, 0, MB.LATERAL_ALLOWANCE):
+                    shifted_cell = cell.translate((dx, 0, 0))
+                    for lift in range(0, 41):
+                        self.assertLess(hit((carrier + shifted_cell).translate((0, 0, lift)),
+                                            obstacle), TOL, (dx, lift))
+                    for label, solid in hardware:
+                        self.assertLess(hit(shifted_cell, solid), TOL, (dx, label))
         self.assertGreater(hit(MB.long_cell(), parts["nice!nano"]), TOL)
         self.assertGreater(B.PCB_TOP - B.PCB_T - (MB.CELL_Z + MB.MAX_THICKNESS), .7)
 
     def test_long_cell_envelope_rejects_oversized_packs(self):
-        for kwargs in ({"length": 46}, {"width": 20.5}, {"thickness": 8.1}):
+        for kwargs in ({"length": 46}, {"width": MB.MAX_WIDTH + .01}, {"thickness": 8.1}):
             with self.subTest(pack=kwargs), self.assertRaises(ValueError):
                 MB.long_cell(**kwargs)
 
