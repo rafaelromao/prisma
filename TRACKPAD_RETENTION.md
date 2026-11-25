@@ -1,10 +1,23 @@
 # Trackpad edge retainer (issue #4)
 
-Stacked on the shared drawer interface (#7). No PCB or common tray changes. The existing ledge remains the lower support; two identical keyed hooks retain opposite side sectors from above. The hooks rise 1.0 mm above the nominal lid face (below the keycap envelope). The pad centre and Z datum remain unchanged. The 0.9 mm nominal overlap and 0.2 mm axial play are provisional; confirm the actual overlay has an inactive edge, and that the clips do not touch active area or preload the PCB. The underside bosses use the same 2.5 mm printed pilot diameter as the common M3 screws. Use two M3 × 4 mm pan-head screws (under-head length, head ≤5.6 mm diameter and ≤2.4 mm height), not the M3 × 8 enclosure screws. The 3.4 mm flange clearance and 1.2 mm flange give 2.8 mm nominal engagement. The 4.0 mm boss depth and 0.6 mm blind roof leave 0.4 mm tip-to-pilot-bottom clearance even with 0.2 mm extra screw length. The enlarged bosses and wider screw heads require new clearance and actual thread pull-out checks. The screws seat against the clip flanges, not the pad.
+The common tray and the PCBs are unchanged. The original ledge supports the pad;
+two identical keyed hooks capture its front-side edge sectors. Each hook rises
+1.0 mm above the lid, below the keycaps. The pad stays in its original position.
+Confirm the actual overlay has an inactive edge for the nominal 0.9 mm overlap
+and that the nominal 0.2 mm vertical play does not become preload.
 
-## Remaining generation and qualification gates
+The M3 retainer design interfered with the tray and main PCB. Use two **M2 × 3 mm
+pan-head screws** (under-head length, head ≤3.8 mm diameter and ≤1.6 mm height)
+in the new 1.65 mm blind pilots. The screw bears on the clip, not the pad.
+With ±0.1 mm each for screw length and flange thickness, modeled engagement is
+1.6–2.0 mm and tip clearance is at least 0.4 mm, before print error at the
+pilot bottom. Verify actual pull-out strength and at least 0.3 mm tip clearance.
+Do not substitute the M3 × 8 enclosure screws.
 
-This source change must not be treated as print-ready until the generated artifacts and nominal tests pass. On an environment with the pinned requirements and KiCad, regenerate the trackpad only and render the mechanical scenes using the repository's documented pipeline, without routing or regenerating fabrication files:
+## Regeneration and qualification
+
+The revised lid and clips are exported as source/public STL pairs. To reproduce
+them and the trackpad views without changing PCB fabrication files, run:
 
 ```sh
 python -m pip install -r requirements.txt
@@ -13,11 +26,16 @@ python trackpad/trackpad.py
 python -m unittest test_module_assembly test_stl_export test_drawer
 python check_fit.py
 python verify_artifacts.py
+python vrml.py
 python scene.py
 ./kicad.sh python3 render_boards.py
-./render.sh
-python render_manifest.py
+views=$(git ls-files 'renders/trackpad*.png' | xargs -n1 basename)
+./render.sh $views
+python render_manifest.py --update $views
 python page.py
 ```
 
-Commit the revised trackpad lid/retainer STL and their public copies, design JSON, updated mechanical renders and manifests; reject any changes to PCB fabrication files. Verify all CI jobs. Test actual 40 mm Cirque edge and thickness, print fit, screw engagement and blind depth, retention under normal use and removal, full key travel, cable routing during closure and sensor operation for both controller options. Do not print the prior published lid with the new clips.
+Physical qualification remains open. Test the actual 40 mm Cirque edge and
+thickness, print fit, screw engagement and blind depth, retention in normal
+use and removal, key travel, wired closure and sensor operation for both
+controller options. Do not pair a prior lid with these clips.

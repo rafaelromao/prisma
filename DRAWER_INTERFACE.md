@@ -61,13 +61,15 @@ confirm safe bearing surfaces before assembly.
 | Rear support | X=-4..4, Y=-52..-46, Z=3.1..9.6 (original battery seat) |
 | Middle support | X=-3..3, Y=-74..-71, Z=7.7..9.6 (reset board) |
 | Front support | X=-3..3, Y=-85..-83, Z=7.7..9.6 (reset board) |
-| Long-cell maximum CAD envelope | X=-10.2..10.2, rear Y=-42.5, length up to 45, Z=10.1..18.1 |
+| Long-cell maximum installed envelope | X=-10..10, rear Y=-42.5, length up to 45, Z=10.1..18.1 |
 | Reference protected length | 41 mm (40 mm nominal plus allowance, not a pack measurement) |
 | Local lead exit | X=-3..3, Y=-42.5..-39.8, Z=10.1..13.1 |
 
-The width/thickness limits include cell manufacturing variation, insulation
-and attachment thickness in the modeled envelope; actual clearance to the
-side posts must stay positive after print error. The main PCB underside
+The width/thickness limits include cell manufacturing variation and
+insulation. The 20.4 mm nominal tray throat is not a usable pack width:
+the 20.0 mm installed limit leaves 0.2 mm per side. CAD tests allow a
+0.15 mm lateral offset during insertion; measure the printed tray and verify
+positive residual clearance after print error, insulation and swelling. The main PCB underside
 is at Z=18.877, leaving only 0.777 mm nominal above the maximum cell
 envelope. Keep solder joints and wires out of that gap unless measured
 clearance permits them. Do not assume the lead-exit box verifies the entire

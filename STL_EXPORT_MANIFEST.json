@@ -272,11 +272,11 @@
     },
     {
       "path": "trackpad/case/lid.stl",
-      "sha256": "cb73e4e1c6595c4eec869e824af33744545ff131a6dfc88897753d61739f8794",
-      "bytes": 276184,
-      "triangles": 5522,
+      "sha256": "693cd4063bf3ff59d6755812b06ed22d5ba68662ef68014412cfc1af15a5a051",
+      "bytes": 320184,
+      "triangles": 6402,
       "components": 1,
-      "volume_mm3": 2027.77563,
+      "volume_mm3": 1992.5789,
       "size_mm": [
         55.13846,
         84.83187,
@@ -287,15 +287,45 @@
     },
     {
       "path": "stls/trackpad_lid.stl",
-      "sha256": "cb73e4e1c6595c4eec869e824af33744545ff131a6dfc88897753d61739f8794",
-      "bytes": 276184,
-      "triangles": 5522,
+      "sha256": "693cd4063bf3ff59d6755812b06ed22d5ba68662ef68014412cfc1af15a5a051",
+      "bytes": 320184,
+      "triangles": 6402,
       "components": 1,
-      "volume_mm3": 2027.77563,
+      "volume_mm3": 1992.5789,
       "size_mm": [
         55.13846,
         84.83187,
         3.28
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "trackpad/case/retainer.stl",
+      "sha256": "a7f258ad89590e83977d566c633608c9b683e259f0842535c4ffee3bc48059cd",
+      "bytes": 17284,
+      "triangles": 344,
+      "components": 1,
+      "volume_mm3": 37.26859,
+      "size_mm": [
+        4.95,
+        5.2,
+        7.35
+      ],
+      "watertight": true,
+      "winding": true
+    },
+    {
+      "path": "stls/trackpad_retainer.stl",
+      "sha256": "a7f258ad89590e83977d566c633608c9b683e259f0842535c4ffee3bc48059cd",
+      "bytes": 17284,
+      "triangles": 344,
+      "components": 1,
+      "volume_mm3": 37.26859,
+      "size_mm": [
+        4.95,
+        5.2,
+        7.35
       ],
       "watertight": true,
       "winding": true
@@ -341,6 +371,10 @@
     [
       "trackpad/case/lid.stl",
       "stls/trackpad_lid.stl"
+    ],
+    [
+      "trackpad/case/retainer.stl",
+      "stls/trackpad_retainer.stl"
     ]
   ],
   "note": "Binary topology/copy integrity only; not a physical buildability certificate."
