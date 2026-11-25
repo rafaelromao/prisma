@@ -29,15 +29,17 @@ H = M.PCB_TOP + B.CHOC["below_plate"]   # the Choc trackball's height
 TOP_T = 1.2                    # the top: a Choc plate (the switches clip into 1.2 to 1.3 mm)
 # TM040040 spec: 0.99 mm PCB + overlay, 5.15 +/- 0.2 mm with components, none in the outer 2 mm ring.
 # Keep the original seat and pad datum; the ledge supports the free underside ring.
-# Two removable side hooks capture only the outer edge, with no adhesive or preload.
+# Two removable hooks capture only the front-side edge sectors, with no adhesive or preload.
 PAD = dict(d=40.0, t=1.2, back=4.4, clr=0.3, rim=1.0, ledge=1.8, gap=12.0)
-# M3 x 4 pan-head, length under head. Use the existing M3 pilot diameter,
-# but a shorter screw than the tray's M3 x 8 to preserve the blind roof.
-# Head envelope and thread pull-out strength require physical qualification.
-RETAINER = dict(diameter=3.0, length=4.0, pilot=M.SCREW["pilot"], clearance=3.4,
-                head_d=5.6, head_h=2.4, flange=1.2, boss_depth=4.0, roof=.6,
-                boss_r=2.9, screw_x=22.0, screw_y=7.8, slide=1.35, axial_play=.2,
-                edge_overlap=.9, lip_t=.8)
+# M2 x 3 pan-head, length under head. The shorter, narrower screw puts both
+# mounts in clear pockets between the unchanged tray bosses and the main board.
+# Printed thread pull-out strength and actual hardware remain to be qualified.
+RETAINER = dict(diameter=2.0, length=3.0, pilot=1.65, clearance=2.35,
+                 head_d=3.8, head_h=1.6, flange=1.2, boss_depth=3.0, roof=.6,
+                 boss_r=1.95, screw_x=22.1, screw_y=3.8, slide=1.35, axial_play=.2,
+                 length_tol=.1, flange_tol=.1,
+                 edge_overlap=.9, lip_t=.8)
+RETAINER_ANGLES = (-55, -165)  # about the pad centre, measured from +X
 BREAKOUT = (24.0, 18.0, 4.5)   # reserved maximum envelope, including parts/connector, not a measured kit
 BREAKOUT_LIFT = 2.5            # insulating spacer clears the sensor-board screw heads; no holder
 NANO = B.NANO
@@ -90,6 +92,11 @@ def ffc_envelope(L):
                 3.5, L['pad'][1] + 18, H - PAD['t'] - PAD['back'] - .3)
 
 
+def dr_lead_corridor():
+    """Separate DR lead's local drop beside the FFC, excluding its solder joint."""
+    return Manifold.cylinder(6.2, .45, circular_segments=32).translate((4.8, -60.2, 10.8))
+
+
 def breakout_visual(L):
     """Illustrative supplied breakout within its reserved envelope, not a measured PCB."""
     x, y = L['ball']
@@ -114,9 +121,9 @@ def ffc_visual(L):
     return out
 
 
-def _at_pad(solid, L, side):
-    """One common local clip, turned 180 degrees for the opposite side."""
-    return solid.rotate((0, 0, 0 if side == 1 else 180)).translate((*L["pad"], 0))
+def at_pad(solid, L, angle):
+    """Place a local solid in either of the two edge-retainer stations."""
+    return solid.rotate((0, 0, angle)).translate((*L["pad"], 0))
 
 
 def retainer_floor():
@@ -144,7 +151,13 @@ def _clip():
 
 
 def retainers(L):
-    return [_at_pad(_clip(), L, side) for side in (1, -1)]
+    return retainer_poses(L)
+
+
+def retainer_poses(L, outward=0, down=0):
+    """Clip positions along their individual straight assembly/removal paths."""
+    clip = _clip().translate((outward, 0, -down))
+    return [at_pad(clip, L, angle) for angle in RETAINER_ANGLES]
 
 
 def retainer_print():
@@ -154,15 +167,15 @@ def retainer_print():
     return m.translate((-x, -y, -z))
 
 
-def retainer_screws(L, heads_only=False, extra=0.0):
+def retainer_screws(L, heads_only=False, extra=0.0, flange_error=0.0):
     q = RETAINER
-    z = retainer_floor() - q["flange"]
+    z = retainer_floor() - q["flange"] - flange_error
     x, y = q["screw_x"], q["screw_y"]
     head = Manifold.cylinder(q["head_h"], q["head_d"] / 2, circular_segments=48)
     screw = head.translate((x, y, z - q["head_h"]))
     if not heads_only:
         screw += Manifold.cylinder(q["length"] + extra, q["diameter"] / 2, circular_segments=48).translate((x, y, z))
-    return [_at_pad(screw, L, side) for side in (1, -1)]
+    return [at_pad(screw, L, angle) for angle in RETAINER_ANGLES]
 
 
 def _retainer_mounts(sh, L):
@@ -177,9 +190,9 @@ def _retainer_mounts(sh, L):
     # Insertion clearance for the lip, and a narrow keyed stem channel. The
     # rest of the original ledge remains unchanged, including the rear gap.
     slot = box3(20.15, -1.9, z - .1, 23.15, 1.9, H + 1.1)
-    for side in (1, -1):
-        sh += _at_pad(boss, L, side)
-        sh -= _at_pad(pilot + slot, L, side)
+    for angle in RETAINER_ANGLES:
+        sh += at_pad(boss, L, angle)
+        sh -= at_pad(pilot + slot, L, angle)
     return sh
 
 
@@ -230,7 +243,8 @@ def main():
     shutil.copyfile(os.path.join(HERE, "case", "retainer.stl"), os.path.join(HERE, "..", C.STLS, "trackpad_retainer.stl"))
     json.dump(dict(layout={k: v for k, v in L.items()}, height=H, screws=M.lid_screws(), feet=M.feet_spots(),
                     wiring=wiring(), controllers=SIGNALS['trackpad'], gpio=GPIO,
-                    breakout_envelope=BREAKOUT, breakout_lift=BREAKOUT_LIFT, retainer=RETAINER), open(os.path.join(HERE, "design.json"), "w"), indent=1,
+                     breakout_envelope=BREAKOUT, breakout_lift=BREAKOUT_LIFT,
+                     retainer=dict(RETAINER, angles=RETAINER_ANGLES)), open(os.path.join(HERE, "design.json"), "w"), indent=1,
               default=lambda o: [float(v) for v in o])
     return L, lid_m, tray_m, ps
 
