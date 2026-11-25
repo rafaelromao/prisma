@@ -86,7 +86,7 @@
         1568,
         1176
       ],
-      "sha256": "a793fe3c20ea2896061fba2d7515ec8b0ef31545c526ce7a4e89f03d1b1e0232"
+      "sha256": "017cebba193f0e329199df9d63bfdf2f0e9f728e1f93ee37f4232e170d672388"
     },
     {
       "path": "renders/dock_under.png",
@@ -102,7 +102,7 @@
         1568,
         1176
       ],
-      "sha256": "0ef572944d26fde039d5030ef8f88d51818b406a2204030cc893fbfc900827b5"
+      "sha256": "3f13490d721bb65e902eafda0c388bf579bcc55581082e213ca41cf9916efabf"
     },
     {
       "path": "renders/dock_unibody_side.png",
@@ -110,7 +110,7 @@
         1568,
         1176
       ],
-      "sha256": "b513f2a002b218595bee0184f85a9c4e93a7dfeac4f3396a60ce3ef235d1faad"
+      "sha256": "351183c941375522d6922fbe650c67bbb0ae5e531634bf15fb79c2b5e11600f7"
     },
     {
       "path": "renders/dongle_headless.png",
@@ -118,7 +118,7 @@
         1568,
         1176
       ],
-      "sha256": "fd0c8c2dc1a7495f16ddb9e8a4b7100431c45472ba5885d08fb32e9ab52fc55c"
+      "sha256": "95d975f52c47291c7eef30f8b761d138fa13a39300e8872970225d817ecf3e96"
     },
     {
       "path": "renders/dongle_headless_structure.png",
@@ -126,7 +126,7 @@
         1568,
         1176
       ],
-      "sha256": "aab981865d41e2914d8eb74186e66ba5deea593826dc5801dc702e5da991fe91"
+      "sha256": "69c85f43dc3703a45bd8a1fa4304dbf1145d2946d91ef0a57c78c39590021fb0"
     },
     {
       "path": "renders/dongle_oled.png",
@@ -134,7 +134,7 @@
         1568,
         1176
       ],
-      "sha256": "d64a06ff3ee73cd8c84471e95326cfb34cfc883285ac2dd510b1852274f0b353"
+      "sha256": "1daee0529a9d4abb1d670317957eba414eb9a2595b1d83bf958336cd9accce49"
     },
     {
       "path": "renders/dongle_oled_structure.png",
@@ -142,7 +142,7 @@
         1568,
         1176
       ],
-      "sha256": "13fbf1517af5baea69119e802a05b0ed04844c6b72c54973d5d32b0aee1ad0aa"
+      "sha256": "0a263edae01f9f3983596b193025c96cd5432e7bbbf861ac9aa333460dfd261d"
     },
     {
       "path": "renders/full.png",
@@ -174,7 +174,7 @@
         1800,
         7500
       ],
-      "sha256": "043eaabd0e6a17398b5c7c29c3e5e8c17ef5ff1e15b4ec054f2efb8e2b58b1a2"
+      "sha256": "f76403a453031399e0acdf3f4dfbc7441c6b14a26b39e5533a5ce3bc0d874c27"
     },
     {
       "path": "renders/pads.png",
@@ -206,7 +206,7 @@
         1568,
         1176
       ],
-      "sha256": "7f26fe916295a9e7c208a774ad594ff9c98c3a61807841a1a34e65a04278bf56"
+      "sha256": "84d709597fc53ea07871c6234038d75f6dd7f00b892b3a737ec24113adccb719"
     },
     {
       "path": "renders/plate.png",
@@ -510,7 +510,7 @@
         1568,
         1176
       ],
-      "sha256": "bb8a3683755bb0856e1c9c8de793ee2fda5a9f6ef20fc8b44ca8672dc6051d9e"
+      "sha256": "722c839780ce1be820f8c8f91a02a2de906a1f73d45057ffcd4577c47b63393d"
     },
     {
       "path": "renders/trackpad_assembly.png",
@@ -518,7 +518,7 @@
         1568,
         1176
       ],
-      "sha256": "38a4fd3d4dc032298ab7ea450258b89494e6c5cef9ce99d851c832ae79dc540b"
+      "sha256": "c35f8b98f5643d73e6c352e4fa40d9b482a2c062880395ad128ce54c12896ce4"
     },
     {
       "path": "renders/trackpad_open.png",
@@ -526,7 +526,7 @@
         1568,
         1176
       ],
-      "sha256": "1d35a8ba362cd82e43a2d8fd7dbebd28043abe9e01adad76116b5bf3055a9593"
+      "sha256": "a4d05530d18663f5d23f17cb098313037cd8310cb026759a3169f90b4f48f8d9"
     },
     {
       "path": "renders/trackpad_rear.png",
@@ -534,7 +534,7 @@
         1568,
         1176
       ],
-      "sha256": "fa629db769b0c8d0272aa5d5736158ec37398406bc8fe97ab9a0c8aaeb8d216a"
+      "sha256": "ce6a81201fe374e716bbd1ecfba8e0683247b96bd2ba964d97c2416bafe0537e"
     },
     {
       "path": "renders/trackpad_reset.png",
@@ -542,7 +542,7 @@
         1568,
         1176
       ],
-      "sha256": "857de62d046d708ba64d8444db2cf9996c9799bfcd2aa3ad25b36f8213902a5a"
+      "sha256": "516c2d369f5ca48c08d81241b6fb1251836365738ceb5a6d7731392c9060d8b6"
     },
     {
       "path": "renders/trackpad_seam.png",
@@ -550,7 +550,7 @@
         1568,
         1176
       ],
-      "sha256": "80ea8f0c577fbe43a6e54c5eaf126490ab46e007c0716eb3dc4b69e40a349d30"
+      "sha256": "b0615a2ce8d4e56366af5b02c893504c616073fc71c3ccc033458debb9046113"
     },
     {
       "path": "renders/trackpad_stack.png",
@@ -558,7 +558,7 @@
         1568,
         1176
       ],
-      "sha256": "e83683a007b4e7464e94d80cd7d3294cbdc79faa3738ce54bfb5cf705df07b94"
+      "sha256": "f39432eba63d24327f843de92b9f450e9aeb6708ba6536aa3ba8a2167e53e286"
     },
     {
       "path": "renders/trackpad_structure.png",
@@ -566,7 +566,7 @@
         1568,
         1176
       ],
-      "sha256": "63925db6e23b75665fb24172f57fdcfcb20b838f0740505f4123c6b82cf5b0fb"
+      "sha256": "7fa073c28481fb6e8b64c874161c8f2262188633ad98663654f07bb5baccf802"
     },
     {
       "path": "renders/trackpad_tray.png",
@@ -574,7 +574,7 @@
         1568,
         1176
       ],
-      "sha256": "ecd01cccd8ffb4ac0db37b87e56f7d6edbf7cfa18cfa3de200d5d97d24b0c4cd"
+      "sha256": "258883beb6550cb2e59020ca46be89766fb624a98d8aa4009b39ee192e3868df"
     },
     {
       "path": "renders/trackpad_under.png",
@@ -582,7 +582,7 @@
         1568,
         1176
       ],
-      "sha256": "c8e787960db4bc8059b68a3537fc312b52157ce66df510582fd2c7ef14de538b"
+      "sha256": "0d6809ec4ee87e2e7305d3a27aeb04040dbdc87c810c2f24e1f0e44cbc8bf85a"
     },
     {
       "path": "renders/trackpad_usb.png",
@@ -590,7 +590,7 @@
         1568,
         1176
       ],
-      "sha256": "d9b40b13c2eea2449c52bfc2c9b532207acfe4af7573dacffa078dd463a9590a"
+      "sha256": "3d4815506895117f6a5da6ad431e3b3dc8e749a68f755b862d14d0c822a508f1"
     },
     {
       "path": "renders/trackpad_usb_dock.png",
@@ -598,7 +598,7 @@
         1568,
         1176
       ],
-      "sha256": "7795076c6b7e69f734434d43970d707e284e004469241a7da57d333fa2d6513c"
+      "sha256": "736759b66534de8fa3df87306d993cc7b80cfcf0f910bec1defaa7e7a2a5d140"
     },
     {
       "path": "renders/trackpad_usb_open.png",
@@ -606,7 +606,7 @@
         1568,
         1176
       ],
-      "sha256": "46fe8eab5f8fc56a07b6125d1a7da8255ce0fd890b58d5ca9e64062e5a5185d4"
+      "sha256": "088712f2f8a4bada5ed33836ba791f9c9bee58541cb38f6b1bfb6b1be0bee50b"
     },
     {
       "path": "renders/trackpad_with_half.png",
@@ -614,7 +614,7 @@
         1568,
         1176
       ],
-      "sha256": "610b20c914f13c3c3c85e1c57c17ee21cabb8fd5ea31f3dd45f2fbcaf8898b22"
+      "sha256": "e44786d93a4aa8f10b69832ec0187a37a673c0e766bf384b0466a94d6ac85d94"
     },
     {
       "path": "renders/unibody.png",
@@ -672,7 +672,7 @@
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "ecd0806377a9ee646201462129122154d88ab8a237b7f679d7e6879f8f14e912"
+      "sha256": "d5ae65f8dfec24a06e10b6959744bd1bd99d659a093af0b07e0fbca2c174a04f"
     },
     {
       "path": "build_pcb.py",
@@ -780,7 +780,7 @@
     },
     {
       "path": "test_module_assembly.py",
-      "sha256": "d763de96df6b022fcb0b4a3cfd27bdc40a4b8553851fb67b1b8d3fd3a39a5326"
+      "sha256": "66bd506e0ce85c2d2d52e82e7ee13f495223b8bac0f7ed90dcb1f5976c8eb34b"
     },
     {
       "path": "test_stl_export.py",
@@ -816,11 +816,11 @@
     },
     {
       "path": "trackpad/trackpad.py",
-      "sha256": "cc0698451bf85e02dcbbfb13af769b17905fcade9f3ef74a4e03a9cb5067e2c3"
+      "sha256": "1c5c0f7b332447ed5e9a5901455e1299a190c131b6d85d04e2116be68115e158"
     },
     {
       "path": "verify_artifacts.py",
-      "sha256": "fc16626368b73b98df63412d0fd8c5cd535e8dff992fc3d2c2956305fa16dee2"
+      "sha256": "089d91b3a721b7f547313ffd761952ca6fb54ca67dcb872c88f11c2c4db8d2b7"
     },
     {
       "path": "vrml.py",
