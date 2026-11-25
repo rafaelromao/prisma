@@ -687,6 +687,8 @@ buy for the halves.</p>
 or epoxy for the magnets, thin card for the sensor's
 shims, and a 2.5 mm insulating spacer/tape stack for the I²C breakout (no printed holder).</p>
 <p>Soldering, assembly and printing: see <a href="#build">BUILD.md</a>.</p>
+<h3>Powered central dongle (draft)</h3>
+<p>Add one unchanged three-board pointing panel, genuine XIAO nRF52840 and existing links, MSK-12C02, TS-1187A, protected 500 mAh 1S pack, removable dielectric carrier/adhesive, common tray, four M3 × 8 lid screws, two qualified reset-board screws/shims, seven magnets and three bump-ons. Omit all pointing sensors, sockets, keys and optical parts. Optional Waveshare 14657 128×32 SSD1306 OLED, insulated four-wire harness and removable retention tape. Choose the <a href="stls/dongle_lid.stl">plain lid</a> or <a href="stls/dongle_oled_lid.stl">OLED lid</a>. See <a href="DONGLE.md">DONGLE.md</a> for dimensions and required physical qualification. Dongle quantities are additional to the existing totals.</p>
 <!-- /BOM.md -->
     </div>
   </section>
@@ -730,6 +732,7 @@ shims, and a 2.5 mm insulating spacer/tape stack for the I²C breakout (no print
 <ol>
 <li><a href="#b-resetting-a-closed-half">Resetting a closed half</a></li>
 <li><a href="#b-printing">Printing</a></li>
+<li><a href="#b-powered-central-dongle-draft">Powered central dongle (draft)</a></li>
 </ol>
 <!-- /BUILD.md contents -->
     </details>
@@ -1270,6 +1273,8 @@ and comes out with your puller (see "Taking a switch out").</p>
 <li><strong>PLA:</strong> use the filament and slicer profile intended for the final print. Check bridge sag, screw-pilot fit and cracking, and Choc switch retention on representative geometry before printing the complete set.</li>
 <li><strong>Release gate:</strong> follow <a href="PRINT_READINESS.md">PRINT_READINESS.md</a>. Inspect continuous toolpaths through every <strong>0.6–0.9 mm</strong> magnet backing/skin, not just the outer mesh. A hypothetical 0.5% error over the 199 mm dock is about 1 mm, greater than the local fit allowances. Measure differential shrinkage and warping of mating parts with the chosen material/profile before a complete build; ±0.2 mm translation tests do not cover either. Never scale just one mating part blindly: that also moves magnets and screw centres. If calibration cannot meet the fit budget, stop and revise/regenerate the geometry.</li>
 </ul>
+<h3 id="b-powered-central-dongle-draft">Powered central dongle (draft)</h3>
+<p>See <a href="DONGLE.md">DONGLE.md</a> for selective population, XIAO polarity and jumper checks, long-cell carrier assembly, optional OLED wiring, firmware and qualification. Do not use the short pointing-device battery or populate the keys/sensor. The dongle is the two-half central; the headless variant requires no display. Switch off does not isolate USB power. Actual pack, harness, display, charging and mechanical fit remain unverified; do not assemble until qualified.</p>
 <!-- /BUILD.md -->
     </div>
     </div>

@@ -113,6 +113,38 @@
       "sha256": "b513f2a002b218595bee0184f85a9c4e93a7dfeac4f3396a60ce3ef235d1faad"
     },
     {
+      "path": "renders/dongle_headless.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "fd0c8c2dc1a7495f16ddb9e8a4b7100431c45472ba5885d08fb32e9ab52fc55c"
+    },
+    {
+      "path": "renders/dongle_headless_structure.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "aab981865d41e2914d8eb74186e66ba5deea593826dc5801dc702e5da991fe91"
+    },
+    {
+      "path": "renders/dongle_oled.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "d64a06ff3ee73cd8c84471e95326cfb34cfc883285ac2dd510b1852274f0b353"
+    },
+    {
+      "path": "renders/dongle_oled_structure.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "13fbf1517af5baea69119e802a05b0ed04844c6b72c54973d5d32b0aee1ad0aa"
+    },
+    {
       "path": "renders/full.png",
       "size": [
         1568,
@@ -140,9 +172,9 @@
       "path": "renders/modules.png",
       "size": [
         1800,
-        7000
+        7500
       ],
-      "sha256": "62041c1e1563b13c16b7cb3347f5c67fa4548a427d9f29e4b5bcf510d3525496"
+      "sha256": "043eaabd0e6a17398b5c7c29c3e5e8c17ef5ff1e15b4ec054f2efb8e2b58b1a2"
     },
     {
       "path": "renders/pads.png",
@@ -636,11 +668,11 @@
   "inputs": [
     {
       "path": ".render/scenes.json",
-      "sha256": "a5757a0dc0c6340de87721498f4c27bd9f886d04d03950ed65ff7cbe624edcd6"
+      "sha256": "549e651b3a413689f0000fddc62830589a10ad9ae79d6e199d3e88a7374fb62f"
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "2336aa36a5fa9a6ec33fe9e89362f79b1e7d8f76806493ced24e9fb0f8751610"
+      "sha256": "ecd0806377a9ee646201462129122154d88ab8a237b7f679d7e6879f8f14e912"
     },
     {
       "path": "build_pcb.py",
@@ -669,6 +701,10 @@
     {
       "path": "dock.py",
       "sha256": "02de9fd24bac1fc9f864874d6f88ab6cedba9dead7a3c4d95c8cab7ab4dc583b"
+    },
+    {
+      "path": "dongle.py",
+      "sha256": "66a685b84985df37de88af9a549ad1066acd907180f6f7ae9341ad4cc5995960"
     },
     {
       "path": "footprints.py",
@@ -700,7 +736,7 @@
     },
     {
       "path": "render.sh",
-      "sha256": "3c8c2dcca165cc8ab04a46a6a68ea52dfbde49cea3c8b3f12be130238a803ff8"
+      "sha256": "ca96b6b6b0c7f399165101666b48a066937a905cd6805d81ce583cb9baf5ceb4"
     },
     {
       "path": "render_boards.py",
@@ -708,7 +744,7 @@
     },
     {
       "path": "render_manifest.py",
-      "sha256": "d28336a7e3de9a8cb747e002bfca313a4b7845ee0c1ac889629ac1f896fa87ba"
+      "sha256": "995a4013aad0541c8d195cb23d0bec83f41f67cf8aacb815e84d80710a93ab24"
     },
     {
       "path": "render_notes.py",
@@ -716,7 +752,7 @@
     },
     {
       "path": "scene.py",
-      "sha256": "2c9c142efb3e0d6ca0b480d0c4bcdc433b1cd845d951f212c3cb34099e989e2c"
+      "sha256": "941effff34cc793b26f7afd21b28994724d3ef8754b29420bac3d977fd3df8a6"
     },
     {
       "path": "stand_mount.py",
@@ -729,6 +765,10 @@
     {
       "path": "switch_mount.py",
       "sha256": "b27d038ed0e5ff772de819f07883714e94164e48ea7518e5be7086fcf655df9e"
+    },
+    {
+      "path": "test_dongle.py",
+      "sha256": "f56d9e602f6dc664b512c3228a2ddcc70542570574ab1f78b9f4bd8d11611656"
     },
     {
       "path": "test_drawer.py",
@@ -744,7 +784,7 @@
     },
     {
       "path": "test_stl_export.py",
-      "sha256": "5d4a64b4efe90e7029988d5dabc1f34c98ffcfd47a769c50a6ed9a6962bfccd1"
+      "sha256": "798de20f159deb6d8309580254e2f7359ad10373bb489a9a1989c5a71efd5a41"
     },
     {
       "path": "test_switch_mount.py",
@@ -789,7 +829,9 @@
   ],
   "note": "Listed PNGs refreshed from the final scene; other views verified against the preceding manifest.",
   "updated_views": [
-    "dock_insert.png",
-    "placeholder_structure.png"
+    "dongle_headless.png",
+    "dongle_headless_structure.png",
+    "dongle_oled.png",
+    "dongle_oled_structure.png"
   ]
 }
