@@ -8,6 +8,7 @@ from shapely.geometry import LineString, Polygon
 import dock as K
 import insert
 import module_shell as M
+import module_battery as MB
 from trackball import trackball
 from trackpad import trackpad
 
@@ -26,6 +27,16 @@ class DrawerTest(unittest.TestCase):
             cls.modules.append((name, tray + lid, Manifold(), mod.H, mod.parts(layout, main_plan, sensor_plan), M.bumpons()))
         cover, _ = insert.build()
         cls.modules.append(("cover", cover, Manifold(), insert.H, [], Manifold()))
+
+    def test_standard_blank_interface_on_the_canonical_tray(self):
+        lid = MB.interface_lid()
+        M.check_common("standard blank interface", lid, self.tray, [])
+        M.check_dock_and_desk(self.tray, lid, M.CHOC_TOP, feet=M.bumpons(), k=self.dock)
+        pivot = M.OUTLINE.bounds[3]
+        for tenth in range(0, 121, 5):
+            tilted = lid.translate((0, -pivot, -M.FLUSH)).rotate(
+                (-tenth / 10, 0, 0)).translate((0, pivot, M.FLUSH))
+            self.assertLess(abs((tilted ^ self.tray).volume()), .05)
 
     def test_continuous_walls_and_magnet_retention(self):
         plan = K.drawer_plan(M.P)

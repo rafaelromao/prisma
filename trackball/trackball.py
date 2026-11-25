@@ -276,7 +276,11 @@ def cup_outer_r():
 
 
 def tray(L):
-    """The tray every module shares: M.tray() with the electronics' seats and the screw posts."""
+    """The canonical tray: M.tray() with the electronics seats and screw posts.
+
+    Keep its geometry and PCB datums shared. The long-cell removable carrier
+    in module_battery.py uses the freed pointing volume without altering it.
+    """
     sh = M.tray()
     # the battery's cradle
     c = CRADLE[2]

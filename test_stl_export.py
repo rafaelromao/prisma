@@ -13,6 +13,14 @@ from trackpad import trackpad as T
 
 
 class StlExportTest(unittest.TestCase):
+    def test_canonical_tray_has_only_one_public_copy(self):
+        source = Path("case/module_tray.stl")
+        public = Path("stls/module_tray.stl")
+        self.assertEqual(source.read_bytes(), public.read_bytes())
+        self.assertEqual(sorted(Path("stls").glob("*tray*.stl")), [public])
+        for folder in (Path("trackball/case"), Path("trackpad/case")):
+            self.assertEqual(list(folder.glob("*tray*.stl")), [])
+
     def test_all_printable_variants_survive_binary_stl_quantization(self):
         half = C.real(C.build())
         plate = C.real(C.plate()[0]).mirror((0, 0, 1)).translate((0, 0, C.PLATE["thick"]))

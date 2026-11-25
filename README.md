@@ -226,7 +226,9 @@ stand it is a tented, splayed unibody, sturdier than the magnets at the seam alo
 Two standalone ZMK pointing devices. Either slides into the dock's drawer from the front, or snaps onto
 either half's inner wall on the desk, or sits on its own on its bump-ons. They are built like a half: a
 tray, a lid, and the same M3 × 8 flat-head screws from the top. The tray is one print, shared by every
-module; only the lid changes.
+module; only the lid changes for pointing devices. The [common drawer interface](DRAWER_INTERFACE.md)
+reserves the same tray for the future passive lid and 500 mAh dongle using a removable
+insulated carrier. The existing solid placeholder remains separate until its follow-up.
 
 - **Shared by both:** the tray, the main board (keys, hot-swap sockets, power switch), a controller on its own small board,
   a 752025 (250 mAh) battery, and a sensor board holding the reset button. All in the same places, so the
