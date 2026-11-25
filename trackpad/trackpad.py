@@ -6,7 +6,7 @@ power switch and USB-C at the back, the reset button pressed from below. Only th
 carries the pad, on a ledge. The sensor board carries only reset. The supplied I2C breakout and
 flat cable are retained; four wires go to the breakout and a separate DR wire to the pad.
 
-Writes trackpad/design.json (placement, wiring), case/lid.stl, and prints the fit check.
+Writes trackpad/design.json (placement, wiring), case/lid.stl and case/retainer.stl, and prints the fit check.
 """
 import json
 import os
@@ -28,8 +28,15 @@ from trackball.controller_pinout import SIGNALS, GPIO
 H = M.PCB_TOP + B.CHOC["below_plate"]   # the Choc trackball's height
 TOP_T = 1.2                    # the top: a Choc plate (the switches clip into 1.2 to 1.3 mm)
 # TM040040 spec: 0.99 mm PCB + overlay, 5.15 +/- 0.2 mm with components, none in the outer 2 mm ring.
-# The seat is 1.2 deep: the difference is the adhesive dots. The ledge sits under that free ring.
+# Keep the original seat and pad datum; the ledge supports the free underside ring.
+# Two removable side hooks capture only the outer edge, with no adhesive or preload.
 PAD = dict(d=40.0, t=1.2, back=4.4, clr=0.3, rim=1.0, ledge=1.8, gap=12.0)
+# M2 pan-head, length under head. These are provisional printable-pilot dimensions,
+# not an assumption that all M2 hardware has the same head or usable thread.
+RETAINER = dict(length=3.0, pilot=1.65, clearance=2.3, head_d=3.8, head_h=1.5,
+                flange=1.2, boss_depth=3.0, roof=.6, boss_r=2.0,
+                screw_x=21.7, screw_y=5.4, slide=1.35, axial_play=.2,
+                edge_overlap=.9, lip_t=.8)
 BREAKOUT = (24.0, 18.0, 4.5)   # reserved maximum envelope, including parts/connector, not a measured kit
 BREAKOUT_LIFT = 2.5            # insulating spacer clears the sensor-board screw heads; no holder
 NANO = B.NANO
@@ -60,6 +67,10 @@ def parts(L, main_plan, sensor_plan):
                                                        circular_segments=96).translate((px, py, pz - PAD["back"]))))
     out.append(("I2C breakout envelope", breakout_envelope(L)))
     out.append(("FFC bend envelope", ffc_envelope(L)))
+    for i, clip in enumerate(retainers(L), 1):
+        out.append(("pad retainer %d" % i, clip))
+    for i, head in enumerate(retainer_screws(L, heads_only=True), 1):
+        out.append(("pad retainer screw %d" % i, head))
     return out
 
 
@@ -102,6 +113,75 @@ def ffc_visual(L):
     return out
 
 
+def _at_pad(solid, L, side):
+    """One common local clip, turned 180 degrees for the opposite side."""
+    return solid.rotate((0, 0, 0 if side == 1 else 180)).translate((*L["pad"], 0))
+
+
+def retainer_floor():
+    return H - RETAINER["boss_depth"]
+
+
+def _clip():
+    """One keyed hook. Insert through the slot from below, slide in, screw to the boss.
+
+    The hard flange seats on the boss, not on the sensor. The top hook has axial
+    play above the nominal overlay; its inner edge covers only the outer 0.9 mm.
+    """
+    q = RETAINER
+    z = retainer_floor()
+    sx, sy = q["screw_x"], q["screw_y"]
+    stem = box(20.5, -1.6, 21.65, 1.6)
+    flange = stem.union(Point(sx, sy).buffer(q["boss_r"], quad_segs=16)).convex_hull
+    clip = M.extrude(flange, z - q["flange"], z)
+    clip += M.extrude(stem, z - .02, H + q["axial_play"] + q["lip_t"])
+    clip += box3(PAD["d"] / 2 - q["edge_overlap"], -1.6, H + q["axial_play"],
+                 21.65, 1.6, H + q["axial_play"] + q["lip_t"])
+    hole = Manifold.cylinder(q["flange"] + .1, q["clearance"] / 2,
+                             circular_segments=40).translate((sx, sy, z - q["flange"] - .04))
+    return clip - hole
+
+
+def retainers(L):
+    return [_at_pad(_clip(), L, side) for side in (1, -1)]
+
+
+def retainer_print():
+    """Print two copies, lying on the hook's side so its lip is not a vertical cantilever."""
+    m = _clip().rotate((90, 0, 0))
+    x, y, z = m.bounding_box()[:3]
+    return m.translate((-x, -y, -z))
+
+
+def retainer_screws(L, heads_only=False, extra=0.0):
+    q = RETAINER
+    z = retainer_floor() - q["flange"]
+    x, y = q["screw_x"], q["screw_y"]
+    head = Manifold.cylinder(q["head_h"], q["head_d"] / 2, circular_segments=48)
+    screw = head.translate((x, y, z - q["head_h"]))
+    if not heads_only:
+        screw += Manifold.cylinder(q["length"] + extra, 1.0, circular_segments=48).translate((x, y, z))
+    return [_at_pad(screw, L, side) for side in (1, -1)]
+
+
+def _retainer_mounts(sh, L):
+    q = RETAINER
+    z = retainer_floor()
+    x, y = q["screw_x"], q["screw_y"]
+    boss = Manifold.cylinder(q["boss_depth"] - TOP_T + .02, q["boss_r"],
+                             circular_segments=64).translate((x, y, z))
+    # The blind hole opens on the underside. Leave the full 0.6 mm roof.
+    pilot = Manifold.cylinder(q["boss_depth"] - q["roof"] + .02, q["pilot"] / 2,
+                              circular_segments=48).translate((x, y, z - .02))
+    # Insertion clearance for the lip, and a narrow keyed stem channel. The
+    # rest of the original ledge remains unchanged, including the rear gap.
+    slot = box3(20.15, -1.9, z - .1, 23.15, 1.9, H + 1.1)
+    for side in (1, -1):
+        sh += _at_pad(boss, L, side)
+        sh -= _at_pad(pilot + slot, L, side)
+    return sh
+
+
 def lid(L):
     sh = B.lid(L, "choc", ball=False)
     # the pad's seat: through the top, and a ledge round it under its rim, open at the back
@@ -120,7 +200,7 @@ def lid(L):
                              circular_segments=120).translate((px, py, ledge_z - 1.0))
     sh += seat - cone
     sh -= Manifold.cylinder(TOP_T + 1, r, circular_segments=120).translate((px, py, ledge_z))
-    return M.lid_holes(M.bevel(sh, H), H)
+    return M.lid_holes(M.bevel(_retainer_mounts(sh, L), H), H)
 
 
 def wiring():
@@ -145,9 +225,11 @@ def main():
     os.makedirs(os.path.join(HERE, "case"), exist_ok=True)
     B.stl_lid(lid_m, H, os.path.join(HERE, "case", "lid.stl"))
     shutil.copyfile(os.path.join(HERE, "case", "lid.stl"), os.path.join(HERE, "..", C.STLS, "trackpad_lid.stl"))
+    C.stl(retainer_print(), os.path.join(HERE, "case", "retainer.stl"))
+    shutil.copyfile(os.path.join(HERE, "case", "retainer.stl"), os.path.join(HERE, "..", C.STLS, "trackpad_retainer.stl"))
     json.dump(dict(layout={k: v for k, v in L.items()}, height=H, screws=M.lid_screws(), feet=M.feet_spots(),
                     wiring=wiring(), controllers=SIGNALS['trackpad'], gpio=GPIO,
-                    breakout_envelope=BREAKOUT, breakout_lift=BREAKOUT_LIFT), open(os.path.join(HERE, "design.json"), "w"), indent=1,
+                    breakout_envelope=BREAKOUT, breakout_lift=BREAKOUT_LIFT, retainer=RETAINER), open(os.path.join(HERE, "design.json"), "w"), indent=1,
               default=lambda o: [float(v) for v in o])
     return L, lid_m, tray_m, ps
 

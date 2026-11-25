@@ -307,11 +307,16 @@ sockets on the shared main board and stands at the Choc lid's height, 1.2 mm ove
   switch, putting **17.5 mm front-to-back** here; they cannot be independently quarter-turned.
   The centred nominal pad-to-cap gap is **0.585 mm**; an 18 mm square envelope has only
   **0.335 mm**. The seat's 0.3 mm radial allowance can reduce these to **0.285/0.035 mm**
-  before print error or wobble. Check actual pad placement, adhesive, cap travel and wobble;
+  before print error or wobble. Check actual pad placement, edge-retainer fit, cap travel and wobble;
   these are not first-print fit guarantees. The front screw centres are now
   x = ±21.0, y = −91.5 mm, leaving **2.087 mm** from the countersink envelope to the pad seat
   (formerly 0.871 mm). Use the new tray and lids together; PCB holes and key positions are unchanged.
 
+- The original pad ledge supports the underside perimeter. Two identical printed keyed clips
+  (`trackpad/case/retainer.stl`, print twice) hook over opposite outer edge sectors and
+  attach from inside with M2 × 3 pan-head screws. No sensor adhesive. The raised hooks
+  leave the original pad datum, key positions, cable clearance and tray unchanged.
+  Qualify the actual overlay edge, printed fit and screw engagement before use; see BUILD.md.
 - Retain the supplied I²C breakout with its pull-up resistors and original 12-pin flat cable.
   Four wires connect the MCU to the breakout; one separate DR wire connects the MCU directly to the
   Cirque underside. The sensor/reset board area reserves a 24 × 18 × 4.5 mm breakout envelope on a

@@ -159,6 +159,10 @@ def _shown(mod, kind, name, m, L):
 
 
 def _colour(name):
+    if name.startswith("pad retainer screw"):
+        return SCREW_RGB
+    if name.startswith("pad retainer"):
+        return TRAY_RGB
     rgb = PART_RGB.get(name)
     if rgb is None:
         rgb = vrml.KEYCAP if name.startswith("keycap") else vrml.SWITCH if name[:2] in ("MX", "ch", "CH") else vrml.SOCKET
@@ -224,7 +228,10 @@ def module_instruction_scenes(kind, switch="choc"):
     seam = [(lid, LID_RGB), (tray, TRAY_RGB)]
     populated = [(tray, TRAY_RGB), (M.floor_magnet(), vrml.METAL), (_sensor_screws(L), SCREW_RGB)]
     for label, solid in ps:
-        if not _on_lid(label):
+        if label.startswith("pad retainer"):
+            structure.append((solid.translate((0, 0, 12)), _colour(label)))
+            seam.append((solid, _colour(label)))
+        elif not _on_lid(label):
             populated.append((_shown(mod, kind, label, solid, L), _colour(label)))
     empty = [(tray, TRAY_RGB), (_sensor_screws(L), SCREW_RGB)]
     for label, solid in ps:

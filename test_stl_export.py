@@ -32,12 +32,14 @@ class StlExportTest(unittest.TestCase):
         for name, lid, height in (("mx", B.lid(layout, "mx"), B.H), ("choc", B.lid(layout, "choc"), B.M.CHOC_TOP),
                                   ("trackpad", T.lid(T.place()), T.H)):
             solids[name] = lid.mirror((0, 0, 1)).translate((0, 0, height))
+        solids["trackpad_retainer"] = T.retainer_print()
         record = np.dtype([("normal", "<f4", 3), ("vertices", "<f4", (3, 3)), ("attribute", "<u2")])
         published = {"left": "case/case_left.stl", "right": "case/case_right.stl",
                      "plate_left": "case/plate_left.stl", "plate_right": "case/plate_right.stl",
                      "dock": "case/dock.stl", "cover": "case/insert.stl",
                      "tray": "case/module_tray.stl", "mx": "trackball/case/lid.stl",
-                     "choc": "trackball/case/lid_choc.stl", "trackpad": "trackpad/case/lid.stl"}
+                     "choc": "trackball/case/lid_choc.stl", "trackpad": "trackpad/case/lid.stl",
+                     "trackpad_retainer": "trackpad/case/retainer.stl"}
         with tempfile.TemporaryDirectory(dir="/tmp/opencode", prefix="prisma-stl-test-") as folder:
             for name, solid in solids.items():
                 with self.subTest(variant=name):
