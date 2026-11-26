@@ -327,6 +327,15 @@ Work in this order, power off, with the magnets already glued in. Before putting
 
 Stick three 8 × 2 mm bump-ons into the floor's recesses.
 
+### Installing the Cirque holder
+
+These views look at the **underside** of the lid. Install the holder with the lid off the tray. The dark green disc marks the space taken by the parts on the pad's underside; the tabs stay outside it.
+
+| 1. Seat the Cirque | 2. Fit the mirrored tabs | 3. Check the installed holder |
+|---|---|---|
+| ![Cirque aligned below the lid's round pocket](renders/trackpad_holder_insert.png) | ![Green support tabs and orange M3 screws aligned with the blind bosses](renders/trackpad_holder_tabs.png) | ![Installed tabs supporting opposite edges of the Cirque](renders/trackpad_holder_installed.png) |
+| Lower the pad into the face-down lid with the touch surface toward the opening. | Point the raised ends toward the pad centre. Use one M3 × 4 mm pan-head screw per tab. | Both flanges should seat on the bosses. Check that the pad has slight free play before routing the cable. |
+
 ### Power and reset
 
 Same switch and same button in the same place on both modules.

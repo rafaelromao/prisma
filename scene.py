@@ -255,6 +255,16 @@ def module_instruction_scenes(kind, switch="choc"):
         ]
         views["holder"] += [(tab.translate((0, 0, 23)), (.16, .72, .45)) for tab in mod.retainers(L)]
         views["holder"] += [(screw.translate((0, 0, 15)), SCREW_RGB) for screw in mod.retainer_screws(L)]
+        parts = dict(ps)
+        pad = [(parts["pad"], vrml.PAD), (parts["pad's back parts"], PCB_GREEN)]
+        tabs = [(tab, (.16, .72, .45)) for tab in mod.retainers(L)]
+        screws = [(screw, SCREW_RGB) for screw in mod.retainer_screws(L)]
+        cover = [(lid, LID_RGB)]
+        views["holder_insert"] = cover + [(solid.translate((0, 0, -12)), rgb) for solid, rgb in pad]
+        views["holder_tabs"] = cover + pad + [
+            (solid.translate((0, 0, -9)), rgb) for solid, rgb in tabs] + [
+            (solid.translate((0, 0, -17)), rgb) for solid, rgb in screws]
+        views["holder_installed"] = cover + pad + tabs + screws
     return views
 
 
@@ -512,6 +522,8 @@ def main():
             scenes[name] = {"speck": [-2.0, 38.0], "z": -(B.PCB_TOP - .8 + lift), "size": 60.0}
         if name.endswith("_rear"):
             scenes[name] = {"speck": [0.0, 20.0], "z": -14.0, "size": 80.0}
+        if name.startswith("trackpad_holder_"):
+            scenes[name] = {"speck": [0.0, 76.0], "z": -19.0, "size": 65.0}
         if "_usb" in name:
             scenes[name]["speck"] = [0.0, 40.0]
             if name.endswith("_dock"):
