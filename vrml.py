@@ -70,6 +70,7 @@ def models(d="pcb/3d"):
         (box(-2.45, -8.45, -1.6 - 1.85, 7.75, -1.25, -1.6), SOCKET),
     ]
     write_parts(f"{d}/choc_v1_with_cap.wrl", switch)
+    write_parts(f"{d}/choc_socket.wrl", switch[-1:])                 # alone, for the build steps
     # XIAO nRF52840 as mounted on the F face (pad side down, USB end at -y); render_boards.py
     # turns it under the board for the parts on the bottom face. Seeed's layout: USB-C hanging
     # 1.3 mm past the end, nRF52840 mid-board, chip antenna at the far end, reset button and

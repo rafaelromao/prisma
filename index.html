@@ -799,17 +799,18 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <div class="table"><table>
 <thead>
 <tr>
-<th>Parts face: controller, sockets and power switch</th>
-<th>Switch face: board artwork and soldering access</th>
+<th>Parts face: module, sockets, power switch, JST and battery</th>
+<th>Switch face: switches, keycaps and reset button</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><img alt="Populated parts face of the left half" src="renders/parts_bottom.png" /></td>
-<td><img alt="Opposite face of the left half's bare PCB" src="renders/board_top.png" /></td>
+<td><img alt="Populated switch face of the left half" src="renders/parts_top.png" /></td>
 </tr>
 </tbody>
 </table></div>
+<p>The pictures in steps 2–6 show the left half, adding one part at a time.</p>
 <h3 id="b-before-you-start">Before you start</h3>
 <ul>
 <li><strong>Flash and test the module first.</strong> Plug it into USB and double-tap reset: a USB drive appears. Copy the firmware onto it:</li>
@@ -868,6 +869,8 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <p>Leave the jumpers on the other face open: they're on the parts face, under where the module will sit.</p>
 <p><strong>Check:</strong> each bridged pair beeps on the multimeter, and the unbridged selector row doesn't.</p>
 <h3 id="b-2-solder-the-module-parts-face">2. Solder the module (parts face)</h3>
+<p><img alt="Module soldered flat on the left half's parts face" src="renders/step_module.png" /></p>
+<p><em>The module on its outline, components up, USB-C towards the board edge.</em></p>
 <ol>
 <li><strong>Pre-tin the module's underside pads</strong> that the boxed holes reach: the two battery pads (VBAT and GND on the XIAO, B+ and B- on the Super52840), the P0.09 pad (NFC1 on the XIAO, <code>009</code> on the Super52840) and RST. Flux each one and touch it with a lightly tinned iron, leaving a thin, flat coat. Wick off any bump: a blob lifts the module off its edge pads. In step 4 the solder fed into each hole then only has to melt into the coat that's already there.</li>
 <li>Flux the 14 edge pads. Lay the module flat over its outline with the USB-C end towards the board edge. The pads are pulled out past the module, so you can reach them from the side.</li>
@@ -886,6 +889,8 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li>No two adjacent castellations beep to each other.</li>
 </ul>
 <h3 id="b-3-power-switch-msk-12c02-parts-face">3. Power switch, MSK-12C02 (parts face)</h3>
+<p><img alt="Power switch added beside the module's USB-C end" src="renders/step_switch.png" /></p>
+<p><em>Added: the power switch beside the USB-C port, lever out over the edge.</em></p>
 <p>It goes next to the module's USB-C, with the lever pointing out over the board edge and its two locating pegs in the small holes.</p>
 <ol>
 <li>Tin one of the four corner (shield) pads. Place the switch with tweezers and reheat that pad to tack it.</li>
@@ -893,14 +898,20 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li>Solder the three signal pads with the fine tip and very little solder. A bridge between the middle pin and its near neighbour does no harm (both are VBAT). A bridge from the middle pin to the far one bypasses the switch: wick it away.</li>
 </ol>
 <h3 id="b-4-jst-battery-socket-parts-face">4. JST battery socket (parts face)</h3>
+<p><img alt="JST battery socket added at the BAT outline" src="renders/step_jst.png" /></p>
+<p><em>Added: the white JST socket at the <code>BAT</code> outline.</em></p>
 <p>Its opening faces the battery's spot under the inner keys. Tack one signal pin, check it sits flat, and solder the other pin. Then solder the two large mounting tabs: they need more heat and more solder, because they take the force of plugging the battery in.</p>
 <h3 id="b-5-hot-swap-sockets-parts-face">5. Hot-swap sockets (parts face)</h3>
+<p><img alt="Twelve hot-swap sockets added on the parts face" src="renders/step_sockets.png" /></p>
+<p><em>Added: the twelve black sockets, one per key.</em></p>
 <p>Twelve, one per key. Each socket fits its outline only one way round.</p>
 <ol>
 <li>Tin one pad lightly, place the socket, and hold it flat with tweezers while you reheat the pad until the socket's metal tab sinks into the solder.</li>
 <li>Solder the second tab. Use enough solder to make a fillet, but keep it out of the socket's opening.</li>
 </ol>
 <h3 id="b-6-reset-button-ts-1187a-switch-face">6. Reset button, TS-1187A (switch face)</h3>
+<p><img alt="Reset button on the switch face at the RST outline" src="renders/step_reset.png" /></p>
+<p><em>Turned over: the reset button at the <code>RST</code> outline.</em></p>
 <p>It goes on the <strong>switch face</strong>, in the gap above the thumb keys, inside its outline labelled <code>RST</code>. The part is square and symmetric: any of the four ways round works.</p>
 <ol>
 <li>Tin one corner pad, hold the button flat and centred with tweezers, and reheat the pad to tack it.</li>
@@ -980,6 +991,7 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <p><img alt="Both floors from below: the pads in black" src="renders/pads.png" /></p>
 <p>Clean the slots with isopropyl alcohol first and press each pad down firmly against the slot's roof, centred in its round end. Stack the halves to check: they should close flat, with no rocking.</p>
 <h3 id="b-taking-a-switch-out">Taking a switch out</h3>
+<p><img alt="Top plate with a pair of puller grooves at each switch opening" src="renders/plate.png" /></p>
 <p>The plates and the Choc lids carry two grooves per switch, as on the ZSA Voyager, because a Choc switch has no side indents for a puller to grip. A switch is held by four latch barbs under the plate's lip; a pull on the keycap is not meant to release it.</p>
 <ol>
 <li>Switch the keyboard off, unplug USB, and remove any module from the dock before inserting the metal puller. Then pull the keycap straight up with a keycap puller.</li>
@@ -1343,6 +1355,7 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 </table></div>
 <p>Take it out of the dock, unplug USB, switch it off, and take off the keycaps and ball. Undo the four lid screws and tilt the lid up from the front. The main board stays: it is soldered to the eight stacking pins, so desolder them to take it out. On the trackpad the lid remains attached by the supplied flat cable and the separate DR wire; support it without pulling either, and release the FFC latch if the available slack is insufficient.</p>
 <h3 id="b-resetting-a-closed-half">Resetting a closed half</h3>
+<p><img alt="Assembled left half with the reset cone above the thumb keys" src="renders/full.png" /></p>
 <p>Press straight down into the cone above the thumbs with a fingertip (the pad, not the nail, is enough: the cone is 4.2 mm across at the top and the plunger 2.0 mm wide).</p>
 <ul>
 <li><strong>Once:</strong> the half reboots.</li>

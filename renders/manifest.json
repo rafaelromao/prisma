@@ -4,9 +4,9 @@
       "path": "renders/all.png",
       "size": [
         4120,
-        2088
+        2043
       ],
-      "sha256": "b8af703fa42336441576dbcf60683eeaf8305d7d179bfbec369626b894f3cc33"
+      "sha256": "a294785f386b9b57fed0cd14468d65fe6c94d43ca7153c52ea6f00ade82cff87"
     },
     {
       "path": "renders/board_bottom.png",
@@ -190,7 +190,7 @@
         1568,
         1176
       ],
-      "sha256": "5539403c01c991e68fb247ff12293271d4c508db397f56cb391f849a6b2e9e5b"
+      "sha256": "135c29ced370b65caac7a55119c09178d7df1efeecca68fb15bf466cd999895b"
     },
     {
       "path": "renders/parts_top.png",
@@ -198,7 +198,7 @@
         1568,
         1176
       ],
-      "sha256": "5d4f33571a228de86660e97d92cb84e5c233ac2a82c8ae8da27f69078ba23202"
+      "sha256": "7a2f09439df34790a176b24fd919b6fefa910480212af21c5501e99204c1b9fd"
     },
     {
       "path": "renders/placeholder_structure.png",
@@ -247,6 +247,46 @@
         1176
       ],
       "sha256": "c35384754bbe7c06565df6ebae53cafd7920573ea373d31e015ca932b5c158e2"
+    },
+    {
+      "path": "renders/step_jst.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "c515f665fc2f14c5ba1ee6a47991d2f5e6cabf52f73563bedc08a371dfa31502"
+    },
+    {
+      "path": "renders/step_module.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "fd1069762471b42d5d187211b6685dd98b0e17d835314b54ac2d21e6c0be70ff"
+    },
+    {
+      "path": "renders/step_reset.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "995a80c565fa536acb2512c7548f8597c216334237ae6e2014d6dba1590ce7ac"
+    },
+    {
+      "path": "renders/step_sockets.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "00ee86f89f5caecf0d3162dfd05239ad1f58762c5e429ef405e7dfbd51074b90"
+    },
+    {
+      "path": "renders/step_switch.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "04527587fe5e89cc47f0e48a4c0c2db5f0eb018b60df3db74057d07d8ca9797f"
     },
     {
       "path": "renders/trackball.png",
@@ -776,11 +816,11 @@
     },
     {
       "path": "render.sh",
-      "sha256": "049141511e9e13c0d83448c45cb390776b9d0d6d89682e9663a72f56a64fa966"
+      "sha256": "275c6eee5072c3e47b4cfa58e680877dfda47819bab6e3f86415e6505974dc2e"
     },
     {
       "path": "render_boards.py",
-      "sha256": "e5cea4fc19c926c5cae393ac3d1feddf2216011cd482ad66d4aef0fd8b73f721"
+      "sha256": "ab3871d9f201111ca9b8b6054a6104682683c15a580eaeb9806a268ff22f3b51"
     },
     {
       "path": "render_manifest.py",
@@ -864,63 +904,18 @@
     },
     {
       "path": "vrml.py",
-      "sha256": "6a98eba0532f105d5fb0197a23fa0adddf1562ee9f25d77d62ad8277633e4121"
+      "sha256": "8656a857958082457a9d50099611104dbd655f913c8b6131c8d2be278224594c"
     }
   ],
   "note": "Listed PNGs refreshed from the final scene; other views verified against the preceding manifest.",
   "updated_views": [
-    "cyberdeck.png",
-    "cyberdeck_front.png",
-    "cyberdeck_side.png",
-    "cyberdeck_top.png",
-    "dock_insert.png",
-    "dock_unibody.png",
-    "dock_unibody_side.png",
-    "dongle_headless.png",
-    "dongle_headless_structure.png",
-    "dongle_oled.png",
-    "dongle_oled_structure.png",
-    "placeholder_structure.png",
-    "trackball.png",
-    "trackball_assembly.png",
-    "trackball_mx.png",
-    "trackball_mx_assembly.png",
-    "trackball_mx_reset.png",
-    "trackball_mx_seam.png",
-    "trackball_mx_stack.png",
-    "trackball_mx_structure.png",
-    "trackball_mx_tray.png",
-    "trackball_open.png",
-    "trackball_rear.png",
-    "trackball_reset.png",
-    "trackball_seam.png",
-    "trackball_stack.png",
-    "trackball_structure.png",
-    "trackball_tray.png",
-    "trackball_under.png",
-    "trackball_usb.png",
-    "trackball_usb_dock.png",
-    "trackball_usb_open.png",
-    "trackball_with_half.png",
-    "trackball_xiao_stack.png",
-    "trackball_xiao_usb_open.png",
-    "trackpad.png",
-    "trackpad_assembly.png",
-    "trackpad_holder.png",
-    "trackpad_holder_insert.png",
-    "trackpad_holder_installed.png",
-    "trackpad_holder_tabs.png",
-    "trackpad_open.png",
-    "trackpad_rear.png",
-    "trackpad_reset.png",
-    "trackpad_seam.png",
-    "trackpad_stack.png",
-    "trackpad_structure.png",
-    "trackpad_tray.png",
-    "trackpad_under.png",
-    "trackpad_usb.png",
-    "trackpad_usb_dock.png",
-    "trackpad_usb_open.png",
-    "trackpad_with_half.png"
+    "all.png",
+    "parts_bottom.png",
+    "parts_top.png",
+    "step_jst.png",
+    "step_module.png",
+    "step_reset.png",
+    "step_sockets.png",
+    "step_switch.png"
   ]
 }

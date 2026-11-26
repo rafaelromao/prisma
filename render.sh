@@ -31,6 +31,11 @@ r --side top    -o renders/board_top.png      .render/bare.kicad_pcb
 r --side bottom -o renders/board_bottom.png   .render/bare.kicad_pcb
 r --rotate '-40,0,25'  --zoom 0.85 -o renders/parts_top.png    .render/parts.kicad_pcb
 r --rotate '140,0,-25' --zoom 0.85 -o renders/parts_bottom.png .render/parts.kicad_pcb
+# BUILD.md's soldering steps (render_boards.py)
+for step in module switch jst sockets; do
+    r --rotate '140,0,-25' --zoom 0.85 -o "renders/step_$step.png" ".render/step_$step.kicad_pcb"
+done
+r --rotate '-40,0,25'  --zoom 0.85 -o renders/step_reset.png   .render/step_reset.kicad_pcb
 r --rotate '-40,0,25'  --zoom 0.85 -o renders/full.png         .render/full.kicad_pcb
 r --rotate '-40,0,25'  --zoom 0.0016 -o renders/case.png         .render/case.kicad_pcb
 r --rotate '-40,0,25'  --zoom 0.0016 -o renders/plate.png        .render/plate.kicad_pcb

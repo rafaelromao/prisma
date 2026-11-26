@@ -66,6 +66,28 @@ def main():
     model_fp(b, "CASE", "${KIPRJMOD}/3d/case.wrl")
     save(b, "full")
 
+    # BUILD.md's soldering steps, cumulative: only the parts fitted so far.
+    fitted = []
+    for step, refs in (("module", ["U1"]), ("switch", ["SW13"]), ("jst", ["J1"]),
+                       ("sockets", [f"SW{i}" for i in range(1, 13)]), ("reset", ["SW14"])):
+        fitted += refs
+        b = pcbnew.LoadBoard(SRC)
+        for fp in b.GetFootprints():
+            ref = fp.GetReference()
+            models = fp.Models()
+            if ref not in fitted:
+                models.clear()
+                continue
+            for i in range(len(models)):
+                m = models[i]
+                if ref in ("U1", "SW13", "J1"):      # under the board, as in "parts"
+                    m.m_Rotation = pcbnew.VECTOR3D(0, 180, 0)
+                    m.m_Offset = pcbnew.VECTOR3D(0, 0, -1.6)
+                elif ref != "SW14":                  # the socket without its switch and cap
+                    m.m_Filename = "${KIPRJMOD}/3d/choc_socket.wrl"
+                models[i] = m
+        save(b, f"step_{step}")
+
     # case alone: a speck of board at the case's centre (the camera centres on the board)
     xs = [p[0] for p in D["case_outline"]]
     ys = [p[1] for p in D["case_outline"]]
