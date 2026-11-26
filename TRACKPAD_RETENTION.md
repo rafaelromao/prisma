@@ -7,6 +7,8 @@ and are hidden with the lid installed. They hold the pad independently of the
 tray, with 0.1 mm nominal axial play rather than pressure on the sensor.
 The common tray, PCBs, lid height and key positions are unchanged.
 
+![Exploded view of the Cirque pad, the two green support tabs and their screws beneath the lid](renders/trackpad_holder.png)
+
 The tabs use two **M3 × 4 mm pan-head screws**
 (under-head length, head ≤5.5 mm diameter and ≤2.0 mm height) in Ø2.5 mm,
 3.4 mm-deep blind pilots. Each tab seats against the lid boss, not against

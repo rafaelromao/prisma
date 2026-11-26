@@ -172,9 +172,9 @@
       "path": "renders/modules.png",
       "size": [
         1800,
-        7500
+        8000
       ],
-      "sha256": "e0a55d511e3af7417c3c2ed89ebadb1b81f4ea85b3ab75bd0dd757db2a38ecc0"
+      "sha256": "d4d34c8aeac4cca9498f4ebbf5b73319ac49819c1f491dd11062e040edc0968a"
     },
     {
       "path": "renders/pads.png",
@@ -529,6 +529,14 @@
       "sha256": "976b526270088a14e73204c3d196952e2c949098930aef440e680e6912722670"
     },
     {
+      "path": "renders/trackpad_holder.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "72a417296b69f02e5efdac6067154d59f2c6915db0efd6bedfce99042d15938f"
+    },
+    {
       "path": "renders/trackpad_open.png",
       "size": [
         1568,
@@ -676,7 +684,7 @@
   "inputs": [
     {
       "path": ".render/scenes.json",
-      "sha256": "5ece182b1c823780ed2ab2e7cf713f9debce0085ea2ee46d0a71d4877ed5f7ed"
+      "sha256": "04ceca042cf8979c428a0e0bdd5d48b326bc125c580e130c1a3d7dca023c2722"
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
@@ -744,7 +752,7 @@
     },
     {
       "path": "render.sh",
-      "sha256": "ebcdeec579beb968cdea5da2ee034e832a27d5d495bba72c65cf7e39c146e770"
+      "sha256": "3b2f992625639b6aa47970b728270b3cdd6a35d24ae2b77c894102ba4d069caf"
     },
     {
       "path": "render_boards.py",
@@ -752,7 +760,7 @@
     },
     {
       "path": "render_manifest.py",
-      "sha256": "436b780f34ce19e64d2f57a02ab3cd54f24da2c5032b75e314471481745f12db"
+      "sha256": "04b26c0d6faa082513ef0c992c524c083a84471300d2a3d15f5dd3a20cbe5441"
     },
     {
       "path": "render_notes.py",
@@ -760,7 +768,7 @@
     },
     {
       "path": "scene.py",
-      "sha256": "2f89021eafa1b731810b5b3578454285be044a9b8f6cb8bf14dfc656c69717b6"
+      "sha256": "0f859b435c39e429b393c89f0628684b92ea951ca04f36ca8e7aea9b94d93ad5"
     },
     {
       "path": "stand_mount.py",
@@ -837,54 +845,6 @@
   ],
   "note": "Listed PNGs refreshed from the final scene; other views verified against the preceding manifest.",
   "updated_views": [
-    "cyberdeck.png",
-    "cyberdeck_front.png",
-    "cyberdeck_side.png",
-    "cyberdeck_top.png",
-    "dock_insert.png",
-    "dock_unibody.png",
-    "dock_unibody_side.png",
-    "dongle_headless.png",
-    "dongle_headless_structure.png",
-    "dongle_oled.png",
-    "dongle_oled_structure.png",
-    "placeholder_structure.png",
-    "trackball.png",
-    "trackball_assembly.png",
-    "trackball_mx.png",
-    "trackball_mx_assembly.png",
-    "trackball_mx_reset.png",
-    "trackball_mx_seam.png",
-    "trackball_mx_stack.png",
-    "trackball_mx_structure.png",
-    "trackball_mx_tray.png",
-    "trackball_open.png",
-    "trackball_rear.png",
-    "trackball_reset.png",
-    "trackball_seam.png",
-    "trackball_stack.png",
-    "trackball_structure.png",
-    "trackball_tray.png",
-    "trackball_under.png",
-    "trackball_usb.png",
-    "trackball_usb_dock.png",
-    "trackball_usb_open.png",
-    "trackball_with_half.png",
-    "trackball_xiao_stack.png",
-    "trackball_xiao_usb_open.png",
-    "trackpad.png",
-    "trackpad_assembly.png",
-    "trackpad_open.png",
-    "trackpad_rear.png",
-    "trackpad_reset.png",
-    "trackpad_seam.png",
-    "trackpad_stack.png",
-    "trackpad_structure.png",
-    "trackpad_tray.png",
-    "trackpad_under.png",
-    "trackpad_usb.png",
-    "trackpad_usb_dock.png",
-    "trackpad_usb_open.png",
-    "trackpad_with_half.png"
+    "trackpad_holder.png"
   ]
 }

@@ -244,7 +244,18 @@ def module_instruction_scenes(kind, switch="choc"):
     reset = dict(ps)["reset"]
     tool = Manifold.cylinder(12, .55, circular_segments=32).translate((rx, ry, reset.bounding_box()[2] - 14))
     reset_scene = [(tray, TRAY_RGB), (reset, (.88, .23, .08)), (tool, SCREW_RGB), (dict(ps)["sensor board"], PCB_GREEN)]
-    return {"structure": structure, "seam": seam, "tray": populated, "stack": empty, "reset": reset_scene}
+    views = {"structure": structure, "seam": seam, "tray": populated, "stack": empty, "reset": reset_scene}
+    if kind == "trackpad":
+        views["holder"] = [
+            (tray, TRAY_RGB),
+            (lid.translate((0, 0, 42)), LID_RGB),
+            (dict(ps)["pad"].translate((0, 0, 34)), vrml.PAD),
+            (dict(ps)["pad's back parts"].translate((0, 0, 34)), PCB_GREEN),
+            (M.lid_fasteners(_height(mod, kind, switch), 56), SCREW_RGB),
+        ]
+        views["holder"] += [(tab.translate((0, 0, 23)), (.16, .72, .45)) for tab in mod.retainers(L)]
+        views["holder"] += [(screw.translate((0, 0, 15)), SCREW_RGB) for screw in mod.retainer_screws(L)]
+    return views
 
 
 def _module_magnets(M):

@@ -50,6 +50,7 @@ def main():
                  'trackball_board_stack_nano.png', 'trackball_board_stack_nano_exploded.png', 'trackball_board_stack_nano_top.png',
                  'trackball_board_stack_wires.png', 'trackball_board_stack_nano_wires.png']
     required += ['dongle_headless.png', 'dongle_oled.png', 'dongle_headless_structure.png', 'dongle_oled_structure.png']
+    required += ['trackpad_holder.png']
     assert all((root / "renders" / n).is_file() for n in required)
     font = ImageFont.truetype("/usr/share/fonts/liberation/LiberationSans-Regular.ttf", 22)
     sheet = Image.new("RGB", (1800, ((len(required) + 2) // 3) * 500), "white")

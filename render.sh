@@ -66,6 +66,7 @@ r --rotate '-45,0,-30'    --zoom 0.0018 -o renders/trackball_mx.png         .ren
 r --rotate '-35,0,-60'    --zoom 0.0022 -o renders/trackball_open.png      .render/trackball_open.kicad_pcb
 r --rotate '-45,0,-20'    --zoom 0.0011 -o renders/trackball_with_half.png .render/trackball_with_half.kicad_pcb
 r --rotate '-45,0,-30'    --zoom 0.0015 -o renders/trackpad.png            .render/trackpad.kicad_pcb
+r --rotate '-55,0,-25'    --zoom 0.00125 -o renders/trackpad_holder.png    .render/trackpad_holder.kicad_pcb
 r --rotate '-35,0,-60'    --zoom 0.0015 -o renders/trackpad_open.png       .render/trackpad_open.kicad_pcb
 r --rotate '-45,0,-20'    --zoom 0.0011 -o renders/trackpad_with_half.png  .render/trackpad_with_half.kicad_pcb
 r --rotate '-55,0,-25'    --zoom 0.0013 -o renders/trackball_mx_assembly.png .render/trackball_mx_assembly.kicad_pcb
