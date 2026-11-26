@@ -211,13 +211,13 @@ def _on_lid(name):
     return name.split(" ")[0] in UP or name.startswith("pad")
 
 
-def module_assembly(kind):
+def module_assembly(kind, switch="choc"):
     """Lid lifted 30 mm off the populated tray with its keys, screws 12 mm over it. No wires drawn."""
     import module_shell as M
-    mod, L, lid, tray, ps = _built(kind)
+    mod, L, lid, tray, ps = _built(kind, switch)
     up = (0, 0, 30)
     out = [(lid.translate(up), vrml.CASE), (tray, vrml.CASE), (M.bumpons(), vrml.PAD), (_module_magnets(M), vrml.METAL),
-           (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(_height(mod, kind, "choc"), 42), vrml.METAL), (_sensor_screws(L), vrml.METAL)]
+           (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(_height(mod, kind, switch), 42), vrml.METAL), (_sensor_screws(L), vrml.METAL)]
     for name, solid in ps:
         solid = _shown(mod, kind, name, solid, L)
         out.append((solid.translate(up) if _on_lid(name) else solid, _colour(name)))
@@ -232,10 +232,7 @@ def module_instruction_scenes(kind, switch="choc"):
     seam = [(lid, LID_RGB), (tray, TRAY_RGB)]
     populated = [(tray, TRAY_RGB), (M.floor_magnet(), vrml.METAL), (_sensor_screws(L), SCREW_RGB)]
     for label, solid in ps:
-        if label.startswith("pad retainer"):
-            structure.append((solid.translate((0, 0, 12)), _colour(label)))
-            seam.append((solid, _colour(label)))
-        elif not _on_lid(label):
+        if not _on_lid(label):
             populated.append((_shown(mod, kind, label, solid, L), _colour(label)))
     empty = [(tray, TRAY_RGB), (_sensor_screws(L), SCREW_RGB)]
     for label, solid in ps:
@@ -321,6 +318,7 @@ def module_scenes(k):
         if kind == "trackball":      # the trackball is shown with its Choc lid; the MX lid is the alternative
             mx_parts, _ = _module(kind, "mx")
             scenes["trackball_mx"] = [(plan(m), rgb) for m, rgb in mx_parts]
+            scenes["trackball_mx_assembly"] = [(plan(m), rgb) for m, rgb in module_assembly(kind, "mx")]
             for label, solids in module_instruction_scenes(kind, "mx").items():
                 scenes["trackball_mx_" + label] = [(plan(m), rgb) for m, rgb in solids]
         connected = parts + _usb_parts(kind)
@@ -477,11 +475,16 @@ def main():
         electronics = [(solid, colors.get(label, vrml.XIAO_PCB)) for label, solid in parts]
         dock[name] = [(C.real(m), rgb) for m, rgb in common + electronics +
                       [(lid, LID_RGB), (M.lid_fasteners(G.H), SCREW_RGB)]]
-        exploded = common + [(m.translate((0, 0, 24 if label in ("OLED", "OLED connector envelope") else 0)),
-                              colors.get(label, vrml.XIAO_PCB)) for label, m in parts]
+        # Separate the removable pack and carrier from the populated tray,
+        # with the OLED (when fitted) staying with its lid. Omit wire keepouts.
+        lid_lift, pack_lift = 55, 28
+        lifts = {label: pack_lift for label in ("insulated carrier", "cell adhesive", "500 mAh cell envelope")}
+        lifts["OLED"] = lid_lift
+        exploded = common + [(m.translate((0, 0, lifts.get(label, 0))), colors.get(label, vrml.XIAO_PCB))
+                             for label, m in parts if label not in ("battery lead exit", "OLED connector envelope")]
         dock[name + "_structure"] = [(C.real(m), rgb) for m, rgb in exploded +
-                                     [(lid.translate((0, 0, 24)), LID_RGB),
-                                      (M.lid_fasteners(G.H, 38), SCREW_RGB)]]
+                                     [(lid.translate((0, 0, lid_lift)), LID_RGB),
+                                      (M.lid_fasteners(G.H, lid_lift + 12), SCREW_RGB)]]
         for key in (name, name + "_structure"):
             scenes[key] = {"speck": [0.0, 55.0], "z": -1.5, "size": 100.0}
     dock["independent_tenting"] = independent_tenting()

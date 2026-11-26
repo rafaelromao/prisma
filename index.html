@@ -316,7 +316,7 @@ main img { cursor: zoom-in; }
     <p><strong>Trackball:</strong> a 34 mm ball and PMW3610 sensor, with two Choc v1 hot-swap keys on one shared PCB: the same switches and caps as the halves. The PCB also takes MX sockets; populate one socket family and print the matching lid.</p>
     <figure><img src="renders/trackball_mx.png" alt="MX trackball case with taller switches, sharing the Choc variant's PCB" width="1600" height="1200" loading="lazy"><figcaption>The MX lid: same tray and boards.</figcaption></figure>
     <p><strong>Trackpad:</strong> a 40 mm Cirque in the lid, with its supplied I²C breakout and flat cable. Four wires run from the main board to the breakout and a separate DR wire to the Cirque's underside. Space is reserved for the breakout and cable with no printed holder; check your kit's dimensions against the build guide.</p>
-    <figure><img src="renders/trackpad_structure.png" alt="Trackpad module with the grey lid raised off the blue tray" width="1600" height="1280" loading="lazy"><figcaption>The trackpad's lid on the same tray.</figcaption></figure>
+    <figure><img src="renders/trackpad_structure.png" alt="Bare trackpad lid raised off the blue tray" width="1600" height="1200" loading="lazy"><figcaption>The bare trackpad lid and common tray. The pad and its underside hardware are omitted in this view.</figcaption></figure>
   </section>
 
   <div class="grid2">
@@ -327,6 +327,19 @@ main img { cursor: zoom-in; }
     <figure><img src="renders/trackball_with_half.png" alt="The trackball module snapped onto the left half on the desk" width="1600" height="1200" loading="lazy"><figcaption>Snapped onto a half on the desk.</figcaption></figure>
     <figure><img src="renders/trackpad_with_half.png" alt="The trackpad module snapped onto the left half on the desk" width="1600" height="1200" loading="lazy"><figcaption>The trackpad, on a half.</figcaption></figure>
   </div>
+
+  <section class="stack col" id="drawer-exploded">
+    <h3>Exploded views: all drawer modules</h3>
+    <p>Each variant uses the same tray and four M3 × 8 lid screws. Wiring is omitted for clarity.</p>
+    <div class="grid2">
+      <figure><img src="renders/trackball_assembly.png" alt="Choc trackball lid, ball and keys lifted above the populated tray" width="1600" height="1200" loading="lazy"><figcaption>Trackball, Choc v1</figcaption></figure>
+      <figure><img src="renders/trackball_mx_assembly.png" alt="MX trackball lid, ball and taller keys lifted above the populated tray" width="1600" height="1200" loading="lazy"><figcaption>Trackball, MX</figcaption></figure>
+      <figure><img src="renders/trackpad_assembly.png" alt="Trackpad lid with pad and keys lifted above the populated tray" width="1600" height="1200" loading="lazy"><figcaption>Trackpad: the hidden support tabs stay with the lid.</figcaption></figure>
+      <figure><img src="renders/placeholder_structure.png" alt="Passive lid lifted above a common tray with no electronics" width="1600" height="1200" loading="lazy"><figcaption>Passive drawer: no electronics.</figcaption></figure>
+      <figure><img src="renders/dongle_headless_structure.png" alt="Headless dongle with a plain lid above the lifted battery and carrier and populated tray" width="1600" height="1200" loading="lazy"><figcaption>Headless dongle: plain lid, 500 mAh battery and insulated carrier.</figcaption></figure>
+      <figure><img src="renders/dongle_oled_structure.png" alt="OLED dongle with the display in the lifted lid above the battery and carrier and populated tray" width="1600" height="1200" loading="lazy"><figcaption>OLED dongle: the display lifts with the lid.</figcaption></figure>
+    </div>
+  </section>
 
   <section class="stack col">
     <h3>USB-C, seated</h3>
@@ -960,13 +973,15 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <p><strong>Passive placeholder:</strong> For a prototype, print the common tray (or reuse an empty one) and the top-down <code>case/placeholder_lid.stl</code>. Fit six side magnets, one floor magnet and three bump-ons exactly as for a pointing module. Leave the existing rear USB/power and underside reset passages empty; there are no live parts to expose or extra cutouts in the lid. Fit the rear hooks first, lower the front, then secure four M3 × 8 flat-head screws flush, without overtightening. The top is 1.0 mm above the halves' edges to keep the standard screws from bottoming in the tray. The hollow assembly does not inherit the retired solid insert's load capacity. Check lid flex, screw retention, feet, magnet retention and dock/desk fit before relying on it for lap use. See <a href="PLACEHOLDER_LID.md">qualification and regeneration</a>.</p>
 <h3 id="b-pointing-modules">Pointing modules</h3>
 <p>Both modules are built the same way as a half: a <strong>tray</strong>, a <strong>lid</strong>, and the same <strong>M3 × 8 flat-head screws</strong> going in from the top. The tray is one print, shared by all of them. Only the lid changes: <code>trackball/case/lid.stl</code> (MX), <code>trackball/case/lid_choc.stl</code> (Choc v1) or <code>trackpad/case/lid.stl</code>.</p>
-<p>The first row of renders is the trackball with its Choc lid, the second the same module with the MX lid, the third the trackpad.</p>
+<p>The first row of renders is the trackball with its Choc lid, the second the same module with the MX lid, the third the trackpad.
+See the <a href="index.html#drawer-exploded">exploded-view gallery</a> for the populated pointing modules,
+the passive lid, and both powered dongles (headless and OLED).</p>
 <p>The raised lid has upper facets on its <strong>front and both sides</strong>, starting at the halves' top-surface height. Below that height the front keeps the drawer's matching profile for horizontal removal.</p>
 <div class="table"><table>
 <thead>
 <tr>
-<th>The parts, lid raised</th>
-<th>Closed</th>
+<th>Bare enclosure, lid raised</th>
+<th>Bare enclosure, closed</th>
 </tr>
 </thead>
 <tbody>

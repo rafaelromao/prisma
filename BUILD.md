@@ -178,10 +178,12 @@ Try it on one switch before the board is closed up, with your own puller: the gr
 Both modules are built the same way as a half: a **tray**, a **lid**, and the same **M3 × 8 flat-head screws** going in from the top. The tray is one print, shared by all of them. Only the lid changes: `trackball/case/lid.stl` (MX), `trackball/case/lid_choc.stl` (Choc v1) or `trackpad/case/lid.stl`.
 
 The first row of renders is the trackball with its Choc lid, the second the same module with the MX lid, the third the trackpad.
+See the [exploded-view gallery](index.html#drawer-exploded) for the populated pointing modules,
+the passive lid, and both powered dongles (headless and OLED).
 
 The raised lid has upper facets on its **front and both sides**, starting at the halves' top-surface height. Below that height the front keeps the drawer's matching profile for horizontal removal.
 
-| The parts, lid raised | Closed |
+| Bare enclosure, lid raised | Bare enclosure, closed |
 |---|---|
 | ![](renders/trackball_structure.png) | ![](renders/trackball_seam.png) |
 | ![](renders/trackball_mx_structure.png) | ![](renders/trackball_mx_seam.png) |

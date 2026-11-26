@@ -126,7 +126,7 @@
         1568,
         1176
       ],
-      "sha256": "69c85f43dc3703a45bd8a1fa4304dbf1145d2946d91ef0a57c78c39590021fb0"
+      "sha256": "12b89a5d07b462fed3572b0c8b1f6731c38aa822f4e2e744d6ce772edf66ae3c"
     },
     {
       "path": "renders/dongle_oled.png",
@@ -142,7 +142,7 @@
         1568,
         1176
       ],
-      "sha256": "0a263edae01f9f3983596b193025c96cd5432e7bbbf861ac9aa333460dfd261d"
+      "sha256": "9c7b0e3a405e33945841471406fcea16e193b1ca1daf65854696930fb4341984"
     },
     {
       "path": "renders/full.png",
@@ -174,7 +174,7 @@
         1800,
         7500
       ],
-      "sha256": "50efdfac48cba00675cc3c6bcae7511f0ede4e7c4018373379dfa9f262da1564"
+      "sha256": "9d7f61ea968248d5fd9fa1512c031bbd13c90362d9853740bd41dcf2327d78ff"
     },
     {
       "path": "renders/pads.png",
@@ -351,6 +351,14 @@
         1176
       ],
       "sha256": "49cd67a664d3f2a22d3b49f18b1c1d45b2c1b6516cb7b21869dda86fcea1f758"
+    },
+    {
+      "path": "renders/trackball_mx_assembly.png",
+      "size": [
+        1568,
+        1176
+      ],
+      "sha256": "bdd1aae26cfc24bfd67d2985c24ed6647683d5b09372e9d6ac613349fc242e66"
     },
     {
       "path": "renders/trackball_mx_reset.png",
@@ -550,7 +558,7 @@
         1568,
         1176
       ],
-      "sha256": "e9707c5aa8476964311fc4f4a96f81c4af88c8430685db4c966c8476de7eea4b"
+      "sha256": "a97422fd825249b0f8ca566acaef17d662bd143c5842aa074c9fac6408763f14"
     },
     {
       "path": "renders/trackpad_stack.png",
@@ -566,7 +574,7 @@
         1568,
         1176
       ],
-      "sha256": "0c5bb697ff3e9e5bf8f0418b7d09c0443721cac37a581435a6e4f21bd1c83a72"
+      "sha256": "34f6667459e84f16f241927a573580d345f39736e46146a40f6325614aca1ccf"
     },
     {
       "path": "renders/trackpad_tray.png",
@@ -668,7 +676,7 @@
   "inputs": [
     {
       "path": ".render/scenes.json",
-      "sha256": "549e651b3a413689f0000fddc62830589a10ad9ae79d6e199d3e88a7374fb62f"
+      "sha256": "5ece182b1c823780ed2ab2e7cf713f9debce0085ea2ee46d0a71d4877ed5f7ed"
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
@@ -736,7 +744,7 @@
     },
     {
       "path": "render.sh",
-      "sha256": "ca96b6b6b0c7f399165101666b48a066937a905cd6805d81ce583cb9baf5ceb4"
+      "sha256": "ebcdeec579beb968cdea5da2ee034e832a27d5d495bba72c65cf7e39c146e770"
     },
     {
       "path": "render_boards.py",
@@ -744,7 +752,7 @@
     },
     {
       "path": "render_manifest.py",
-      "sha256": "995a4013aad0541c8d195cb23d0bec83f41f67cf8aacb815e84d80710a93ab24"
+      "sha256": "436b780f34ce19e64d2f57a02ab3cd54f24da2c5032b75e314471481745f12db"
     },
     {
       "path": "render_notes.py",
@@ -752,7 +760,7 @@
     },
     {
       "path": "scene.py",
-      "sha256": "941effff34cc793b26f7afd21b28994724d3ef8754b29420bac3d977fd3df8a6"
+      "sha256": "2f89021eafa1b731810b5b3578454285be044a9b8f6cb8bf14dfc656c69717b6"
     },
     {
       "path": "stand_mount.py",
@@ -829,21 +837,10 @@
   ],
   "note": "Listed PNGs refreshed from the final scene; other views verified against the preceding manifest.",
   "updated_views": [
-    "dock_unibody.png",
-    "dock_unibody_side.png",
-    "trackpad.png",
-    "trackpad_assembly.png",
-    "trackpad_open.png",
-    "trackpad_rear.png",
-    "trackpad_reset.png",
+    "dongle_headless_structure.png",
+    "dongle_oled_structure.png",
+    "trackball_mx_assembly.png",
     "trackpad_seam.png",
-    "trackpad_stack.png",
-    "trackpad_structure.png",
-    "trackpad_tray.png",
-    "trackpad_under.png",
-    "trackpad_usb.png",
-    "trackpad_usb_dock.png",
-    "trackpad_usb_open.png",
-    "trackpad_with_half.png"
+    "trackpad_structure.png"
   ]
 }

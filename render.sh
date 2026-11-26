@@ -54,7 +54,7 @@ r --rotate '-50,0,-25'    --zoom 0.0009 -o renders/dock_insert.png     .render/d
 r --rotate '-50,0,-25'    --zoom 0.0015 -o renders/placeholder_structure.png .render/placeholder_structure.kicad_pcb
 for kind in dongle_headless dongle_oled; do
     r --rotate '-50,0,-25' --zoom 0.0018 -o "renders/$kind.png" ".render/$kind.kicad_pcb"
-    r --rotate '-50,0,-25' --zoom 0.0015 -o "renders/${kind}_structure.png" ".render/${kind}_structure.kicad_pcb"
+    r --rotate '-63,0,-25' --zoom 0.0011 -o "renders/${kind}_structure.png" ".render/${kind}_structure.kicad_pcb"
 done
 r --rotate '-40,0,25'     --zoom 0.001  -o renders/dock.png            .render/dock.kicad_pcb
 r --rotate '140,0,-25'    --zoom 0.001  -o renders/dock_under.png      .render/dock.kicad_pcb
@@ -68,6 +68,7 @@ r --rotate '-45,0,-20'    --zoom 0.0011 -o renders/trackball_with_half.png .rend
 r --rotate '-45,0,-30'    --zoom 0.0015 -o renders/trackpad.png            .render/trackpad.kicad_pcb
 r --rotate '-35,0,-60'    --zoom 0.0015 -o renders/trackpad_open.png       .render/trackpad_open.kicad_pcb
 r --rotate '-45,0,-20'    --zoom 0.0011 -o renders/trackpad_with_half.png  .render/trackpad_with_half.kicad_pcb
+r --rotate '-55,0,-25'    --zoom 0.0013 -o renders/trackball_mx_assembly.png .render/trackball_mx_assembly.kicad_pcb
 for kind in trackball trackpad; do
     r --rotate '-55,0,-25' --zoom 0.0013 -o renders/${kind}_assembly.png .render/${kind}_assembly.kicad_pcb
     r --rotate '140,0,-30' --zoom 0.0017 -o renders/${kind}_under.png .render/${kind}.kicad_pcb
