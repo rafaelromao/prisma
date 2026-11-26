@@ -43,6 +43,9 @@ class ModuleAssemblyTest(unittest.TestCase):
 
     def test_prisma_stamp_is_recessed_into_the_shared_front_wall(self):
         stamp = M.front_stamp()
+        x0, _, z0, x1, _, z1 = stamp.bounding_box()
+        self.assertAlmostEqual(x1 - x0, 35)
+        self.assertAlmostEqual(z1 - z0, 8)
         # All the lettering is cut, with solid wall behind even the deepest strokes.
         self.assertLess(hit(stamp, self.tray), TOL)
         normal, _ = M.K.front_flat(M.P, M.SPINE_TOP)[0]

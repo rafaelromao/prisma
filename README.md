@@ -268,7 +268,7 @@ clearance.
 
 A 34 mm ball and two Choc v1 hot-swap keys on one shared PCB: the same switches and caps as the halves.
 The PCB also takes MX sockets, and the MX lid is kept exactly as it was. The MX lid stands 4 mm over the
-halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halves' top height to the lid top. The front facet is steeper to preserve the 40 mm trackpad rim and key/power-switch clearance; the lower front remains matched to the drawer. The shared tray's lower front carries the PRISMA wordmark recessed 0.4 mm, so it appears on every drawer module.
+halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halves' top height to the lid top. The front facet is steeper to preserve the 40 mm trackpad rim and key/power-switch clearance; the lower front remains matched to the drawer. The shared tray's lower front carries a 35 × 8 mm PRISMA wordmark across its three facets, recessed 0.4 mm, so it appears on every drawer module.
 
 - The ball sits in a cup in the lid on three 3 mm Si3N4 balls and lifts straight out. Under it, a PMW3610
   on its own board looks up through an LM18-LSI lens (circuit after siderakb's pmw3610-pcb, CERN-OHL-P-2.0,

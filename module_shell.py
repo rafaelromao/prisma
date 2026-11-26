@@ -161,7 +161,7 @@ FRONT_STAMP_DEPTH = .4
 
 @lru_cache(maxsize=1)
 def front_stamp():
-    """The original PRISMA wordmark, recessed into the flat facing the typist."""
+    """The PRISMA wordmark projected across the three user-facing facets."""
     from matplotlib.font_manager import FontProperties
     from matplotlib.textpath import TextPath
 
@@ -172,13 +172,27 @@ def front_stamp():
         outline = outline.symmetric_difference(Polygon(ring).buffer(0))
     x0, y0, x1, y1 = outline.bounds
     outline = affinity.translate(outline, -(x0 + x1) / 2, -(y0 + y1) / 2)
-    outline = affinity.scale(outline, 17.5 / (x1 - x0), 4 / (y1 - y0), origin=(0, 0))
+    outline = affinity.scale(outline, 35 / (x1 - x0), 8 / (y1 - y0), origin=(0, 0))
 
-    (_, ny, nz), d = K.front_flat(P, SPINE_TOP)[0]
+    # The three upper planes define the front over the full height of the mark.
+    # In projection, keep each region where its plane is furthest inward.
     z = 12.0
-    y = (d - nz * (FLOOR_Z + z)) / ny
-    return extrude(outline, -FRONT_STAMP_DEPTH, .08).transform(
-        ((1, 0, 0, 0), (0, nz, ny, y), (0, -ny, nz, z)))
+    planes = K.front_planes(P)[:2] + K.front_flat(P, SPINE_TOP)[:1]
+    projected = [(-nx / ny, -nz / ny, (d - nz * (FLOOR_Z + z)) / ny, ny)
+                 for (nx, ny, nz), d in planes]
+    stamp = Manifold()
+    for ax, az, y, ny in projected:
+        region = outline
+        for bx, bz, by, _ in projected:
+            if ax == bx:
+                continue
+            x0, x1 = ((by - y + (bz - az) * h) / (ax - bx) for h in (-5, 5))
+            inward = 40 if ax > bx else -40
+            region = region.intersection(Polygon([(x0, -5), (x1, 5), (inward, 5), (inward, -5)]))
+        if not region.is_empty:
+            stamp += extrude(region, -FRONT_STAMP_DEPTH, .08).transform(
+                ((1, 0, 0, 0), (ax, az, 1 / ny, y), (0, 1, 0, z)))
+    return stamp
 
 
 def tray():

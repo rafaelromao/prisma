@@ -11,7 +11,7 @@ sensor screws or keys. The existing control passages remain
 empty and unsealed for tray reuse; it is not dust- or water-tight.
 The lid has no control openings. Do not print or modify the tray per variant.
 The restored diamond is cut 0.6 mm deep into the lid's top; the shared tray
-carries the recessed PRISMA wordmark on its front facet, so every module
+carries the recessed PRISMA wordmark across its front facets, so every module
 variant shows it.
 
 The nominal lid top is FLUSH + 1.0 mm. At FLUSH the standard screws
