@@ -104,9 +104,6 @@ LINK_PIN = 15.0                # an extra-long header's length, plastic against 
 BAT = (20.0, 25.0, 7.5)        # 752025 lengthwise: w (x), l (y), thickness
 CRADLE = (1.2, 3.0, 0.3)
 CUP_WALL = 1.6
-# Round the trackpad's front holder screws (x mirrored, y), 0.3 mm off their 5.5 mm heads, from z
-# up; cut only ahead of wall_y, so the front screw posts keep their full section.
-HOLDER_RELIEF = dict(x=15.43, y=-93.26, r=3.05, z=17.0, wall_y=-95.0)
 PAD_TEXT = dict(SCLK="CK", SDIO="IO", NCS="CS", MOTION="MO", RST="RST", VCC="3V", GND="G", VBAT="VBAT", XR="R2")
 PAD_X = 8.2                    # the wire pads' columns, from the centreline
 PAD_EDGE = 1.5                 # wire pad centre to the board edge: its joint clears the lid's lip
@@ -344,13 +341,6 @@ def tray(L):
         sh -= Manifold.cylinder(PCB_TOP - 13.9 + 1, M.SCREW["pilot"] / 2, circular_segments=24).translate((x, y, 13.9))
     for x, y in sensor_holes(L):
         sh -= Manifold.cylinder(PLATE_TOP + SENSOR_BELOW, M.SCREW["pilot"] / 2, circular_segments=24).translate((x, y, SENSOR_PILOT_BOTTOM))
-    # Two shallow scallops inside the front wall, above the outer wordmark: the trackpad's front
-    # holder screws swing past it as the lid closes about the rear hooks (trackpad/trackpad.py).
-    for sx in (-1, 1):
-        x, y = sx * HOLDER_RELIEF["x"], HOLDER_RELIEF["y"]
-        scallop = Manifold.cylinder(M.FLUSH - HOLDER_RELIEF["z"] + 1, HOLDER_RELIEF["r"],
-                                    circular_segments=96).translate((x, y, HOLDER_RELIEF["z"]))
-        sh -= scallop ^ box3(x - 5, y - 5, 0, x + 5, HOLDER_RELIEF["wall_y"], M.FLUSH + 2)
     # reset: the button faces down from the sensor board; a pin hole through the floor under it
     rx, ry = sensor_reset(L)
     sh -= Manifold.cylinder(M.BOTTOM_T + 2, 1.25, circular_segments=24).translate((rx, ry, M.FEET - 1))

@@ -30,7 +30,8 @@ def inspect(path):
     for a, b in edges:
         parent[find(int(a))] = find(int(b))
     components = len({find(i) for i in range(len(vertices))})
-    expected = {"dock_halves.stl": 2, "retainer.stl": 4, "trackpad_retainer.stl": 4}.get(path.name, 1)
+    two_part = path.name == "dock_halves.stl"
+    expected = 2 if two_part else 1
     assert components == expected, (path, components)
     volume = float(np.einsum("ij,ij->i", tri[:, 0], np.cross(tri[:, 1], tri[:, 2])).sum() / 6)
     assert volume > 0, (path, "reversed surface")

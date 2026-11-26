@@ -52,23 +52,6 @@ class ModuleAssemblyTest(unittest.TestCase):
         backing = stamp.translate(tuple(-normal * (M.FRONT_STAMP_DEPTH + .1)))
         self.assertLess((backing - self.tray).volume(), TOL)
 
-    def test_holder_relief_sits_on_the_front_screws_and_leaves_a_wall(self):
-        L, r = self.P, B.HOLDER_RELIEF
-        front = [s.bounding_box() for s in T.retainer_screws(L, heads_only=True)
-                 if s.bounding_box()[1] < L["pad"][1] - 15]
-        self.assertEqual(len(front), 2)
-        for x0, y0, _, x1, y1, _ in front:
-            self.assertAlmostEqual(abs(x0 + x1) / 2, r["x"], delta=.05)
-            self.assertAlmostEqual((y0 + y1) / 2, r["y"], delta=.05)
-        # Above the wordmark, and at least 1 mm of front wall behind each scallop.
-        self.assertGreater(r["z"], M.front_stamp().bounding_box()[5] + .5)
-        outside = M.K.module_front(M.extrude(M.OUTLINE, M.FEET, M.FLUSH), M.P)
-        for sx in (-1, 1):
-            grown = Manifold.cylinder(M.FLUSH - r["z"], r["r"] + 1.0, circular_segments=96).translate(
-                (sx * r["x"], r["y"], r["z"]))
-            ahead = Manifold.cube((10, 5, 30)).translate((sx * r["x"] - 5, r["wall_y"] - 5, 0))
-            self.assertLess(((grown ^ ahead) - outside).volume(), TOL)
-
     def test_passive_lid_reuses_complete_tray_and_standard_mounts(self):
         lid, tray = insert.build()
         self.assertLess(abs((tray - self.tray).volume()), TOL)
@@ -120,10 +103,20 @@ class ModuleAssemblyTest(unittest.TestCase):
         pad = parts["pad"]
         sensor = pad + parts["pad's back parts"]
         clips = T.retainers(L)
-        self.assertEqual(len(T.retainer_print().decompose()), len(T.RETAINER_STATIONS))
-        # One pair at the sides and one holding the front, toward the typist.
-        self.assertEqual(len(clips), 4)
-        self.assertEqual(sum(c.bounding_box()[1] < L["pad"][1] - 15 for c in clips), 2)
+        self.assertEqual(len(T.retainer_print().decompose()), 1)
+        self.assertAlmostEqual(T.retainer_print().bounding_box()[2], 0)
+        # One band under the rim: round the front, to behind both sides, and deep.
+        holder = clips[0]
+        ledge = Polygon()
+        for ring in holder.slice(T.pad_bottom() - .05).to_polygons():
+            ledge = ledge.symmetric_difference(Polygon(ring).buffer(0))
+        self.assertGreater(ledge.intersection(Point(*L["pad"]).buffer(T.PAD["d"] / 2, 400)).area, 100)
+        x0, y0, z0, x1, y1, z1 = holder.bounding_box()
+        self.assertLess(y0, L["pad"][1] - 19)
+        self.assertGreater(y1, L["pad"][1] + 6)
+        self.assertLess(x0, L["pad"][0] - 20)
+        self.assertGreater(x1, L["pad"][0] + 20)
+        self.assertGreater(z1 - z0, 10)
         self.assertLess(pad.bounding_box()[5], T.H)
         self.assertLess(hit(sensor, lid), TOL)
         self.assertLess(hit(sensor.translate((0, 0, -.2)), parts["main board"]), TOL)
@@ -132,9 +125,11 @@ class ModuleAssemblyTest(unittest.TestCase):
         rim = (Manifold.cylinder(.25, r + .1, circular_segments=120)
                - Manifold.cylinder(.25, r - T.PAD["overlap"] + .05, circular_segments=120))
         self.assertLess((rim.translate((*L["pad"], T.H - .6)) - lid).volume(), TOL)
-        for i, clip in enumerate(clips):
+        for screw in T.retainer_screws(L):
+            self.assertLess(screw.bounding_box()[5], T.H)
+            self.assertGreater(screw.bounding_box()[2], holder.bounding_box()[2])      # heads sunk in it
+        for clip in clips:
             self.assertLess(clip.bounding_box()[5], T.H)
-            self.assertLess(T.retainer_screws(L)[i].bounding_box()[5], T.H)
             for dz in (0, .1, .5, 1, 2, 4, 8):
                 self.assertLess(hit(clip.translate((0, 0, -dz)), lid + sensor), TOL)
         # With the tabs removed the entire sensor loads straight from below.
@@ -150,7 +145,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertGreaterEqual(T.PAD["overlap"] - T.PAD["clr"], .5)
         # The continuous rim and tabs block a lifted, tilted pad.
         px, py = L["pad"]
-        blockers = lid + sum(clips, Manifold())
+        blockers = lid + clips[0]
         top = pad.bounding_box()[5]
         centred = pad.translate((-px, -py, -top))
         for roll in range(-3, 4):
@@ -191,8 +186,8 @@ class ModuleAssemblyTest(unittest.TestCase):
                 obstacle += solid
         thick_flange_screws = T.retainer_screws(L, extra=q["length_tol"], flange_error=q["flange_tol"])
         thin_flange_screws = T.retainer_screws(L, extra=q["length_tol"], flange_error=-q["flange_tol"])
-        for i, ((angle, sx, sy), clip, screw) in enumerate(
-                zip(T.RETAINER_STATIONS, T.retainers(L), T.retainer_screws(L))):
+        clip = T.retainers(L)[0]
+        for i, ((angle, sx, sy), screw) in enumerate(zip(T.RETAINER_STATIONS, T.retainer_screws(L))):
             def at_station(solid, height, sx=sx, sy=sy, angle=angle):
                 return T.at_pad(solid.translate((sx, sy, height)), L, angle)
 

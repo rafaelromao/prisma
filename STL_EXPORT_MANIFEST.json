@@ -152,11 +152,11 @@
     },
     {
       "path": "case/module_tray.stl",
-      "sha256": "326e4f4bfd9b53cb8137291f22741e914ee3f9f62b0cf55999919553f610384b",
-      "bytes": 297284,
-      "triangles": 5944,
+      "sha256": "27f299d2d62d961caadf9d4c9b7c1c2d585cc5489e1198cd4ec6c2f0f6b3d0e0",
+      "bytes": 290484,
+      "triangles": 5808,
       "components": 1,
-      "volume_mm3": 17970.18955,
+      "volume_mm3": 17972.40673,
       "size_mm": [
         55.95002,
         100.81739,
@@ -167,11 +167,11 @@
     },
     {
       "path": "stls/module_tray.stl",
-      "sha256": "326e4f4bfd9b53cb8137291f22741e914ee3f9f62b0cf55999919553f610384b",
-      "bytes": 297284,
-      "triangles": 5944,
+      "sha256": "27f299d2d62d961caadf9d4c9b7c1c2d585cc5489e1198cd4ec6c2f0f6b3d0e0",
+      "bytes": 290484,
+      "triangles": 5808,
       "components": 1,
-      "volume_mm3": 17970.18955,
+      "volume_mm3": 17972.40673,
       "size_mm": [
         55.95002,
         100.81739,
@@ -332,11 +332,11 @@
     },
     {
       "path": "trackpad/case/lid.stl",
-      "sha256": "e36e5ab88c0473d5285df4208ad767452d337f309aa1cc02d3736d18a4b058fc",
-      "bytes": 326684,
-      "triangles": 6532,
+      "sha256": "54db40f8dc694dbb47bc303c733d79d68a2005cc09975798f382d35deeca822e",
+      "bytes": 285084,
+      "triangles": 5700,
       "components": 1,
-      "volume_mm3": 1965.63405,
+      "volume_mm3": 1910.5522,
       "size_mm": [
         55.13846,
         84.83187,
@@ -347,11 +347,11 @@
     },
     {
       "path": "stls/trackpad_lid.stl",
-      "sha256": "e36e5ab88c0473d5285df4208ad767452d337f309aa1cc02d3736d18a4b058fc",
-      "bytes": 326684,
-      "triangles": 6532,
+      "sha256": "54db40f8dc694dbb47bc303c733d79d68a2005cc09975798f382d35deeca822e",
+      "bytes": 285084,
+      "triangles": 5700,
       "components": 1,
-      "volume_mm3": 1965.63405,
+      "volume_mm3": 1910.5522,
       "size_mm": [
         55.13846,
         84.83187,
@@ -362,30 +362,30 @@
     },
     {
       "path": "trackpad/case/retainer.stl",
-      "sha256": "a0a891563af7d74a1174ca6bc78608f3dae3b85089d0117ed68361c28618115a",
-      "bytes": 65684,
-      "triangles": 1312,
-      "components": 4,
-      "volume_mm3": 149.08878,
+      "sha256": "42c4ddbfd8886f2435628e550b6157d004295f518ce7bcbf3d3aea2f5bf7a434",
+      "bytes": 169384,
+      "triangles": 3386,
+      "components": 1,
+      "volume_mm3": 2532.44605,
       "size_mm": [
-        34.82,
-        12.75,
-        3.2
+        47.65815,
+        28.07665,
+        10.67732
       ],
       "watertight": true,
       "winding": true
     },
     {
       "path": "stls/trackpad_retainer.stl",
-      "sha256": "a0a891563af7d74a1174ca6bc78608f3dae3b85089d0117ed68361c28618115a",
-      "bytes": 65684,
-      "triangles": 1312,
-      "components": 4,
-      "volume_mm3": 149.08878,
+      "sha256": "42c4ddbfd8886f2435628e550b6157d004295f518ce7bcbf3d3aea2f5bf7a434",
+      "bytes": 169384,
+      "triangles": 3386,
+      "components": 1,
+      "volume_mm3": 2532.44605,
       "size_mm": [
-        34.82,
-        12.75,
-        3.2
+        47.65815,
+        28.07665,
+        10.67732
       ],
       "watertight": true,
       "winding": true

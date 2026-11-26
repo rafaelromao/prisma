@@ -320,7 +320,7 @@ sockets on the shared main board and stands at the Choc lid's height, 1.2 mm ove
   (formerly 0.871 mm). Use the new tray and lids together; PCB holes and key positions are unchanged.
 
 - The pad loads from below and sits **0.8 mm below the lid surface**. The lid rim overlaps the
-  inactive edge, and four hidden tabs (`trackpad/case/retainer.stl`, all in one print: two at the sides, two at the front) support it
+  inactive edge, and a hidden horseshoe holder (`trackpad/case/retainer.stl`, one print) supports it
   from underneath with M3 × 4 pan-head screws in blind holes. Nothing protrudes over the lid,
   and no sensor adhesive is needed. Qualify the actual overlay edge, printed fit and screw
   engagement before use; see [BUILD.md](BUILD.md) and [TRACKPAD_RETENTION.md](TRACKPAD_RETENTION.md).

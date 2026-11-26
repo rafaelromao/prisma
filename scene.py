@@ -253,8 +253,8 @@ def module_instruction_scenes(kind, switch="choc"):
             (dict(ps)["pad's back parts"].translate((0, 0, 34)), PCB_GREEN),
             (M.lid_fasteners(_height(mod, kind, switch), 56), SCREW_RGB),
         ]
-        views["holder"] += [(tab.translate((0, 0, 23)), (.16, .72, .45)) for tab in mod.retainers(L)]
-        views["holder"] += [(screw.translate((0, 0, 15)), SCREW_RGB) for screw in mod.retainer_screws(L)]
+        views["holder"] += [(tab.translate((0, 0, 24)), (.16, .72, .45)) for tab in mod.retainers(L)]
+        views["holder"] += [(screw.translate((0, 0, 5)), SCREW_RGB) for screw in mod.retainer_screws(L)]
         parts = dict(ps)
         pad = [(parts["pad"], vrml.PAD), (parts["pad's back parts"], PCB_GREEN)]
         tabs = [(tab, (.16, .72, .45)) for tab in mod.retainers(L)]
@@ -262,8 +262,8 @@ def module_instruction_scenes(kind, switch="choc"):
         cover = [(lid, LID_RGB)]
         views["holder_insert"] = cover + [(solid.translate((0, 0, -12)), rgb) for solid, rgb in pad]
         views["holder_tabs"] = cover + pad + [
-            (solid.translate((0, 0, -9)), rgb) for solid, rgb in tabs] + [
-            (solid.translate((0, 0, -17)), rgb) for solid, rgb in screws]
+            (solid.translate((0, 0, -16)), rgb) for solid, rgb in tabs] + [
+            (solid.translate((0, 0, -30)), rgb) for solid, rgb in screws]
         views["holder_installed"] = cover + pad + tabs + screws
     return views
 

@@ -9,16 +9,19 @@ and flat cable are retained; four wires go to the breakout and a separate DR wir
 Writes trackpad/design.json (placement, wiring), case/lid.stl and case/retainer.stl, and prints the fit check.
 """
 import json
+import math
 import os
 import shutil
 import sys
+from functools import lru_cache
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 
 import numpy as np
-from manifold3d import Manifold
-from shapely.geometry import Point, box
+from manifold3d import Manifold, OpType
+from shapely.geometry import Point, Polygon, box
+from shapely.ops import unary_union
 
 import case as C
 import module_shell as M
@@ -37,13 +40,14 @@ PAD = dict(d=40.0, t=1.2, back=4.4, back_r=17.9, clr=0.3, rim=1.0,
 RETAINER = dict(diameter=3.0, length=4.0, pilot=M.SCREW["pilot"], clearance=3.4,
                  head_d=5.5, head_h=2.0, flange=1.2, boss_depth=4.0, roof=.6,
                  boss_r=2.25, length_tol=.1, flange_tol=.1)
-# Each station is (angle of its support about the pad centre, local screw x, y). The side
-# pair keeps its blind boss positions for the rear-hook closing sweep. The front pair
-# (toward you is -90) puts a support 19 mm ahead of the pad's centre and reaches back to a
-# screw at -46.7 degrees, 22.5 mm out: the one spot where the head clears both the tray's
-# sloped front wall and the front enclosure screw posts by 0.2 mm.
-RETAINER_STATIONS = ((-10.76, 22.16, -4.4), (-169.24, 22.16, 4.4),
-                     (-70.0, 20.665, 8.9), (-110.0, 20.665, -8.9))
+# Keep the previous blind boss positions for clearance through the rear-hook
+# closing sweep. Each station is (angle about pad centre, local screw x, y).
+RETAINER_STATIONS = ((-10.76, 22.16, -4.4), (-169.24, 22.16, 4.4))
+# The holder under the pad: r_in clears the parts on the pad's back (17.9 plus its 0.3 mm play),
+# r_out stays inside the pad's pocket; back is how far behind its sides it reaches (degrees);
+# bottom is 2.3 mm over the sensor board, room for its wires; gap and sweep_gap clear the tray.
+HOLDER = dict(r_in=18.3, r_out=20.2, r_low=23.0, back=22.0, bottom=10.0, ear_r=4.2,
+              gap=.45, sweep_gap=.3, bore_gap=.3)
 BREAKOUT = (24.0, 18.0, 4.5)   # reserved maximum envelope, including parts/connector, not a measured kit
 BREAKOUT_LIFT = 1.8            # insulating spacer clears the sensor-board screws and frees cable height
 NANO = B.NANO
@@ -130,7 +134,7 @@ def ffc_visual(L):
 
 
 def at_pad(solid, L, angle):
-    """Place a local solid at one of the edge-retainer stations."""
+    """Place a local solid in either of the two edge-retainer stations."""
     return solid.rotate((0, 0, angle)).translate((*L["pad"], 0))
 
 
@@ -138,32 +142,90 @@ def retainer_floor():
     return H - RETAINER["boss_depth"]
 
 
-def _clip(sx, sy):
-    """Underside tab with a hard screw seat and a raised pad support."""
-    q = RETAINER
-    z = retainer_floor()
-    support = box(19.0, -1.6, 20.25, 1.6)
-    flange = support.union(Point(sx, sy).buffer(q["boss_r"], quad_segs=16)).convex_hull
-    clip = M.extrude(flange, z - q["flange"], z)
-    clip += M.extrude(support, z - .02, pad_bottom())
-    hole = Manifold.cylinder(q["flange"] + .1, q["clearance"] / 2,
-                             circular_segments=40).translate((sx, sy, z - q["flange"] - .04))
-    return clip - hole
+def station_xy(L):
+    """The two screws' places (plan)."""
+    px, py = L["pad"]
+    out = []
+    for angle, sx, sy in RETAINER_STATIONS:
+        a = math.radians(angle)
+        out.append((px + sx * math.cos(a) - sy * math.sin(a), py + sx * math.sin(a) + sy * math.cos(a)))
+    return out
+
+
+def _sector(L, r0, r1, a0, a1):
+    px, py = L["pad"]
+    angles = [math.radians(a0 + (a1 - a0) * i / 200) for i in range(201)]
+    return Polygon([(px + r1 * math.cos(a), py + r1 * math.sin(a)) for a in angles] +
+                   [(px + r0 * math.cos(a), py + r0 * math.sin(a)) for a in reversed(angles)])
+
+
+def _tray_keepout(tray):
+    """The tray's plan over the holder's height, HOLDER["gap"] off it."""
+    slabs = []
+    for i in range(23):
+        z = HOLDER["bottom"] + (pad_bottom() - HOLDER["bottom"]) * i / 22
+        slab = Polygon()
+        for ring in tray.slice(z).to_polygons():
+            slab = slab.symmetric_difference(Polygon(ring).buffer(0))
+        slabs.append(slab)
+    return unary_union(slabs).buffer(HOLDER["gap"])
+
+
+def _closing_sweep(tray):
+    """What the tray's front walls sweep through, seen from the lid, as it closes about the rear hooks."""
+    # The outer wordmark cannot be reached from inside: fill it, and simplify, to keep the mesh clean.
+    near = ((tray + M.front_stamp()) ^ Manifold.cube((70, 60, 30)).translate((-35, -105, HOLDER["bottom"] - 6))).simplify(.01)
+    g = HOLDER["sweep_gap"]
+    near = Manifold.batch_boolean([near.translate((dx, dy, 0)) for dx, dy in ((g, 0), (-g, 0), (0, g), (0, -g))],
+                                  OpType.Add)
+    pivot = M.OUTLINE.bounds[3]
+    return Manifold.batch_boolean([near.translate((0, -pivot, -M.FLUSH)).rotate((step / 4, 0, 0)).translate(
+        (0, pivot, M.FLUSH)) for step in range(1, 49)], OpType.Add)
+
+
+def _solid_only(shape, thick=1.0):
+    """Drop whatever is thinner than `thick`: it would not print, or would snap off."""
+    return shape.buffer(-thick / 2, join_style=2).buffer(thick / 2, join_style=2).intersection(shape)
+
+
+@lru_cache(maxsize=1)
+def _holder():
+    """The holder, one print: a band under the pad's inactive rim, from HOLDER["back"] degrees behind
+    one side, round the front, to the same behind the other. It stops where the main board begins.
+    Above the lid bosses only a ledge, inside the pad's pocket; below them as wide as the tray
+    allows, down to HOLDER["bottom"]. The two M3 x 4 screws sit in counterbores."""
+    q, h = RETAINER, HOLDER
+    L = place()
+    tray = B.tray(L)
+    z_floor, z_top, clamp = retainer_floor(), pad_bottom(), retainer_floor() - q["flange"]
+    a0, a1 = -180 - h["back"], h["back"]
+    keep = _tray_keepout(tray)
+    inner = M.inner().buffer(-h["gap"], join_style=2)
+    screws = station_xy(L)
+    pad_disc = Point(*L["pad"]).buffer(h["r_in"], 400)
+    low = unary_union([_sector(L, h["r_in"], h["r_low"], a0, a1)] +
+                      [Point(x, y).buffer(h["ear_r"], 64).difference(pad_disc) for x, y in screws])
+    low = low.intersection(inner).difference(keep)
+    ledge = _sector(L, h["r_in"], h["r_out"], a0, a1).intersection(inner).difference(keep)
+    bores = unary_union([Point(x, y).buffer(q["head_d"] / 2 + h["bore_gap"], 64) for x, y in screws])
+    holes = unary_union([Point(x, y).buffer(q["clearance"] / 2, 48) for x, y in screws])
+    body = M.extrude(_solid_only(low.difference(bores)), h["bottom"], clamp + .02)
+    body += M.extrude(_solid_only(low).difference(holes), clamp, z_floor)
+    body += M.extrude(_solid_only(ledge), z_floor - .02, z_top)
+    body = M.K.module_front(body, M.P, M.WALL + h["gap"]) - _closing_sweep(tray)
+    return max(body.simplify(.02).decompose(), key=lambda m: m.volume())
 
 
 def retainers(L):
-    return [at_pad(_clip(sx, sy), L, angle) for angle, sx, sy in RETAINER_STATIONS]
+    """The printed holders in place: just the one."""
+    return [_holder()]
 
 
 def retainer_print():
-    """Print all the tabs (two mirrored pairs) flange-down, with their support pads facing up."""
-    out, x0, gap = Manifold(), 0.0, 5.0
-    for _, sx, sy in RETAINER_STATIONS:
-        m = _clip(sx, sy)
-        x, y, z, x1 = m.bounding_box()[:4]
-        out += m.translate((x0 - x, -y, -z))
-        x0 += x1 - x + gap
-    return out
+    """The holder as printed: flat bottom down, the ledge up, no support."""
+    m = _holder()
+    x, y, z = m.bounding_box()[:3]
+    return m.translate((-x, -y, -z))
 
 
 def retainer_screws(L, heads_only=False, extra=0.0, flange_error=0.0):
