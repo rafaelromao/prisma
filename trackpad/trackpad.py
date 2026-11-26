@@ -37,9 +37,13 @@ PAD = dict(d=40.0, t=1.2, back=4.4, back_r=17.9, clr=0.3, rim=1.0,
 RETAINER = dict(diameter=3.0, length=4.0, pilot=M.SCREW["pilot"], clearance=3.4,
                  head_d=5.5, head_h=2.0, flange=1.2, boss_depth=4.0, roof=.6,
                  boss_r=2.25, length_tol=.1, flange_tol=.1)
-# Keep the previous blind boss positions for clearance through the rear-hook
-# closing sweep. Each station is (angle about pad centre, local screw x, y).
-RETAINER_STATIONS = ((-10.76, 22.16, -4.4), (-169.24, 22.16, 4.4))
+# Each station is (angle of its support about the pad centre, local screw x, y). The side
+# pair keeps its blind boss positions for the rear-hook closing sweep. The front pair
+# (toward you is -90) puts a support 19 mm ahead of the pad's centre and reaches back to a
+# screw at -46.7 degrees, 22.5 mm out: the one spot where the head clears both the tray's
+# sloped front wall and the front enclosure screw posts by 0.2 mm.
+RETAINER_STATIONS = ((-10.76, 22.16, -4.4), (-169.24, 22.16, 4.4),
+                     (-70.0, 20.665, 8.9), (-110.0, 20.665, -8.9))
 BREAKOUT = (24.0, 18.0, 4.5)   # reserved maximum envelope, including parts/connector, not a measured kit
 BREAKOUT_LIFT = 1.8            # insulating spacer clears the sensor-board screws and frees cable height
 NANO = B.NANO
@@ -126,7 +130,7 @@ def ffc_visual(L):
 
 
 def at_pad(solid, L, angle):
-    """Place a local solid in either of the two edge-retainer stations."""
+    """Place a local solid at one of the edge-retainer stations."""
     return solid.rotate((0, 0, angle)).translate((*L["pad"], 0))
 
 
@@ -152,16 +156,14 @@ def retainers(L):
 
 
 def retainer_print():
-    """Print both mirrored tabs flange-down, with their support pads facing up."""
-    pair = []
+    """Print all the tabs (two mirrored pairs) flange-down, with their support pads facing up."""
+    out, x0, gap = Manifold(), 0.0, 5.0
     for _, sx, sy in RETAINER_STATIONS:
         m = _clip(sx, sy)
-        x, y, z = m.bounding_box()[:3]
-        pair.append(m.translate((-x, -y, -z)))
-    gap = 5.0
-    right, left = pair
-    left = left.translate((right.bounding_box()[3] + gap, 0, 0))
-    return right + left
+        x, y, z, x1 = m.bounding_box()[:4]
+        out += m.translate((x0 - x, -y, -z))
+        x0 += x1 - x + gap
+    return out
 
 
 def retainer_screws(L, heads_only=False, extra=0.0, flange_error=0.0):

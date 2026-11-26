@@ -22,6 +22,7 @@ pilots are required for this approach.
 | Magnet / feet | Six 8 × 1.5 mm side magnets, one floor magnet, three 8 × 2 mm bump-ons |
 | Service | Rear USB-C and power slot, existing downward reset hole; no additional holes |
 | Insertion | Rear hooks first for lid; horizontal front removal for the complete module |
+| Front scallops | Two 0.4 mm-deep reliefs inside the front wall, above the wordmark, for the trackpad's front holder screws |
 | Front marking | 35 × 8 mm PRISMA wordmark in front projection, recessed 0.4 mm across the three front facets; no footprint or insertion change |
 
 A non-pointing standard-height blank fixture in `module_battery.interface_lid()`

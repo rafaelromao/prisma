@@ -58,7 +58,10 @@ PCB_TOP = M.PCB_TOP                                 # MX: 5 mm under the top; Ch
 SOCKET_BOT = PCB_TOP - PCB_T - MX["socket"]
 BALL = 34.0
 BEARING = 3.0                  # Si3N4 balls in the cup, three of them
-BEARING_ANGLE = 40.0           # contact angle below the ball's equator
+# Contact angle below the ball's equator. A sideways push unseats the ball once it passes
+# 0.5 / tan(angle) of the downward load: 0.87 here, 0.60 at the former 40 degrees. Published
+# cups use 15 to 25; under 30 the pockets reach the thin Choc lid's top.
+BEARING_ANGLE = 30.0
 SENSOR_BELOW = 3.4             # room under it, over the reinforced foot roofs
 LENS_ABOVE = 2.0               # nominal lens reference plane over the sensor board's top
 SENSOR_SHIM = 0.4              # the posts' top under the nominal board: shimmed at assembly
@@ -101,6 +104,9 @@ LINK_PIN = 15.0                # an extra-long header's length, plastic against 
 BAT = (20.0, 25.0, 7.5)        # 752025 lengthwise: w (x), l (y), thickness
 CRADLE = (1.2, 3.0, 0.3)
 CUP_WALL = 1.6
+# Round the trackpad's front holder screws (x mirrored, y), 0.3 mm off their 5.5 mm heads, from z
+# up; cut only ahead of wall_y, so the front screw posts keep their full section.
+HOLDER_RELIEF = dict(x=15.43, y=-93.26, r=3.05, z=17.0, wall_y=-95.0)
 PAD_TEXT = dict(SCLK="CK", SDIO="IO", NCS="CS", MOTION="MO", RST="RST", VCC="3V", GND="G", VBAT="VBAT", XR="R2")
 PAD_X = 8.2                    # the wire pads' columns, from the centreline
 PAD_EDGE = 1.5                 # wire pad centre to the board edge: its joint clears the lid's lip
@@ -109,6 +115,8 @@ PAD_KEEP = (-77.1, 18.9)       # the trackpad's back parts: centre y, radius
 PANEL_LENGTH = 99.5            # the ordered panel's longest side, within the 100 mm tier
 BALL_CLR = 0.6                 # the cup's inside off the ball
 BCZ = PLATE_TOP + SENSOR_BELOW + PCB_T + LENS_ABOVE + WORK + BALL / 2
+# The cup's lowest edge, independent of the bearings' height: the battery is placed against it.
+CUP_Z0 = BCZ - (BALL / 2 + BEARING / 2) * math.sin(math.radians(40.0)) - BEARING
 
 
 def place():
@@ -135,8 +143,7 @@ def place():
 
 def cup_floor_r():
     """How far the cup's lowest part reaches out from the ball's axis, near the plate."""
-    z = bearing_z() - BEARING
-    return math.sqrt(max((BALL / 2 + BALL_CLR + CUP_WALL) ** 2 - (BCZ - z) ** 2, 0)) + 1.0
+    return math.sqrt(max((BALL / 2 + BALL_CLR + CUP_WALL) ** 2 - (BCZ - CUP_Z0) ** 2, 0)) + 1.0
 
 
 def bearing_z():
@@ -250,13 +257,19 @@ def usb_z(L):
     return SOCKET_BOT - NANO_GAP - NANO[2] - NANO[3] / 2
 
 
+def bore_r(height):
+    """The lid's opening round the ball: 0.5 mm off the ball at that lid's top, so the lower
+    Choc lid holds it as closely as the MX lid does."""
+    return math.sqrt((BALL / 2) ** 2 - max(BCZ - height, 0) ** 2) + 0.5
+
+
 def cup(L):
     """The ball's cup: a spherical shell round the ball (BALL_CLR off it, CUP_WALL thick) from the
     top down past the bearings, a boss behind each bearing (its pocket is closed at the back), and
     a window under the ball for the sensor. All of it is under the ball's equator (over the
     module's top), so the ball lifts straight out."""
     bx, by = L["ball"]
-    z0 = bearing_z() - BEARING
+    z0 = CUP_Z0
     r_in = BALL / 2 + BALL_CLR
     cupm = Manifold.sphere(r_in + CUP_WALL, 128).translate((bx, by, BCZ))
     for x, y, z in bearings(L):
@@ -331,6 +344,13 @@ def tray(L):
         sh -= Manifold.cylinder(PCB_TOP - 13.9 + 1, M.SCREW["pilot"] / 2, circular_segments=24).translate((x, y, 13.9))
     for x, y in sensor_holes(L):
         sh -= Manifold.cylinder(PLATE_TOP + SENSOR_BELOW, M.SCREW["pilot"] / 2, circular_segments=24).translate((x, y, SENSOR_PILOT_BOTTOM))
+    # Two shallow scallops inside the front wall, above the outer wordmark: the trackpad's front
+    # holder screws swing past it as the lid closes about the rear hooks (trackpad/trackpad.py).
+    for sx in (-1, 1):
+        x, y = sx * HOLDER_RELIEF["x"], HOLDER_RELIEF["y"]
+        scallop = Manifold.cylinder(M.FLUSH - HOLDER_RELIEF["z"] + 1, HOLDER_RELIEF["r"],
+                                    circular_segments=96).translate((x, y, HOLDER_RELIEF["z"]))
+        sh -= scallop ^ box3(x - 5, y - 5, 0, x + 5, HOLDER_RELIEF["wall_y"], M.FLUSH + 2)
     # reset: the button faces down from the sensor board; a pin hole through the floor under it
     rx, ry = sensor_reset(L)
     sh -= Manifold.cylinder(M.BOTTOM_T + 2, 1.25, circular_segments=24).translate((rx, ry, M.FEET - 1))
@@ -357,7 +377,7 @@ def lid(L, switch="mx", ball=True):
     if ball:
         bx, by = L["ball"]
         sh += cup(L)
-        sh -= Manifold.cylinder(top_t + 1, L["r_top"], circular_segments=120).translate((bx, by, height - top_t - 0.5))
+        sh -= Manifold.cylinder(top_t + 1, bore_r(height), circular_segments=120).translate((bx, by, height - top_t - 0.5))
     for kx, ky in L["keys"]:
         sh -= Manifold.cube((cut, cut, top_t + 1)).translate((kx - cut / 2, ky - cut / 2, height - top_t - 0.5))
         if switch == "choc":

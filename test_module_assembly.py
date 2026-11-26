@@ -52,6 +52,23 @@ class ModuleAssemblyTest(unittest.TestCase):
         backing = stamp.translate(tuple(-normal * (M.FRONT_STAMP_DEPTH + .1)))
         self.assertLess((backing - self.tray).volume(), TOL)
 
+    def test_holder_relief_sits_on_the_front_screws_and_leaves_a_wall(self):
+        L, r = self.P, B.HOLDER_RELIEF
+        front = [s.bounding_box() for s in T.retainer_screws(L, heads_only=True)
+                 if s.bounding_box()[1] < L["pad"][1] - 15]
+        self.assertEqual(len(front), 2)
+        for x0, y0, _, x1, y1, _ in front:
+            self.assertAlmostEqual(abs(x0 + x1) / 2, r["x"], delta=.05)
+            self.assertAlmostEqual((y0 + y1) / 2, r["y"], delta=.05)
+        # Above the wordmark, and at least 1 mm of front wall behind each scallop.
+        self.assertGreater(r["z"], M.front_stamp().bounding_box()[5] + .5)
+        outside = M.K.module_front(M.extrude(M.OUTLINE, M.FEET, M.FLUSH), M.P)
+        for sx in (-1, 1):
+            grown = Manifold.cylinder(M.FLUSH - r["z"], r["r"] + 1.0, circular_segments=96).translate(
+                (sx * r["x"], r["y"], r["z"]))
+            ahead = Manifold.cube((10, 5, 30)).translate((sx * r["x"] - 5, r["wall_y"] - 5, 0))
+            self.assertLess(((grown ^ ahead) - outside).volume(), TOL)
+
     def test_passive_lid_reuses_complete_tray_and_standard_mounts(self):
         lid, tray = insert.build()
         self.assertLess(abs((tray - self.tray).volume()), TOL)
@@ -103,7 +120,10 @@ class ModuleAssemblyTest(unittest.TestCase):
         pad = parts["pad"]
         sensor = pad + parts["pad's back parts"]
         clips = T.retainers(L)
-        self.assertEqual(len(T.retainer_print().decompose()), 2)
+        self.assertEqual(len(T.retainer_print().decompose()), len(T.RETAINER_STATIONS))
+        # One pair at the sides and one holding the front, toward the typist.
+        self.assertEqual(len(clips), 4)
+        self.assertEqual(sum(c.bounding_box()[1] < L["pad"][1] - 15 for c in clips), 2)
         self.assertLess(pad.bounding_box()[5], T.H)
         self.assertLess(hit(sensor, lid), TOL)
         self.assertLess(hit(sensor.translate((0, 0, -.2)), parts["main board"]), TOL)
@@ -130,7 +150,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertGreaterEqual(T.PAD["overlap"] - T.PAD["clr"], .5)
         # The continuous rim and tabs block a lifted, tilted pad.
         px, py = L["pad"]
-        blockers = lid + clips[0] + clips[1]
+        blockers = lid + sum(clips, Manifold())
         top = pad.bounding_box()[5]
         centred = pad.translate((-px, -py, -top))
         for roll in range(-3, 4):

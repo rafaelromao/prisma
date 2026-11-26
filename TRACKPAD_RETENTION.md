@@ -2,14 +2,21 @@
 
 The pad loads from underneath and sits 0.8 mm below the lid surface at rest.
 The 0.7 mm-thick lid rim covers 0.8 mm of the pad edge nominally (0.5 mm at
-maximum radial shift). The mirrored tabs support the component-free underside
-and are hidden with the lid installed. They hold the pad independently of the
+maximum radial shift). Four tabs, a mirrored pair at the sides and a mirrored pair
+holding the front, support the component-free underside and are hidden with the lid installed. They hold the pad independently of the
 tray, with 0.1 mm nominal axial play rather than pressure on the sensor.
-The common tray, PCBs, lid height and key positions are unchanged.
+PCBs, lid height and key positions are unchanged.
 
-![Exploded view of the Cirque pad, the two green support tabs and their screws beneath the lid](renders/trackpad_holder.png)
+The side supports sit about 4 mm in front of the pad's centre, so they alone left a
+press near the front edge free to tip the pad. The front supports sit about 19 mm in
+front of it. Their long tabs reach back to screws squeezed between the tray's front
+wall and the front screw posts. The common tray has two 0.4 mm-deep scallops inside
+its front wall so those screw heads can swing past as the lid closes; reprint the tray
+with this lid. There is no support at the rear edge; test presses there.
 
-The tabs use two **M3 × 4 mm pan-head screws**
+![Exploded view of the Cirque pad, the four green support tabs and their screws beneath the lid](renders/trackpad_holder.png)
+
+The tabs use four **M3 × 4 mm pan-head screws**
 (under-head length, head ≤5.5 mm diameter and ≤2.0 mm height) in Ø2.5 mm,
 3.4 mm-deep blind pilots. Each tab seats against the lid boss, not against
 the pad. With ±0.1 mm each for screw length and

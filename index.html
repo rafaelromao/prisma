@@ -317,13 +317,13 @@ main img { cursor: zoom-in; }
     <figure><img src="renders/trackball_mx.png" alt="MX trackball case with taller switches, sharing the Choc variant's PCB" width="1600" height="1200" loading="lazy"><figcaption>The MX lid: same tray and boards.</figcaption></figure>
     <p><strong>Trackpad:</strong> a 40 mm Cirque in the lid, with its supplied I²C breakout and flat cable. Four wires run from the main board to the breakout and a separate DR wire to the Cirque's underside. Space is reserved for the breakout and cable with no printed holder; check your kit's dimensions against the build guide.</p>
     <figure><img src="renders/trackpad_structure.png" alt="Bare trackpad lid raised off the blue tray" width="1600" height="1200" loading="lazy"><figcaption>The bare trackpad lid and common tray. The pad and its underside hardware are omitted in this view.</figcaption></figure>
-    <figure><img src="renders/trackpad_holder.png" alt="Exploded Cirque assembly showing the pad, two green support tabs, and their screws beneath the lid" width="1600" height="1200" loading="lazy"><figcaption>Cirque holder detail: the two green tabs screw into the underside of the lid and support the pad at its edges.</figcaption></figure>
+    <figure><img src="renders/trackpad_holder.png" alt="Exploded Cirque assembly showing the pad, four green support tabs, and their screws beneath the lid" width="1600" height="1200" loading="lazy"><figcaption>Cirque holder detail: four green tabs screw into the underside of the lid and support the pad at its sides and front.</figcaption></figure>
   </section>
 
   <div class="grid2">
     <figure><img src="renders/trackball.png" alt="The trackball module: a red ball at the front, two Choc keys stacked behind it" width="1600" height="1200" loading="lazy"><figcaption>The trackball module.</figcaption></figure>
     <figure><img src="renders/trackball_open.png" alt="The trackball module cut open: the sensor board under the ball, the main board under the keys, the nice!nano and the battery under it" width="1600" height="1200" loading="lazy"><figcaption>Cut open: sensor board, main board, nice!nano, battery.</figcaption></figure>
-    <figure><img src="renders/trackpad.png" alt="The trackpad module: a round Cirque pad at the front, two Choc keys stacked behind it" width="1600" height="1200" loading="lazy"><figcaption>The Cirque pad sits slightly recessed; two M3-screwed tabs hold it from below without protruding above the lid. Prototype STLs: <a href="stls/trackpad_lid.stl">lid</a> and <a href="stls/trackpad_retainer.stl">support tabs</a>. See <a href="TRACKPAD_RETENTION.md">physical qualification</a>.</figcaption></figure>
+    <figure><img src="renders/trackpad.png" alt="The trackpad module: a round Cirque pad at the front, two Choc keys stacked behind it" width="1600" height="1200" loading="lazy"><figcaption>The Cirque pad sits slightly recessed; four M3-screwed tabs hold it from below without protruding above the lid. Prototype STLs: <a href="stls/trackpad_lid.stl">lid</a> and <a href="stls/trackpad_retainer.stl">support tabs</a>. See <a href="TRACKPAD_RETENTION.md">physical qualification</a>.</figcaption></figure>
     <figure><img src="renders/trackpad_open.png" alt="The trackpad module cut open: battery, reset board and the nice!nano beneath the keys" width="1600" height="1200" loading="lazy"><figcaption>Cut open: battery, reset board, controller.</figcaption></figure>
     <figure><img src="renders/trackball_with_half.png" alt="The trackball module snapped onto the left half on the desk" width="1600" height="1200" loading="lazy"><figcaption>Snapped onto a half on the desk.</figcaption></figure>
     <figure><img src="renders/trackpad_with_half.png" alt="The trackpad module snapped onto the left half on the desk" width="1600" height="1200" loading="lazy"><figcaption>The trackpad, on a half.</figcaption></figure>
@@ -669,11 +669,11 @@ buy for the halves.</p>
 <td>Hidden trackpad retainer, <code>trackpad/case/retainer.stl</code></td>
 <td>1 set</td>
 <td></td>
-<td>Print once, flange-down as exported; contains both underside support tabs</td>
+<td>Print once, flange-down as exported; contains all four underside support tabs (two short side tabs, two long front tabs)</td>
 </tr>
 <tr>
 <td>M3 × 4 mm pan-head screws</td>
-<td>2</td>
+<td>4</td>
 <td><code>M3x4 pan head machine screw</code></td>
 <td>Under-head length, head ≤5.5 mm diameter and ≤2.0 mm height; Ø2.5 × 3.4 mm blind pilots in the lid, 2.6–3.0 mm engagement, verify ≥0.4 mm tip clearance</td>
 </tr>
@@ -1287,8 +1287,8 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 </ol>
 <p><img alt="Main board in the tray" src="renders/trackball_tray.png" /></p>
 <ol>
-<li><strong>Trackpad only.</strong> Confirm the actual pad has a component-free underside perimeter and an inactive overlay edge. With the lid off and face down, drop the pad into the pocket from below, overlay toward the opening. Print <code>trackpad/case/retainer.stl</code> once, flange-down as exported; it contains both mirrored support tabs. Point each tab's raised support toward the pad centre and secure it to the blind lid boss with one <strong>M3 × 4 mm pan-head screw</strong> (under-head length; head ≤5.5 mm diameter, ≤2.0 mm height), never an enclosure screw. The flange seats against the boss, not against the pad. Verify at least 2.6 mm engagement, 0.4 mm tip clearance, adequate pull-out strength and slight free play (0.1 mm nominal); do not clamp or flex the sensor. No adhesive is needed. For service, unplug power, lift the lid, release the cable as needed, remove the tabs, and withdraw the pad from underneath. Reserve <strong>24 × 18 × 4.5 mm</strong> for the breakout, including connector, resistors and solder joints. Set it on a <strong>1.8 mm insulating spacer</strong> above the sensor PCB; check clearance over the screw heads before securing it. Keep the original flat cable in its reserved 7 mm-wide bend corridor, with slack to lift the lid. Route the separate DR lead beside it and the four breakout wires to the main board. Check the actual bend radius and wired closure; do not sharply fold or trap the FFC.</li>
-<li><strong>Trackball only.</strong> Glue the three ceramic balls into the lid's cup.</li>
+<li><strong>Trackpad only.</strong> Confirm the actual pad has a component-free underside perimeter and an inactive overlay edge. With the lid off and face down, drop the pad into the pocket from below, overlay toward the opening. Print <code>trackpad/case/retainer.stl</code> once, flange-down as exported; it contains all four support tabs: a short mirrored pair for the sides and a long mirrored pair for the front (the edge toward you). Point each tab's raised support toward the pad centre and secure each to its blind lid boss with one <strong>M3 × 4 mm pan-head screw</strong> (under-head length; head ≤5.5 mm diameter, ≤2.0 mm height), never an enclosure screw. The flange seats against the boss, not against the pad. Verify at least 2.6 mm engagement, 0.4 mm tip clearance, adequate pull-out strength and slight free play (0.1 mm nominal); do not clamp or flex the sensor. No adhesive is needed. For service, unplug power, lift the lid, release the cable as needed, remove the tabs, and withdraw the pad from underneath. Reserve <strong>24 × 18 × 4.5 mm</strong> for the breakout, including connector, resistors and solder joints. Set it on a <strong>1.8 mm insulating spacer</strong> above the sensor PCB; check clearance over the screw heads before securing it. Keep the original flat cable in its reserved 7 mm-wide bend corridor, with slack to lift the lid. Route the separate DR lead beside it and the four breakout wires to the main board. Check the actual bend radius and wired closure; do not sharply fold or trap the FFC.</li>
+<li><strong>Trackball only.</strong> Glue the three ceramic balls into the lid's cup, seated fully in their pockets: they carry the ball 30° below its equator. Use a lid printed from the current files; earlier lids held them at 40°, where a sideways push unseated the ball more easily.</li>
 <li><strong>Lid.</strong> Rear first: tilt the lid, push its two rear hooks into the slots in the back wall, then lower the front. It locates on the tray's rim.</li>
 <li><strong>Four M3 × 8 screws</strong> into the lid's countersinks, as on a half: they go into the tray's four posts. Turn them in slowly, and stop when the heads sit flush.</li>
 <li>Clip the switches through the lid into the sockets, fit the keycaps, and drop the ball in. On the trackpad, use <strong>17.5 × 16.5 mm compact Choc caps</strong>. Conventional twin-stem caps rotate with the switch, putting <strong>17.5 mm front-to-back</strong> here; do not assume they can turn independently. Verify full key travel and wobble without contact. Use the current tray and lid together: the front screw pair leaves a 2.087 mm screw-to-pad-pocket web. Tighten only to flush, never to force a distorted lid flat. Before use, verify that the pad cannot escape in any direction, the overlay has no clamp load, the screws cannot reach the sensor or wiring, and the lid closes without snagging the DR lead or FFC. Test pointing and taps near the rim, plus sleep and wake. CAD clearance is not a physical qualification.</li>
@@ -1300,20 +1300,20 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 <thead>
 <tr>
 <th>1. Seat the Cirque</th>
-<th>2. Fit the mirrored tabs</th>
+<th>2. Fit the four tabs</th>
 <th>3. Check the installed holder</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><img alt="Cirque aligned below the lid's round pocket" src="renders/trackpad_holder_insert.png" /></td>
-<td><img alt="Green support tabs and orange M3 screws aligned with the blind bosses" src="renders/trackpad_holder_tabs.png" /></td>
-<td><img alt="Installed tabs supporting opposite edges of the Cirque" src="renders/trackpad_holder_installed.png" /></td>
+<td><img alt="Two side tabs, two front tabs and their orange M3 screws aligned with the blind bosses" src="renders/trackpad_holder_tabs.png" /></td>
+<td><img alt="Four installed tabs supporting the sides and front of the Cirque" src="renders/trackpad_holder_installed.png" /></td>
 </tr>
 <tr>
 <td>Lower the pad into the face-down lid with the touch surface toward the opening.</td>
-<td>Point the raised ends toward the pad centre. Use one M3 × 4 mm pan-head screw per tab.</td>
-<td>Both flanges should seat on the bosses. Check that the pad has slight free play before routing the cable.</td>
+<td>Short tabs at the sides, long tabs at the front, raised ends toward the pad centre. One M3 × 4 mm pan-head screw each.</td>
+<td>All four flanges should seat on the bosses. Check that the pad has slight free play before routing the cable.</td>
 </tr>
 </tbody>
 </table></div>

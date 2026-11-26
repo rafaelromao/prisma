@@ -273,6 +273,13 @@ halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halv
 - The ball sits in a cup in the lid on three 3 mm Si3N4 balls and lifts straight out. Under it, a PMW3610
   on its own board looks up through an LM18-LSI lens (circuit after siderakb's pmw3610-pcb, CERN-OHL-P-2.0,
   at 3.3 V logic with a TLV74318).
+- **Pushing the ball.** The bearings sit 30° below the ball's equator (`BEARING_ANGLE`). In a static
+  model, the ball starts riding up them once a sideways push exceeds 0.87 of the downward load in the
+  worst direction (0.60 at the former 40°), and must rise at least 10 mm to leave the cup. Published
+  cups use [15–25°](https://kepeo.hatenablog.com/entry/2024/09/08/134648) (the
+  [MNT Reform moved from 45° to 22°](https://community.mnt.re/t/trackball-replacement-cup-with-bearings/460));
+  under 30° the pockets would reach the top of the thin Choc lid. Nothing holds the ball in if the module
+  is turned over. Feel, friction and tracking at 30° still need a printed test.
 - The main board accepts **MX or Choc v1 hot-swap sockets**, not both populated together. Choc sockets
   face 180° opposite the MX sockets. MX uses `trackball/case/lid.stl` (1.5 mm plate), Choc uses
   `trackball/case/lid_choc.stl` (1.2 mm plate, with two pull grooves per switch). Choc v2 is not supported.
@@ -313,7 +320,7 @@ sockets on the shared main board and stands at the Choc lid's height, 1.2 mm ove
   (formerly 0.871 mm). Use the new tray and lids together; PCB holes and key positions are unchanged.
 
 - The pad loads from below and sits **0.8 mm below the lid surface**. The lid rim overlaps the
-  inactive edge, and two hidden tabs (`trackpad/case/retainer.stl`, both in one print) support it
+  inactive edge, and four hidden tabs (`trackpad/case/retainer.stl`, all in one print: two at the sides, two at the front) support it
   from underneath with M3 × 4 pan-head screws in blind holes. Nothing protrudes over the lid,
   and no sensor adhesive is needed. Qualify the actual overlay edge, printed fit and screw
   engagement before use; see [BUILD.md](BUILD.md) and [TRACKPAD_RETENTION.md](TRACKPAD_RETENTION.md).
