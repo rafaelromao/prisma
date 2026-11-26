@@ -31,6 +31,10 @@ Each board has a **parts face** and a **switch face**. The silkscreen tells you 
 
 The module always lies flat on the parts face, with its pad side against the PCB and its components (USB-C, shield, reset button) pointing away from it, towards the case floor.
 
+| Parts face: controller, sockets and power switch | Switch face: board artwork and soldering access |
+|---|---|
+| ![Populated parts face of the left half](renders/parts_bottom.png) | ![Opposite face of the left half's bare PCB](renders/board_top.png) |
+
 ## Before you start
 
 - **Flash and test the module first.** Plug it into USB and double-tap reset: a USB drive appears. Copy the firmware onto it:
@@ -134,6 +138,10 @@ It goes on the **switch face**, in the gap above the thumb keys, inside its outl
 
 The base is solid up to the PCB's underside, with a pocket for every part. The PCB rests on plastic everywhere, which makes the half stiff and quiet. The top plate covers the whole board: the switches clip into it, and a shallow pocket in its underside clears the solder around the module.
 
+| Base: pockets for the battery, PCB and controls | Plate underside: relief pockets and screw bosses |
+|---|---|
+| ![Empty case base](renders/case.png) | ![Underside of the top plate](renders/plate_under.png) |
+
 1. Fit **13 common 8 × 1.5 mm N52 discs per half** (polarity!): seven underneath and six along the seam. Dry-fit first, without forcing the plastic, then apply a little suitable adhesive. Keep adhesive off the mating faces.
 2. Lay the battery in its bay and plug it into the JST socket. The plug and the slack of its leads sit in the bay, between the battery and the socket.
 3. Lower the PCB, parts face down, into the base. Each part drops into its pocket, the switch lever slides down its slot, and the USB-C port lines up with its recess. Nothing should need force: every pocket has 0.6 mm of clearance, and the PCB 0.5 mm to the outer walls.
@@ -160,6 +168,10 @@ The plates and the Choc lids carry two grooves per switch, as on the ZSA Voyager
 Try it on one switch before the board is closed up, with your own puller: the grooves are sized to a 3.72 mm × 0.19 mm blade, with 0.14 mm clearance per side in CAD. If yours is wider, change `GROOVE_W` in `switch_mount.py` and regenerate.
 
 ## Optional stands and drawer retention
+
+| Independent magnetic stands | Dock underside: base pocket and feet |
+|---|---|
+| ![Keyboard halves on independent stands](renders/independent_tenting.png) | ![Underside of the dock](renders/dock_under.png) |
 
 - Use the same **8 × 1.5 mm N52 discs everywhere**. The dock takes six wing magnets and six side magnets per half, **three base pairs** (three of those discs are glued to the Ugreen base) and one upward-facing disc in the drawer floor: **31 discs total**. No underside contact sits near the drawer retention magnet: at least 1 mm of plastic separates their pockets, even with each 0.2 mm off. Leave the rear free for USB and the cable.
 - Each drawer insert takes three evenly spaced side magnets per side (seam positions 2, 4 and 6). The halves and dock have six per side at 17.8 mm pitch; the inserts use every other position. Check the full half → dock → insert polarity chain before gluing.
@@ -328,6 +340,10 @@ The power switch disconnects the battery from both controller and charger: **cha
 
 ### Opening a module
 
+| Rear USB-C cable seated in the dock | Cutaway: plug alignment with the receptacle |
+|---|---|
+| ![Trackpad docked with its USB-C plug](renders/trackpad_usb_dock.png) | ![Trackpad USB-C cutaway](renders/trackpad_usb_open.png) |
+
 Take it out of the dock, unplug USB, switch it off, and take off the keycaps and ball. Undo the four lid screws and tilt the lid up from the front. The main board stays: it is soldered to the eight stacking pins, so desolder them to take it out. On the trackpad the lid remains attached by the supplied flat cable and the separate DR wire; support it without pulling either, and release the FFC latch if the available slack is insufficient.
 
 ## Resetting a closed half
@@ -360,5 +376,9 @@ and comes out with your puller (see "Taking a switch out").
 - **Release gate:** follow [PRINT_READINESS.md](PRINT_READINESS.md). Inspect continuous toolpaths through every **0.6–0.9 mm** magnet backing/skin, not just the outer mesh. A hypothetical 0.5% error over the 199 mm dock is about 1 mm, greater than the local fit allowances. Measure differential shrinkage and warping of mating parts with the chosen material/profile before a complete build; ±0.2 mm translation tests do not cover either. Never scale just one mating part blindly: that also moves magnets and screw centres. If calibration cannot meet the fit budget, stop and revise/regenerate the geometry.
 
 ## Powered central dongle (draft)
+
+| Headless: battery and carrier below the lid | OLED: display stays with the lid |
+|---|---|
+| ![Headless dongle exploded](renders/dongle_headless_structure.png) | ![OLED dongle exploded](renders/dongle_oled_structure.png) |
 
 See [DONGLE.md](DONGLE.md) for selective population, XIAO polarity and jumper checks, long-cell carrier assembly, optional OLED wiring, firmware and qualification. Do not use the short pointing-device battery or populate the keys/sensor. The dongle is the two-half central; the headless variant requires no display. Switch off does not isolate USB power. Actual pack, harness, display, charging and mechanical fit remain unverified; do not assemble until qualified.

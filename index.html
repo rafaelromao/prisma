@@ -795,6 +795,20 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 <li><strong>Switch face:</strong> the key switches clip in here, the reset button is soldered here, and you bridge the jumpers and fill the module's holes from this side.</li>
 </ul>
 <p>The module always lies flat on the parts face, with its pad side against the PCB and its components (USB-C, shield, reset button) pointing away from it, towards the case floor.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Parts face: controller, sockets and power switch</th>
+<th>Switch face: board artwork and soldering access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Populated parts face of the left half" src="renders/parts_bottom.png" /></td>
+<td><img alt="Opposite face of the left half's bare PCB" src="renders/board_top.png" /></td>
+</tr>
+</tbody>
+</table></div>
 <h3 id="b-before-you-start">Before you start</h3>
 <ul>
 <li><strong>Flash and test the module first.</strong> Plug it into USB and double-tap reset: a USB drive appears. Copy the firmware onto it:</li>
@@ -938,6 +952,20 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 </table></div>
 <h3 id="b-8-case-and-plate">8. Case and plate</h3>
 <p>The base is solid up to the PCB's underside, with a pocket for every part. The PCB rests on plastic everywhere, which makes the half stiff and quiet. The top plate covers the whole board: the switches clip into it, and a shallow pocket in its underside clears the solder around the module.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Base: pockets for the battery, PCB and controls</th>
+<th>Plate underside: relief pockets and screw bosses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Empty case base" src="renders/case.png" /></td>
+<td><img alt="Underside of the top plate" src="renders/plate_under.png" /></td>
+</tr>
+</tbody>
+</table></div>
 <ol>
 <li>Fit <strong>13 common 8 × 1.5 mm N52 discs per half</strong> (polarity!): seven underneath and six along the seam. Dry-fit first, without forcing the plastic, then apply a little suitable adhesive. Keep adhesive off the mating faces.</li>
 <li>Lay the battery in its bay and plug it into the JST socket. The plug and the slack of its leads sit in the bay, between the battery and the socket.</li>
@@ -960,6 +988,20 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 </ol>
 <p>Try it on one switch before the board is closed up, with your own puller: the grooves are sized to a 3.72 mm × 0.19 mm blade, with 0.14 mm clearance per side in CAD. If yours is wider, change <code>GROOVE_W</code> in <code>switch_mount.py</code> and regenerate.</p>
 <h3 id="b-optional-stands-and-drawer-retention">Optional stands and drawer retention</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Independent magnetic stands</th>
+<th>Dock underside: base pocket and feet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Keyboard halves on independent stands" src="renders/independent_tenting.png" /></td>
+<td><img alt="Underside of the dock" src="renders/dock_under.png" /></td>
+</tr>
+</tbody>
+</table></div>
 <ul>
 <li>Use the same <strong>8 × 1.5 mm N52 discs everywhere</strong>. The dock takes six wing magnets and six side magnets per half, <strong>three base pairs</strong> (three of those discs are glued to the Ugreen base) and one upward-facing disc in the drawer floor: <strong>31 discs total</strong>. No underside contact sits near the drawer retention magnet: at least 1 mm of plastic separates their pockets, even with each 0.2 mm off. Leave the rear free for USB and the cable.</li>
 <li>Each drawer insert takes three evenly spaced side magnets per side (seam positions 2, 4 and 6). The halves and dock have six per side at 17.8 mm pitch; the inserts use every other position. Check the full half → dock → insert polarity chain before gluing.</li>
@@ -1261,6 +1303,20 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 </table></div>
 <p>The power switch disconnects the battery from both controller and charger: <strong>charging requires the switch on</strong>. USB can power the controller even with the switch off, so unplug USB, switch off and unsolder the battery's <code>+</code> lead before working on wiring: the module has no battery connector. Use a protected single-cell Li-ion/LiPo pack rated for the controller's charging voltage and current; the main PCB supplies neither a charger nor battery protection. Verify the exact controller's charger, startup/bootloader current settings, battery rating and charge termination under USB load before charging. On a genuine XIAO the selectable charging current is approximately 50 or 100 mA; do not assume a Super52840 uses the same circuit or setting. See <a href="https://wiki.seeedstudio.com/XIAO_BLE/#battery-charging-current">Seeed's charging documentation</a>. To reset, take the module out of the dock and press a blunt pin, at most 2 mm across, straight into the hole in the floor: once to reset, twice quickly for the bootloader, if supported by the controller's installed bootloader.</p>
 <h3 id="b-opening-a-module">Opening a module</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Rear USB-C cable seated in the dock</th>
+<th>Cutaway: plug alignment with the receptacle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Trackpad docked with its USB-C plug" src="renders/trackpad_usb_dock.png" /></td>
+<td><img alt="Trackpad USB-C cutaway" src="renders/trackpad_usb_open.png" /></td>
+</tr>
+</tbody>
+</table></div>
 <p>Take it out of the dock, unplug USB, switch it off, and take off the keycaps and ball. Undo the four lid screws and tilt the lid up from the front. The main board stays: it is soldered to the eight stacking pins, so desolder them to take it out. On the trackpad the lid remains attached by the supplied flat cable and the separate DR wire; support it without pulling either, and release the FFC latch if the available slack is insufficient.</p>
 <h3 id="b-resetting-a-closed-half">Resetting a closed half</h3>
 <p>Press straight down into the cone above the thumbs with a fingertip (the pad, not the nail, is enough: the cone is 4.2 mm across at the top and the plunger 2.0 mm wide).</p>
@@ -1290,6 +1346,20 @@ and comes out with your puller (see "Taking a switch out").</p>
 <li><strong>Release gate:</strong> follow <a href="PRINT_READINESS.md">PRINT_READINESS.md</a>. Inspect continuous toolpaths through every <strong>0.6–0.9 mm</strong> magnet backing/skin, not just the outer mesh. A hypothetical 0.5% error over the 199 mm dock is about 1 mm, greater than the local fit allowances. Measure differential shrinkage and warping of mating parts with the chosen material/profile before a complete build; ±0.2 mm translation tests do not cover either. Never scale just one mating part blindly: that also moves magnets and screw centres. If calibration cannot meet the fit budget, stop and revise/regenerate the geometry.</li>
 </ul>
 <h3 id="b-powered-central-dongle-draft">Powered central dongle (draft)</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Headless: battery and carrier below the lid</th>
+<th>OLED: display stays with the lid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="Headless dongle exploded" src="renders/dongle_headless_structure.png" /></td>
+<td><img alt="OLED dongle exploded" src="renders/dongle_oled_structure.png" /></td>
+</tr>
+</tbody>
+</table></div>
 <p>See <a href="DONGLE.md">DONGLE.md</a> for selective population, XIAO polarity and jumper checks, long-cell carrier assembly, optional OLED wiring, firmware and qualification. Do not use the short pointing-device battery or populate the keys/sensor. The dongle is the two-half central; the headless variant requires no display. Switch off does not isolate USB power. Actual pack, harness, display, charging and mechanical fit remain unverified; do not assemble until qualified.</p>
 <!-- /BUILD.md -->
     </div>
