@@ -42,7 +42,7 @@ magnets meet the steel directly. Use the mirrored SVGs in `case/` for alignment 
 Minimum centred clear flat contact circle **54 mm**; prefer about **60 mm** if it clears the
 feet and obstructions. Attraction alone does not qualify retention at a typing angle.
 
-**Passive drawer placeholder:** one common tray (`case/module_tray.stl`), one [plain top lid](stls/placeholder_lid.stl), four M3 × 8 flat-head screws, seven common discs (three a side, one in the floor), and three 8 × 2 mm bump-ons. No electronics, battery or sensor screws. Swap the lid on a spare empty tray or reuse an existing unpopulated tray. See [passive lid qualification](PLACEHOLDER_LID.md); the old solid insert is retired.
+**Passive drawer placeholder:** one common tray (`case/module_tray.stl`), one [diamond-marked top lid](stls/placeholder_lid.stl), four M3 × 8 flat-head screws, seven common discs (three a side, one in the floor), and three 8 × 2 mm bump-ons. No electronics, battery or sensor screws. Swap the lid on a spare empty tray or reuse an existing unpopulated tray. See [passive lid qualification](PLACEHOLDER_LID.md); the old solid insert is retired.
 
 **Magnet total:** both halves 26 + dock and base 31 + placeholder 7 + both pointing modules 14
 = **78 discs**, before spares, if building three complete separate trays. The three discs glued to the dock stand's aluminium **base**

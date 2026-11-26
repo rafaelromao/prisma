@@ -156,6 +156,31 @@ def feet_spots():
     return [front_l, (-front_l[0], front_l[1]), (0.0, back[1])]
 
 
+FRONT_STAMP_DEPTH = .4
+
+
+@lru_cache(maxsize=1)
+def front_stamp():
+    """The original PRISMA wordmark, recessed into the flat facing the typist."""
+    from matplotlib.font_manager import FontProperties
+    from matplotlib.textpath import TextPath
+
+    path = TextPath((0, 0), "PRISMA", size=100,
+                    prop=FontProperties(family="DejaVu Sans", weight="bold"))
+    outline = Polygon()
+    for ring in path.to_polygons():
+        outline = outline.symmetric_difference(Polygon(ring).buffer(0))
+    x0, y0, x1, y1 = outline.bounds
+    outline = affinity.translate(outline, -(x0 + x1) / 2, -(y0 + y1) / 2)
+    outline = affinity.scale(outline, 17.5 / (x1 - x0), 4 / (y1 - y0), origin=(0, 0))
+
+    (_, ny, nz), d = K.front_flat(P, SPINE_TOP)[0]
+    z = 12.0
+    y = (d - nz * (FLOOR_Z + z)) / ny
+    return extrude(outline, -FRONT_STAMP_DEPTH, .08).transform(
+        ((1, 0, 0, 0), (0, nz, ny, y), (0, -ny, nz, z)))
+
+
 def tray():
     """The shared tray: floor, walls and magnet bosses, up to FLUSH, with the rear hood.
     Printed floor down, so the hood's 45-degree underside needs no support."""
@@ -172,7 +197,7 @@ def tray():
     x, y = K.DRAWER_FLOOR_MAG
     body += Manifold.cylinder(2.5, 4.8, circular_segments=48).translate((x, y, FEET))
     body -= Manifold.cylinder(1.61, 4.15, circular_segments=48).translate((x, y, FEET - .01))
-    return body - magnet_pockets() - finger_pockets()
+    return body - magnet_pockets() - finger_pockets() - front_stamp()
 
 
 FINGERS = (-5.0, 5.0)              # the lid's rear hooks: no screw head fits behind the keys

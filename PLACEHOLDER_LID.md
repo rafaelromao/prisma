@@ -4,12 +4,15 @@ The old solid insert has been retired. The shared-tray lid's STL and dock
 views are CAD-verified; the physical assembly is not yet qualified.
 
 The passive module is the canonical `case/module_tray.stl` plus a
-plain, removable top-down `case/placeholder_lid.stl` (public copy
+removable, diamond-marked top-down `case/placeholder_lid.stl` (public copy
 `stls/placeholder_lid.stl`), four M3 × 8 countersunk screws, seven
 8 × 1.5 mm magnets and three 8 × 2 mm bump-ons. No boards, battery,
-sensor screws, keys or decorations. The existing control passages remain
+sensor screws or keys. The existing control passages remain
 empty and unsealed for tray reuse; it is not dust- or water-tight.
 The lid has no control openings. Do not print or modify the tray per variant.
+The restored diamond is cut 0.6 mm deep into the lid's top; the shared tray
+carries the recessed PRISMA wordmark on its front facet, so every module
+variant shows it.
 
 The nominal lid top is FLUSH + 1.0 mm. At FLUSH the standard screws
 would bottom out (13.477 mm tip vs 13.9 mm pilot bottom). A 0.923 mm rise is
@@ -18,8 +21,10 @@ The 1.0 mm upper roof gives 0.577 mm nominal tip clearance (0.377 mm with
 the allowance), and 6.0 mm nominal engagement. The broad roof is 2.0 mm nominal
 (1.0 mm upper roof plus 1.0 mm inset thickening); the thinner rear hook
 and perimeter region follows the shared interface. These are CAD
-dimensions, not validated measurements. The plain top avoids relief
-weakening the roof. No claim of solid-block strength or dock reinforcement.
+dimensions, not validated measurements. The diamond stays over the 2.0 mm
+forward roof, 2.5 mm inside the top rim and clear of the screw heads; its
+0.6 mm relief leaves 1.4 mm of backing there, so it does not weaken the
+screw-bearing roof. No claim of solid-block strength or dock reinforcement.
 
 ## Regeneration and acceptance gates
 

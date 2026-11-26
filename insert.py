@@ -8,7 +8,7 @@ unchanged screws in the tray's pilots.
 from pathlib import Path
 import shutil
 
-from shapely.geometry import box
+from shapely.geometry import Point, box
 
 import case as C
 import module_shell as M
@@ -23,13 +23,22 @@ SOURCE = Path("case/placeholder_lid.stl")
 PUBLIC = Path("stls/placeholder_lid.stl")
 
 
+def diamond():
+    """Original joined-board emblem, kept over the thick roof and off the screws."""
+    room = M.lid_top_plan(H).intersection(box(-99, -200, 99, -22))
+    for x, y in M.lid_screws():
+        room = room.difference(Point(x, y).buffer(M.SCREW["head"] / 2))
+    outline, seam, _ = M.K.diamond_fit(room)
+    return M.K.relief_solid(outline, seam, H)
+
+
 def lid():
     body = M.lid_blank(H, TOP_T)
     roof = M.inner().buffer(-M.LID_CLR, join_style=2).intersection(
         box(-99, -200, 99, -22))
     body += M.K.module_front(M.extrude(roof, M.FLUSH - ROOF_EXTRA, M.FLUSH + .01),
                              M.P, M.WALL + M.LID_CLR)
-    return M.lid_holes(M.bevel(body, H), H)
+    return M.lid_holes(M.bevel(body, H), H) - diamond()
 
 
 def tray():

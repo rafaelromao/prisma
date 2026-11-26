@@ -41,6 +41,14 @@ class ModuleAssemblyTest(unittest.TestCase):
             with self.subTest(part=name):
                 self.assertEqual(sum(c.volume() > 1e-6 for c in solid.decompose()), 1)
 
+    def test_prisma_stamp_is_recessed_into_the_shared_front_wall(self):
+        stamp = M.front_stamp()
+        # All the lettering is cut, with solid wall behind even the deepest strokes.
+        self.assertLess(hit(stamp, self.tray), TOL)
+        normal, _ = M.K.front_flat(M.P, M.SPINE_TOP)[0]
+        backing = stamp.translate(tuple(-normal * (M.FRONT_STAMP_DEPTH + .1)))
+        self.assertLess((backing - self.tray).volume(), TOL)
+
     def test_passive_lid_reuses_complete_tray_and_standard_mounts(self):
         lid, tray = insert.build()
         self.assertLess(abs((tray - self.tray).volume()), TOL)
@@ -50,11 +58,18 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertAlmostEqual(lid.bounding_box()[5], insert.H)
         self.assertAlmostEqual(insert.lid_print().bounding_box()[2], 0)
         self.assertAlmostEqual(insert.H - M.FLUSH, 1.0)
-        # Broad closed roof: probe from just below the seam to just below
-        # the top; no key, optical or display openings.
-        roof = Manifold.cube((10, 36, 1.9)).translate(
+        # Broad closed roof, including under the original diamond engraving.
+        roof = Manifold.cube((10, 36, 1.3)).translate(
             (-5, -80, M.FLUSH - .95))
         self.assertLess(abs((roof - lid).volume()), TOL)
+        diamond = insert.diamond()
+        self.assertGreater(diamond.volume(), 1)
+        self.assertLess(hit(diamond, lid), TOL)
+        depth, _, _ = M.K.RELIEF
+        backing = diamond ^ Manifold.cube((60, 100, .35)).translate(
+            (-30, -110, insert.H - depth))
+        backing = backing.translate((0, 0, -.4))
+        self.assertLess((backing - lid).volume(), TOL)
         # Empty interior below the roof; no full-height insert or filler.
         void = Manifold.cube((6, 20, 3)).translate((-3, -72, M.FLUSH - 5))
         self.assertLess(hit(void, lid + tray), TOL)
