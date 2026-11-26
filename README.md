@@ -312,15 +312,15 @@ sockets on the shared main board and stands at the Choc lid's height, 1.2 mm ove
   x = ±21.0, y = −91.5 mm, leaving **2.087 mm** from the countersink envelope to the pad seat
   (formerly 0.871 mm). Use the new tray and lids together; PCB holes and key positions are unchanged.
 
-- The original pad ledge supports the underside perimeter. A mirrored pair of printed keyed
-  clips (`trackpad/case/retainer.stl`, both in one print) hook over two side edge sectors and
-  attach from inside with M3 × 4 pan-head screws. No sensor adhesive. The raised hooks
-  leave the original pad datum, key positions, cable clearance and tray unchanged.
-  Qualify the actual overlay edge, printed fit and screw engagement before use; see BUILD.md.
+- The pad loads from below and sits **0.8 mm below the lid surface**. The lid rim overlaps the
+  inactive edge, and two hidden tabs (`trackpad/case/retainer.stl`, both in one print) support it
+  from underneath with M3 × 4 pan-head screws in blind holes. Nothing protrudes over the lid,
+  and no sensor adhesive is needed. Qualify the actual overlay edge, printed fit and screw
+  engagement before use; see [BUILD.md](BUILD.md) and [TRACKPAD_RETENTION.md](TRACKPAD_RETENTION.md).
 - Retain the supplied I²C breakout with its pull-up resistors and original 12-pin flat cable.
   Four wires connect the MCU to the breakout; one separate DR wire connects the MCU directly to the
   Cirque underside. The sensor/reset board area reserves a 24 × 18 × 4.5 mm breakout envelope on a
-  2.5 mm insulating spacer, plus cable-bend room, with no printed holder. Verify actual kit dimensions.
+  1.8 mm insulating spacer, plus cable-bend room, with no printed holder. Verify actual kit dimensions.
 
 | Wire | nice!nano v2 | Plain XIAO nRF52840 |
 |---|---|---|

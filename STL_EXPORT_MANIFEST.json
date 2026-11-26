@@ -332,11 +332,11 @@
     },
     {
       "path": "trackpad/case/lid.stl",
-      "sha256": "280d5059f80db2dea0bd5ccd879cb2c1bbfb461d3dec7b12d0f3f800e4c0d4a0",
-      "bytes": 325384,
-      "triangles": 6506,
+      "sha256": "54db40f8dc694dbb47bc303c733d79d68a2005cc09975798f382d35deeca822e",
+      "bytes": 285084,
+      "triangles": 5700,
       "components": 1,
-      "volume_mm3": 2021.8912,
+      "volume_mm3": 1910.5522,
       "size_mm": [
         55.13846,
         84.83187,
@@ -347,11 +347,11 @@
     },
     {
       "path": "stls/trackpad_lid.stl",
-      "sha256": "280d5059f80db2dea0bd5ccd879cb2c1bbfb461d3dec7b12d0f3f800e4c0d4a0",
-      "bytes": 325384,
-      "triangles": 6506,
+      "sha256": "54db40f8dc694dbb47bc303c733d79d68a2005cc09975798f382d35deeca822e",
+      "bytes": 285084,
+      "triangles": 5700,
       "components": 1,
-      "volume_mm3": 2021.8912,
+      "volume_mm3": 1910.5522,
       "size_mm": [
         55.13846,
         84.83187,
@@ -362,30 +362,30 @@
     },
     {
       "path": "trackpad/case/retainer.stl",
-      "sha256": "3fd2be4d6743f3d15f88b273410156807dd5c3ed430fd84c342cff19c364d8ad",
-      "bytes": 35084,
-      "triangles": 700,
+      "sha256": "adc7c2c5b4bd8e2dbe42d81d831b26e7d0a8e4de2aad2faf940dae19b6317ebd",
+      "bytes": 32884,
+      "triangles": 656,
       "components": 2,
-      "volume_mm3": 67.45361,
+      "volume_mm3": 62.37568,
       "size_mm": [
-        15.42,
-        6.2,
-        8.25
+        15.82,
+        8.25,
+        3.2
       ],
       "watertight": true,
       "winding": true
     },
     {
       "path": "stls/trackpad_retainer.stl",
-      "sha256": "3fd2be4d6743f3d15f88b273410156807dd5c3ed430fd84c342cff19c364d8ad",
-      "bytes": 35084,
-      "triangles": 700,
+      "sha256": "adc7c2c5b4bd8e2dbe42d81d831b26e7d0a8e4de2aad2faf940dae19b6317ebd",
+      "bytes": 32884,
+      "triangles": 656,
       "components": 2,
-      "volume_mm3": 67.45361,
+      "volume_mm3": 62.37568,
       "size_mm": [
-        15.42,
-        6.2,
-        8.25
+        15.82,
+        8.25,
+        3.2
       ],
       "watertight": true,
       "winding": true

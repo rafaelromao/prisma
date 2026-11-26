@@ -183,7 +183,19 @@
   18.0,
   4.5
  ],
- "breakout_lift": 2.5,
+ "breakout_lift": 1.8,
+ "pad": {
+  "d": 40.0,
+  "t": 1.2,
+  "back": 4.4,
+  "back_r": 17.9,
+  "clr": 0.3,
+  "rim": 1.0,
+  "bezel": 0.7,
+  "overlap": 0.8,
+  "axial_play": 0.1,
+  "bottom": 20.677321216307725
+ },
  "retainer": {
   "diameter": 3.0,
   "length": 4.0,
@@ -195,16 +207,8 @@
   "boss_depth": 4.0,
   "roof": 0.6,
   "boss_r": 2.25,
-  "slide": 1.55,
-  "axial_play": 0.2,
   "length_tol": 0.1,
   "flange_tol": 0.1,
-  "edge_overlap": 0.8,
-  "lip_t": 0.8,
-  "angles": [
-   -10.76,
-   -169.24
-  ],
   "stations": [
    [
     -10.76,

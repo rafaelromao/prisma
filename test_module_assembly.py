@@ -83,31 +83,41 @@ class ModuleAssemblyTest(unittest.TestCase):
         _, lid, parts, _ = self.modules[2]
         parts = dict(parts)
         pad = parts["pad"]
-        q = T.RETAINER
+        sensor = pad + parts["pad's back parts"]
         clips = T.retainers(L)
         self.assertEqual(len(T.retainer_print().decompose()), 2)
-        # Original vertical insertion remains possible with the clips removed.
-        for lift in (.05, .5, 2, 10):
-            self.assertLess(hit(pad.translate((0, 0, lift)), lid), TOL)
+        self.assertLess(pad.bounding_box()[5], T.H)
+        self.assertLess(hit(sensor, lid), TOL)
+        self.assertLess(hit(sensor.translate((0, 0, -.2)), parts["main board"]), TOL)
+        # A continuous ring covers the inactive edge; there are no top slots.
+        r = T.PAD["d"] / 2
+        rim = (Manifold.cylinder(.25, r + .1, circular_segments=120)
+               - Manifold.cylinder(.25, r - T.PAD["overlap"] + .05, circular_segments=120))
+        self.assertLess((rim.translate((*L["pad"], T.H - .6)) - lid).volume(), TOL)
         for i, clip in enumerate(clips):
-            self.assertLess(hit(clip, lid + pad + parts["pad's back parts"]), TOL)
-            # Slide outward with the lid removed, then withdraw from below.
-            for dx in (0, .25, .5, .75, 1.0, q["slide"]):
-                self.assertLess(hit(T.retainer_poses(L, outward=dx)[i], lid + pad), TOL)
-            for dz in (.1, .5, 1, 2, 4, 8):
-                self.assertLess(hit(T.retainer_poses(L, outward=q["slide"], down=dz)[i], lid + pad), TOL)
-            for dx, dy in ((0, 0), (.3, 0), (-.3, 0), (0, .3), (0, -.3)):
-                moved = pad.translate((dx, dy, q["axial_play"] + .25))
-                self.assertGreater(hit(clip, moved), .05)
-            self.assertGreaterEqual(q["edge_overlap"] - T.PAD["clr"], .5)
-        # At a small upward displacement the pad cannot tilt past both hooks:
-        # the opposite edge meets either the ledge or one of the clips.
+            self.assertLess(clip.bounding_box()[5], T.H)
+            self.assertLess(T.retainer_screws(L)[i].bounding_box()[5], T.H)
+            for dz in (0, .1, .5, 1, 2, 4, 8):
+                self.assertLess(hit(clip.translate((0, 0, -dz)), lid + sensor), TOL)
+        # With the tabs removed the entire sensor loads straight from below.
+        for dz in (.05, .5, 1, 2, 4, 8):
+            self.assertLess(hit(sensor.translate((0, 0, -dz)), lid), TOL)
+        # At the extremes of radial play, the rim blocks lift and each tab
+        # supports the edge rather than any of the components behind it.
+        for dx, dy in ((0, 0), (.3, 0), (-.3, 0), (0, .3), (0, -.3)):
+            self.assertGreater(hit(pad.translate((dx, dy, T.PAD["axial_play"] + .15)), lid), .05)
+            for clip in clips:
+                self.assertGreater(hit(pad.translate((dx, dy, -.15)), clip), .05)
+                self.assertLess(hit(parts["pad's back parts"].translate((dx, dy, 0)), clip), TOL)
+        self.assertGreaterEqual(T.PAD["overlap"] - T.PAD["clr"], .5)
+        # The continuous rim and tabs block a lifted, tilted pad.
         px, py = L["pad"]
         blockers = lid + clips[0] + clips[1]
-        centred = pad.translate((-px, -py, -T.H))
+        top = pad.bounding_box()[5]
+        centred = pad.translate((-px, -py, -top))
         for roll in range(-3, 4):
             for pitch in range(-3, 4):
-                tilted = centred.rotate((roll, pitch, 0)).translate((px, py, T.H + .45))
+                tilted = centred.rotate((roll, pitch, 0)).translate((px, py, top + .25))
                 self.assertGreater(hit(tilted, blockers), .05, (roll, pitch))
 
     def test_trackpad_retainer_fasteners_and_populated_clearances(self):
