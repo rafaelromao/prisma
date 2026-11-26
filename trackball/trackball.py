@@ -1,6 +1,8 @@
-"""Prisma Trackball: a 34 mm ball and two MX or Choc v1 hot-swap keys, on shared boards.
+"""Prisma Trackball: a 34 mm ball and two Choc v1 hot-swap keys, on shared boards.
 
-On the shared tray (module_shell.py), with a lid that carries the keys' plate and the ball's cup.
+On the shared tray (module_shell.py), with a lid that carries the keys' plate and the ball's cup,
+and over it a cover whose collar keeps the ball in, held by the lid's four screws. The boards also
+take MX sockets, and their layout was drawn for MX, but only the Choc lid is made.
 The ball sits at the front in that cup on three 3 mm ceramic balls, and lifts out from above. Under
 it, on the tray's floor, the sensor board: a PMW3610 looking up through its LM18-LSI lens, and the
 reset button facing down, pressed with a pin through the floor. Behind the ball the main board rests
@@ -41,15 +43,13 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))     # last: this fil
 from controller_pinout import HEADER, LINKS, ROWS
 from controllers import XIAO_LENGTH, XIAO_SETBACK, XIAO_USB_OVERHANG
 
-H = M.FLUSH + 4.0
-TOP_T = 1.5                    # the top: an MX plate (1.5 mm)
-MX_CUT = 14.0 + 0.2            # nominal MX opening + provisional FDM compensation; qualify printed fit
+H = M.FLUSH + 4.0              # the former MX lid's top: the cup and the main board's outline are cut against it
 CHOC_CUT = C.PLATE["cut"] + 2 * C.PLATE["cut_tol"]  # same Choc mounting allowance as the halves
 MX_PITCH = 19.05
 SWITCH_ANGLE = 270             # sockets face the wider side of the rearward key's offset centre
 KEYS_REAR_SHIFT = 4.2          # clears the trackpad front facet without crowding the power-switch pads
 KEYS_X = -0.45                 # common centres for both socket families and case variants
-MX = dict(cap=18.0, below_plate=5.0, socket=1.85, cap_top=8.0 + 7.6)   # cap_top: over the plate (DSA)
+MX = dict(cap=18.0, socket=1.85)   # what the boards' fixed key positions and socket room were drawn for
 CHOC = dict(cap=18.0, below_plate=2.2, socket=1.8, cap_top=7.5)
 PLATE_TOP = M.FEET + M.BOTTOM_T
 BAT_Z = PLATE_TOP + .4          # insulating seat above reinforced floor roofs
@@ -104,6 +104,13 @@ LINK_PIN = 15.0                # an extra-long header's length, plastic against 
 BAT = (20.0, 25.0, 7.5)        # 752025 lengthwise: w (x), l (y), thickness
 CRADLE = (1.2, 3.0, 0.3)
 CUP_WALL = 1.6
+COVER_T = 1.8                  # the cover's plate; the same M3 x 8 screws then bite 4 mm
+COVER_LIP = 5.75               # the collar's lip over the ball's equator
+COVER_LIP_R = 16.5             # its opening's radius: the ball (17) can rise only 1.7 mm
+COVER_R = 19.0                 # the collar, centre to facet
+COVER_SIDES = 16
+CAP = (16.5, 17.5)             # compact Choc caps (x, y) as these quarter-turned switches carry them
+CAP_CLR = 1.0                  # round each cap, in the cover
 PAD_TEXT = dict(SCLK="CK", SDIO="IO", NCS="CS", MOTION="MO", RST="RST", VCC="3V", GND="G", VBAT="VBAT", XR="R2")
 PAD_X = 8.2                    # the wire pads' columns, from the centreline
 PAD_EDGE = 1.5                 # wire pad centre to the board edge: its joint clears the lid's lip
@@ -184,12 +191,11 @@ def board_holes():
     return M.lid_screws()[2:]
 
 
-def parts(L, main_plan, sensor_plan, switch="mx"):
-    spec = MX if switch == "mx" else CHOC
-    height = PCB_TOP + spec["below_plate"]
+def parts(L, main_plan, sensor_plan):
+    height = PCB_TOP + CHOC["below_plate"]
     pcb_top = PCB_TOP
-    top_t = TOP_T if switch == "mx" else 1.2
-    socket_bot = pcb_top - PCB_T - spec["socket"]
+    top_t = 1.2
+    socket_bot = pcb_top - PCB_T - CHOC["socket"]
     out = []
     bx, by = L["ball"]
     out.append(("ball", Manifold.sphere(BALL / 2, 96).translate((bx, by, BCZ))))
@@ -197,16 +203,11 @@ def parts(L, main_plan, sensor_plan, switch="mx"):
         out.append(("bearing %d" % (i + 1), Manifold.sphere(BEARING / 2, 24).translate((x, y, z))))
     for i, (kx, ky) in enumerate(L["keys"]):
         body = box3(kx - 6.95, ky - 6.95, pcb_top, kx + 6.95, ky + 6.95, height - top_t - 0.05)
-        housing_h = 6.6 if switch == "mx" else 2.5
-        housing_half = 7.8 if switch == "mx" else 7.5
-        body += box3(kx - housing_half, ky - housing_half, height,
-                     kx + housing_half, ky + housing_half, height + housing_h)
-        out.append((switch.upper() + " %d" % (i + 1), body))
-        out.append(("keycap %d" % (i + 1), box3(kx - spec["cap"] / 2, ky - spec["cap"] / 2, height + housing_h,
-                                                  kx + spec["cap"] / 2, ky + spec["cap"] / 2, height + spec["cap_top"])))
-        x0, x1 = (-6.9, -0.9) if switch == "mx" else (1.25, 8.45)
-        out.append(("socket %d" % (i + 1), box3(kx + x0, ky - 7.75, socket_bot,
-                                                   kx + x1, ky + 7.75, pcb_top - PCB_T)))
+        body += box3(kx - 7.5, ky - 7.5, height, kx + 7.5, ky + 7.5, height + 2.5)
+        out.append(("CHOC %d" % (i + 1), body))
+        out.append(("keycap %d" % (i + 1), box3(kx - CHOC["cap"] / 2, ky - CHOC["cap"] / 2, height + 2.5,
+                                                  kx + CHOC["cap"] / 2, ky + CHOC["cap"] / 2, height + CHOC["cap_top"])))
+        out.append(("socket %d" % (i + 1), box3(kx + 1.25, ky - 7.75, socket_bot, kx + 8.45, ky + 7.75, pcb_top - PCB_T)))
     holes = unary_union([Point(x, y).buffer(POST_PIN + .2, 32) for x, y in board_holes()])
     out.append(("main board", M.extrude(main_plan.difference(holes), pcb_top - PCB_T, pcb_top)))
     out.append(("power switch", power_switch(main_plan)))
@@ -255,8 +256,7 @@ def usb_z(L):
 
 
 def bore_r(height):
-    """The lid's opening round the ball: 0.5 mm off the ball at that lid's top, so the lower
-    Choc lid holds it as closely as the MX lid does."""
+    """The lid's opening round the ball: 0.5 mm off the ball at the lid's top."""
     return math.sqrt((BALL / 2) ** 2 - max(BCZ - height, 0) ** 2) + 0.5
 
 
@@ -357,23 +357,21 @@ def tray(L):
     return sh
 
 
-def lid(L, switch="mx", ball=True):
-    """The top: the key cutouts, the power switch's pocket and notch; the ball's cup and bore."""
-    spec = MX if switch == "mx" else CHOC
-    height = PCB_TOP + spec["below_plate"]
-    top_t = TOP_T if switch == "mx" else 1.2
-    cut = MX_CUT if switch == "mx" else CHOC_CUT
+def lid(L, ball=True):
+    """The top: the Choc key cutouts, the power switch's pocket and notch; the ball's cup and bore."""
+    height = PCB_TOP + CHOC["below_plate"]
+    top_t = 1.2
     sh = M.lid_blank(height, top_t)
     if ball:
         bx, by = L["ball"]
         sh += cup(L)
         sh -= Manifold.cylinder(top_t + 1, bore_r(height), circular_segments=120).translate((bx, by, height - top_t - 0.5))
     for kx, ky in L["keys"]:
-        sh -= Manifold.cube((cut, cut, top_t + 1)).translate((kx - cut / 2, ky - cut / 2, height - top_t - 0.5))
-        if switch == "choc":
-            # Pull grooves through the lip, along the latch axis: the footprint's peg axis is its x axis,
-            # which SWITCH_ANGLE (270) turns to the plan's y. The MX lid has none.
-            sh -= SM.pull_grooves((kx, ky), 90, cut / 2, height - top_t - 0.01, height + 0.5)
+        sh -= Manifold.cube((CHOC_CUT, CHOC_CUT, top_t + 1)).translate(
+            (kx - CHOC_CUT / 2, ky - CHOC_CUT / 2, height - top_t - 0.5))
+        # Pull grooves through the lip, along the latch axis: the footprint's peg axis is its x axis,
+        # which SWITCH_ANGLE (270) turns to the plan's y.
+        sh -= SM.pull_grooves((kx, ky), 90, CHOC_CUT / 2, height - top_t - 0.01, height + 0.5)
     main_plan = main_board_plan(L)
     back = L["back"]
     sh -= box3(-2.5, back - M.WALL - 1.5, PCB_TOP, 2.5, back + 1.5, PCB_TOP + 2.6)
@@ -381,9 +379,43 @@ def lid(L, switch="mx", ball=True):
     return M.lid_holes(M.bevel(sh, height), height) if ball else sh
 
 
-def build(L, switch="mx"):
+def cap_openings(L):
+    """The cover's opening for the keycaps: CAP_CLR round each, so a cap never touches it."""
+    w, length = CAP[0] / 2 + CAP_CLR, CAP[1] / 2 + CAP_CLR
+    return unary_union([box(kx - w, ky - length, kx + w, ky + length) for kx, ky in L["keys"]])
+
+
+def cover(L):
+    """The cover over the whole lid, under the lid's four screws: a COVER_T plate and a faceted
+    collar whose lip closes above the ball's equator, so the ball cannot leave. Lower it over the
+    ball resting in its cup. Printed as it sits, plate down."""
+    height = M.CHOC_TOP
+    top = height + COVER_T
+    bx, by = L["ball"]
+    base = M.lid_top_plan(height)
+    chamfer = .9
+    body = Manifold.batch_hull([M.extrude(base, height, top - chamfer),
+                                M.extrude(base.buffer(-chamfer, join_style=2), top - .01, top)])
+
+    def facets(apothem, z):
+        n = COVER_SIDES
+        return Manifold.cylinder(.01, apothem / math.cos(math.pi / n), circular_segments=n).rotate(
+            (0, 0, 180 / n)).translate((bx, by, z))
+
+    lip = BCZ + COVER_LIP
+    body += Manifold.batch_hull([facets(COVER_R, top - .02), facets(COVER_R, BCZ)])
+    body += Manifold.batch_hull([facets(COVER_R, BCZ), facets(COVER_LIP_R + .9, lip - .01)])
+    bore = BALL / 2 + BALL_CLR
+    body -= Manifold.cylinder(BCZ - height + .02, bore, circular_segments=128).translate((bx, by, height - .01))
+    body -= Manifold.cylinder(COVER_LIP, bore, COVER_LIP_R, circular_segments=128).translate((bx, by, BCZ))
+    body -= Manifold.cylinder(2, COVER_LIP_R, circular_segments=128).translate((bx, by, lip - .02))
+    body -= M.extrude(cap_openings(L), height - 1, top + 1)
+    return M.lid_holes(body, top)
+
+
+def build(L):
     """lid, tray, the main board's plan, the sensor board's plan."""
-    return lid(L, switch), tray(L), main_board_plan(L), sensor_board_plan(L)
+    return lid(L), tray(L), main_board_plan(L), sensor_board_plan(L)
 
 
 def sensor_holes(L):
@@ -566,28 +598,25 @@ def main():
     L = place()
     lid_m, tray_m, main_plan, sensor_plan = build(L)
     ps = parts(L, main_plan, sensor_plan)
+    cover_m = cover(L)
     M.check_common("Prisma Trackball", lid_m, tray_m, ps)
-    M.check_dock_and_desk(lid_m, tray_m, H, ps)
+    M.check_dock_and_desk(lid_m + cover_m, tray_m, M.CHOC_TOP + COVER_T, ps)
+    for name, solid in ps + [("lid", lid_m), ("tray", tray_m)]:
+        assert abs((solid ^ cover_m).volume()) < 1e-3, ("cover", name)
     nb = SOCKET_BOT - NANO_GAP
     print("  ball centre %.1f over the standing plane, top %.1f (%.1f over the module's top); keys at y %s"
-          % (BCZ, BCZ + BALL / 2, BCZ + BALL / 2 - H, ["%.1f" % k[1] for k in L["keys"]]))
+          % (BCZ, BCZ + BALL / 2, BCZ + BALL / 2 - M.CHOC_TOP, ["%.1f" % k[1] for k in L["keys"]]))
     print("  controller board %.2f..%.2f" % (controller_top() - CB_T, controller_top()))
     print("  nano %.1f..%.1f, battery %.1f..%.1f (%.1f mm apart)" % (nb - NANO[2] - NANO[3], nb, BAT_Z,
           BAT_Z + BAT[2], nb - NANO[2] - NANO[3] - BAT_Z - BAT[2]))
     print("  USB-C end %.1f mm in from the back wall's outside" % (L["back"] - (L["nano"][1] + NANO[1])))
-    print("  lid %.1f cm3, tray %.1f cm3, genus %d / %d; height %.2f" % (lid_m.volume() / 1000, tray_m.volume() / 1000,
-          lid_m.genus(), tray_m.genus(), H))
+    print("  lid %.1f cm3, cover %.1f cm3, tray %.1f cm3; lid top %.2f, collar top %.2f" % (
+          lid_m.volume() / 1000, cover_m.volume() / 1000, tray_m.volume() / 1000, M.CHOC_TOP, BCZ + COVER_LIP))
     os.makedirs(os.path.join(HERE, "case"), exist_ok=True)
-    stl_lid(lid_m, H, os.path.join(HERE, "case", "lid.stl"))
-    choc_height = PCB_TOP + CHOC["below_plate"]
-    choc_lid, choc_tray, choc_main, choc_sensor = build(L, "choc")
-    choc_parts = parts(L, choc_main, choc_sensor, "choc")
-    M.check_common("Prisma Trackball / Choc v1", choc_lid, choc_tray, choc_parts)
-    M.check_dock_and_desk(choc_lid, choc_tray, choc_height, choc_parts)
-    assert main_plan.equals(choc_main) and sensor_plan.equals(choc_sensor)
-    stl_lid(choc_lid, choc_height, os.path.join(HERE, "case", "lid_choc.stl"))
+    stl_lid(lid_m, M.CHOC_TOP, os.path.join(HERE, "case", "lid_choc.stl"))
+    C.stl(cover_m.translate((0, 0, -M.CHOC_TOP)), os.path.join(HERE, "case", "cover.stl"))
     os.makedirs(os.path.join(HERE, "..", C.STLS), exist_ok=True)
-    for name in ("lid", "lid_choc"):
+    for name in ("lid_choc", "cover"):
         shutil.copyfile(os.path.join(HERE, "case", name + ".stl"),
                         os.path.join(HERE, "..", C.STLS, "trackball_" + name + ".stl"))
     C.stl(tray_m.translate((0, 0, -M.FEET)), os.path.join(HERE, "..", "case", "module_tray.stl"))

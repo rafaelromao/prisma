@@ -9,7 +9,10 @@ removable, diamond-marked top-down `case/placeholder_lid.stl` (public copy
 8 × 1.5 mm magnets and three 8 × 2 mm bump-ons. No boards, battery,
 sensor screws or keys. The existing control passages remain
 empty and unsealed for tray reuse; it is not dust- or water-tight.
-The lid has no control openings. Do not print or modify the tray per variant.
+The same lid closes the [headless dongle](DONGLE.md), so it has that board's
+power switch pocket underneath and a lever slot at the back; the passive module
+leaves them empty. There are no openings in its top. Do not print or modify the
+tray per variant.
 The restored diamond is cut 0.6 mm deep into the lid's top; the shared tray
 carries the recessed PRISMA wordmark across its front facets, so every module
 variant shows it.

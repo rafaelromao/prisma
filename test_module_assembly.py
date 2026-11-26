@@ -32,8 +32,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         cls.main_plan, cls.sensor_plan = B.main_board_plan(L), B.sensor_board_plan(L)
         P = T.place()
         cls.P = P
-        cls.modules = [("mx", B.lid(L, "mx"), B.parts(L, cls.main_plan, cls.sensor_plan, "mx"), B.H),
-                       ("choc", B.lid(L, "choc"), B.parts(L, cls.main_plan, cls.sensor_plan, "choc"), M.CHOC_TOP),
+        cls.modules = [("choc", B.lid(L), B.parts(L, cls.main_plan, cls.sensor_plan), M.CHOC_TOP),
                        ("trackpad", T.lid(P), T.parts(P, cls.main_plan, cls.sensor_plan), T.H)]
 
     def test_every_print_is_one_solid(self):
@@ -51,6 +50,38 @@ class ModuleAssemblyTest(unittest.TestCase):
         normal, _ = M.K.front_flat(M.P, M.SPINE_TOP)[0]
         backing = stamp.translate(tuple(-normal * (M.FRONT_STAMP_DEPTH + .1)))
         self.assertLess((backing - self.tray).volume(), TOL)
+
+    def test_trackball_cover_keeps_the_ball_in_and_the_keycaps_free(self):
+        L = self.L
+        cover = B.cover(L)
+        _, lid, parts, height = self.modules[0]
+        parts = dict(parts)
+        top = height + B.COVER_T
+        self.assertEqual(sum(c.volume() > 1e-6 for c in cover.decompose()), 1)
+        self.assertAlmostEqual(cover.bounding_box()[2], height)
+        self.assertAlmostEqual(cover.bounding_box()[5], B.BCZ + B.COVER_LIP)
+        self.assertLess(hit(cover, lid + self.tray), TOL)
+        for name, part in parts.items():
+            self.assertLess(hit(cover, part), TOL, name)
+        # The ball rests free, and the lip stops it within 2 mm, over its widest part.
+        ball = parts["ball"]
+        self.assertLess(hit(cover, ball.translate((0, 0, 1.2))), TOL)
+        self.assertGreater(hit(cover, ball.translate((0, 0, 2.2))), TOL)
+        self.assertGreater(B.BCZ + B.BALL / 2 - cover.bounding_box()[5], 10)       # still there to roll
+        # It goes on over a ball already resting in the cup.
+        for lift in (1, 3, 6, 12, 20, 30):
+            self.assertLess(hit(cover.translate((0, 0, lift)), ball), TOL, lift)
+        # A compact cap never touches the cover, at any height of its travel.
+        w, length = B.CAP[0] / 2 + B.CAP_CLR - .05, B.CAP[1] / 2 + B.CAP_CLR - .05
+        for kx, ky in L["keys"]:
+            sweep = M.extrude(box(kx - w, ky - length, kx + w, ky + length), height, top + 5)
+            self.assertLess(hit(cover, sweep), TOL)
+        # The same four screws, flush in the cover, still bite 4 mm.
+        for x, y in M.lid_screws():
+            head = Manifold.cylinder(1.45, 1.75, 3.1, circular_segments=48).translate((x, y, top - 1.45))
+            self.assertLess(hit(head, cover), TOL)
+        self.assertGreaterEqual(M.PCB_TOP - (top - M.SCREW["length"]), 4.0 - 1e-6)
+        M.check_dock_and_desk(lid + cover, self.tray, top, list(parts.items()))
 
     def test_passive_lid_reuses_complete_tray_and_standard_mounts(self):
         lid, tray = insert.build()
@@ -98,7 +129,7 @@ class ModuleAssemblyTest(unittest.TestCase):
 
     def test_trackpad_edge_retention_and_service_sequence(self):
         L = self.P
-        _, lid, parts, _ = self.modules[2]
+        _, lid, parts, _ = self.modules[1]
         parts = dict(parts)
         pad = parts["pad"]
         sensor = pad + parts["pad's back parts"]
@@ -155,7 +186,7 @@ class ModuleAssemblyTest(unittest.TestCase):
 
     def test_trackpad_retainer_fasteners_and_populated_clearances(self):
         L = self.P
-        _, lid, parts, _ = self.modules[2]
+        _, lid, parts, _ = self.modules[1]
         parts = dict(parts)
         q = T.RETAINER
         z = T.retainer_floor()
@@ -278,7 +309,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertEqual(T.RETAINER["pilot"], M.SCREW["pilot"])
         self.assertIn(T.RETAINER["length"], (4.0, 5.0, 6.0, 7.0, 8.0, 16.0))
         self.assertLess(abs((T.parts(self.P, self.main_plan, self.sensor_plan)[0][1]).volume()
-                            - dict(self.modules[1][2])["CHOC 1"].volume()), 1e-6)
+                            - dict(self.modules[0][2])["CHOC 1"].volume()), 1e-6)
 
     def test_trackpad_uses_identical_complete_tray(self):
         other = B.tray(self.P)
@@ -287,7 +318,7 @@ class ModuleAssemblyTest(unittest.TestCase):
 
     def test_long_cell_reservation_reuses_existing_tray_and_reset_board(self):
         from trackball.controllers import xiao
-        parts = dict(self.modules[1][2])
+        parts = dict(self.modules[0][2])
         keep = ("main board", "power switch", "controller board",
                 "controller header", "stacking pins' plastic", "sensor board", "reset")
         controller = xiao(B.xiao_back(self.L), B.SOCKET_BOT - B.NANO_GAP - B.NANO[2])
@@ -338,11 +369,9 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertAlmostEqual(B.CHOC_CUT, 14.0)
         self.assertAlmostEqual(C.PLATE["gap"] + C.PLATE["thick"], 2.2)
         self.assertAlmostEqual(B.CHOC["below_plate"], 2.2)
-        self.assertAlmostEqual(B.MX["below_plate"], 5.0)
         for name, lid, _, height in self.modules:
-            thick = B.TOP_T if name == "mx" else C.PLATE["thick"]
-            width = B.MX_CUT if name == "mx" else B.CHOC_CUT
-            reach = 0 if name == "mx" else SM.GROOVE_REACH      # the Choc lids' pull grooves run along y
+            thick, width = C.PLATE["thick"], B.CHOC_CUT
+            reach = SM.GROOVE_REACH                             # the lids' pull grooves run along y
             for fraction in (.05, .5, .95):
                 rings = [Polygon(p) for p in lid.slice(height - thick * fraction).to_polygons()]
                 for x, y in self.L["keys"]:
@@ -356,7 +385,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertAlmostEqual(M.CHOC_TOP - M.PCB_TOP, SM.STACK)
 
     def choc_lids(self):
-        return [module for module in self.modules if module[0] != "mx"]
+        return self.modules
 
     def test_choc_lids_have_pull_grooves_cut_through_with_nothing_under_them(self):
         # Along y, the latch axis: two grooves a switch, from the opening's edge outwards. The lip is cut
@@ -441,7 +470,7 @@ class ModuleAssemblyTest(unittest.TestCase):
                     self.assertGreater((seat ^ lid).volume(), .25 * seat.volume())
 
     def test_screws_bite_the_post_and_do_not_bottom(self):
-        for height in (B.H, M.CHOC_TOP):
+        for height in (M.CHOC_TOP, M.CHOC_TOP + B.COVER_T):
             tip = height - M.SCREW["length"]
             for x, y in M.lid_screws():
                 with self.subTest(height=height, screw=(x, y)):
@@ -542,7 +571,7 @@ class ModuleAssemblyTest(unittest.TestCase):
                         self.assertLess(hit(solid.translate((0, 0, step)), self.tray), TOL)
 
     def test_usb_c_is_flush_with_the_back(self):
-        nano = dict(self.modules[1][2])["nice!nano"]
+        nano = dict(self.modules[0][2])["nice!nano"]
         self.assertAlmostEqual(nano.bounding_box()[4], self.L["back"], places=4)
 
     def test_lid_hooks_in_at_the_rear_then_closes(self):
@@ -615,7 +644,7 @@ class ModuleAssemblyTest(unittest.TestCase):
         d = .2
         offsets = [(d, 0), (-d, 0), (0, d), (0, -d)]
         board = Manifold()
-        for label, part in self.modules[1][2]:
+        for label, part in self.modules[0][2]:
             if label in ("main board", "power switch", "socket 1", "socket 2"):
                 board += part
         for name, lid, _, _ in self.modules:
@@ -641,13 +670,13 @@ class ModuleAssemblyTest(unittest.TestCase):
     def test_pad_wires_have_a_way_down(self):
         # The separate DR lead passes beside, not through, the retained FFC bend envelope.
         wires = T.dr_lead_corridor()
-        self.assertLess(hit(wires, self.tray + self.modules[2][1]), TOL)
-        for label, solid in self.modules[2][2]:
+        self.assertLess(hit(wires, self.tray + self.modules[1][1]), TOL)
+        for label, solid in self.modules[1][2]:
             if label not in ("pad's back parts", "pad"):
                 self.assertLess(hit(wires, solid), TOL, label)
 
     def test_i2c_breakout_and_ffc_have_reserved_space_without_a_holder(self):
-        parts = dict(self.modules[2][2])
+        parts = dict(self.modules[1][2])
         board = parts['I2C breakout envelope']
         cable = parts['FFC bend envelope']
         self.assertEqual(T.BREAKOUT, (24.0, 18.0, 4.5))
@@ -656,7 +685,7 @@ class ModuleAssemblyTest(unittest.TestCase):
                 with self.subTest(part=name):
                     self.assertLess(hit(board, part), TOL)
                     self.assertLess(hit(cable, part), TOL)
-        for part in (self.tray, self.modules[2][1]):
+        for part in (self.tray, self.modules[1][1]):
             self.assertLess(hit(board + cable, part), TOL)
         for x, y in B.sensor_holes(self.L):
             screw = M.flat_screw(x, y, B.sensor_screw_stack()["head_top"], length=B.SENSOR_SCREW_LENGTH)

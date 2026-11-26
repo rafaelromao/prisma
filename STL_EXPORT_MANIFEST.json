@@ -91,36 +91,6 @@
       "winding": true
     },
     {
-      "path": "case/dongle_lid.stl",
-      "sha256": "e1b7159b880ba35d520bb5c62a92058c03246897cdc2763f28d7320e0922af6b",
-      "bytes": 173284,
-      "triangles": 3464,
-      "components": 1,
-      "volume_mm3": 3806.52677,
-      "size_mm": [
-        55.13846,
-        84.83187,
-        3.28
-      ],
-      "watertight": true,
-      "winding": true
-    },
-    {
-      "path": "stls/dongle_lid.stl",
-      "sha256": "e1b7159b880ba35d520bb5c62a92058c03246897cdc2763f28d7320e0922af6b",
-      "bytes": 173284,
-      "triangles": 3464,
-      "components": 1,
-      "volume_mm3": 3806.52677,
-      "size_mm": [
-        55.13846,
-        84.83187,
-        3.28
-      ],
-      "watertight": true,
-      "winding": true
-    },
-    {
       "path": "case/dongle_oled_lid.stl",
       "sha256": "18547fd716e6fe6e35dff9dca489e7feadec6495683c12862f1a05397cc441da",
       "bytes": 177484,
@@ -182,11 +152,11 @@
     },
     {
       "path": "case/placeholder_lid.stl",
-      "sha256": "42cf03401ac58e3da1380623bcadacdc22366b8a237b6600e03c1b30e1bf6648",
-      "bytes": 117484,
-      "triangles": 2348,
+      "sha256": "3b283a8cb38a4a717d0cd56f65ca4083303f7e95df4fb3a4b71c43a89daf701d",
+      "bytes": 119484,
+      "triangles": 2388,
       "components": 1,
-      "volume_mm3": 5573.05777,
+      "volume_mm3": 5550.01477,
       "size_mm": [
         55.13846,
         84.83187,
@@ -197,11 +167,11 @@
     },
     {
       "path": "stls/placeholder_lid.stl",
-      "sha256": "42cf03401ac58e3da1380623bcadacdc22366b8a237b6600e03c1b30e1bf6648",
-      "bytes": 117484,
-      "triangles": 2348,
+      "sha256": "3b283a8cb38a4a717d0cd56f65ca4083303f7e95df4fb3a4b71c43a89daf701d",
+      "bytes": 119484,
+      "triangles": 2388,
       "components": 1,
-      "volume_mm3": 5573.05777,
+      "volume_mm3": 5550.01477,
       "size_mm": [
         55.13846,
         84.83187,
@@ -271,31 +241,31 @@
       "winding": true
     },
     {
-      "path": "trackball/case/lid.stl",
-      "sha256": "4d812533839e54b9f70cf661b76e534eed0600d27a4fc9d559975d2fb2c73781",
-      "bytes": 603384,
-      "triangles": 12066,
+      "path": "trackball/case/cover.stl",
+      "sha256": "2ee956d17cd078d72de29c2fc3853485d05ceedcddd77d0f8f7fd0b73d2a3c69",
+      "bytes": 130984,
+      "triangles": 2618,
       "components": 1,
-      "volume_mm3": 5550.77992,
+      "volume_mm3": 3698.74185,
       "size_mm": [
-        55.13846,
-        84.83187,
-        11.26889
+        52.29707,
+        82.73187,
+        12.17268
       ],
       "watertight": true,
       "winding": true
     },
     {
-      "path": "stls/trackball_lid.stl",
-      "sha256": "4d812533839e54b9f70cf661b76e534eed0600d27a4fc9d559975d2fb2c73781",
-      "bytes": 603384,
-      "triangles": 12066,
+      "path": "stls/trackball_cover.stl",
+      "sha256": "2ee956d17cd078d72de29c2fc3853485d05ceedcddd77d0f8f7fd0b73d2a3c69",
+      "bytes": 130984,
+      "triangles": 2618,
       "components": 1,
-      "volume_mm3": 5550.77992,
+      "volume_mm3": 3698.74185,
       "size_mm": [
-        55.13846,
-        84.83187,
-        11.26889
+        52.29707,
+        82.73187,
+        12.17268
       ],
       "watertight": true,
       "winding": true
@@ -405,10 +375,6 @@
       "stls/dock.stl"
     ],
     [
-      "case/dongle_lid.stl",
-      "stls/dongle_lid.stl"
-    ],
-    [
       "case/dongle_oled_lid.stl",
       "stls/dongle_oled_lid.stl"
     ],
@@ -429,8 +395,8 @@
       "stls/plate_right.stl"
     ],
     [
-      "trackball/case/lid.stl",
-      "stls/trackball_lid.stl"
+      "trackball/case/cover.stl",
+      "stls/trackball_cover.stl"
     ],
     [
       "trackball/case/lid_choc.stl",

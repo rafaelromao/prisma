@@ -86,9 +86,9 @@ class XiaoOptionTest(unittest.TestCase):
         self.assertGreaterEqual(B.SOCKET_BOT - controller.bounding_box()[5], 1.3)    # a soldered wire fits
         self.assertLess(abs((controller ^ tray).volume()), 1e-3)
         main, sensor = B.main_board_plan(layout), B.sensor_board_plan(layout)
-        for kind in ('mx', 'choc', 'trackpad'):
-            parts = B.parts(layout, main, sensor, kind) if kind != 'trackpad' else T.parts(T.place(), main, sensor)
-            lid = B.lid(layout, kind) if kind != 'trackpad' else T.lid(T.place())
+        for kind in ('choc', 'trackpad'):
+            parts = B.parts(layout, main, sensor) if kind != 'trackpad' else T.parts(T.place(), main, sensor)
+            lid = B.lid(layout) if kind != 'trackpad' else T.lid(T.place())
             with self.subTest(module=kind):
                 self.assertLess(abs((controller ^ lid).volume()), 1e-3)
                 for name, part in parts:
@@ -142,7 +142,7 @@ class XiaoOptionTest(unittest.TestCase):
             self.assertLess(abs((pins ^ board[name]).volume()), 1e-3, name)
         pads = B.board_layout(layout, main)
         plastic = board["stacking pins' plastic"]
-        for lid in (B.lid(layout, 'mx'), B.lid(layout, 'choc')):
+        for lid in (B.lid(layout), B.cover(layout)):
             for link in B.controller_points(layout)["links"].values():
                 joint = M.extrude(B.Point(*link["xy"]).buffer(.8), B.PCB_TOP, B.PCB_TOP + .7)
                 self.assertLess(abs((joint ^ lid).volume()), 1e-3)

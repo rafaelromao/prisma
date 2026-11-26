@@ -8,13 +8,15 @@ proposal; the longer nice!nano intersects the long-cell reservation.
 ## Mechanical design
 
 Reuse the exact common tray, four M3 × 8 flat-head lid screws, six side
-magnets, one floor magnet and three 8 × 2 mm feet. Both lids retain the
-standard Choc height (1.2 mm above the halves' inner edges), rear hooks,
-switch cutout and USB/reset access. No changes to the printed tray or any PCB.
+magnets, one floor magnet and three 8 × 2 mm feet. The headless dongle has no
+lid of its own: it uses the [passive drawer lid](PLACEHOLDER_LID.md), 1.0 mm
+above the halves' inner edges; the OLED lid stands 1.2 mm. Both have the rear
+hooks, power switch pocket and lever slot, and USB/reset access. No changes to the printed tray or any PCB.
 The OLED variant has a recessed glass aperture, two locating rails and two
 lands that bear on the non-active PCB ends. The headless roof is closed.
-`python dongle.py` exports both lids top-down. The
-[headless STL](stls/dongle_lid.stl) and [OLED STL](stls/dongle_oled_lid.stl)
+`python insert.py` exports the headless (placeholder) lid and `python dongle.py`
+the OLED lid, top-down. The
+[placeholder STL](stls/placeholder_lid.stl) and [OLED STL](stls/dongle_oled_lid.stl)
 are CAD-verified prototypes, not physically qualified parts.
 
 ### Required parts and wiring

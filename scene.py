@@ -134,7 +134,7 @@ PART_RGB = {"ball": BALL_RGB, "pad": PAD_RGB, "pad's back parts": vrml.CHIP, "ba
             "reset": vrml.BUTTON, "power switch": vrml.METAL}
 
 
-def _built(kind, switch="choc"):
+def _built(kind):
     """(module, its layout, lid, tray, its parts): the trackpad shares the trackball's tray."""
     import importlib
     import trackball.trackball as B
@@ -142,12 +142,14 @@ def _built(kind, switch="choc"):
     L = mod.place()
     main_plan, sensor_plan = B.main_board_plan(L), B.sensor_board_plan(L)
     if kind == "trackball":
-        return mod, L, B.lid(L, switch), B.tray(L), B.parts(L, main_plan, sensor_plan, switch)
+        return mod, L, B.lid(L), B.tray(L), B.parts(L, main_plan, sensor_plan)
     return mod, L, mod.lid(L), B.tray(L), mod.parts(L, main_plan, sensor_plan)
 
 
-def _height(mod, kind, switch):
-    return mod.PCB_TOP + mod.CHOC["below_plate"] if kind == "trackball" and switch == "choc" else mod.H
+def _screw_top(mod, kind):
+    """Where the lid screws' heads sit: on the trackball, on its cover."""
+    import module_shell as M
+    return M.CHOC_TOP + mod.COVER_T if kind == "trackball" else mod.H
 
 
 def _shown(mod, kind, name, m, L):
@@ -183,13 +185,18 @@ def _sensor_screws(L):
     return out
 
 
-def _module(kind, switch="choc"):
+def _cover(mod, kind, L, up=(0, 0, 0), rgb=None):
+    """The trackball's cover over its lid; the other modules have none."""
+    return [(mod.cover(L).translate(up), rgb or vrml.CASE)] if kind == "trackball" else []
+
+
+def _module(kind):
     """A module as built (dock frame) as (solid, rgb): lid, tray, bump-ons, magnets, parts. No screws, as on
     the halves: the closed module's fasteners are hidden in its lid and tray, and the exploded views show them."""
     import module_shell as M
-    mod, L, lid, tray, ps = _built(kind, switch)
+    mod, L, lid, tray, ps = _built(kind)
     out = [(lid, vrml.CASE), (tray, vrml.CASE), (M.bumpons(), vrml.PAD), (_module_magnets(M), vrml.METAL),
-           (M.floor_magnet(), vrml.METAL)]
+           (M.floor_magnet(), vrml.METAL)] + _cover(mod, kind, L)
     for name, m in ps:
         m = _shown(mod, kind, name, m, L)
         if name == "nice!nano":
@@ -200,10 +207,11 @@ def _module(kind, switch="choc"):
             out.append((receptacle - opening, vrml.METAL))
             m -= receptacle
         out.append((m, _colour(name)))
-    return out, _height(mod, kind, switch)
+    return out
 
 
 LID_RGB, TRAY_RGB, SCREW_RGB = (.72, .76, .8), (.08, .48, .68), (.9, .47, .08)
+COVER_RGB = (.36, .42, .5)
 UP = {"ball", "bearing", "keycap", "MX", "CHOC", "pad"}
 
 
@@ -211,25 +219,28 @@ def _on_lid(name):
     return name.split(" ")[0] in UP or name.startswith("pad")
 
 
-def module_assembly(kind, switch="choc"):
+def module_assembly(kind):
     """Lid lifted 30 mm off the populated tray with its keys, screws 12 mm over it. No wires drawn."""
     import module_shell as M
-    mod, L, lid, tray, ps = _built(kind, switch)
+    mod, L, lid, tray, ps = _built(kind)
     up = (0, 0, 30)
     out = [(lid.translate(up), vrml.CASE), (tray, vrml.CASE), (M.bumpons(), vrml.PAD), (_module_magnets(M), vrml.METAL),
-           (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(_height(mod, kind, switch), 42), vrml.METAL), (_sensor_screws(L), vrml.METAL)]
+           (M.floor_magnet(), vrml.METAL), (M.lid_fasteners(_screw_top(mod, kind), 66 if kind == "trackball" else 42), vrml.METAL),
+           (_sensor_screws(L), vrml.METAL)] + _cover(mod, kind, L, (0, 0, 52))
     for name, solid in ps:
         solid = _shown(mod, kind, name, solid, L)
         out.append((solid.translate(up) if _on_lid(name) else solid, _colour(name)))
     return out
 
 
-def module_instruction_scenes(kind, switch="choc"):
+def module_instruction_scenes(kind):
     """Engineering views in contrast colours: the real printed parts, nothing sectioned."""
     import module_shell as M
-    mod, L, lid, tray, ps = _built(kind, switch)
-    structure = [(lid.translate((0, 0, 24)), LID_RGB), (tray, TRAY_RGB), (M.lid_fasteners(_height(mod, kind, switch), 38), SCREW_RGB)]
-    seam = [(lid, LID_RGB), (tray, TRAY_RGB)]
+    mod, L, lid, tray, ps = _built(kind)
+    structure = [(lid.translate((0, 0, 24)), LID_RGB), (tray, TRAY_RGB),
+                 (M.lid_fasteners(_screw_top(mod, kind), 60 if kind == "trackball" else 38), SCREW_RGB)]
+    structure += _cover(mod, kind, L, (0, 0, 46), COVER_RGB)
+    seam = [(lid, LID_RGB), (tray, TRAY_RGB)] + _cover(mod, kind, L, rgb=COVER_RGB)
     populated = [(tray, TRAY_RGB), (M.floor_magnet(), vrml.METAL), (_sensor_screws(L), SCREW_RGB)]
     for label, solid in ps:
         if not _on_lid(label):
@@ -251,7 +262,7 @@ def module_instruction_scenes(kind, switch="choc"):
             (lid.translate((0, 0, 42)), LID_RGB),
             (dict(ps)["pad"].translate((0, 0, 34)), vrml.PAD),
             (dict(ps)["pad's back parts"].translate((0, 0, 34)), PCB_GREEN),
-            (M.lid_fasteners(_height(mod, kind, switch), 56), SCREW_RGB),
+            (M.lid_fasteners(_screw_top(mod, kind), 56), SCREW_RGB),
         ]
         views["holder"] += [(tab.translate((0, 0, 24)), (.16, .72, .45)) for tab in mod.retainers(L)]
         views["holder"] += [(screw.translate((0, 0, 5)), SCREW_RGB) for screw in mod.retainer_screws(L)]
@@ -319,7 +330,7 @@ def module_scenes(k):
     plan = C.real
     scenes = {}
     for kind in ("trackball", "trackpad"):
-        parts, height = _module(kind)
+        parts = _module(kind)
         scenes[kind] = [(plan(m), rgb) for m, rgb in parts]
         scenes[kind + "_rear"] = scenes[kind]
         scenes[kind + "_assembly"] = [(plan(m), rgb) for m, rgb in module_assembly(kind)]
@@ -336,12 +347,6 @@ def module_scenes(k):
         half = [(plan(flat(plan(m)).translate((n[0] * shift, n[1] * shift, 0))), rgb)
                 for m, rgb in left_half() + [(C.pads(0), vrml.PAD)]]
         scenes[kind + "_with_half"] = scenes[kind] + half
-        if kind == "trackball":      # the trackball is shown with its Choc lid; the MX lid is the alternative
-            mx_parts, _ = _module(kind, "mx")
-            scenes["trackball_mx"] = [(plan(m), rgb) for m, rgb in mx_parts]
-            scenes["trackball_mx_assembly"] = [(plan(m), rgb) for m, rgb in module_assembly(kind, "mx")]
-            for label, solids in module_instruction_scenes(kind, "mx").items():
-                scenes["trackball_mx_" + label] = [(plan(m), rgb) for m, rgb in solids]
         connected = parts + _usb_parts(kind)
         scenes[kind + "_usb"] = [(plan(m), rgb) for m, rgb in connected]
         cut = [(m.trim_by_plane((-1, 0, 0), 0.0), rgb) for m, rgb in parts]
@@ -353,7 +358,7 @@ def module_scenes(k):
     # Alternative controller: actual published Seeed reference mesh, not the nano envelope.
     from trackball import trackball as B
     from trackball.controllers import xiao, xiao_usb_z
-    mod, L, lid, tray, ps = _built('trackball', 'choc')
+    mod, L, lid, tray, ps = _built('trackball')
     floor = B.SOCKET_BOT - B.NANO_GAP - B.NANO[2]
     controller = xiao(B.xiao_back(L), floor)
     stack = [(tray, TRAY_RGB), (controller, vrml.METAL)]
@@ -362,7 +367,7 @@ def module_scenes(k):
             stack.append((solid, _colour(label)))
     stack.append((B.stacking_pins(L), vrml.METAL))
     scenes['trackball_xiao_stack'] = [(plan(m), rgb) for m, rgb in stack]
-    populated = [(tray, TRAY_RGB), (lid, LID_RGB), (controller, vrml.METAL)] + [
+    populated = [(tray, TRAY_RGB), (lid, LID_RGB), (controller, vrml.METAL)] + _cover(mod, 'trackball', L, rgb=COVER_RGB) + [
         (solid, _colour(label)) for label, solid in ps if label != 'nice!nano']
     cut = [(m.trim_by_plane((-1, 0, 0), 0), rgb) for m, rgb in populated]
     plug = M.usb_connection(B.xiao_back(L), xiao_usb_z(floor))
@@ -495,7 +500,7 @@ def main():
                   "insulated carrier": (.8, .8, .75), "cell adhesive": (.8, .8, .75)}
         electronics = [(solid, colors.get(label, vrml.XIAO_PCB)) for label, solid in parts]
         dock[name] = [(C.real(m), rgb) for m, rgb in common + electronics +
-                      [(lid, LID_RGB), (M.lid_fasteners(G.H), SCREW_RGB)]]
+                      [(lid, LID_RGB), (M.lid_fasteners(G.height(oled)), SCREW_RGB)]]
         # Separate the removable pack and carrier from the populated tray,
         # with the OLED (when fitted) staying with its lid. Omit wire keepouts.
         lid_lift, pack_lift = 55, 28
@@ -505,7 +510,7 @@ def main():
                              for label, m in parts if label not in ("battery lead exit", "OLED connector envelope")]
         dock[name + "_structure"] = [(C.real(m), rgb) for m, rgb in exploded +
                                      [(lid.translate((0, 0, lid_lift)), LID_RGB),
-                                      (M.lid_fasteners(G.H, lid_lift + 12), SCREW_RGB)]]
+                                      (M.lid_fasteners(G.height(oled), lid_lift + 12), SCREW_RGB)]]
         for key in (name, name + "_structure"):
             scenes[key] = {"speck": [0.0, 55.0], "z": -1.5, "size": 100.0}
     dock["independent_tenting"] = independent_tenting()

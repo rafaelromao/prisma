@@ -38,6 +38,12 @@ def lid():
         box(-99, -200, 99, -22))
     body += M.K.module_front(M.extrude(roof, M.FLUSH - ROOF_EXTRA, M.FLUSH + .01),
                              M.P, M.WALL + M.LID_CLR)
+    # The power switch's pocket and lever slot: unused by the placeholder, needed when this
+    # lid closes the headless dongle (dongle.py), which has no lid of its own.
+    L = B.place()
+    back, front = L["back"], B.main_board_plan(L).bounds[3]
+    body -= B.box3(-2.5, back - M.WALL - 1.5, B.PCB_TOP, 2.5, back + 1.5, B.PCB_TOP + 2.6)
+    body -= B.box3(-3.55, front - 3.35, B.PCB_TOP - .01, 3.55, front - .25, B.PCB_TOP + 1.55)
     return M.lid_holes(M.bevel(body, H), H) - diamond()
 
 

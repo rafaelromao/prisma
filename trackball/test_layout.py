@@ -15,18 +15,14 @@ else:
 class LayoutTest(unittest.TestCase):
     def test_rearward_keys_retain_a_closed_plate_rim(self):
         layout = T.place()
-        for name, spec in (("mx", T.MX), ("choc", T.CHOC)):
-            width = T.MX_CUT if name == "mx" else T.CHOC_CUT
-            height = T.PCB_TOP + spec["below_plate"]
-            inset = min(max(height - T.M.FLUSH, 0), T.M.UPPER_BEVEL)
-            top = T.M.OUTLINE.buffer(-inset, join_style=2)
-            reach = T.SM.GROOVE_REACH if name == "choc" else 0     # the Choc lids' grooves run along y
-            for x, y in layout["keys"]:
-                cut = box(x - width / 2, y - width / 2 - reach,
-                           x + width / 2, y + width / 2 + reach)
-                with self.subTest(switch=name, key_y=y):
-                    self.assertTrue(top.buffer(-.7, join_style=2).covers(cut),
-                                    "switch aperture breaks out of the plate rim")
+        height = T.PCB_TOP + T.CHOC["below_plate"]
+        inset = min(max(height - T.M.FLUSH, 0), T.M.UPPER_BEVEL)
+        top = T.M.OUTLINE.buffer(-inset, join_style=2)
+        width, reach = T.CHOC_CUT, T.SM.GROOVE_REACH           # the pull grooves run along y
+        for x, y in layout["keys"]:
+            cut = box(x - width / 2, y - width / 2 - reach, x + width / 2, y + width / 2 + reach)
+            with self.subTest(key_y=y):
+                self.assertTrue(top.buffer(-.7, join_style=2).covers(cut), "switch aperture breaks out of the plate rim")
 
     def test_controller_retains_rear_usb_and_floor_service_clearance(self):
         layout = T.place()
@@ -61,22 +57,19 @@ class LayoutTest(unittest.TestCase):
             self.assertLess(min(abs(y - r) for r in rows), 1e-6)
             self.assertIn(round(abs(float(x)), 3), (T.PAD_X, T.LINK_PAD))
         self.assertEqual(len({p for p in close}), 9)
-        for spec_name in ("mx", "choc"):
-            parts = dict(T.parts(layout, main_plan, T.sensor_board_plan(layout), spec_name))
-            for x, y in close + pads["bat"]:
-                joint = T.M.extrude(Point(x, y).buffer(.8), T.PCB_TOP, T.PCB_TOP + .5)
-                with self.subTest(switch=spec_name, joint=(x, y)):
-                    self.assertLess(abs((joint ^ T.lid(layout, spec_name)).volume()), 1e-3)
+        parts = dict(T.parts(layout, main_plan, T.sensor_board_plan(layout)))
+        for x, y in close + pads["bat"]:
+            joint = T.M.extrude(Point(x, y).buffer(.8), T.PCB_TOP, T.PCB_TOP + .5)
+            with self.subTest(joint=(x, y)):
+                self.assertLess(abs((joint ^ T.lid(layout)).volume()), 1e-3)
 
-    def test_mx_and_choc_share_the_boards_and_the_tray(self):
+    def test_the_lid_fits_the_shared_boards_and_tray(self):
         layout = T.place()
         main_plan, sensor_plan = T.main_board_plan(layout), T.sensor_board_plan(layout)
-        tray = T.tray(layout)
-        for switch, spec in (("mx", T.MX), ("choc", T.CHOC)):
-            lid = T.lid(layout, switch)
-            parts = T.parts(layout, main_plan, sensor_plan, switch)
-            T.M.check_common(switch, lid, tray, parts)
-            T.M.check_dock_and_desk(lid, tray, T.PCB_TOP + spec["below_plate"], parts)
+        tray, lid = T.tray(layout), T.lid(layout)
+        parts = T.parts(layout, main_plan, sensor_plan)
+        T.M.check_common("choc", lid, tray, parts)
+        T.M.check_dock_and_desk(lid, tray, T.M.CHOC_TOP, parts)
 
     def test_boards_stand_far_apart_on_the_panel(self):
         layout = T.place()

@@ -309,12 +309,12 @@ main img { cursor: zoom-in; }
     <h2>A trackball or a trackpad, in the drawer</h2>
     <p>Two ZMK pointing modules that slide into the dock's drawer or snap onto a half on the desk. They are built like a half: a tray, a lid, and the same M3 × 8 flat-head screws from the top. Tray, main board, battery, power switch and reset button are shared. The controller, a nice!nano v2 or a plain XIAO nRF52840, sits on its own small board under the main board.</p>
     <p>The <a href="DRAWER_INTERFACE.md">common drawer interface</a> also fits the powered dongle and the <a href="stls/placeholder_lid.stl">passive lid</a>. The passive module has no electronics, sits 1.0 mm above the halves’ edges, and restores the original diamond on its top. Every variant’s shared tray carries the PRISMA wordmark recessed across its front facets. <a href="PLACEHOLDER_LID.md">Physical qualification is still required</a>.</p>
-    <p><strong>Powered central dongle prototype:</strong> XIAO nRF52840 with a protected 500 mAh battery, USB-C, power and reset on the unchanged tray and PCB panel. CAD exports: <a href="stls/dongle_lid.stl">plain lid</a> or <a href="stls/dongle_oled_lid.stl">OLED lid</a>. Both firmware variants compile; physical verification is still required. See the <a href="DONGLE.md">wiring and qualification guide</a> and the <a href="https://github.com/rafaelromao/keyboards/pull/41">firmware companion PR</a>.</p>
-    <figure><img src="renders/dongle_oled.png" alt="The Prisma common drawer tray with a recessed OLED in its lid" width="1600" height="1200" loading="lazy"><figcaption>OLED dongle prototype on the common tray. The headless version uses a closed lid.</figcaption></figure>
-    <figure><img src="renders/trackball_structure.png" alt="Trackball module with the grey lid raised off the blue tray and four orange screws above it" width="1600" height="1280" loading="lazy"><figcaption>Lid, tray and four M3 × 8 screws from the top.</figcaption></figure>
+    <p><strong>Powered central dongle prototype:</strong> XIAO nRF52840 with a protected 500 mAh battery, USB-C, power and reset on the unchanged tray and PCB panel. CAD exports: headless, the <a href="stls/placeholder_lid.stl">passive lid</a> itself; with a display, the <a href="stls/dongle_oled_lid.stl">OLED lid</a>. Both firmware variants compile; physical verification is still required. See the <a href="DONGLE.md">wiring and qualification guide</a> and the <a href="https://github.com/rafaelromao/keyboards/pull/41">firmware companion PR</a>.</p>
+    <figure><img src="renders/dongle_oled.png" alt="The Prisma common drawer tray with a recessed OLED in its lid" width="1600" height="1200" loading="lazy"><figcaption>OLED dongle prototype on the common tray. The headless version uses the passive lid.</figcaption></figure>
+    <figure><img src="renders/trackball_structure.png" alt="Trackball module with the cover and the grey lid raised off the blue tray and four orange screws above them" width="1600" height="1280" loading="lazy"><figcaption>Cover, lid, tray and four M3 × 8 screws from the top.</figcaption></figure>
     <p>Three side magnets per side use every other position in the halves' six-magnet row, and one disc in the module's floor mates with the drawer floor. To remove a module, push its rear hood forwards through the dock's rear passage.</p>
-    <p><strong>Trackball:</strong> a 34 mm ball and PMW3610 sensor, with two Choc v1 hot-swap keys on one shared PCB: the same switches and caps as the halves. The PCB also takes MX sockets; populate one socket family and print the matching lid.</p>
-    <figure><img src="renders/trackball_mx.png" alt="MX trackball case with taller switches, sharing the Choc variant's PCB" width="1600" height="1200" loading="lazy"><figcaption>The MX lid: same tray and boards.</figcaption></figure>
+    <p><strong>Trackball:</strong> a 34 mm ball and PMW3610 sensor, with two Choc v1 hot-swap keys on one shared PCB: the same switches and caps as the halves. A <a href="stls/trackball_cover.stl">cover</a> over the lid, on the same four screws, keeps the ball in.</p>
+    <figure><img src="renders/trackball.png" alt="Trackball module with the cover's faceted collar round the ball and the two keycaps behind it" width="1600" height="1200" loading="lazy"><figcaption>The cover's collar closes above the ball's equator.</figcaption></figure>
     <p><strong>Trackpad:</strong> a 40 mm Cirque in the lid, with its supplied I²C breakout and flat cable. Four wires run from the main board to the breakout and a separate DR wire to the Cirque's underside. Space is reserved for the breakout and cable with no printed holder; check your kit's dimensions against the build guide.</p>
     <figure><img src="renders/trackpad_structure.png" alt="Bare trackpad lid raised off the blue tray" width="1600" height="1200" loading="lazy"><figcaption>The bare trackpad lid and common tray. The pad and its underside hardware are omitted in this view.</figcaption></figure>
     <figure><img src="renders/trackpad_holder.png" alt="Exploded Cirque assembly showing the pad, the green horseshoe holder and its two screws beneath the lid" width="1600" height="1200" loading="lazy"><figcaption>Cirque holder detail: one horseshoe screws into the underside of the lid and supports the pad round its front and sides.</figcaption></figure>
@@ -333,11 +333,10 @@ main img { cursor: zoom-in; }
     <h3>Exploded views: all drawer modules</h3>
     <p>Each variant uses the same tray and four M3 × 8 lid screws. Wiring is omitted for clarity.</p>
     <div class="grid2">
-      <figure><img src="renders/trackball_assembly.png" alt="Choc trackball lid, ball and keys lifted above the populated tray" width="1600" height="1200" loading="lazy"><figcaption>Trackball, Choc v1</figcaption></figure>
-      <figure><img src="renders/trackball_mx_assembly.png" alt="MX trackball lid, ball and taller keys lifted above the populated tray" width="1600" height="1200" loading="lazy"><figcaption>Trackball, MX</figcaption></figure>
+      <figure><img src="renders/trackball_assembly.png" alt="Trackball cover, ball, lid and keys lifted above the populated tray" width="1600" height="1200" loading="lazy"><figcaption>Trackball, with its cover</figcaption></figure>
       <figure><img src="renders/trackpad_assembly.png" alt="Trackpad lid with pad and keys lifted above the populated tray" width="1600" height="1200" loading="lazy"><figcaption>Trackpad: the hidden holder stays with the lid.</figcaption></figure>
       <figure><img src="renders/placeholder_structure.png" alt="Passive lid with its engraved diamond lifted above a common tray with no electronics" width="1600" height="1200" loading="lazy"><figcaption>Passive drawer: no electronics; the original diamond returns to the lid.</figcaption></figure>
-      <figure><img src="renders/dongle_headless_structure.png" alt="Headless dongle with a plain lid above the lifted battery and carrier and populated tray" width="1600" height="1200" loading="lazy"><figcaption>Headless dongle: plain lid, 500 mAh battery and insulated carrier.</figcaption></figure>
+      <figure><img src="renders/dongle_headless_structure.png" alt="Headless dongle with the passive lid above the lifted battery and carrier and populated tray" width="1600" height="1200" loading="lazy"><figcaption>Headless dongle: the passive lid, 500 mAh battery and insulated carrier.</figcaption></figure>
       <figure><img src="renders/dongle_oled_structure.png" alt="OLED dongle with the display in the lifted lid above the battery and carrier and populated tray" width="1600" height="1200" loading="lazy"><figcaption>OLED dongle: the display lifts with the lid.</figcaption></figure>
     </div>
   </section>
@@ -537,7 +536,13 @@ buy for the halves.</p>
 <td>Printed lid</td>
 <td>1</td>
 <td></td>
-<td><code>trackball/case/lid.stl</code> (MX), <code>trackball/case/lid_choc.stl</code> (Choc v1) or <code>trackpad/case/lid.stl</code></td>
+<td><code>trackball/case/lid_choc.stl</code> (trackball) or <code>trackpad/case/lid.stl</code></td>
+</tr>
+<tr>
+<td>Printed ball cover, <code>trackball/case/cover.stl</code> (trackball only)</td>
+<td>1</td>
+<td></td>
+<td>Print as exported, plate down. Held by the lid's four M3 × 8 screws</td>
 </tr>
 <tr>
 <td>PCB, <code>trackball/fab/trackball_jlcpcb.zip</code></td>
@@ -642,10 +647,10 @@ buy for the halves.</p>
 <td>Values as siderakb's PMW3610 board (CERN-OHL-P), which this circuit follows</td>
 </tr>
 <tr>
-<td>MX switches + Kailh MX sockets + 1u DSA caps, <strong>or</strong> Choc v1 switches + Choc sockets + caps</td>
+<td>Choc v1 switches, Choc hot-swap sockets and compact caps</td>
 <td>2 each</td>
-<td><code>Kailh MX hotswap socket</code> / item 4</td>
-<td>Populate only one socket family. Choc v2 is not supported</td>
+<td>items 3, 4 and 5</td>
+<td>Caps 17.5 × 16.5 mm. Leave the board's MX socket pads empty: there is no MX lid. Choc v2 is not supported</td>
 </tr>
 <tr>
 <td>34 mm trackball, 3 mm Si3N4 balls</td>
@@ -702,7 +707,7 @@ or epoxy for the magnets, thin card for the sensor's
 shims, and a 1.8 mm insulating spacer/tape stack for the I²C breakout (no printed holder).</p>
 <p>Soldering, assembly and printing: see <a href="#build">BUILD.md</a>.</p>
 <h3>Powered central dongle (draft)</h3>
-<p>Add one unchanged three-board pointing panel, genuine XIAO nRF52840 and existing links, MSK-12C02, TS-1187A, protected 500 mAh 1S pack, removable dielectric carrier/adhesive, common tray, four M3 × 8 lid screws, two qualified reset-board screws/shims, seven magnets and three bump-ons. Omit all pointing sensors, sockets, keys and optical parts. Optional Waveshare 14657 128×32 SSD1306 OLED, insulated four-wire harness and removable retention tape. Choose the <a href="stls/dongle_lid.stl">plain lid</a> or <a href="stls/dongle_oled_lid.stl">OLED lid</a>. See <a href="DONGLE.md">DONGLE.md</a> for dimensions and required physical qualification. Dongle quantities are additional to the existing totals.</p>
+<p>Add one unchanged three-board pointing panel, genuine XIAO nRF52840 and existing links, MSK-12C02, TS-1187A, protected 500 mAh 1S pack, removable dielectric carrier/adhesive, common tray, four M3 × 8 lid screws, two qualified reset-board screws/shims, seven magnets and three bump-ons. Omit all pointing sensors, sockets, keys and optical parts. Optional Waveshare 14657 128×32 SSD1306 OLED, insulated four-wire harness and removable retention tape. Headless, use the <a href="stls/placeholder_lid.stl">placeholder lid</a> as it is; with a display, the <a href="stls/dongle_oled_lid.stl">OLED lid</a>. See <a href="DONGLE.md">DONGLE.md</a> for dimensions and required physical qualification. Dongle quantities are additional to the existing totals.</p>
 <!-- /BOM.md -->
     </div>
   </section>
@@ -1028,8 +1033,8 @@ time. Both halves use the same PCB, turned over for the right half.</p>
 </ul>
 <p><strong>Passive placeholder:</strong> For a prototype, print the common tray (or reuse an empty one) and the top-down <code>case/placeholder_lid.stl</code>. Fit six side magnets, one floor magnet and three bump-ons exactly as for a pointing module. Leave the existing rear USB/power and underside reset passages empty; there are no live parts to expose or extra cutouts in the lid. Fit the rear hooks first, lower the front, then secure four M3 × 8 flat-head screws flush, without overtightening. The top carries the original joined-board diamond in 0.6 mm sunk lines and is 1.0 mm above the halves' edges to keep the standard screws from bottoming in the tray. The hollow assembly does not inherit the retired solid insert's load capacity. Check lid flex, screw retention, feet, magnet retention and dock/desk fit before relying on it for lap use. See <a href="PLACEHOLDER_LID.md">qualification and regeneration</a>.</p>
 <h3 id="b-pointing-modules">Pointing modules</h3>
-<p>Both modules are built the same way as a half: a <strong>tray</strong>, a <strong>lid</strong>, and the same <strong>M3 × 8 flat-head screws</strong> going in from the top. The tray is one print, shared by all of them; its three front facets carry a 35 × 8 mm <strong>PRISMA wordmark</strong> recessed 0.4 mm, so every module shows it. Only the lid changes: <code>trackball/case/lid.stl</code> (MX), <code>trackball/case/lid_choc.stl</code> (Choc v1) or <code>trackpad/case/lid.stl</code>.</p>
-<p>The first row of renders is the trackball with its Choc lid, the second the same module with the MX lid, the third the trackpad.
+<p>Both modules are built the same way as a half: a <strong>tray</strong>, a <strong>lid</strong>, and the same <strong>M3 × 8 flat-head screws</strong> going in from the top. The tray is one print, shared by all of them; its three front facets carry a 35 × 8 mm <strong>PRISMA wordmark</strong> recessed 0.4 mm, so every module shows it. Only the lid changes: <code>trackball/case/lid_choc.stl</code> (trackball) or <code>trackpad/case/lid.stl</code>. The trackball adds a cover over its lid, <code>trackball/case/cover.stl</code>, whose collar keeps the ball in.</p>
+<p>The first row of renders is the trackball with its cover, the second the trackpad.
 See the <a href="index.html#drawer-exploded">exploded-view gallery</a> for the populated pointing modules,
 the passive lid, and both powered dongles (headless and OLED).</p>
 <p>The raised lid has upper facets on its <strong>front and both sides</strong>, starting at the halves' top-surface height. Below that height the front keeps the drawer's matching profile for horizontal removal.</p>
@@ -1046,10 +1051,6 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 <td><img alt="" src="renders/trackball_seam.png" /></td>
 </tr>
 <tr>
-<td><img alt="" src="renders/trackball_mx_structure.png" /></td>
-<td><img alt="" src="renders/trackball_mx_seam.png" /></td>
-</tr>
-<tr>
 <td><img alt="" src="renders/trackpad_structure.png" /></td>
 <td><img alt="" src="renders/trackpad_seam.png" /></td>
 </tr>
@@ -1063,7 +1064,7 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 <h3 id="b-boards">Boards</h3>
 <ol>
 <li><strong>Snap the panel.</strong> The main board and sensor board are joined by one long bridge with a row of holes at each end, and the controller board hangs off the sensor board's side, a quarter turn round, on a short tab with a row of holes at each end of its own. The tab meets it in its USB notch. Snap the controller board's tab first, then the bridge: hold a board in one hand and the bridge in the other (pliers help) and bend at the row of holes until it snaps. File off the stubs.</li>
-<li><strong>Main board.</strong> Solder the MSK-12C02 power switch on the front face (the side marked <code>MCU BOARD BELOW</code>), with its lever over the rear edge. Solder one family of hot-swap sockets on the back face: Kailh MX for the MX lid, Choc for the Choc lid and the trackpad. Never both.</li>
+<li><strong>Main board.</strong> Solder the MSK-12C02 power switch on the front face (the side marked <code>MCU BOARD BELOW</code>), with its lever over the rear edge. Solder the Choc hot-swap sockets on the back face. Leave the MX socket pads empty.</li>
 <li><strong>Sensor board, trackball.</strong> Solder the regulator, capacitors, resistor and TS-1187A reset button on the back face, the PMW3610 in its cut-out, and clip on the lens.</li>
 <li>
 <p><strong>Sensor board, trackpad.</strong> Solder only the TS-1187A reset button, on the back face.</p>
@@ -1290,8 +1291,8 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 <li><strong>Trackpad only.</strong> Confirm the actual pad has a component-free underside perimeter and an inactive overlay edge. With the lid off and face down, drop the pad into the pocket from below, overlay toward the opening. Print <code>trackpad/case/retainer.stl</code> once, flat bottom down as exported: one horseshoe-shaped holder. Lower it over the back of the pad with its open end toward the keys, and secure it to the two blind lid bosses with two <strong>M3 × 4 mm pan-head screws</strong> (under-head length; head ≤5.5 mm diameter, ≤2.0 mm height), never enclosure screws. The heads sit about 7.5 mm down in their holes, so use a slim screwdriver. The holder seats against the bosses, not against the pad. Verify at least 2.6 mm engagement, 0.4 mm tip clearance, adequate pull-out strength and slight free play (0.1 mm nominal); do not clamp or flex the sensor. No adhesive is needed. For service, unplug power, lift the lid, release the cable as needed, remove the holder, and withdraw the pad from underneath. Reserve <strong>24 × 18 × 4.5 mm</strong> for the breakout, including connector, resistors and solder joints. Set it on a <strong>1.8 mm insulating spacer</strong> above the sensor PCB; check clearance over the screw heads before securing it. Keep the original flat cable in its reserved 7 mm-wide bend corridor, with slack to lift the lid. Route the separate DR lead beside it and the four breakout wires to the main board. Check the actual bend radius and wired closure; do not sharply fold or trap the FFC.</li>
 <li><strong>Trackball only.</strong> Glue the three ceramic balls into the lid's cup, seated fully in their pockets: they carry the ball 30° below its equator. Use a lid printed from the current files; earlier lids held them at 40°, where a sideways push unseated the ball more easily.</li>
 <li><strong>Lid.</strong> Rear first: tilt the lid, push its two rear hooks into the slots in the back wall, then lower the front. It locates on the tray's rim.</li>
-<li><strong>Four M3 × 8 screws</strong> into the lid's countersinks, as on a half: they go into the tray's four posts. Turn them in slowly, and stop when the heads sit flush.</li>
-<li>Clip the switches through the lid into the sockets, fit the keycaps, and drop the ball in. On the trackpad, use <strong>17.5 × 16.5 mm compact Choc caps</strong>. Conventional twin-stem caps rotate with the switch, putting <strong>17.5 mm front-to-back</strong> here; do not assume they can turn independently. Verify full key travel and wobble without contact. Use the current tray and lid together: the front screw pair leaves a 2.087 mm screw-to-pad-pocket web. Tighten only to flush, never to force a distorted lid flat. Before use, verify that the pad cannot escape in any direction, the overlay has no clamp load, the screws cannot reach the sensor or wiring, and the lid closes without snagging the DR lead or FFC. Test pointing and taps near the rim, plus sleep and wake. CAD clearance is not a physical qualification.</li>
+<li><strong>Four M3 × 8 screws</strong>, into the tray's four posts. Trackpad: straight into the lid's countersinks. Trackball: first rest the ball in its cup, then lower the cover over it onto the lid, and put the screws through the cover's countersinks. Turn them in slowly, and stop when the heads sit flush. Through the cover they bite 4 mm rather than 6, so do not overtighten.</li>
+<li>Clip the switches through the lid into the sockets and fit the keycaps. Use <strong>17.5 × 16.5 mm compact Choc caps</strong> on both modules; the trackball cover's openings leave 1 mm round them. Conventional twin-stem caps rotate with the switch, putting <strong>17.5 mm front-to-back</strong> here; do not assume they can turn independently. Verify full key travel and wobble without contact. Use the current tray and lid together: the front screw pair leaves a 2.087 mm screw-to-pad-pocket web. Tighten only to flush, never to force a distorted lid flat. Before use, verify that the pad cannot escape in any direction, the overlay has no clamp load, the screws cannot reach the sensor or wiring, and the lid closes without snagging the DR lead or FFC. Test pointing and taps near the rim, plus sleep and wake. CAD clearance is not a physical qualification.</li>
 </ol>
 <p>Stick three 8 × 2 mm bump-ons into the floor's recesses.</p>
 <h3 id="b-installing-the-cirque-holder">Installing the Cirque holder</h3>
@@ -1353,7 +1354,7 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 </tr>
 </tbody>
 </table></div>
-<p>Take it out of the dock, unplug USB, switch it off, and take off the keycaps and ball. Undo the four lid screws and tilt the lid up from the front. The main board stays: it is soldered to the eight stacking pins, so desolder them to take it out. On the trackpad the lid remains attached by the supplied flat cable and the separate DR wire; support it without pulling either, and release the FFC latch if the available slack is insufficient.</p>
+<p>Take it out of the dock, unplug USB, switch it off, and take off the keycaps. Undo the four lid screws; on the trackball lift off the cover and take out the ball. Tilt the lid up from the front. The main board stays: it is soldered to the eight stacking pins, so desolder them to take it out. On the trackpad the lid remains attached by the supplied flat cable and the separate DR wire; support it without pulling either, and release the FFC latch if the available slack is insufficient.</p>
 <h3 id="b-resetting-a-closed-half">Resetting a closed half</h3>
 <p><img alt="Assembled left half with the reset cone above the thumb keys" src="renders/full.png" /></p>
 <p>Press straight down into the cone above the thumbs with a fingertip (the pad, not the nail, is enough: the cone is 4.2 mm across at the top and the plunger 2.0 mm wide).</p>
@@ -1365,17 +1366,17 @@ the passive lid, and both powered dongles (headless and OLED).</p>
 <p>Switch mounts: see <a href="SWITCH_MOUNT_RESEARCH.md">SWITCH_MOUNT_RESEARCH.md</a> for the
 manufacturer drawings and qualification limits. All Choc v1 retaining plates use
 1.2 mm thickness, a 2.2 mm PCB-to-plate-top stack and 14.0 mm CAD apertures.
-The MX lid uses 1.5 mm thickness, a 5.0 mm stack and 14.2 mm CAD apertures.
 The opening allowances are provisional FDM compensation, not manufacturer tolerances.
 Measure finished openings and verify both switch clips engage before installing electronics.
 Every Choc plate and lid also has two 4.0 mm pull grooves per switch, cut 1.2 mm past the opening
-on its latch edges; the MX lid has none. Check that a switch seats flat, resists a pull on its keycap,
+on its latch edges. Check that a switch seats flat, resists a pull on its keycap,
 and comes out with your puller (see "Taking a switch out").</p>
 <ul>
 <li><strong>Base:</strong> floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately <strong>14.6 mm</strong> and pad-slot roofs span <strong>8.6 mm</strong>. Inspect bridge direction, anchoring and sag with the intended PLA profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.</li>
 <li><strong>Plate:</strong> <strong>top face down</strong>: the STL is already oriented that way, with the pillars and screw bosses pointing up. The reset button's cone narrows upwards at 45° from the bed (4.2 mm to 2.8 mm over the first 0.7 mm) and needs no support. Print it solid, at 0.2 mm layers. The switch cutouts are 14.0 mm (13.8 mm + 0.1 mm per side); if your switches are loose or tight, change <code>cut_tol</code> in <code>design.py</code> and regenerate.</li>
 <li><strong>Module tray:</strong> floor down; the rear hood's underside is designed at 45°. Inspect the <strong>12.8 mm USB bridge</strong> and resulting sag clearance to the real plug/controller before assuming support-free printing. Use 4 walls: the screw posts and the 0.9 mm magnet backings carry the load.</li>
 <li><strong>Module lids:</strong> top face down; the trackball's cup grows out of the lid as it prints. The intended orientation is support-free.</li>
+<li><strong>Trackball cover:</strong> as exported, plate down, collar up. The collar leans in gently to its lip, so no support is intended.</li>
 <li>Review all module overhangs, particularly the rear hooks and cup, in the actual slicer. Check for continuous toolpaths around the trackpad rim. Support-free printing has not been physically verified; keep mating surfaces accessible if removable support is needed.</li>
 <li><strong>Dock:</strong> flat side down, with supports inside the stand-base pocket: its roof is at Z = 4.3 mm and has about <strong>5,900 mm²</strong> of downward-facing horizontal area. Inspect support-interface material, gap, density, access and removal in the actual slicer. Supports must be removable without damaging the pocket roof, magnet skins or fit surfaces. Measure the cleaned pocket against the actual base; it is not a support-free bridge.</li>
 <li><strong>Fit:</strong> nominal allowances include 0.35 mm round a module in the drawer, 0.3 mm round a half on the dock, 0.25 mm round a lid in its tray and 0.15 mm radially round a magnet. These are not guarantees against cumulative print error, warping or elephant foot. Calibrate shrinkage and elephant-foot compensation, and use the same filament and settings for mating parts. Check fits before installing electronics; careful local cleanup may be needed, and a successful first print is not guaranteed.</li>

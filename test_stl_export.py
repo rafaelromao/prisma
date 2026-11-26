@@ -35,8 +35,8 @@ class StlExportTest(unittest.TestCase):
                   "cover": insert.lid_print()}
         layout = B.place()
         solids["tray"] = B.tray(layout).translate((0, 0, -B.M.FEET))
-        for name, lid, height in (("mx", B.lid(layout, "mx"), B.H), ("choc", B.lid(layout, "choc"), B.M.CHOC_TOP),
-                                  ("trackpad", T.lid(T.place()), T.H)):
+        solids["trackball_cover"] = B.cover(layout).translate((0, 0, -B.M.CHOC_TOP))
+        for name, lid, height in (("choc", B.lid(layout), B.M.CHOC_TOP), ("trackpad", T.lid(T.place()), T.H)):
             solids[name] = lid.mirror((0, 0, 1)).translate((0, 0, height))
         solids["trackpad_retainer"] = T.retainer_print()
         for oled in (False, True):
@@ -45,7 +45,7 @@ class StlExportTest(unittest.TestCase):
         published = {"left": "case/case_left.stl", "right": "case/case_right.stl",
                      "plate_left": "case/plate_left.stl", "plate_right": "case/plate_right.stl",
                      "dock": "case/dock.stl", "cover": "case/placeholder_lid.stl",
-                     "tray": "case/module_tray.stl", "mx": "trackball/case/lid.stl",
+                     "tray": "case/module_tray.stl", "trackball_cover": "trackball/case/cover.stl",
                      "choc": "trackball/case/lid_choc.stl", "trackpad": "trackpad/case/lid.stl",
                      "trackpad_retainer": "trackpad/case/retainer.stl"}
         for oled in (False, True):

@@ -73,7 +73,7 @@ def pad_bottom():
 
 def parts(L, main_plan, sensor_plan):
     """The parts as solids, for the checks and the renders."""
-    out = [p for p in B.parts(L, main_plan, sensor_plan, "choc")
+    out = [p for p in B.parts(L, main_plan, sensor_plan)
            if not p[0].startswith(("ball", "bearing", "lens", "sensor's parts"))]
     px, py = L["pad"]
     pz = pad_bottom()
@@ -257,7 +257,7 @@ def _retainer_mounts(sh, L):
 
 
 def lid(L):
-    sh = B.lid(L, "choc", ball=False)
+    sh = B.lid(L, ball=False)
     # Small opening above a larger blind pocket: the pad is fitted from below.
     px, py = L["pad"]
     r = PAD["d"] / 2

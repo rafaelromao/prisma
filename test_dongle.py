@@ -2,6 +2,7 @@
 import unittest
 
 import dongle as D
+import insert
 import module_battery as MB
 import module_shell as M
 from trackball import trackball as B
@@ -21,9 +22,12 @@ class DongleTest(unittest.TestCase):
         self.assertLess(abs((a - b).volume()) + abs((b - a).volume()), 1e-3)
         self.assertNotIn("OLED", dict(D.parts(False)))
         self.assertIn("OLED", dict(D.parts(True)))
+        # The headless dongle has no lid of its own: it is the placeholder's, diamond and all.
+        passive = insert.lid()
+        self.assertEqual(D.paths(False), (insert.SOURCE, insert.PUBLIC))
+        self.assertLess(abs((D.lid(False) - passive).volume()) + abs((passive - D.lid(False)).volume()), 1e-3)
         aperture = M.extrude(D.rect(D.WINDOW_W - .2, D.WINDOW_L - .2, x=D.GLASS_X),
                              M.FLUSH + .1, D.H - .1)
-        self.assertAlmostEqual((D.lid(False) ^ aperture).volume(), aperture.volume(), delta=1e-3)
         self.assertLess(abs((D.lid(True) ^ aperture).volume()), 1e-3)
 
     def test_oled_bears_on_pcb_ends_not_glass_and_has_a_cell_gap(self):

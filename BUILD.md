@@ -211,9 +211,9 @@ Try it on one switch before the board is closed up, with your own puller: the gr
 
 ## Pointing modules
 
-Both modules are built the same way as a half: a **tray**, a **lid**, and the same **M3 × 8 flat-head screws** going in from the top. The tray is one print, shared by all of them; its three front facets carry a 35 × 8 mm **PRISMA wordmark** recessed 0.4 mm, so every module shows it. Only the lid changes: `trackball/case/lid.stl` (MX), `trackball/case/lid_choc.stl` (Choc v1) or `trackpad/case/lid.stl`.
+Both modules are built the same way as a half: a **tray**, a **lid**, and the same **M3 × 8 flat-head screws** going in from the top. The tray is one print, shared by all of them; its three front facets carry a 35 × 8 mm **PRISMA wordmark** recessed 0.4 mm, so every module shows it. Only the lid changes: `trackball/case/lid_choc.stl` (trackball) or `trackpad/case/lid.stl`. The trackball adds a cover over its lid, `trackball/case/cover.stl`, whose collar keeps the ball in.
 
-The first row of renders is the trackball with its Choc lid, the second the same module with the MX lid, the third the trackpad.
+The first row of renders is the trackball with its cover, the second the trackpad.
 See the [exploded-view gallery](index.html#drawer-exploded) for the populated pointing modules,
 the passive lid, and both powered dongles (headless and OLED).
 
@@ -222,7 +222,6 @@ The raised lid has upper facets on its **front and both sides**, starting at the
 | Bare enclosure, lid raised | Bare enclosure, closed |
 |---|---|
 | ![](renders/trackball_structure.png) | ![](renders/trackball_seam.png) |
-| ![](renders/trackball_mx_structure.png) | ![](renders/trackball_mx_seam.png) |
 | ![](renders/trackpad_structure.png) | ![](renders/trackpad_seam.png) |
 
 The same main board holds the two keys and the power switch on both modules. A battery and the controller, on its own small board, sit under it. The same sensor board holds the reset button at the front; on the trackpad it carries nothing else. Everything is hand-soldered with an iron: no paste or hot air. The trackpad retains its supplied I²C breakout and flat cable, plus a separate DR wire.
@@ -238,7 +237,7 @@ USB always plugs directly into the chosen MCU's **onboard USB-C receptacle**. Th
 ### Boards
 
 1. **Snap the panel.** The main board and sensor board are joined by one long bridge with a row of holes at each end, and the controller board hangs off the sensor board's side, a quarter turn round, on a short tab with a row of holes at each end of its own. The tab meets it in its USB notch. Snap the controller board's tab first, then the bridge: hold a board in one hand and the bridge in the other (pliers help) and bend at the row of holes until it snaps. File off the stubs.
-2. **Main board.** Solder the MSK-12C02 power switch on the front face (the side marked `MCU BOARD BELOW`), with its lever over the rear edge. Solder one family of hot-swap sockets on the back face: Kailh MX for the MX lid, Choc for the Choc lid and the trackpad. Never both.
+2. **Main board.** Solder the MSK-12C02 power switch on the front face (the side marked `MCU BOARD BELOW`), with its lever over the rear edge. Solder the Choc hot-swap sockets on the back face. Leave the MX socket pads empty.
 3. **Sensor board, trackball.** Solder the regulator, capacitors, resistor and TS-1187A reset button on the back face, the PMW3610 in its cut-out, and clip on the lens.
 4. **Sensor board, trackpad.** Solder only the TS-1187A reset button, on the back face.
 
@@ -346,8 +345,8 @@ Work in this order, power off, with the magnets already glued in. Before putting
 5. **Trackpad only.** Confirm the actual pad has a component-free underside perimeter and an inactive overlay edge. With the lid off and face down, drop the pad into the pocket from below, overlay toward the opening. Print `trackpad/case/retainer.stl` once, flat bottom down as exported: one horseshoe-shaped holder. Lower it over the back of the pad with its open end toward the keys, and secure it to the two blind lid bosses with two **M3 × 4 mm pan-head screws** (under-head length; head ≤5.5 mm diameter, ≤2.0 mm height), never enclosure screws. The heads sit about 7.5 mm down in their holes, so use a slim screwdriver. The holder seats against the bosses, not against the pad. Verify at least 2.6 mm engagement, 0.4 mm tip clearance, adequate pull-out strength and slight free play (0.1 mm nominal); do not clamp or flex the sensor. No adhesive is needed. For service, unplug power, lift the lid, release the cable as needed, remove the holder, and withdraw the pad from underneath. Reserve **24 × 18 × 4.5 mm** for the breakout, including connector, resistors and solder joints. Set it on a **1.8 mm insulating spacer** above the sensor PCB; check clearance over the screw heads before securing it. Keep the original flat cable in its reserved 7 mm-wide bend corridor, with slack to lift the lid. Route the separate DR lead beside it and the four breakout wires to the main board. Check the actual bend radius and wired closure; do not sharply fold or trap the FFC.
 6. **Trackball only.** Glue the three ceramic balls into the lid's cup, seated fully in their pockets: they carry the ball 30° below its equator. Use a lid printed from the current files; earlier lids held them at 40°, where a sideways push unseated the ball more easily.
 7. **Lid.** Rear first: tilt the lid, push its two rear hooks into the slots in the back wall, then lower the front. It locates on the tray's rim.
-8. **Four M3 × 8 screws** into the lid's countersinks, as on a half: they go into the tray's four posts. Turn them in slowly, and stop when the heads sit flush.
-9. Clip the switches through the lid into the sockets, fit the keycaps, and drop the ball in. On the trackpad, use **17.5 × 16.5 mm compact Choc caps**. Conventional twin-stem caps rotate with the switch, putting **17.5 mm front-to-back** here; do not assume they can turn independently. Verify full key travel and wobble without contact. Use the current tray and lid together: the front screw pair leaves a 2.087 mm screw-to-pad-pocket web. Tighten only to flush, never to force a distorted lid flat. Before use, verify that the pad cannot escape in any direction, the overlay has no clamp load, the screws cannot reach the sensor or wiring, and the lid closes without snagging the DR lead or FFC. Test pointing and taps near the rim, plus sleep and wake. CAD clearance is not a physical qualification.
+8. **Four M3 × 8 screws**, into the tray's four posts. Trackpad: straight into the lid's countersinks. Trackball: first rest the ball in its cup, then lower the cover over it onto the lid, and put the screws through the cover's countersinks. Turn them in slowly, and stop when the heads sit flush. Through the cover they bite 4 mm rather than 6, so do not overtighten.
+9. Clip the switches through the lid into the sockets and fit the keycaps. Use **17.5 × 16.5 mm compact Choc caps** on both modules; the trackball cover's openings leave 1 mm round them. Conventional twin-stem caps rotate with the switch, putting **17.5 mm front-to-back** here; do not assume they can turn independently. Verify full key travel and wobble without contact. Use the current tray and lid together: the front screw pair leaves a 2.087 mm screw-to-pad-pocket web. Tighten only to flush, never to force a distorted lid flat. Before use, verify that the pad cannot escape in any direction, the overlay has no clamp load, the screws cannot reach the sensor or wiring, and the lid closes without snagging the DR lead or FFC. Test pointing and taps near the rim, plus sleep and wake. CAD clearance is not a physical qualification.
 
 Stick three 8 × 2 mm bump-ons into the floor's recesses.
 
@@ -377,7 +376,7 @@ The power switch disconnects the battery from both controller and charger: **cha
 |---|---|
 | ![Trackpad docked with its USB-C plug](renders/trackpad_usb_dock.png) | ![Trackpad USB-C cutaway](renders/trackpad_usb_open.png) |
 
-Take it out of the dock, unplug USB, switch it off, and take off the keycaps and ball. Undo the four lid screws and tilt the lid up from the front. The main board stays: it is soldered to the eight stacking pins, so desolder them to take it out. On the trackpad the lid remains attached by the supplied flat cable and the separate DR wire; support it without pulling either, and release the FFC latch if the available slack is insufficient.
+Take it out of the dock, unplug USB, switch it off, and take off the keycaps. Undo the four lid screws; on the trackball lift off the cover and take out the ball. Tilt the lid up from the front. The main board stays: it is soldered to the eight stacking pins, so desolder them to take it out. On the trackpad the lid remains attached by the supplied flat cable and the separate DR wire; support it without pulling either, and release the FFC latch if the available slack is insufficient.
 
 ## Resetting a closed half
 
@@ -393,17 +392,17 @@ Press straight down into the cone above the thumbs with a fingertip (the pad, no
 Switch mounts: see [SWITCH_MOUNT_RESEARCH.md](SWITCH_MOUNT_RESEARCH.md) for the
 manufacturer drawings and qualification limits. All Choc v1 retaining plates use
 1.2 mm thickness, a 2.2 mm PCB-to-plate-top stack and 14.0 mm CAD apertures.
-The MX lid uses 1.5 mm thickness, a 5.0 mm stack and 14.2 mm CAD apertures.
 The opening allowances are provisional FDM compensation, not manufacturer tolerances.
 Measure finished openings and verify both switch clips engage before installing electronics.
 Every Choc plate and lid also has two 4.0 mm pull grooves per switch, cut 1.2 mm past the opening
-on its latch edges; the MX lid has none. Check that a switch seats flat, resists a pull on its keycap,
+on its latch edges. Check that a switch seats flat, resists a pull on its keycap,
 and comes out with your puller (see "Taking a switch out").
 
 - **Base:** floor-down; intended without supports, subject to bridge inspection in your slicer. The USB recess spans approximately **14.6 mm** and pad-slot roofs span **8.6 mm**. Inspect bridge direction, anchoring and sag with the intended PLA profile; add accessible removable support if necessary. For a quiet, solid base, use 4–5 walls and 40–100% infill (gyroid, or solid). More infill means less hollow sound and more weight.
 - **Plate:** **top face down**: the STL is already oriented that way, with the pillars and screw bosses pointing up. The reset button's cone narrows upwards at 45° from the bed (4.2 mm to 2.8 mm over the first 0.7 mm) and needs no support. Print it solid, at 0.2 mm layers. The switch cutouts are 14.0 mm (13.8 mm + 0.1 mm per side); if your switches are loose or tight, change `cut_tol` in `design.py` and regenerate.
 - **Module tray:** floor down; the rear hood's underside is designed at 45°. Inspect the **12.8 mm USB bridge** and resulting sag clearance to the real plug/controller before assuming support-free printing. Use 4 walls: the screw posts and the 0.9 mm magnet backings carry the load.
 - **Module lids:** top face down; the trackball's cup grows out of the lid as it prints. The intended orientation is support-free.
+- **Trackball cover:** as exported, plate down, collar up. The collar leans in gently to its lip, so no support is intended.
 - Review all module overhangs, particularly the rear hooks and cup, in the actual slicer. Check for continuous toolpaths around the trackpad rim. Support-free printing has not been physically verified; keep mating surfaces accessible if removable support is needed.
 - **Dock:** flat side down, with supports inside the stand-base pocket: its roof is at Z = 4.3 mm and has about **5,900 mm²** of downward-facing horizontal area. Inspect support-interface material, gap, density, access and removal in the actual slicer. Supports must be removable without damaging the pocket roof, magnet skins or fit surfaces. Measure the cleaned pocket against the actual base; it is not a support-free bridge.
 - **Fit:** nominal allowances include 0.35 mm round a module in the drawer, 0.3 mm round a half on the dock, 0.25 mm round a lid in its tray and 0.15 mm radially round a magnet. These are not guarantees against cumulative print error, warping or elephant foot. Calibrate shrinkage and elephant-foot compensation, and use the same filament and settings for mating parts. Check fits before installing electronics; careful local cleanup may be needed, and a successful first print is not guaranteed.

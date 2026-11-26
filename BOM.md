@@ -55,7 +55,8 @@ buy for the halves.
 | Every pointing module | Qty | Search for | Notes |
 |---|---|---|---|
 | Printed tray, `case/module_tray.stl` | 1 | | The same print for every module; see [common drawer interface](DRAWER_INTERFACE.md) for the future removable long-cell carrier |
-| Printed lid | 1 | | `trackball/case/lid.stl` (MX), `trackball/case/lid_choc.stl` (Choc v1) or `trackpad/case/lid.stl` |
+| Printed lid | 1 | | `trackball/case/lid_choc.stl` (trackball) or `trackpad/case/lid.stl` |
+| Printed ball cover, `trackball/case/cover.stl` (trackball only) | 1 | | Print as exported, plate down. Held by the lid's four M3 × 8 screws |
 | PCB, `trackball/fab/trackball_jlcpcb.zip` | 1 (order 5) | (JLCPCB) | 2 layers, 1.6 mm, 53.7 × 99.5 mm. One breakaway panel of three boards (main, sensor, controller), for both pointing modules and either controller: nice!nano v2 or plain XIAO nRF52840. JLCPCB may count this as three designs and add a fee: enter Different Design = 3 and confirm on the quote |
 | M3 × 8 flat-head screws | 6 | same as item 11 | Four through the lid unchanged; finish the two sensor-board screws to ≤7.6 mm overall, deburr, then verify seating, engagement and ≥0.3 mm tip clearance before installing electronics/battery (BUILD.md) |
 | Disc magnets 8 × 1.5 mm, N52 | 7 | same as item 10 | Three a side, one in the floor |
@@ -74,7 +75,7 @@ buy for the halves.
 | PixArt PMW3610DM-SUDU + LM18-LSI lens | 1 + 1 | `PMW3610` (eBay, Tindie: Randware) / `LM18-LSI` | Through-hole sensor in the sensor board's cut-out, on its back face; the lens clips on from the front, looking up |
 | TLV74318PDBVR, SOT-23-5 | 1 | `TLV74318PDBVR` | The sensor's 1.8 V |
 | 0805 capacitors: 10 µF, 3.3 µF, 1 µF ×2, 100 nF ×3, 10 nF ×2; 0805 resistor 10 kΩ | 9 + 1 | `0805 capacitor kit` | Values as siderakb's PMW3610 board (CERN-OHL-P), which this circuit follows |
-| MX switches + Kailh MX sockets + 1u DSA caps, **or** Choc v1 switches + Choc sockets + caps | 2 each | `Kailh MX hotswap socket` / item 4 | Populate only one socket family. Choc v2 is not supported |
+| Choc v1 switches, Choc hot-swap sockets and compact caps | 2 each | items 3, 4 and 5 | Caps 17.5 × 16.5 mm. Leave the board's MX socket pads empty: there is no MX lid. Choc v2 is not supported |
 | 34 mm trackball, 3 mm Si3N4 balls | 1 + 3 | `34mm trackball` / `3mm ceramic ball Si3N4` | The ceramic balls glue into the cup's three pockets |
 
 | Trackpad | Qty | Search for | Notes |
@@ -93,4 +94,4 @@ Soldering, assembly and printing: see [BUILD.md](BUILD.md).
 
 ## Powered central dongle (draft)
 
-Add one unchanged three-board pointing panel, genuine XIAO nRF52840 and existing links, MSK-12C02, TS-1187A, protected 500 mAh 1S pack, removable dielectric carrier/adhesive, common tray, four M3 × 8 lid screws, two qualified reset-board screws/shims, seven magnets and three bump-ons. Omit all pointing sensors, sockets, keys and optical parts. Optional Waveshare 14657 128×32 SSD1306 OLED, insulated four-wire harness and removable retention tape. Choose the [plain lid](stls/dongle_lid.stl) or [OLED lid](stls/dongle_oled_lid.stl). See [DONGLE.md](DONGLE.md) for dimensions and required physical qualification. Dongle quantities are additional to the existing totals.
+Add one unchanged three-board pointing panel, genuine XIAO nRF52840 and existing links, MSK-12C02, TS-1187A, protected 500 mAh 1S pack, removable dielectric carrier/adhesive, common tray, four M3 × 8 lid screws, two qualified reset-board screws/shims, seven magnets and three bump-ons. Omit all pointing sensors, sockets, keys and optical parts. Optional Waveshare 14657 128×32 SSD1306 OLED, insulated four-wire harness and removable retention tape. Headless, use the [placeholder lid](stls/placeholder_lid.stl) as it is; with a display, the [OLED lid](stls/dongle_oled_lid.stl). See [DONGLE.md](DONGLE.md) for dimensions and required physical qualification. Dongle quantities are additional to the existing totals.

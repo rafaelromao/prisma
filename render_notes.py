@@ -31,11 +31,15 @@ def main():
         "reset": "RESET | press from below through the floor with the pin (orange) | take the module out of the dock first",
         "rear": "BACK | power slider above USB-C, the same on every module",
     }
-    for kind in ("trackball", "trackball_mx", "trackpad"):
+    for kind in ("trackball", "trackpad"):
         for view, text in notes.items():
             path = Path(f"renders/{kind}_{view}.png")
             if not path.exists():
                 continue
+            if kind == "trackball" and view == "structure":
+                text = "THE PRINTED PARTS | grey: lid | slate: cover | blue: tray | orange: four M3 x 8 screws, from the top"
+            if kind == "trackball" and view == "seam":
+                text = "CLOSED | slate cover on the grey lid and blue tray"
             image = Image.open(path).convert("RGB")
             out = Image.new("RGB", (image.width, image.height + 80), "white")
             out.paste(image, (0, 0))

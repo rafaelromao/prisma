@@ -11,12 +11,13 @@ import numpy as np
 from shapely.geometry import box
 
 import case as C
+import insert
 import module_shell as M
 import module_battery as MB
 from trackball import trackball as B
 from trackball.controllers import xiao, xiao_usb_z
 
-H = M.CHOC_TOP
+H = M.CHOC_TOP                # the OLED lid's top; the headless one is the placeholder lid
 OLED_Y = -80.0
 # Waveshare SKU 14657, SSD1306 128x32, 36 x 12.5 mm PCB.
 OLED_W, OLED_L = 36.0, 12.5
@@ -30,7 +31,7 @@ OLED_CLR = .3
 WINDOW_W, WINDOW_L = 32.0, 11.5
 OLED_Z = OLED_PCB_Z - OLED_DEPTH
 BAT_ADHESIVE = .15
-NAMES = {False: "dongle_lid", True: "dongle_oled_lid"}
+NAMES = {False: "placeholder_lid", True: "dongle_oled_lid"}
 KEEP = ("main board", "power switch", "controller board", "controller header",
         "stacking pins' plastic", "sensor board", "reset")
 
@@ -51,7 +52,13 @@ def connector():
     return B.box3(12.5, OLED_Y - 5.5, M.FLUSH - 5.5, 21.0, OLED_Y + 5.5, OLED_Z)
 
 
+def height(oled=False):
+    return H if oled else insert.H
+
+
 def lid(oled=False):
+    if not oled:
+        return insert.lid()
     L = B.place()
     sh = M.lid_blank(H, 1.2)
     back = L["back"]
@@ -61,17 +68,16 @@ def lid(oled=False):
                  2.5, back + 1.5, B.PCB_TOP + 2.6)
     sh -= B.box3(-3.55, main.bounds[3] - 3.35, B.PCB_TOP - .01,
                  3.55, main.bounds[3] - .25, B.PCB_TOP + 1.55)
-    if oled:
-        # Locate the non-active edges with rails and end lands. The window
-        # surrounds the whole recessed glass: its edges never bear lid load.
-        outer = rect(OLED_W + 2 * (OLED_CLR + 1.0), OLED_L + 2 * (OLED_CLR + 1.0))
-        pocket = rect(OLED_W + 2 * OLED_CLR, OLED_L + 2 * OLED_CLR)
-        rails = outer.difference(pocket).intersection(
-            rect(OLED_W - 4.0, OLED_L + 2 * (OLED_CLR + 1.0)))
-        sh += M.extrude(rails, M.FLUSH - 1.4, M.FLUSH + .02)
-        for x in (-17.25, 17.25):
-            sh += M.extrude(rect(1.3, 9.0, x=x), OLED_PCB_Z, M.FLUSH + .02)
-        sh -= M.extrude(rect(WINDOW_W, WINDOW_L, x=GLASS_X), M.FLUSH - .02, H + .1)
+    # Locate the non-active edges with rails and end lands. The window
+    # surrounds the whole recessed glass: its edges never bear lid load.
+    outer = rect(OLED_W + 2 * (OLED_CLR + 1.0), OLED_L + 2 * (OLED_CLR + 1.0))
+    pocket = rect(OLED_W + 2 * OLED_CLR, OLED_L + 2 * OLED_CLR)
+    rails = outer.difference(pocket).intersection(
+        rect(OLED_W - 4.0, OLED_L + 2 * (OLED_CLR + 1.0)))
+    sh += M.extrude(rails, M.FLUSH - 1.4, M.FLUSH + .02)
+    for x in (-17.25, 17.25):
+        sh += M.extrude(rect(1.3, 9.0, x=x), OLED_PCB_Z, M.FLUSH + .02)
+    sh -= M.extrude(rect(WINDOW_W, WINDOW_L, x=GLASS_X), M.FLUSH - .02, H + .1)
     return M.lid_holes(M.bevel(sh, H), H)
 
 
@@ -90,7 +96,7 @@ def adhesive(length=MB.MAX_LENGTH):
 
 def parts(oled=False, length=MB.MAX_LENGTH):
     L = B.place()
-    all_parts = dict(B.parts(L, B.main_board_plan(L), B.sensor_board_plan(L), "choc"))
+    all_parts = dict(B.parts(L, B.main_board_plan(L), B.sensor_board_plan(L)))
     out = [(name, all_parts[name]) for name in KEEP]
     floor = B.SOCKET_BOT - B.NANO_GAP - B.NANO[2]
     out += [("XIAO", xiao(B.xiao_back(L), floor)),
@@ -107,7 +113,7 @@ def build(oled=False):
 
 
 def lid_print(oled=False):
-    return lid(oled).mirror((0, 0, 1)).translate((0, 0, H))
+    return lid(oled).mirror((0, 0, 1)).translate((0, 0, height(oled)))
 
 
 def paths(oled=False):
@@ -125,7 +131,7 @@ def check(oled=False, length=MB.MAX_LENGTH):
     new = dict(components[len(KEEP) + 1:])
     fixed = components[:len(KEEP) + 1] + [
         ("stacking pins", B.stacking_pins(L)),
-        ("lid screws", M.lid_fasteners(H)),
+        ("lid screws", M.lid_fasteners(height(oled))),
         ("floor magnet", M.floor_magnet()), ("feet", M.bumpons())]
     for x, y in B.sensor_holes(L):
         fixed.append(("reset board screw", M.flat_screw(
@@ -151,7 +157,7 @@ def check(oled=False, length=MB.MAX_LENGTH):
     for dx in (-MB.LATERAL_ALLOWANCE, MB.LATERAL_ALLOWANCE):
         clear(packing.translate((dx, 0, 0)), obstacles, f"pack lateral clearance ({dx:+.2f} mm)")
     dock = M.K.make()
-    M.check_dock_and_desk(bottom, cover, H, components, k=dock)
+    M.check_dock_and_desk(bottom, cover, height(oled), components, k=dock)
     assert sum(p.volume() > 1e-6 for p in cover.decompose()) == 1
 
 
@@ -175,6 +181,8 @@ def main():
         for length in (MB.REFERENCE_LENGTH, MB.MAX_LENGTH):
             check(oled, length)
         usb_insertion_clearance(oled)
+        if not oled:
+            continue                  # the headless lid is the placeholder's, which insert.py writes
         source, public = paths(oled)
         source.parent.mkdir(parents=True, exist_ok=True)
         public.parent.mkdir(parents=True, exist_ok=True)

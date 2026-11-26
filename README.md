@@ -239,8 +239,8 @@ insulated carrier. See [passive lid qualification](PLACEHOLDER_LID.md) before re
 | **Trackball (Choc v1 lid)** | **The parts** |
 |---|---|
 | ![](renders/trackball.png) | ![](renders/trackball_structure.png) |
-| **The MX lid, same tray and boards** | **Inside (cut through the middle)** |
-| ![](renders/trackball_mx.png) | ![](renders/trackball_open.png) |
+| **Cover lifted off the ball** | **Inside (cut through the middle)** |
+| ![](renders/trackball_assembly.png) | ![](renders/trackball_open.png) |
 | **On a half, on the desk** | **Its boards (front / back)** |
 | ![](renders/trackball_with_half.png) | ![](renders/trackball_board_top.png) ![](renders/trackball_board_bottom.png) |
 | **Trackpad** | **The parts** |
@@ -267,10 +267,14 @@ clearance.
 ### Prisma Trackball (`trackball/trackball.py`)
 
 A 34 mm ball and two Choc v1 hot-swap keys on one shared PCB: the same switches and caps as the halves.
-The PCB also takes MX sockets, and the MX lid is kept exactly as it was. The MX lid stands 4 mm over the
-halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halves' top height to the lid top. The front facet is steeper to preserve the 40 mm trackpad rim and key/power-switch clearance; the lower front remains matched to the drawer. The shared tray's lower front carries a 35 × 8 mm PRISMA wordmark across its three facets, recessed 0.4 mm, so it appears on every drawer module.
+The lid stands 1.2 mm over the halves, its front and side upper facets running from the halves' top height to the lid top. Over it, a cover with a faceted collar keeps the ball in.
+The front facet is steeper to preserve the 40 mm trackpad rim and key/power-switch clearance; the lower front remains matched to the drawer. The shared tray's lower front carries a 35 × 8 mm PRISMA wordmark across its three facets, recessed 0.4 mm, so it appears on every drawer module.
 
-- The ball sits in a cup in the lid on three 3 mm Si3N4 balls and lifts straight out. Under it, a PMW3610
+- **The cover** (`trackball/case/cover.stl`) lies over the whole lid under the same four M3 × 8 screws,
+  which then bite 4 mm. Its lip closes 5.75 mm above the ball's equator with a 33 mm opening, so the
+  ball can rise only 1.7 mm and cannot fall out, even with the module turned over; 11 mm of it stays
+  above the collar. The keycap openings leave 1 mm round compact caps.
+- The ball sits in a cup in the lid on three 3 mm Si3N4 balls and lifts out once the cover is off. Under it, a PMW3610
   on its own board looks up through an LM18-LSI lens (circuit after siderakb's pmw3610-pcb, CERN-OHL-P-2.0,
   at 3.3 V logic with a TLV74318).
 - **Pushing the ball.** The bearings sit 30° below the ball's equator (`BEARING_ANGLE`). In a static
@@ -278,11 +282,10 @@ halves; the Choc lid 1.2 mm. Their front and side upper facets run from the halv
   worst direction (0.60 at the former 40°), and must rise at least 10 mm to leave the cup. Published
   cups use [15–25°](https://kepeo.hatenablog.com/entry/2024/09/08/134648) (the
   [MNT Reform moved from 45° to 22°](https://community.mnt.re/t/trackball-replacement-cup-with-bearings/460));
-  under 30° the pockets would reach the top of the thin Choc lid. Nothing holds the ball in if the module
-  is turned over. Feel, friction and tracking at 30° still need a printed test.
-- The main board accepts **MX or Choc v1 hot-swap sockets**, not both populated together. Choc sockets
-  face 180° opposite the MX sockets. MX uses `trackball/case/lid.stl` (1.5 mm plate), Choc uses
-  `trackball/case/lid_choc.stl` (1.2 mm plate, with two pull grooves per switch). Choc v2 is not supported.
+  under 30° the pockets would reach the top of the thin lid. Feel, friction and tracking at 30° still
+  need a printed test.
+- Fit **Choc v1 hot-swap sockets**; Choc v2 is not supported. The board also carries MX socket pads, and
+  its key spacing was drawn for MX, but no MX lid is made: leave those pads empty.
 - The controller stands face down on a standard 2.54 mm header on its own small board, its USB-C port
   flush with the back wall. That board drops into the tray between printed stops, which take a plug's force.
 - Eight 15 mm stacking pins join the controller board to the main board, beside the controller, and the battery and reset
@@ -409,9 +412,9 @@ b prisma -c   # central left, peripheral left/right, dongle
 ## Regenerating
 
 Switch mounting dimensions and manufacturer sources are recorded in
-[SWITCH_MOUNT_RESEARCH.md](SWITCH_MOUNT_RESEARCH.md). Choc module openings now match
-the halves' 14.0 mm CAD aperture rather than reusing the MX lid's 14.2 mm aperture.
-The Choc plates and lids (not the MX lid) also carry two pull grooves per switch, ZSA Voyager style,
+[SWITCH_MOUNT_RESEARCH.md](SWITCH_MOUNT_RESEARCH.md). Choc module openings match
+the halves' 14.0 mm CAD aperture.
+The plates and module lids also carry two pull grooves per switch, ZSA Voyager style,
 cut for the puller described there; the numbers and what is and is not verified are in that file.
 Printed snap retention still requires qualification with the selected switches/material.
 
@@ -463,4 +466,4 @@ matches XKB's TS-1187A land pattern.
 
 ## Powered drawer central (draft)
 
-The fourth common-tray module uses an existing three-board panel with reset and power switch only, a genuine XIAO nRF52840, and a protected 500 mAh cell on the removable dielectric carrier. It is the ZMK central for both wireless halves. CAD-verified [headless](stls/dongle_lid.stl) and [OLED](stls/dongle_oled_lid.stl) lid prototypes are available; both firmware targets compile, but the selected pack, OLED and wired assembly are not yet physically qualified. See the [wiring and qualification guide](DONGLE.md) and [companion firmware PR](https://github.com/rafaelromao/keyboards/pull/41). No PCB changes.
+The fourth common-tray module uses an existing three-board panel with reset and power switch only, a genuine XIAO nRF52840, and a protected 500 mAh cell on the removable dielectric carrier. It is the ZMK central for both wireless halves. Headless, it uses the [placeholder lid](stls/placeholder_lid.stl); with a display, the [OLED lid](stls/dongle_oled_lid.stl). Both are CAD-verified prototypes; both firmware targets compile, but the selected pack, OLED and wired assembly are not yet physically qualified. See the [wiring and qualification guide](DONGLE.md) and [companion firmware PR](https://github.com/rafaelromao/keyboards/pull/41). No PCB changes.

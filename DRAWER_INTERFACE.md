@@ -18,7 +18,7 @@ pilots are required for this approach.
 | Bottom / seam | Feet stand at Z=0; printed bottom starts at Z=0.5; seam at `M.FLUSH` |
 | Locating lip | `M.lid_blank()`, nominal 0.25 mm side clearance; rear hooks at X=±5 |
 | Lid screws | Four M3 × 8 flat-head, 90° countersunk, 2.5 mm pilots; front X=±21, Y=-91.5; board pair X=±12.3, Y=-54 |
-| Standard low lid | `M.CHOC_TOP = M.FLUSH + 1.2`; MX remains at `M.FLUSH + 4` |
+| Standard low lid | `M.CHOC_TOP = M.FLUSH + 1.2`; the trackball adds a 1.8 mm cover over it |
 | Magnet / feet | Six 8 × 1.5 mm side magnets, one floor magnet, three 8 × 2 mm bump-ons |
 | Service | Rear USB-C and power slot, existing downward reset hole; no additional holes |
 | Insertion | Rear hooks first for lid; horizontal front removal for the complete module |
