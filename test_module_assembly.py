@@ -60,6 +60,14 @@ class ModuleAssemblyTest(unittest.TestCase):
         self.assertEqual(sum(c.volume() > 1e-6 for c in cover.decompose()), 1)
         self.assertAlmostEqual(cover.bounding_box()[2], height)
         self.assertAlmostEqual(cover.bounding_box()[5], B.BCZ + B.COVER_LIP)
+        self.assertLess((cover - cover.mirror((1, 0, 0))).volume(), TOL)
+        rear = max(y for _, y in L["keys"])
+        self.assertAlmostEqual(cover.bounding_box()[4], rear)
+        # Both rail tips retain at least 1 mm of solid width even at the bevel.
+        edge = B.cap_openings(L).bounds[2]
+        rail_tip = box(edge + .01, rear - .5, edge + 1.01, rear - .01)
+        probe = M.extrude(rail_tip, top - .1, top - .01)
+        self.assertLess((probe - cover).volume(), TOL)
         self.assertLess(hit(cover, lid + self.tray), TOL)
         for name, part in parts.items():
             self.assertLess(hit(cover, part), TOL, name)

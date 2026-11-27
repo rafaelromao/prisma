@@ -380,13 +380,14 @@ def lid(L, ball=True):
 
 
 def cap_openings(L):
-    """The cover's opening for the keycaps: CAP_CLR round each, so a cap never touches it."""
-    w, length = CAP[0] / 2 + CAP_CLR, CAP[1] / 2 + CAP_CLR
-    return unary_union([box(kx - w, ky - length, kx + w, ky + length) for kx, ky in L["keys"]])
+    """A centred, open-ended channel that clears the offset keycaps on both sides."""
+    w = CAP[0] / 2 + CAP_CLR + max(abs(x) for x, _ in L["keys"])
+    front = min(y for _, y in L["keys"]) - CAP[1] / 2 - CAP_CLR
+    return box(-w, front, w, L["back"] + 1)
 
 
 def cover(L):
-    """The cover over the whole lid, under the lid's four screws: a COVER_T plate and a faceted
+    """The open-backed cover under the lid's four screws: a COVER_T plate and a faceted
     collar whose lip closes above the ball's equator, so the ball cannot leave. Lower it over the
     ball resting in its cup. Printed as it sits, plate down."""
     height = M.CHOC_TOP
@@ -396,6 +397,8 @@ def cover(L):
     chamfer = .9
     body = Manifold.batch_hull([M.extrude(base, height, top - chamfer),
                                 M.extrude(base.buffer(-chamfer, join_style=2), top - .01, top)])
+    # End both rails at the rear key centre, before the taper thins them below 1 mm.
+    body = body.trim_by_plane((0, -1, 0), -max(y for _, y in L["keys"]))
 
     def facets(apothem, z):
         n = COVER_SIDES

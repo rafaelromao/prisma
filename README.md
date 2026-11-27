@@ -270,10 +270,10 @@ A 34 mm ball and two Choc v1 hot-swap keys on one shared PCB: the same switches 
 The lid stands 1.2 mm over the halves, its front and side upper facets running from the halves' top height to the lid top. Over it, a cover with a faceted collar keeps the ball in.
 The front facet is steeper to preserve the 40 mm trackpad rim and key/power-switch clearance; the lower front remains matched to the drawer. The shared tray's lower front carries a 35 × 8 mm PRISMA wordmark across its three facets, recessed 0.4 mm, so it appears on every drawer module.
 
-- **The cover** (`trackball/case/cover.stl`) lies over the whole lid under the same four M3 × 8 screws,
+- **The cover** (`trackball/case/cover.stl`) has matching side rails and an open rear under the same four M3 × 8 screws,
   which then bite 4 mm. Its lip closes 5.75 mm above the ball's equator with a 33 mm opening, so the
   ball can rise only 1.7 mm and cannot fall out, even with the module turned over; 11 mm of it stays
-  above the collar. The keycap openings leave 1 mm round compact caps.
+  above the collar. The keycap channel leaves at least 1 mm around compact caps; both rails end before they narrow below 1 mm.
 - The ball sits in a cup in the lid on three 3 mm Si3N4 balls and lifts out once the cover is off. Under it, a PMW3610
   on its own board looks up through an LM18-LSI lens (circuit after siderakb's pmw3610-pcb, CERN-OHL-P-2.0,
   at 3.3 V logic with a TLV74318).

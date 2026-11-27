@@ -242,14 +242,14 @@
     },
     {
       "path": "trackball/case/cover.stl",
-      "sha256": "2ee956d17cd078d72de29c2fc3853485d05ceedcddd77d0f8f7fd0b73d2a3c69",
-      "bytes": 130984,
-      "triangles": 2618,
+      "sha256": "2f14b8a4bdc9eba00dbcb5d3219534002fa53cc4d0c549283f9256f5f3200380",
+      "bytes": 130884,
+      "triangles": 2616,
       "components": 1,
-      "volume_mm3": 3698.74185,
+      "volume_mm3": 3489.51004,
       "size_mm": [
         52.29707,
-        82.73187,
+        69.78547,
         12.17268
       ],
       "watertight": true,
@@ -257,14 +257,14 @@
     },
     {
       "path": "stls/trackball_cover.stl",
-      "sha256": "2ee956d17cd078d72de29c2fc3853485d05ceedcddd77d0f8f7fd0b73d2a3c69",
-      "bytes": 130984,
-      "triangles": 2618,
+      "sha256": "2f14b8a4bdc9eba00dbcb5d3219534002fa53cc4d0c549283f9256f5f3200380",
+      "bytes": 130884,
+      "triangles": 2616,
       "components": 1,
-      "volume_mm3": 3698.74185,
+      "volume_mm3": 3489.51004,
       "size_mm": [
         52.29707,
-        82.73187,
+        69.78547,
         12.17268
       ],
       "watertight": true,

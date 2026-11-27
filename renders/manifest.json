@@ -38,7 +38,7 @@
         1568,
         1176
       ],
-      "sha256": "e3e624db8543603040f7445cda4001a233998bcea0b5bd0695a92cf85f0ffaa9"
+      "sha256": "f82d3c824a6e1184ffe269b8eb6732589a46d17ddb54fe3b2dd4fa5c0db19014"
     },
     {
       "path": "renders/cyberdeck_front.png",
@@ -46,7 +46,7 @@
         1568,
         1176
       ],
-      "sha256": "d9528ae67a6283bbc09977462b489bc7d74fbbc3d8a0ddc818e4698c128b04e5"
+      "sha256": "ff40a8b150a9f7d1cf4d0cfeb00f12063c7dac0169aba73a60b8d6ffb70b653c"
     },
     {
       "path": "renders/cyberdeck_side.png",
@@ -54,7 +54,7 @@
         1568,
         1176
       ],
-      "sha256": "37f9e01c4d74625191def69df395d53a45932ecf48628b45ebbc0591ed49e91d"
+      "sha256": "3b01afef6d223e772a79e3d09f05b7c42084c003e9e1730ca970c80c7301ef9c"
     },
     {
       "path": "renders/cyberdeck_top.png",
@@ -62,7 +62,7 @@
         1568,
         1176
       ],
-      "sha256": "14100d96b46e9cd6a12eb7f061faca85c57c15e616f5098296cd5d8bb1ca2ef2"
+      "sha256": "c60aa9b46af166fcc198a8235e7430e8f95dcbce0f0a499231cb405b1e742c29"
     },
     {
       "path": "renders/dock.png",
@@ -174,7 +174,7 @@
         1800,
         7500
       ],
-      "sha256": "3167210c08bf8f628c18218211993c0fb2c6842cad0d428429cab91fb9f4262f"
+      "sha256": "f4e30df909d4e6ad3e575740ddaff2194ab4e829f8abb666c8a99bfde9baf2b4"
     },
     {
       "path": "renders/pads.png",
@@ -294,7 +294,7 @@
         1568,
         1176
       ],
-      "sha256": "31b4d78a77181c62ea4b778e6c90d4c39cd4a36818bca1672f49b5c34b63258e"
+      "sha256": "883462bbb62d3df28135d0620d7cc479ed62675a3df3c92ca6d6edf1c55092fc"
     },
     {
       "path": "renders/trackball_assembly.png",
@@ -302,7 +302,7 @@
         1568,
         1176
       ],
-      "sha256": "7622e0de4119ad3f98a3e56fc7fa13744571a550e2e9c23c94e0af90fbc958b4"
+      "sha256": "98a4df706a20c1729adea1fa8799b4811524c5a2618d023a66030bde4e2ea83b"
     },
     {
       "path": "renders/trackball_board_bottom.png",
@@ -390,7 +390,7 @@
         1568,
         1176
       ],
-      "sha256": "bf2e1ffbac4268e3bf47e719dd6a59bda860192e5e429f017794f3eb4f44da78"
+      "sha256": "8db9cc3a65d613aeee372a61d03e418571712a5491f32886d548f55ded08905d"
     },
     {
       "path": "renders/trackball_rear.png",
@@ -398,7 +398,7 @@
         1568,
         1256
       ],
-      "sha256": "72b49faa9f838c9686c60543bd20c5f89e0882ecceacf3ab0a28874e8d2da654"
+      "sha256": "8548e6b2154bb50b19812cb317763327372f500289a2080f8611fd29335660ee"
     },
     {
       "path": "renders/trackball_reset.png",
@@ -414,7 +414,7 @@
         1568,
         1256
       ],
-      "sha256": "abd1522d4cefb11704636d1689c6ef1fe36b21b4e2060493cd49b041da33c865"
+      "sha256": "139ae4c8e77c3052ca9d51fd47c8ba21f64d3bed9e5a6b673256514fef397b48"
     },
     {
       "path": "renders/trackball_stack.png",
@@ -430,7 +430,7 @@
         1568,
         1256
       ],
-      "sha256": "0a830b1f6d0f861f84d5d15620e99273656e30de66c5783d0e995035f90b058c"
+      "sha256": "48d1151e9a34097eda85e164ab192766943b7e6a63706c2af6dd818cdf621153"
     },
     {
       "path": "renders/trackball_tray.png",
@@ -446,7 +446,7 @@
         1568,
         1176
       ],
-      "sha256": "ec71d1fb1d86cfc77ab21fddf62e643e8e2095cb56ce070c4233e2e713533951"
+      "sha256": "0d2435885221f41689a914b4faa3494b14cd9e65d0be6f6a4862f626d79c11dd"
     },
     {
       "path": "renders/trackball_usb.png",
@@ -454,7 +454,7 @@
         1568,
         1176
       ],
-      "sha256": "0e55c444799bdca336c66caa605719e894bf5cae36dad10a14a6571b661968dc"
+      "sha256": "c42911bc494498e252c63b0bfe14aef90a1f9f124e9ea4e639adfe0dada15b53"
     },
     {
       "path": "renders/trackball_usb_dock.png",
@@ -462,7 +462,7 @@
         1568,
         1176
       ],
-      "sha256": "d7d12c7369d3a8ee09fcd90e8affa14d68a496d093d1a0643d0d5c6ecbcc3585"
+      "sha256": "2fca782cf3bef68b5ea010d550cd6a2d2a463ff648ddbadc0864e2cfd0669043"
     },
     {
       "path": "renders/trackball_usb_open.png",
@@ -470,7 +470,7 @@
         1568,
         1176
       ],
-      "sha256": "f9f37789ea1a16c71b8aff476a42a59267c9763ed24f84aac3bfe39f468ffff9"
+      "sha256": "818305beba06dcbfb72ebb978d63595d5ce812772c5c807b52d28ef08ac2d6d5"
     },
     {
       "path": "renders/trackball_with_half.png",
@@ -478,7 +478,7 @@
         1568,
         1176
       ],
-      "sha256": "c89215281fbcd9865816367f872108b824a5fe873f2a0e392c0cc9d65caba19a"
+      "sha256": "4454c508895cad962227f2f2ed3ac3479ce2f56446190ac2646a2422fa734eaa"
     },
     {
       "path": "renders/trackball_xiao_stack.png",
@@ -494,7 +494,7 @@
         1568,
         1176
       ],
-      "sha256": "6ebc09aefc8ec4816bd7b75cf9ef2928d3d2a011088697fc32624865c3a455af"
+      "sha256": "2c15b38984f4c21850332d5136a50a355dcfa557f576fbdf9cbe58650cd9a2bf"
     },
     {
       "path": "renders/trackpad.png",
@@ -696,7 +696,7 @@
     },
     {
       "path": "STL_EXPORT_MANIFEST.json",
-      "sha256": "f0037278afa150481dcf8e3c8a43739c825eaa9e6ab5ad2abe9f99a803b96fcc"
+      "sha256": "9aec15f6238fc6d9d5b403d93d522f17219336afe4334703fb94e03ef1cabe3e"
     },
     {
       "path": "build_pcb.py",
@@ -804,7 +804,7 @@
     },
     {
       "path": "test_module_assembly.py",
-      "sha256": "6940fbc73b61191b765e2bcc625c2ad69109309e7eaac3e5023ef1e6745f2f9e"
+      "sha256": "727a38d68537a1df837170eadf3df0ac5015f47398caaede6246ad505d69c68c"
     },
     {
       "path": "test_stl_export.py",
@@ -836,7 +836,7 @@
     },
     {
       "path": "trackball/trackball.py",
-      "sha256": "03f1d6fec62d26a632f273c742763e0ec6be81d0a241950ec4d5201a83fb167e"
+      "sha256": "1f73663ab837edfb26a1b91b912396ec68ac783beaf2d82f338ef7d45a7a4b32"
     },
     {
       "path": "trackpad/trackpad.py",
@@ -857,47 +857,17 @@
     "cyberdeck_front.png",
     "cyberdeck_side.png",
     "cyberdeck_top.png",
-    "dock_insert.png",
-    "dock_unibody.png",
-    "dock_unibody_side.png",
-    "dongle_headless.png",
-    "dongle_headless_structure.png",
-    "dongle_oled.png",
-    "dongle_oled_structure.png",
-    "placeholder_structure.png",
     "trackball.png",
     "trackball_assembly.png",
     "trackball_open.png",
     "trackball_rear.png",
-    "trackball_reset.png",
     "trackball_seam.png",
-    "trackball_stack.png",
     "trackball_structure.png",
-    "trackball_tray.png",
     "trackball_under.png",
     "trackball_usb.png",
     "trackball_usb_dock.png",
     "trackball_usb_open.png",
     "trackball_with_half.png",
-    "trackball_xiao_stack.png",
-    "trackball_xiao_usb_open.png",
-    "trackpad.png",
-    "trackpad_assembly.png",
-    "trackpad_holder.png",
-    "trackpad_holder_insert.png",
-    "trackpad_holder_installed.png",
-    "trackpad_holder_tabs.png",
-    "trackpad_open.png",
-    "trackpad_rear.png",
-    "trackpad_reset.png",
-    "trackpad_seam.png",
-    "trackpad_stack.png",
-    "trackpad_structure.png",
-    "trackpad_tray.png",
-    "trackpad_under.png",
-    "trackpad_usb.png",
-    "trackpad_usb_dock.png",
-    "trackpad_usb_open.png",
-    "trackpad_with_half.png"
+    "trackball_xiao_usb_open.png"
   ]
 }

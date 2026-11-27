@@ -213,7 +213,7 @@ Try it on one switch before the board is closed up, with your own puller: the gr
 
 Both modules are built the same way as a half: a **tray**, a **lid**, and the same **M3 × 8 flat-head screws** going in from the top. The tray is one print, shared by all of them; its three front facets carry a 35 × 8 mm **PRISMA wordmark** recessed 0.4 mm, so every module shows it. Only the lid changes: `trackball/case/lid_choc.stl` (trackball) or `trackpad/case/lid.stl`. The trackball adds a cover over its lid, `trackball/case/cover.stl`, whose collar keeps the ball in.
 
-The first row of renders is the trackball with its cover, the second the trackpad.
+The first row shows the trackball with its open-backed cover and matching side rails; the second shows the trackpad.
 See the [exploded-view gallery](index.html#drawer-exploded) for the populated pointing modules,
 the passive lid, and both powered dongles (headless and OLED).
 
